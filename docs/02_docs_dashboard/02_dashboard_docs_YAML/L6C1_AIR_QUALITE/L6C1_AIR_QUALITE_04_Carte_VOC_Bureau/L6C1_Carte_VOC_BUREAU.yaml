@@ -1,0 +1,337 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: custom:mushroom-entity-card
+    entity: sensor.tcov_bureau_ppb
+    tap_action:
+      action: more-info
+    icon: mdi:air-filter
+    name: Bureau VOC
+    primary_info: state
+    secondary_info: name
+    card_mod:
+      style:
+        mushroom-shape-icon$: |
+          .shape {
+            {# ========== CONFIG ========== #}
+            {% set voc = states(config.entity) | float(0) %}
+
+            {# DEFAULTS (will be overridden by ranges) #}
+            {% set rgb = '40,200,120' %}
+            {% set anim = 'voc-clean-breathe' %}
+            {% set glow_anim = 'voc-clean-glow' %}
+            {% set halo_anim = 'voc-clean-halo' %}
+            {% set duration = 4.0 %}
+            {% set intensity = 0.5 %}
+
+            {# RANGES / COLORS #}
+            {# You can change numbers below if needed #}
+
+            {% if voc < 100 %}
+              {# GREEN #}
+              {% set rgb = '40,200,120' %}
+              {% set anim = 'voc-clean-breathe' %}
+              {% set glow_anim = 'voc-clean-glow' %}
+              {% set halo_anim = 'voc-clean-halo' %}
+              {% set duration = 4.4 %}
+              {% set intensity = 0.45 %}
+
+            {% elif voc < 200 %}
+              {# YELLOW-GREEN #}
+              {% set rgb = '140,220,80' %}
+              {% set anim = 'voc-good-wave' %}
+              {% set glow_anim = 'voc-good-glow' %}
+              {% set halo_anim = 'voc-good-halo' %}
+              {% set duration = 3.6 %}
+              {% set intensity = 0.55 %}
+
+            {% elif voc < 300 %}
+              {# YELLOW #}
+              {% set rgb = '255,210,40' %}
+              {% set anim = 'voc-fair-breathe' %}
+              {% set glow_anim = 'voc-fair-glow' %}
+              {% set halo_anim = 'voc-fair-halo' %}
+              {% set duration = 3.0 %}
+              {% set intensity = 0.7 %}
+
+            {% elif voc < 400 %}
+              {# ORANGE #}
+              {% set rgb = '255,140,40' %}
+              {% set anim = 'voc-poor-pulse' %}
+              {% set glow_anim = 'voc-poor-glow' %}
+              {% set halo_anim = 'voc-poor-halo' %}
+              {% set duration = 2.4 %}
+              {% set intensity = 0.9 %}
+
+            {% else %}
+              {# RED #}
+              {% set rgb = '255,50,50' %}
+              {% set anim = 'voc-bad-shimmer' %}
+              {% set glow_anim = 'voc-bad-glow' %}
+              {% set halo_anim = 'voc-bad-halo' %}
+              {% set duration = 2.0 %}
+              {% set intensity = 1.0 %}
+            {% endif %}
+
+            {# Apply variables #}
+            --voc-rgb: {{ rgb }};
+            --voc-intensity: {{ intensity }};
+            --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+            --voc-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+            --voc-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+
+            opacity: 1;
+
+            /* Icon color follows VOC level */
+            --icon-color: rgba({{ rgb }}, 1);
+
+            /* Shape neutral base */
+            background-color: rgba(77, 77, 77,0.1) !important;
+            box-shadow: none !important;
+            border: 1px solid rgba(255,255,255,0.06);
+
+            position: relative;
+            transform-origin: 50% 60%;
+            animation: var(--shape-animation);
+          }
+
+          /* Glow layers */
+          .shape::before,
+          .shape::after {
+            content: '';
+            position: absolute;
+            border-radius: inherit;
+            pointer-events: none;
+          }
+
+          .shape::before {
+            inset: -8px;
+            animation: var(--voc-glow-animation);
+          }
+
+          .shape::after {
+            inset: -22px;
+            animation: var(--voc-halo-animation);
+            mix-blend-mode: screen;
+          }
+
+          /* ========== CLEAN ========== */
+          @keyframes voc-clean-breathe {
+            0%   { transform: scale(0.96); }
+            50%  { transform: scale(1.03); }
+            100% { transform: scale(0.96); }
+          }
+
+          @keyframes voc-clean-glow {
+            0% {
+              box-shadow:
+                0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+            }
+            50% {
+              box-shadow:
+                0 0 30px 4 rgba(var(--voc-rgb), 0.9),
+                0 0 50px 10px rgba(var(--voc-rgb), 0.85);
+            }
+            100% {
+              box-shadow:
+                0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+            }
+          }
+
+          @keyframes voc-clean-halo {
+            0% {
+              box-shadow:
+                0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+            }
+            50% {
+              box-shadow:
+                0 0 130px 36px rgba(var(--voc-rgb), 0.42),
+                0 -34px 100px -8px rgba(220, 255, 240, 0.65);
+            }
+            100% {
+              box-shadow:
+                0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+            }
+          }
+
+          /* ========== GOOD ========== */
+          @keyframes voc-good-wave {
+            0%   { transform: translateX(0); }
+            25%  { transform: translateX(-1px); }
+            50%  { transform: translateX(1px) translateY(-1px); }
+            75%  { transform: translateX(-1px); }
+            100% { transform: translateX(0); }
+          }
+
+          @keyframes voc-good-glow {
+            0% {
+              box-shadow:
+                0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+            }
+            50% {
+              box-shadow:
+                0 0 28px 2 rgba(var(--voc-rgb), 0.9),
+                0 0 48px 12px rgba(var(--voc-rgb), 0.8);
+            }
+            100% {
+              box-shadow:
+                0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+            }
+          }
+
+          @keyframes voc-good-halo {
+            0% {
+              box-shadow:
+                0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                0 18px 80px -12px rgba(140, 255, 120, 0.25);
+            }
+            50% {
+              box-shadow:
+                0 0 140px 42px rgba(var(--voc-rgb), 0.4),
+                0 30px 110px -10px rgba(160, 255, 140, 0.4);
+            }
+            100% {
+              box-shadow:
+                0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                0 18px 80px -12px rgba(140, 255, 120, 0.25);
+            }
+          }
+
+          /* ========== FAIR ========== */
+          @keyframes voc-fair-breathe {
+            0%   { transform: scale(0.98); }
+            50%  { transform: scale(1.05); }
+            100% { transform: scale(0.98); }
+          }
+
+          @keyframes voc-fair-glow {
+            50% {
+              box-shadow:
+                0 0 26px 4 rgba(var(--voc-rgb), 0.85),
+                0 0 42px 10px rgba(var(--voc-rgb), 0.8);
+            }
+          }
+
+          @keyframes voc-fair-halo {
+            50% {
+              box-shadow:
+                0 0 120px 40px rgba(var(--voc-rgb), 0.42),
+                0 26px 80px -10px rgba(255, 245, 180, 0.5);
+            }
+          }
+
+          /* ========== POOR ========== */
+          @keyframes voc-poor-pulse {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.07); }
+            100% { transform: scale(1); }
+          }
+
+          @keyframes voc-poor-glow {
+            50% {
+              box-shadow:
+                0 0 30px 4 rgba(var(--voc-rgb), 0.95),
+                0 0 54px 14px rgba(var(--voc-rgb), 0.9);
+            }
+          }
+
+          @keyframes voc-poor-halo {
+            50% {
+              box-shadow:
+                0 0 140px 48px rgba(var(--voc-rgb), 0.52),
+                0 26px 100px -10px rgba(255, 210, 150, 0.5);
+            }
+          }
+
+          /* ========== BAD ========== */
+          @keyframes voc-bad-shimmer {
+            0%   { transform: scale(1); filter: blur(0); }
+            50%  { transform: scale(1.08); filter: blur(0.6px); }
+            100% { transform: scale(1); filter: blur(0); }
+          }
+
+          @keyframes voc-bad-glow {
+            50% {
+              box-shadow:
+                0 0 34px 6 rgba(var(--voc-rgb), 1),
+                0 0 62px 14px rgba(var(--voc-rgb), 0.95);
+            }
+          }
+
+          @keyframes voc-bad-halo {
+            50% {
+              box-shadow:
+                0 0 160px 60px rgba(var(--voc-rgb), 0.6),
+                0 34px 120px -12px rgba(255, 140, 120, 0.6);
+            }
+          }
+        .: |
+          mushroom-shape-icon {
+            --icon-size: 64px;
+            --icon-color: rgba(var(--voc-rgb),1) !important;
+            display: flex;
+            margin: -18px 0 10px -20px !important;
+            padding-right: 22px;
+            padding-bottom: 50px;
+          }
+          ha-card {
+            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 14px));
+
+            --card-primary-font-size: 1.5rem !important;
+            --card-primary-line-height: 1.3 !important;
+          }
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.tcov_bureau_ppb
+        hours_to_show: 24
+        line_width: 5
+        show:
+          name: false
+          icon: false
+          state: false
+          labels: false
+          legend: false
+        color_thresholds:
+          - value: 0
+            color: rgb(40,200,120)
+          - value: 100
+            color: rgb(140,220,80)
+          - value: 200
+            color: rgb(255,210,40)
+          - value: 300
+            color: rgb(255,140,40)
+          - value: 400
+            color: rgb(255,50,50)
+        card_mod:
+          style: |
+            ha-card {
+              background: none;
+              box-shadow: none;
+              opacity: 50%;
+              border: none;
+              width: 400px;
+              mask-image: radial-gradient(
+                ellipse at center,
+                rgba(0,0,0,1) 0%,
+                rgba(0,0,0,0) 90%
+              );
+            }
+    card_mod:
+      style:
+        .: |
+          ha-card {
+              background: none;
+              box-shadow: none;
+              border: none;
+              margin: 8px 12px; 
+              position: absolute;
+              bottom: -10px;
+              right: -10px;
+              }ha-card::before, ha-card::after { display: none !important; }

@@ -1804,6 +1804,10 @@ templates/Air_Quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml` | ✅ |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` | ✅ |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` | ✅ |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml` | ✅ (créé 2026-11-22, non déployé) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml` | ✅ (créé 2026-11-22, non déployé) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml` | ✅ (créé 2026-11-22, non déployé) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml` | ✅ (créé 2026-11-22, non déployé) |
 
 ---
 

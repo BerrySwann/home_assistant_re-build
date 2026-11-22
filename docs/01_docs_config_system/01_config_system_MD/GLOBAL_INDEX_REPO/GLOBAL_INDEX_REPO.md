@@ -2882,6 +2882,16 @@ le total ~49.
 </details>
 
 <details>
+<summary>🧩 <b>Cartes mushroom</b> - PM2.5 et tCOV, Bureau et Chambre <i>- ajouté 2026-11-22</i></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.md">L6C1_Carte_PM_BUREAU (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.md">L6C1_Carte_VOC_BUREAU (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.md">L6C1_Carte_PM_CHAMBRE (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.md">L6C1_Carte_VOC_CHAMBRE (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml">YAML</a><br>
+</blockquote>
+</details>
+
+<details>
 <summary>📄 <b>Page</b> - 6 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.md">Doc Page</a><br>

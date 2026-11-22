@@ -261,18 +261,20 @@ streamline_templates:
 
             {% if temp_ext >= 34 %}
 
-            - **Palier été fort** : {{ temp_ext | round(0) }} - {{ d7 }} = **{{
-            (temp_ext - d7) | round(0) }} °C**
+            - **Palier été fort** : {{ temp_ext | round(1) }} °C - {{ d7 |
+            round(0) | int }} °C - {{ d1 | round(0) | int }} °C = **{{
+            ((temp_ext - d7) - d1) | round(0) | int }} °C**
 
             {% elif temp_ext > 32 %}
 
-            - **Palier été chaud** : {{ temp_ext | round(0) }} - {{ d5 }} = **{{
-            (temp_ext - d5) | round(0) }} °C**
+            - **Palier été chaud** : {{ temp_ext | round(1) }} °C - {{ d5 |
+            round(0) | int }} °C - {{ d1 | round(0) | int }} °C = **{{
+            ((temp_ext - d5) - d1) | round(0) | int }} °C**
 
             {% else %}
 
-            - **Palier été** : consigne maintenue à **{{ consigne | round(0) }}
-            °C**
+            - **Palier été** : {{ consigne | round(0) | int }} °C - {{ d1 |
+            round(0) | int }} °C = **{{ (consigne - d1) | round(0) | int }} °C**
 
             {% endif %}
 
@@ -280,18 +282,21 @@ streamline_templates:
 
             {% if temp_ext < 8 %}
 
-            - **Palier hiver froid** (< 8 °C) : {{ consigne | round(0) }} + {{
-            d2 }} = **{{ (consigne + d2) | round(0) }} °C**
+            - **Palier hiver froid** (< 8 °C) : {{ consigne | round(0) | int }}
+            °C + {{ d2 | round(0) | int }} °C + {{ d1 | round(0) | int }} °C =
+            **{{ (consigne + d2 + d1) | round(0) | int }} °C**
 
             {% elif temp_ext < 12 %}
 
-            - **Palier hiver frais** (< 12 °C) : {{ consigne | round(0) }} + {{
-            d1 }} = **{{ (consigne + d1) | round(0) }} °C**
+            - **Palier hiver frais** (< 12 °C) : {{ consigne | round(0) | int }}
+            °C + {{ d1 | round(0) | int }} °C + {{ d1 | round(0) | int }} °C =
+            **{{ (consigne + d1 + d1) | round(0) | int }} °C**
 
             {% else %}
 
-            - **Palier hiver doux** (>= 12 °C) : consigne maintenue à **{{
-            consigne | round(0) }} °C**
+            - **Palier hiver doux** (>= 12 °C) : {{ consigne | round(0) | int }}
+            °C + {{ d1 | round(0) | int }} °C = **{{ (consigne + d1) | round(0)
+            | int }} °C**
 
             {% endif %}
 
@@ -304,23 +309,23 @@ streamline_templates:
             - Mode été/hiver, capteur de saison : **{{ mode | upper }}**
 
             {% if mode == 'cool' %} - Consigne active (Été) : **{{ consigne |
-            round(0) }} °C**
+            round(0) | int }} °C**
 
-            - Confort par défaut (Été) : **{{ conf | round(1) }} °C**
+            - Confort par défaut (Été) : **{{ conf | round(0) | int }} °C**
 
             - Éco été : **{{ states('sensor.temperature_eco_ete') | float(0) |
-            round(0) }} °C**
+            round(0) | int }} °C**
 
             {% elif mode == 'heat' %} - Consigne active (Hiver) : **{{ consigne
-            | round(0) }} °C**
+            | round(0) | int }} °C**
 
-            - Confort par défaut (Hiver) : **{{ conf | round(1) }} °C**
+            - Confort par défaut (Hiver) : **{{ conf | round(0) | int }} °C**
 
             - Éco hiver : **{{ states('sensor.temperature_eco_hiver') | float(0)
-            | round(0) }} °C**
+            | round(0) | int }} °C**
 
             {% else %} - Consigne active (hors saison) : **{{ consigne |
-            round(0) }} °C**
+            round(0) | int }} °C**
 
             {% endif %}
 
@@ -328,34 +333,35 @@ streamline_templates:
             **Consignes calculées**
 
 
-            - Confort de jour, compensé, 7h30 -> 21h00 : **{{ conf_j | round(1)
-            }} °C**
+            - Confort de jour, compensé, 7h30 -> 21h00 : **{{ conf_j | round(0)
+            | int }} °C**
 
             - Confort de nuit, consigne régulée, 21h00 -> 7h30 : **{{ conf_n |
-            round(1) }} °C**
+            round(0) | int }} °C**
 
 
-            **Pièces, plafonds appliqués**
+            **Pièces**
 
-            - Salon : **{{ tcs | round(1) }} °C** ({{ "%+.1f" | format(tcs -
-            conf_j) }} par rapport au confort jour)
+            - Salon : **{{ tcs | round(0) | int }} °C** ({{ "%+d" | format((tcs
+            - conf_j) | round(0) | int) }} par rapport au confort jour)
 
-            - Bureau : **{{ tcb | round(1) }} °C** ({{ "%+.1f" | format(tcb -
-            conf_j) }} par rapport au confort jour)
+            - Bureau : **{{ tcb | round(0) | int }} °C** ({{ "%+d" | format((tcb
+            - conf_j) | round(0) | int) }} par rapport au confort jour)
 
-            - Chambre : **{{ tcc | round(0) }} °C** ({{ "%+.1f" | format(tcc -
-            conf_j) }} par rapport au confort jour)
+            - Chambre : **{{ tcc | round(0) | int }} °C** ({{ "%+d" |
+            format((tcc - conf_j) | round(0) | int) }} par rapport au confort
+            jour)
 
 
             **Mode éco, si absents**
 
             {% if mode == 'cool' %}
 
-            - Éco été corrigé, compensé : **{{ eco_e | round(0) }} °C**
+            - Éco été corrigé, compensé : **{{ eco_e | round(0) | int }} °C**
 
             {% else %}
 
-            - Éco hiver corrigé, compensé : **{{ eco_h | round(0) }} °C**
+            - Éco hiver corrigé, compensé : **{{ eco_h | round(0) | int }} °C**
 
             {% endif %}
 
@@ -1426,7 +1432,7 @@ streamline_templates:
           color: '#E6E6FA'
           unit: °C
           float_precision: 2
-          stroke_width: 2
+          stroke_width: 1
           group_by:
             func: last
             duration: 24h
@@ -7745,22 +7751,32 @@ views:
                     opacity: 0.2
                     extend_to: now
                     fill_raw: last
-                    data_generator: |
+                    data_generator: >
                       const data = [];
-                      const lat = 43.72;
+
+                      const lat = hass.states['zone.home']?.attributes?.latitude
+                      ?? hass.config.latitude ?? 43.72;
+
                       const latRad = lat * Math.PI / 180;
+
                       const now = new Date();
-                      const year = 2026;
-                      for (let i = 0; i <= 365; i++) {
-                        const date = new Date(year, 0, i + 1);
-                        if (date > now) break;
-                        const dayOfYear = i + 1;
-                        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-                        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+
+                      const year = now.getFullYear();
+
+                      function dayLength(dayOfYear) {
+                        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+                        const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+                        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);
                         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
-                        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
-                        data.push([date.getTime(), dayLength]);
+                        return (2 * hourAngle * 180 / Math.PI / 15);
                       }
+
+                      for (let i = 1; i <= 365; i++) {
+                        const date = new Date(year, 0, i);
+                        if (date > now) break;
+                        data.push([date.getTime(), Math.round(dayLength(i) * 100) / 100]);
+                      }
+
                       return data;
                     color_threshold:
                       - value: 9
@@ -7789,22 +7805,31 @@ views:
                       in_chart: true
                       extremas: false
                       legend_value: false
-                    data_generator: |
+                    data_generator: >
                       const data = [];
+
                       const lat = hass.states['zone.home']?.attributes?.latitude
-                                  ?? hass.config.latitude
-                                  ?? 43.72;
+                      ?? hass.config.latitude ?? 43.72;
+
                       const latRad = lat * Math.PI / 180;
-                      const year = new Date().getFullYear();
-                      for (let i = 0; i <= 365; i += 4) {
-                        const date = new Date(year, 0, i + 1);
-                        const dayOfYear = i + 1;
-                        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-                        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+
+                      const now = new Date();
+
+                      const year = now.getFullYear();
+
+                      function dayLength(dayOfYear) {
+                        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+                        const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+                        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);
                         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
-                        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
-                        data.push([date.getTime(), dayLength]);
+                        return (2 * hourAngle * 180 / Math.PI / 15);
                       }
+
+                      for (let i = 1; i <= 365; i += 4) {
+                        const date = new Date(year, 0, i);
+                        data.push([date.getTime(), Math.round(dayLength(i) * 100) / 100]);
+                      }
+
                       return data;
                   - entity: sensor.variation_quotidienne
                     name: Gain/Perte
@@ -7814,23 +7839,34 @@ views:
                     color: '#8B5CF6'
                     stroke_width: 1
                     opacity: 0.1
-                    data_generator: |
+                    data_generator: >
                       const data = [];
-                      const lat = 43.72;
+
+                      const lat = hass.states['zone.home']?.attributes?.latitude
+                      ?? hass.config.latitude ?? 43.72;
+
                       const latRad = lat * Math.PI / 180;
-                      const year = 2026;
-                      function getDayLength(dayOfYear) {
-                        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-                        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+
+                      const now = new Date();
+
+                      const year = now.getFullYear();
+
+                      function dayLength(dayOfYear) {
+                        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+                        const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+                        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);
                         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
                         return (2 * hourAngle * 180 / Math.PI / 15);
                       }
+
                       for (let i = 1; i <= 365; i++) {
-                        const date = new Date(year, 0, i + 1);
-                        // [modif] Pas de break → courbe complète jusqu'au 31/12
-                        const diffMinutes = (getDayLength(i + 1) - getDayLength(i)) * 60;
-                        data.push([date.getTime(), diffMinutes]);
+                        const date = new Date(year, 0, i);
+                        // Le break est INDISPENSABLE : in_header affiche la derniere valeur de la serie.
+                        // Sans lui, le header montrait +0,80 min (le 31/12) au lieu de la variation du jour.
+                        if (date > now) break;
+                        data.push([date.getTime(), (dayLength(i + 1) - dayLength(i)) * 60]);
                       }
+
                       return data;
                     show:
                       in_header: true
@@ -32460,13 +32496,25 @@ views:
                     show_state: false
                     show_icon: false
                     show_label: true
-                    label: |
+                    label: |-
                       [[[
-                        if (!entity || entity.state === 'unavailable') return 'Uptime: N/A';
-                        var h_total = parseFloat(entity.state);
+                        if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+                        var s = String(entity.state);
+                        var h_total;
+                        if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+                          h_total = parseFloat(s.replace(',', '.'));
+                        } else {
+                          var t = Date.parse(s);
+                          h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+                        }
                         var j = Math.floor(h_total / 24);
                         var h = Math.floor(h_total % 24);
-                        return 'Uptime: ' + (j > 0 ? j + 'j ' : '') + h + 'h';
+                        var mn = Math.floor((h_total * 60) % 60);
+                        var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
+                        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+                          '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+                          '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+                        '</div>';
                       ]]]
                     styles:
                       card:
@@ -32671,22 +32719,23 @@ views:
                 show_state: false
                 show_icon: false
                 show_label: true
-                label: |
+                label: |-
                   [[[
-                    var used = states['sensor.homeassistant_utilisation_de_la_memoire'];
-                    var max = states['sensor.homeassistant_utilisation_maximale_de_la_memoire'];
-                    if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
-                    var usedV = parseFloat(used.state);
-                    var maxV = parseFloat(max.state);
-                    var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
-                    var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+                    var pct = states['sensor.system_monitor_utilisation_de_la_memoire'];
+                    var used = states['sensor.system_monitor_memoire_utilisee'];
+                    var libre = states['sensor.system_monitor_memoire_libre'];
+                    if (!pct || pct.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+                    var pctV = parseFloat(pct.state);
+                    var usedV = used ? parseFloat(used.state) / 1024 : 0;
+                    var libreV = libre ? parseFloat(libre.state) / 1024 : 0;
+                    var color = pctV < 60 ? '#6ea8d7' : pctV < 80 ? '#ff9800' : '#f44336';
                     return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
                       '<div style="display:flex;justify-content:space-between;align-items:center">' +
                         '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
-                        '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+                        '<span style="color:white;font-weight:bold;font-size:12px">' + pctV.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + (usedV+libreV).toFixed(1) + ' GiB)</span>' +
                       '</div>' +
                       '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
-                        '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+                        '<div style="background:' + color + ';width:' + Math.min(pctV,100) + '%;height:3px;border-radius:2px"></div>' +
                       '</div></div>';
                   ]]]
                 styles:
@@ -32742,13 +32791,21 @@ views:
                 show_state: false
                 show_icon: false
                 show_label: true
-                label: |
+                label: |-
                   [[[
                     if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-                    var h_total = parseFloat(entity.state);
+                    var s = String(entity.state);
+                    var h_total;
+                    if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+                      h_total = parseFloat(s.replace(',', '.'));
+                    } else {
+                      var t = Date.parse(s);
+                      h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+                    }
                     var j = Math.floor(h_total / 24);
                     var h = Math.floor(h_total % 24);
-                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    var mn = Math.floor((h_total * 60) % 60);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
                     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
                       '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
                       '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -32992,13 +33049,21 @@ views:
                 show_state: false
                 show_icon: false
                 show_label: true
-                label: |
+                label: |-
                   [[[
-                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-                    var h_total = parseFloat(entity.state);
+                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+                    var s = String(entity.state);
+                    var h_total;
+                    if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+                      h_total = parseFloat(s.replace(',', '.'));
+                    } else {
+                      var t = Date.parse(s);
+                      h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+                    }
                     var j = Math.floor(h_total / 24);
                     var h = Math.floor(h_total % 24);
-                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    var mn = Math.floor((h_total * 60) % 60);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
                     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
                       '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
                       '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -33242,13 +33307,21 @@ views:
                 show_state: false
                 show_icon: false
                 show_label: true
-                label: |
+                label: |-
                   [[[
-                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-                    var h_total = parseFloat(entity.state);
+                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+                    var s = String(entity.state);
+                    var h_total;
+                    if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+                      h_total = parseFloat(s.replace(',', '.'));
+                    } else {
+                      var t = Date.parse(s);
+                      h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+                    }
                     var j = Math.floor(h_total / 24);
                     var h = Math.floor(h_total % 24);
-                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    var mn = Math.floor((h_total * 60) % 60);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
                     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
                       '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
                       '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -33492,13 +33565,21 @@ views:
                 show_state: false
                 show_icon: false
                 show_label: true
-                label: |
+                label: |-
                   [[[
-                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-                    var h_total = parseFloat(entity.state);
+                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+                    var s = String(entity.state);
+                    var h_total;
+                    if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+                      h_total = parseFloat(s.replace(',', '.'));
+                    } else {
+                      var t = Date.parse(s);
+                      h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+                    }
                     var j = Math.floor(h_total / 24);
                     var h = Math.floor(h_total % 24);
-                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    var mn = Math.floor((h_total * 60) % 60);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
                     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
                       '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
                       '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -33715,7 +33796,8 @@ views:
                     var h_total = diffMs / (1000 * 3600);
                     var j = Math.floor(h_total / 24);
                     var h = Math.floor(h_total % 24);
-                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    var mn = Math.floor((h_total * 60) % 60);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
                     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
                       '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
                       '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -38389,6 +38471,799 @@ views:
                 opacity: 1;
               }
             card_layout: normal
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.qualite_air_bureau_ikea_pm25
+                tap_action:
+                  action: more-info
+                icon: mdi:air-filter
+                name: Air quality Bureau
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG (EUROPEAN AQI STYLE, PM2.5) ========== #}
+                        {% set aqi = states(config.entity) | float(0) %}
+
+                        {# DEFAULTS (overridden by ranges) #}
+                        {% set rgb = '40,190,100' %}
+                        {% set anim = 'aq-good-breathe' %}
+                        {% set glow_anim = 'aq-good-glow' %}
+                        {% set halo_anim = 'aq-good-halo' %}
+                        {% set duration = 3.2 %}
+
+                        {# EAQI PM2.5 BANDS (µg/m3, 1 hour)
+                           0   - 5    -> Good (dark green)
+                           6   - 15   -> Fair (light green)
+                           16  - 50   -> Moderate (yellow)
+                           51  - 90   -> Poor (orange)
+                           91  - 140  -> Very poor (red)
+                           > 140      -> Extremely poor (dark maroon)
+                        #}
+
+                        {# RANGES / COLORS #}
+                        {# You can change aqi number below if needed #}
+
+
+                        {% if aqi <= 5 %}
+                          {# GOOD #}
+                          {% set rgb = '40,190,100' %}
+                          {% set anim = 'aq-good-breathe' %}
+                          {% set glow_anim = 'aq-good-glow' %}
+                          {% set halo_anim = 'aq-good-halo' %}
+                          {% set duration = 3.4 %}
+
+                        {% elif aqi <= 15 %}
+                          {# FAIR #}
+                          {% set rgb = '140,220,140' %}
+                          {% set anim = 'aq-fair-wave' %}
+                          {% set glow_anim = 'aq-fair-glow' %}
+                          {% set halo_anim = 'aq-fair-halo' %}
+                          {% set duration = 3.2 %}
+
+                        {% elif aqi <= 50 %}
+                          {# MODERATE #}
+                          {% set rgb = '255,215,70' %}
+                          {% set anim = 'aq-moderate-wave' %}
+                          {% set glow_anim = 'aq-moderate-glow' %}
+                          {% set halo_anim = 'aq-moderate-halo' %}
+                          {% set duration = 3.0 %}
+
+                        {% elif aqi <= 90 %}
+                          {# POOR #}
+                          {% set rgb = '255,170,60' %}
+                          {% set anim = 'aq-poor-pulse' %}
+                          {% set glow_anim = 'aq-poor-glow' %}
+                          {% set halo_anim = 'aq-poor-halo' %}
+                          {% set duration = 2.8 %}
+
+                        {% elif aqi <= 140 %}
+                          {# VERY POOR #}
+                          {% set rgb = '230,60,60' %}
+                          {% set anim = 'aq-verypoor-throb' %}
+                          {% set glow_anim = 'aq-verypoor-glow' %}
+                          {% set halo_anim = 'aq-verypoor-halo' %}
+                          {% set duration = 2.4 %}
+
+                        {% else %}
+                          {# EXTREMELY POOR #}
+                          {% set rgb = '120,0,70' %}
+                          {% set anim = 'aq-extreme-smog' %}
+                          {% set glow_anim = 'aq-extreme-glow' %}
+                          {% set halo_anim = 'aq-extreme-halo' %}
+                          {% set duration = 2.0 %}
+                        {% endif %}
+
+                        --aq-rgb: {{ rgb }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --aq-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --aq-halo-animation: {{ halo_anim }} {{ (duration * 1.1) | round(2) }}s ease-in-out infinite;
+
+                        /* icon color follows AQ color */
+                        --icon-color: rgba({{ rgb }}, 1);
+
+                        /* neutral pill so theme color does not bleed */
+                        background-color: rgba(77,77,77,0.12) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+
+                        opacity: 1;
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+
+                      /* glow layers */
+                      .shape::before,
+                      .shape::after {
+                        content: '';
+                        position: absolute;
+                        border-radius: inherit;
+                        pointer-events: none;
+                      }
+
+                      .shape::before {
+                        inset: -8px;
+                        animation: var(--aq-glow-animation);
+                      }
+
+                      .shape::after {
+                        inset: -22px;
+                        animation: var(--aq-halo-animation);
+                        mix-blend-mode: screen;
+                      }
+
+                      /* ========== GOOD (green) ========== */
+                      @keyframes aq-good-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.04); }
+                        100% { transform: scale(0.98); }
+                      }
+
+                      @keyframes aq-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 4 rgba(var(--aq-rgb), 0.9),
+                            0 0 40px 10px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes aq-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--aq-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,255,210,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.45),
+                            0 26px 90px -10px rgba(200,255,220,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--aq-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,255,210,0.3);
+                        }
+                      }
+
+                      /* ========== FAIR (light green) ========== */
+                      @keyframes aq-fair-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes aq-fair-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 3 rgba(var(--aq-rgb), 0.9),
+                            0 0 40px 9px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes aq-fair-halo {
+                        0% {
+                          box-shadow:
+                            0 0 85px 26px rgba(var(--aq-rgb), 0.35),
+                            0 18px 75px -12px rgba(200,255,210,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 125px 42px rgba(var(--aq-rgb), 0.45),
+                            0 26px 95px -10px rgba(215,255,225,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 85px 26px rgba(var(--aq-rgb), 0.35),
+                            0 18px 75px -12px rgba(200,255,210,0.3);
+                        }
+                      }
+
+                      /* ========== MODERATE (yellow) ========== */
+                      @keyframes aq-moderate-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes aq-moderate-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--aq-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--aq-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 26px 3 rgba(var(--aq-rgb), 0.95),
+                            0 0 44px 10px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--aq-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--aq-rgb), 0.7);
+                        }
+                      }
+
+                      @keyframes aq-moderate-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 28px rgba(var(--aq-rgb), 0.4),
+                            0 20px 80px -10px rgba(255,240,170,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 135px 44px rgba(var(--aq-rgb), 0.5),
+                            0 30px 105px -8px rgba(255,250,190,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 28px rgba(var(--aq-rgb), 0.4),
+                            0 20px 80px -10px rgba(255,240,170,0.3);
+                        }
+                      }
+
+                      /* ========== POOR (orange) ========== */
+                      @keyframes aq-poor-pulse {
+                        0%   { transform: scale(0.99); }
+                        50%  { transform: scale(1.06); }
+                        100% { transform: scale(0.99); }
+                      }
+
+                      @keyframes aq-poor-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--aq-rgb), 0.65),
+                            0 0 34px 4 rgba(var(--aq-rgb), 0.75);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--aq-rgb), 1),
+                            0 0 50px 12px rgba(var(--aq-rgb), 0.9);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--aq-rgb), 0.65),
+                            0 0 34px 4 rgba(var(--aq-rgb), 0.75);
+                        }
+                      }
+
+                      @keyframes aq-poor-halo {
+                        0% {
+                          box-shadow:
+                            0 0 100px 34px rgba(var(--aq-rgb), 0.5),
+                            0 24px 90px -10px rgba(255,210,150,0.45);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 145px 50px rgba(var(--aq-rgb), 0.6),
+                            0 32px 115px -8px rgba(255,220,170,0.55);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 100px 34px rgba(var(--aq-rgb), 0.5),
+                            0 24px 90px -10px rgba(255,210,150,0.45);
+                        }
+                      }
+
+                      /* ========== VERY POOR (red) ========== */
+                      @keyframes aq-verypoor-throb {
+                        0%   { transform: scale(1); }
+                        40%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+
+                      @keyframes aq-verypoor-glow {
+                        0% {
+                          box-shadow:
+                            0 0 24px 0 rgba(var(--aq-rgb), 0.75),
+                            0 0 38px 6 rgba(var(--aq-rgb), 0.8);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 34px 4 rgba(var(--aq-rgb), 1),
+                            0 0 60px 14px rgba(var(--aq-rgb), 0.95);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 24px 0 rgba(var(--aq-rgb), 0.75),
+                            0 0 38px 6 rgba(var(--aq-rgb), 0.8);
+                        }
+                      }
+
+                      @keyframes aq-verypoor-halo {
+                        0% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.55),
+                            0 30px 110px -10px rgba(150,60,60,0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 170px 64px rgba(var(--aq-rgb), 0.7),
+                            0 40px 140px -8px rgba(180,80,80,0.7);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.55),
+                            0 30px 110px -10px rgba(150,60,60,0.55);
+                        }
+                      }
+
+                      /* ========== EXTREMELY POOR (dark maroon) ========== */
+                      @keyframes aq-extreme-smog {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        35%  { transform: scale(1.1) translateY(-1px); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+
+                      @keyframes aq-extreme-glow {
+                        0% {
+                          box-shadow:
+                            0 0 26px 0 rgba(var(--aq-rgb), 0.85),
+                            0 0 44px 8 rgba(var(--aq-rgb), 0.9);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 38px 6 rgba(var(--aq-rgb), 1),
+                            0 0 70px 18px rgba(var(--aq-rgb), 0.98);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 26px 0 rgba(var(--aq-rgb), 0.85),
+                            0 0 44px 8 rgba(var(--aq-rgb), 0.9);
+                        }
+                      }
+
+                      @keyframes aq-extreme-halo {
+                        0% {
+                          box-shadow:
+                            0 0 180px 60px rgba(var(--aq-rgb), 0.7),
+                            0 40px 150px -10px rgba(60,0,30,0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 230px 90px rgba(var(--aq-rgb), 0.85),
+                            0 52px 180px -8px rgba(90,0,45,0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 180px 60px rgba(var(--aq-rgb), 0.7),
+                            0 40px 150px -10px rgba(60,0,30,0.7);
+                        }
+                      }
+                    .: |
+                      mushroom-shape-icon {
+                        --icon-size: 64px;
+                        --icon-color: rgba(var(--hum-rgb),1) !important;
+                        display: flex;
+                        margin: -18px 0 10px -20px !important;
+                        padding-right: 22px;
+                        padding-bottom: 50px;
+                      }
+                      ha-card {
+                        clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 14px));
+                        
+                        /* FONT SIZE & SPACING SETTINGS */
+                        --card-primary-font-size: 1.5rem !important;
+                        
+                        /* Increases vertical space between primary and secondary */
+                        --card-primary-line-height: 1.3 !important;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.qualite_air_bureau_ikea_pm25
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: rgb(40,190,100)
+                      - value: 6
+                        color: rgb(140,220,140)
+                      - value: 16
+                        color: rgb(255,215,70)
+                      - value: 51
+                        color: rgb(255,170,60)
+                      - value: 91
+                        color: rgb(230,60,60)
+                      - value: 141
+                        color: rgb(120,0,70)
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }ha-card::before, ha-card::after { display: none !important; }
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.tcov_bureau_ppb
+                tap_action:
+                  action: more-info
+                icon: mdi:air-filter
+                name: Bureau VOC
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG ========== #}
+                        {% set voc = states(config.entity) | float(0) %}
+
+                        {# DEFAULTS (will be overridden by ranges) #}
+                        {% set rgb = '40,200,120' %}
+                        {% set anim = 'voc-clean-breathe' %}
+                        {% set glow_anim = 'voc-clean-glow' %}
+                        {% set halo_anim = 'voc-clean-halo' %}
+                        {% set duration = 4.0 %}
+                        {% set intensity = 0.5 %}
+
+                        {# RANGES / COLORS #}
+                        {# You can change numbers below if needed #}
+
+                        {% if voc < 100 %}
+                          {# GREEN #}
+                          {% set rgb = '40,200,120' %}
+                          {% set anim = 'voc-clean-breathe' %}
+                          {% set glow_anim = 'voc-clean-glow' %}
+                          {% set halo_anim = 'voc-clean-halo' %}
+                          {% set duration = 4.4 %}
+                          {% set intensity = 0.45 %}
+
+                        {% elif voc < 200 %}
+                          {# YELLOW-GREEN #}
+                          {% set rgb = '140,220,80' %}
+                          {% set anim = 'voc-good-wave' %}
+                          {% set glow_anim = 'voc-good-glow' %}
+                          {% set halo_anim = 'voc-good-halo' %}
+                          {% set duration = 3.6 %}
+                          {% set intensity = 0.55 %}
+
+                        {% elif voc < 300 %}
+                          {# YELLOW #}
+                          {% set rgb = '255,210,40' %}
+                          {% set anim = 'voc-fair-breathe' %}
+                          {% set glow_anim = 'voc-fair-glow' %}
+                          {% set halo_anim = 'voc-fair-halo' %}
+                          {% set duration = 3.0 %}
+                          {% set intensity = 0.7 %}
+
+                        {% elif voc < 400 %}
+                          {# ORANGE #}
+                          {% set rgb = '255,140,40' %}
+                          {% set anim = 'voc-poor-pulse' %}
+                          {% set glow_anim = 'voc-poor-glow' %}
+                          {% set halo_anim = 'voc-poor-halo' %}
+                          {% set duration = 2.4 %}
+                          {% set intensity = 0.9 %}
+
+                        {% else %}
+                          {# RED #}
+                          {% set rgb = '255,50,50' %}
+                          {% set anim = 'voc-bad-shimmer' %}
+                          {% set glow_anim = 'voc-bad-glow' %}
+                          {% set halo_anim = 'voc-bad-halo' %}
+                          {% set duration = 2.0 %}
+                          {% set intensity = 1.0 %}
+                        {% endif %}
+
+                        {# Apply variables #}
+                        --voc-rgb: {{ rgb }};
+                        --voc-intensity: {{ intensity }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --voc-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --voc-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+
+                        opacity: 1;
+
+                        /* Icon color follows VOC level */
+                        --icon-color: rgba({{ rgb }}, 1);
+
+                        /* Shape neutral base */
+                        background-color: rgba(77, 77, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+
+                      /* Glow layers */
+                      .shape::before,
+                      .shape::after {
+                        content: '';
+                        position: absolute;
+                        border-radius: inherit;
+                        pointer-events: none;
+                      }
+
+                      .shape::before {
+                        inset: -8px;
+                        animation: var(--voc-glow-animation);
+                      }
+
+                      .shape::after {
+                        inset: -22px;
+                        animation: var(--voc-halo-animation);
+                        mix-blend-mode: screen;
+                      }
+
+                      /* ========== CLEAN ========== */
+                      @keyframes voc-clean-breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.03); }
+                        100% { transform: scale(0.96); }
+                      }
+
+                      @keyframes voc-clean-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--voc-rgb), 0.9),
+                            0 0 50px 10px rgba(var(--voc-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+                        }
+                      }
+
+                      @keyframes voc-clean-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                            0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 36px rgba(var(--voc-rgb), 0.42),
+                            0 -34px 100px -8px rgba(220, 255, 240, 0.65);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                            0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+                        }
+                      }
+
+                      /* ========== GOOD ========== */
+                      @keyframes voc-good-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes voc-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 2 rgba(var(--voc-rgb), 0.9),
+                            0 0 48px 12px rgba(var(--voc-rgb), 0.8);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes voc-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                            0 18px 80px -12px rgba(140, 255, 120, 0.25);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 140px 42px rgba(var(--voc-rgb), 0.4),
+                            0 30px 110px -10px rgba(160, 255, 140, 0.4);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                            0 18px 80px -12px rgba(140, 255, 120, 0.25);
+                        }
+                      }
+
+                      /* ========== FAIR ========== */
+                      @keyframes voc-fair-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.05); }
+                        100% { transform: scale(0.98); }
+                      }
+
+                      @keyframes voc-fair-glow {
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--voc-rgb), 0.85),
+                            0 0 42px 10px rgba(var(--voc-rgb), 0.8);
+                        }
+                      }
+
+                      @keyframes voc-fair-halo {
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--voc-rgb), 0.42),
+                            0 26px 80px -10px rgba(255, 245, 180, 0.5);
+                        }
+                      }
+
+                      /* ========== POOR ========== */
+                      @keyframes voc-poor-pulse {
+                        0%   { transform: scale(1); }
+                        50%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+
+                      @keyframes voc-poor-glow {
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--voc-rgb), 0.95),
+                            0 0 54px 14px rgba(var(--voc-rgb), 0.9);
+                        }
+                      }
+
+                      @keyframes voc-poor-halo {
+                        50% {
+                          box-shadow:
+                            0 0 140px 48px rgba(var(--voc-rgb), 0.52),
+                            0 26px 100px -10px rgba(255, 210, 150, 0.5);
+                        }
+                      }
+
+                      /* ========== BAD ========== */
+                      @keyframes voc-bad-shimmer {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        50%  { transform: scale(1.08); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+
+                      @keyframes voc-bad-glow {
+                        50% {
+                          box-shadow:
+                            0 0 34px 6 rgba(var(--voc-rgb), 1),
+                            0 0 62px 14px rgba(var(--voc-rgb), 0.95);
+                        }
+                      }
+
+                      @keyframes voc-bad-halo {
+                        50% {
+                          box-shadow:
+                            0 0 160px 60px rgba(var(--voc-rgb), 0.6),
+                            0 34px 120px -12px rgba(255, 140, 120, 0.6);
+                        }
+                      }
+                    .: |
+                      mushroom-shape-icon {
+                        --icon-size: 64px;
+                        --icon-color: rgba(var(--voc-rgb),1) !important;
+                        display: flex;
+                        margin: -18px 0 10px -20px !important;
+                        padding-right: 22px;
+                        padding-bottom: 50px;
+                      }
+                      ha-card {
+                        clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 14px));
+
+                        --card-primary-font-size: 1.5rem !important;
+                        --card-primary-line-height: 1.3 !important;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.tcov_bureau_ppb
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: rgb(40,200,120)
+                      - value: 100
+                        color: rgb(140,220,80)
+                      - value: 200
+                        color: rgb(255,210,40)
+                      - value: 300
+                        color: rgb(255,140,40)
+                      - value: 400
+                        color: rgb(255,50,50)
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }ha-card::before, ha-card::after { display: none !important; }
           - type: custom:streamline-card
             template: pm25_ring-tile
             variables:
@@ -38522,6 +39397,799 @@ views:
                 opacity: 1;
               }
             card_layout: normal
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.qualite_air_chambre_ikea_pm25
+                tap_action:
+                  action: more-info
+                icon: mdi:air-filter
+                name: Air quality Chambre
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG (EUROPEAN AQI STYLE, PM2.5) ========== #}
+                        {% set aqi = states(config.entity) | float(0) %}
+
+                        {# DEFAULTS (overridden by ranges) #}
+                        {% set rgb = '40,190,100' %}
+                        {% set anim = 'aq-good-breathe' %}
+                        {% set glow_anim = 'aq-good-glow' %}
+                        {% set halo_anim = 'aq-good-halo' %}
+                        {% set duration = 3.2 %}
+
+                        {# EAQI PM2.5 BANDS (µg/m3, 1 hour)
+                           0   - 5    -> Good (dark green)
+                           6   - 15   -> Fair (light green)
+                           16  - 50   -> Moderate (yellow)
+                           51  - 90   -> Poor (orange)
+                           91  - 140  -> Very poor (red)
+                           > 140      -> Extremely poor (dark maroon)
+                        #}
+
+                        {# RANGES / COLORS #}
+                        {# You can change aqi number below if needed #}
+
+
+                        {% if aqi <= 5 %}
+                          {# GOOD #}
+                          {% set rgb = '40,190,100' %}
+                          {% set anim = 'aq-good-breathe' %}
+                          {% set glow_anim = 'aq-good-glow' %}
+                          {% set halo_anim = 'aq-good-halo' %}
+                          {% set duration = 3.4 %}
+
+                        {% elif aqi <= 15 %}
+                          {# FAIR #}
+                          {% set rgb = '140,220,140' %}
+                          {% set anim = 'aq-fair-wave' %}
+                          {% set glow_anim = 'aq-fair-glow' %}
+                          {% set halo_anim = 'aq-fair-halo' %}
+                          {% set duration = 3.2 %}
+
+                        {% elif aqi <= 50 %}
+                          {# MODERATE #}
+                          {% set rgb = '255,215,70' %}
+                          {% set anim = 'aq-moderate-wave' %}
+                          {% set glow_anim = 'aq-moderate-glow' %}
+                          {% set halo_anim = 'aq-moderate-halo' %}
+                          {% set duration = 3.0 %}
+
+                        {% elif aqi <= 90 %}
+                          {# POOR #}
+                          {% set rgb = '255,170,60' %}
+                          {% set anim = 'aq-poor-pulse' %}
+                          {% set glow_anim = 'aq-poor-glow' %}
+                          {% set halo_anim = 'aq-poor-halo' %}
+                          {% set duration = 2.8 %}
+
+                        {% elif aqi <= 140 %}
+                          {# VERY POOR #}
+                          {% set rgb = '230,60,60' %}
+                          {% set anim = 'aq-verypoor-throb' %}
+                          {% set glow_anim = 'aq-verypoor-glow' %}
+                          {% set halo_anim = 'aq-verypoor-halo' %}
+                          {% set duration = 2.4 %}
+
+                        {% else %}
+                          {# EXTREMELY POOR #}
+                          {% set rgb = '120,0,70' %}
+                          {% set anim = 'aq-extreme-smog' %}
+                          {% set glow_anim = 'aq-extreme-glow' %}
+                          {% set halo_anim = 'aq-extreme-halo' %}
+                          {% set duration = 2.0 %}
+                        {% endif %}
+
+                        --aq-rgb: {{ rgb }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --aq-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --aq-halo-animation: {{ halo_anim }} {{ (duration * 1.1) | round(2) }}s ease-in-out infinite;
+
+                        /* icon color follows AQ color */
+                        --icon-color: rgba({{ rgb }}, 1);
+
+                        /* neutral pill so theme color does not bleed */
+                        background-color: rgba(77,77,77,0.12) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+
+                        opacity: 1;
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+
+                      /* glow layers */
+                      .shape::before,
+                      .shape::after {
+                        content: '';
+                        position: absolute;
+                        border-radius: inherit;
+                        pointer-events: none;
+                      }
+
+                      .shape::before {
+                        inset: -8px;
+                        animation: var(--aq-glow-animation);
+                      }
+
+                      .shape::after {
+                        inset: -22px;
+                        animation: var(--aq-halo-animation);
+                        mix-blend-mode: screen;
+                      }
+
+                      /* ========== GOOD (green) ========== */
+                      @keyframes aq-good-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.04); }
+                        100% { transform: scale(0.98); }
+                      }
+
+                      @keyframes aq-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 4 rgba(var(--aq-rgb), 0.9),
+                            0 0 40px 10px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes aq-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--aq-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,255,210,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.45),
+                            0 26px 90px -10px rgba(200,255,220,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--aq-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,255,210,0.3);
+                        }
+                      }
+
+                      /* ========== FAIR (light green) ========== */
+                      @keyframes aq-fair-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes aq-fair-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 3 rgba(var(--aq-rgb), 0.9),
+                            0 0 40px 9px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--aq-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--aq-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes aq-fair-halo {
+                        0% {
+                          box-shadow:
+                            0 0 85px 26px rgba(var(--aq-rgb), 0.35),
+                            0 18px 75px -12px rgba(200,255,210,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 125px 42px rgba(var(--aq-rgb), 0.45),
+                            0 26px 95px -10px rgba(215,255,225,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 85px 26px rgba(var(--aq-rgb), 0.35),
+                            0 18px 75px -12px rgba(200,255,210,0.3);
+                        }
+                      }
+
+                      /* ========== MODERATE (yellow) ========== */
+                      @keyframes aq-moderate-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes aq-moderate-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--aq-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--aq-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 26px 3 rgba(var(--aq-rgb), 0.95),
+                            0 0 44px 10px rgba(var(--aq-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--aq-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--aq-rgb), 0.7);
+                        }
+                      }
+
+                      @keyframes aq-moderate-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 28px rgba(var(--aq-rgb), 0.4),
+                            0 20px 80px -10px rgba(255,240,170,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 135px 44px rgba(var(--aq-rgb), 0.5),
+                            0 30px 105px -8px rgba(255,250,190,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 28px rgba(var(--aq-rgb), 0.4),
+                            0 20px 80px -10px rgba(255,240,170,0.3);
+                        }
+                      }
+
+                      /* ========== POOR (orange) ========== */
+                      @keyframes aq-poor-pulse {
+                        0%   { transform: scale(0.99); }
+                        50%  { transform: scale(1.06); }
+                        100% { transform: scale(0.99); }
+                      }
+
+                      @keyframes aq-poor-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--aq-rgb), 0.65),
+                            0 0 34px 4 rgba(var(--aq-rgb), 0.75);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--aq-rgb), 1),
+                            0 0 50px 12px rgba(var(--aq-rgb), 0.9);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--aq-rgb), 0.65),
+                            0 0 34px 4 rgba(var(--aq-rgb), 0.75);
+                        }
+                      }
+
+                      @keyframes aq-poor-halo {
+                        0% {
+                          box-shadow:
+                            0 0 100px 34px rgba(var(--aq-rgb), 0.5),
+                            0 24px 90px -10px rgba(255,210,150,0.45);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 145px 50px rgba(var(--aq-rgb), 0.6),
+                            0 32px 115px -8px rgba(255,220,170,0.55);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 100px 34px rgba(var(--aq-rgb), 0.5),
+                            0 24px 90px -10px rgba(255,210,150,0.45);
+                        }
+                      }
+
+                      /* ========== VERY POOR (red) ========== */
+                      @keyframes aq-verypoor-throb {
+                        0%   { transform: scale(1); }
+                        40%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+
+                      @keyframes aq-verypoor-glow {
+                        0% {
+                          box-shadow:
+                            0 0 24px 0 rgba(var(--aq-rgb), 0.75),
+                            0 0 38px 6 rgba(var(--aq-rgb), 0.8);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 34px 4 rgba(var(--aq-rgb), 1),
+                            0 0 60px 14px rgba(var(--aq-rgb), 0.95);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 24px 0 rgba(var(--aq-rgb), 0.75),
+                            0 0 38px 6 rgba(var(--aq-rgb), 0.8);
+                        }
+                      }
+
+                      @keyframes aq-verypoor-halo {
+                        0% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.55),
+                            0 30px 110px -10px rgba(150,60,60,0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 170px 64px rgba(var(--aq-rgb), 0.7),
+                            0 40px 140px -8px rgba(180,80,80,0.7);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--aq-rgb), 0.55),
+                            0 30px 110px -10px rgba(150,60,60,0.55);
+                        }
+                      }
+
+                      /* ========== EXTREMELY POOR (dark maroon) ========== */
+                      @keyframes aq-extreme-smog {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        35%  { transform: scale(1.1) translateY(-1px); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+
+                      @keyframes aq-extreme-glow {
+                        0% {
+                          box-shadow:
+                            0 0 26px 0 rgba(var(--aq-rgb), 0.85),
+                            0 0 44px 8 rgba(var(--aq-rgb), 0.9);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 38px 6 rgba(var(--aq-rgb), 1),
+                            0 0 70px 18px rgba(var(--aq-rgb), 0.98);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 26px 0 rgba(var(--aq-rgb), 0.85),
+                            0 0 44px 8 rgba(var(--aq-rgb), 0.9);
+                        }
+                      }
+
+                      @keyframes aq-extreme-halo {
+                        0% {
+                          box-shadow:
+                            0 0 180px 60px rgba(var(--aq-rgb), 0.7),
+                            0 40px 150px -10px rgba(60,0,30,0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 230px 90px rgba(var(--aq-rgb), 0.85),
+                            0 52px 180px -8px rgba(90,0,45,0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 180px 60px rgba(var(--aq-rgb), 0.7),
+                            0 40px 150px -10px rgba(60,0,30,0.7);
+                        }
+                      }
+                    .: |
+                      mushroom-shape-icon {
+                        --icon-size: 64px;
+                        --icon-color: rgba(var(--hum-rgb),1) !important;
+                        display: flex;
+                        margin: -18px 0 10px -20px !important;
+                        padding-right: 22px;
+                        padding-bottom: 50px;
+                      }
+                      ha-card {
+                        clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 14px));
+                        
+                        /* FONT SIZE & SPACING SETTINGS */
+                        --card-primary-font-size: 1.5rem !important;
+                        
+                        /* Increases vertical space between primary and secondary */
+                        --card-primary-line-height: 1.3 !important;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.qualite_air_chambre_ikea_pm25
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: rgb(40,190,100)
+                      - value: 6
+                        color: rgb(140,220,140)
+                      - value: 16
+                        color: rgb(255,215,70)
+                      - value: 51
+                        color: rgb(255,170,60)
+                      - value: 91
+                        color: rgb(230,60,60)
+                      - value: 141
+                        color: rgb(120,0,70)
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }ha-card::before, ha-card::after { display: none !important; }
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.tcov_chambre_ppb
+                tap_action:
+                  action: more-info
+                icon: mdi:air-filter
+                name: Chambre VOC
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG ========== #}
+                        {% set voc = states(config.entity) | float(0) %}
+
+                        {# DEFAULTS (will be overridden by ranges) #}
+                        {% set rgb = '40,200,120' %}
+                        {% set anim = 'voc-clean-breathe' %}
+                        {% set glow_anim = 'voc-clean-glow' %}
+                        {% set halo_anim = 'voc-clean-halo' %}
+                        {% set duration = 4.0 %}
+                        {% set intensity = 0.5 %}
+
+                        {# RANGES / COLORS #}
+                        {# You can change numbers below if needed #}
+
+                        {% if voc < 100 %}
+                          {# GREEN #}
+                          {% set rgb = '40,200,120' %}
+                          {% set anim = 'voc-clean-breathe' %}
+                          {% set glow_anim = 'voc-clean-glow' %}
+                          {% set halo_anim = 'voc-clean-halo' %}
+                          {% set duration = 4.4 %}
+                          {% set intensity = 0.45 %}
+
+                        {% elif voc < 200 %}
+                          {# YELLOW-GREEN #}
+                          {% set rgb = '140,220,80' %}
+                          {% set anim = 'voc-good-wave' %}
+                          {% set glow_anim = 'voc-good-glow' %}
+                          {% set halo_anim = 'voc-good-halo' %}
+                          {% set duration = 3.6 %}
+                          {% set intensity = 0.55 %}
+
+                        {% elif voc < 300 %}
+                          {# YELLOW #}
+                          {% set rgb = '255,210,40' %}
+                          {% set anim = 'voc-fair-breathe' %}
+                          {% set glow_anim = 'voc-fair-glow' %}
+                          {% set halo_anim = 'voc-fair-halo' %}
+                          {% set duration = 3.0 %}
+                          {% set intensity = 0.7 %}
+
+                        {% elif voc < 400 %}
+                          {# ORANGE #}
+                          {% set rgb = '255,140,40' %}
+                          {% set anim = 'voc-poor-pulse' %}
+                          {% set glow_anim = 'voc-poor-glow' %}
+                          {% set halo_anim = 'voc-poor-halo' %}
+                          {% set duration = 2.4 %}
+                          {% set intensity = 0.9 %}
+
+                        {% else %}
+                          {# RED #}
+                          {% set rgb = '255,50,50' %}
+                          {% set anim = 'voc-bad-shimmer' %}
+                          {% set glow_anim = 'voc-bad-glow' %}
+                          {% set halo_anim = 'voc-bad-halo' %}
+                          {% set duration = 2.0 %}
+                          {% set intensity = 1.0 %}
+                        {% endif %}
+
+                        {# Apply variables #}
+                        --voc-rgb: {{ rgb }};
+                        --voc-intensity: {{ intensity }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --voc-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --voc-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+
+                        opacity: 1;
+
+                        /* Icon color follows VOC level */
+                        --icon-color: rgba({{ rgb }}, 1);
+
+                        /* Shape neutral base */
+                        background-color: rgba(77, 77, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+
+                      /* Glow layers */
+                      .shape::before,
+                      .shape::after {
+                        content: '';
+                        position: absolute;
+                        border-radius: inherit;
+                        pointer-events: none;
+                      }
+
+                      .shape::before {
+                        inset: -8px;
+                        animation: var(--voc-glow-animation);
+                      }
+
+                      .shape::after {
+                        inset: -22px;
+                        animation: var(--voc-halo-animation);
+                        mix-blend-mode: screen;
+                      }
+
+                      /* ========== CLEAN ========== */
+                      @keyframes voc-clean-breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.03); }
+                        100% { transform: scale(0.96); }
+                      }
+
+                      @keyframes voc-clean-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--voc-rgb), 0.9),
+                            0 0 50px 10px rgba(var(--voc-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 6 rgba(var(--voc-rgb), 0.5);
+                        }
+                      }
+
+                      @keyframes voc-clean-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                            0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 36px rgba(var(--voc-rgb), 0.42),
+                            0 -34px 100px -8px rgba(220, 255, 240, 0.65);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--voc-rgb), 0.28),
+                            0 -20px 80px -14px rgba(200, 255, 230, 0.45);
+                        }
+                      }
+
+                      /* ========== GOOD ========== */
+                      @keyframes voc-good-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+
+                      @keyframes voc-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 2 rgba(var(--voc-rgb), 0.9),
+                            0 0 48px 12px rgba(var(--voc-rgb), 0.8);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--voc-rgb), 0.55),
+                            0 0 34px 4 rgba(var(--voc-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes voc-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                            0 18px 80px -12px rgba(140, 255, 120, 0.25);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 140px 42px rgba(var(--voc-rgb), 0.4),
+                            0 30px 110px -10px rgba(160, 255, 140, 0.4);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--voc-rgb), 0.3),
+                            0 18px 80px -12px rgba(140, 255, 120, 0.25);
+                        }
+                      }
+
+                      /* ========== FAIR ========== */
+                      @keyframes voc-fair-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.05); }
+                        100% { transform: scale(0.98); }
+                      }
+
+                      @keyframes voc-fair-glow {
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--voc-rgb), 0.85),
+                            0 0 42px 10px rgba(var(--voc-rgb), 0.8);
+                        }
+                      }
+
+                      @keyframes voc-fair-halo {
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--voc-rgb), 0.42),
+                            0 26px 80px -10px rgba(255, 245, 180, 0.5);
+                        }
+                      }
+
+                      /* ========== POOR ========== */
+                      @keyframes voc-poor-pulse {
+                        0%   { transform: scale(1); }
+                        50%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+
+                      @keyframes voc-poor-glow {
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--voc-rgb), 0.95),
+                            0 0 54px 14px rgba(var(--voc-rgb), 0.9);
+                        }
+                      }
+
+                      @keyframes voc-poor-halo {
+                        50% {
+                          box-shadow:
+                            0 0 140px 48px rgba(var(--voc-rgb), 0.52),
+                            0 26px 100px -10px rgba(255, 210, 150, 0.5);
+                        }
+                      }
+
+                      /* ========== BAD ========== */
+                      @keyframes voc-bad-shimmer {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        50%  { transform: scale(1.08); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+
+                      @keyframes voc-bad-glow {
+                        50% {
+                          box-shadow:
+                            0 0 34px 6 rgba(var(--voc-rgb), 1),
+                            0 0 62px 14px rgba(var(--voc-rgb), 0.95);
+                        }
+                      }
+
+                      @keyframes voc-bad-halo {
+                        50% {
+                          box-shadow:
+                            0 0 160px 60px rgba(var(--voc-rgb), 0.6),
+                            0 34px 120px -12px rgba(255, 140, 120, 0.6);
+                        }
+                      }
+                    .: |
+                      mushroom-shape-icon {
+                        --icon-size: 64px;
+                        --icon-color: rgba(var(--voc-rgb),1) !important;
+                        display: flex;
+                        margin: -18px 0 10px -20px !important;
+                        padding-right: 22px;
+                        padding-bottom: 50px;
+                      }
+                      ha-card {
+                        clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 14px));
+
+                        --card-primary-font-size: 1.5rem !important;
+                        --card-primary-line-height: 1.3 !important;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.tcov_chambre_ppb
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: rgb(40,200,120)
+                      - value: 100
+                        color: rgb(140,220,80)
+                      - value: 200
+                        color: rgb(255,210,40)
+                      - value: 300
+                        color: rgb(255,140,40)
+                      - value: 400
+                        color: rgb(255,50,50)
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }ha-card::before, ha-card::after { display: none !important; }
           - type: custom:streamline-card
             template: pm25_ring-tile
             variables:

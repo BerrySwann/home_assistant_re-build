@@ -70,18 +70,21 @@ Page détaillée de qualité de l'air pour 3 pièces : Salon, Bureau, Chambre. C
 │  AIR QUALITY (heading)                     tap → /0      │
 ├──────────────────────────────────────────────────────────┤
 │  ══ SALON ══════════════════════════════════════════     │  ← bubble-card separator
+│  [ mushroom PM2.5 Salon ]  [ mushroom tCOV Salon ]       │  ← 2 × vertical-stack-in-card
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │  ← 2 × streamline ring-tile
 │  [ Graph. PM2.5 Salon ↗  ]   [ Graph. tCOV Salon ↗  ]  │  ← 2 × bubble-card button
 │  [pop-up #spm25 - streamline pm25   (hidden)]            │
 │  [pop-up #scov  - streamline cov    (hidden)]            │
 ├──────────────────────────────────────────────────────────┤
 │  ══ BUREAU ═════════════════════════════════════════     │
+│  [ mushroom PM2.5 Bureau ] [ mushroom tCOV Bureau ]      │
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │
 │  [ Graph. PM2.5 Bureau ↗ ]   [ Graph. tCOV Bureau ↗ ]  │
 │  [pop-up #bpm25 - streamline pm25   (hidden)]            │
 │  [pop-up #bcov  - streamline cov    (hidden)]            │
 ├──────────────────────────────────────────────────────────┤
 │  ══ CHAMBRE ════════════════════════════════════════     │
+│  [ mushroom PM2.5 Chambre] [ mushroom tCOV Chambre]      │
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │
 │  [ Graph. PM2.5 Chambre ↗]   [ Graph. tCOV Chambre ↗]  │
 │  [pop-up #cpm25 - streamline pm25   (hidden)]            │
@@ -327,6 +330,10 @@ Source : `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` - `device_cl
 | Page YAML | `Dashboard/L6C1_AIR_QUALITE/page_L6C1_air_qualite_2026-05-23.yaml` |
 | Sensors statistics | `TREE_CORRIGE/sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
 | Templates ppb | `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| Carte PM Bureau | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml` |
+| Carte VOC Bureau | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml` |
+| Carte PM Chambre | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml` |
+| Carte VOC Chambre | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml` |
 
 ---
 
@@ -336,3 +343,8 @@ Source : `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` - `device_cl
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L6C1_Vignette_AIR_QUALITE]]*
+
+<!-- annotations_log:
+[2026-11-22] DEPLOYE en prod : les 4 cartes mushroom Bureau et Chambre ajoutees dans dashboard-tablette, vue air-quality (cartes 11-12 sous BUREAU, 20-21 sous CHAMBRE ; separateurs maintenant aux index 1, 10, 19 ; 28 cartes). Hash dashboard fa09dad1f0f5a828. Cartes Salon inchangees.
+[2026-11-22] YAML local de la page : 6 cartes mushroom (vertical-stack-in-card) inserees juste sous les separateurs SALON, BUREAU, CHAMBRE (28 cartes). Salon = copie exacte de la prod du 07/11 ; Bureau et Chambre = cartes L6C1_AIR_QUALITE_03 a 06. Controle : page moins les 4 cartes nouvelles == prod du 07/11. Non deploye en prod (le dashboard live n a pas ete modifie).
+[2026-11-22] 4 cartes mushroom (PM2.5 et tCOV, Bureau et Chambre) ajoutees au dossier L6C1 : voir les lignes Carte du tableau des fichiers lies. -->
