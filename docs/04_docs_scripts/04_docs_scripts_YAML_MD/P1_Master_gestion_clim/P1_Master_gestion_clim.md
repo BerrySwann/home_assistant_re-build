@@ -105,7 +105,7 @@ En groupe_2, le jour, le bureau recoit l eco (`temp_eco_hc`, sans correction) en
 
 Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco de saison (`temp_eco_hc` ou `temp_eco_ec`).
 
-**Eco en groupe_1, chauffage (depuis le 2026-11-22)** : le script calcule `eco_hc_salon`, `eco_hc_bureau` et `eco_hc_chambre`, c est a dire l eco moins la correction de la piece (1 / 2 / 2), sans descendre sous le `min_temp` lu sur l entite climate (16 au salon, 10 au bureau et a la chambre). Avec l eco a 17, il envoie 16 / 15 / 15, soit 17 reel partout. Avant : 17 envoye, donc 18 / 19 / 19 reel. L eco ete (`temp_eco_ec`), le mode degrade (`eco_saison_val`) et le bureau en groupe_2 de jour (eco sans correction) restent inchanges. La notification affiche `t_salon_target`, `t_bureau_target` et `t_chambre_target`, c est a dire la valeur reellement envoyee.
+**Eco en groupe_1, chauffage (depuis le 2026-11-22)** : le script calcule `eco_hc_salon`, `eco_hc_bureau` et `eco_hc_chambre`, c est a dire l eco moins la correction de la piece (1 / 2 / 2), sans descendre sous le `min_temp` lu sur l entite climate (16 au salon, 10 au bureau et a la chambre). Avec l eco a 17, il envoie 16 / 15 / 15, soit 17 reel partout. Avant : 17 envoye, donc 18 / 19 / 19 reel. L eco ete (`temp_eco_ec`), le mode degrade (`eco_saison_val`) et le bureau en groupe_2 de jour (eco sans correction) restent inchanges. La notification affiche la cible reelle de la piece : la valeur envoyee (`t_salon_target`, `t_bureau_target`, `t_chambre_target`) plus la correction de la piece, depuis le 2026-11-22 (en groupe_1 chauffage : 17 / 17 / 17 pour 16 / 15 / 15 envoye).
 
 ### 6. Exécution
 
@@ -120,7 +120,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 - CHAMBRE : idem avec clim chambre
 - `sensor_update` + clim déjà en `off` → on ne la redémarre pas (protection intentionnelle)
 - Délai 2s
-- Notif résumé `[AJ/AN] presence - Mode / Températures`
+- Notif résumé `[AJ/AN] presence - Mode / Températures` (cible réelle = valeur envoyée + correction de la pièce, arrondie à 1 décimale)
 
 ---
 
@@ -194,6 +194,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
 | 2026-11-22 | Claude | **Fiche corrigee, script inchange.** Cibles de jour des groupes 2, 3 et 4 alignees sur le code : salon en groupe_3 = cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), bureau en groupe_2 = eco en chauffage et `tccj_b` en clim. Variables `tccsj_*` renommees `tccj_*` (corrige moins correction), comme dans le script. | `ee25a74797646c88` |
+| 2026-11-22 | Claude | **Notification resume : cibles reelles.** Le resume affiche valeur envoyee + correction de la piece (`t_s`, `t_b`, `t_c`) au lieu de la valeur envoyee, arrondie a 1 decimale. Les consignes envoyees aux clims ne changent pas. | `feb1f6683d7f047c` |
 | 2026-11-22 | Claude | **Eco corrige en groupe_1 (chauffage).** Trois variables `eco_hc_salon`, `eco_hc_bureau`, `eco_hc_chambre` : eco moins la correction de la piece (1 / 2 / 2), plancher `min_temp` de la clim lu sur l entite climate (16 salon, 10 bureau et chambre). Envoye 16 / 15 / 15 au lieu de 17, reel 17 partout au lieu de 18 / 19 / 19. Notification : vrais sauts de ligne, valeurs `t_salon_target`, `t_bureau_target`, `t_chambre_target` (valeur reellement envoyee). YAML local reconstruit depuis la prod (il datait du 2026-11-17). | `ee25a74797646c88` |
 | 2026-11-17 | Claude | **Fiche realignee sur la prod.** Capteurs `correction_temperature_salon`, `_bureau`, `_chambre` (sans `_nuit_`), valeurs relevees dans HA le 2026-11-17 : 1 / 2 / 2. La fiche annoncait 1 / 3 / 3 ; auteur et date du passage de 3 a 2 inconnus. | - |
 | 2026-11-12 | Hermes | **Cible et consigne envoyee separees.** `tccn_s/b/c` ne valent plus `temperature_confort_nuit` mais `temperature_consigne_nuit_*` moins `correction_temperature_nuit_*`. Trois capteurs de correction crees dans le template : 1 au salon, 3 au bureau et a la chambre, mesures du 2026-11-10 (ecarts 1,5 / 4,0 / 3,6 du capteur de reprise d'air). Le script envoie donc 18 / 16 / 16 alors que la cible reste 19. La soustraction avait d'abord ete posee dans le template, ce qui cassait J K L : la cible tombait a 18 et 16, les automatisations declenchaient en permanence et le -1 restait colle. | - |
@@ -207,4 +208,5 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 [2026-11-17] noms des capteurs de correction (sans _nuit_) et valeurs 1/2/2 alignes sur HA ; repli 18 ou 17.
 [2026-11-22] eco groupe_1 chauffage : correction soustraite, plancher min_temp (eco_hc_salon, eco_hc_bureau, eco_hc_chambre) ; notification = valeur envoyee ; YAML local realigne sur la prod (ee25a74797646c88).
 [2026-11-22] cibles de jour des groupes 2/3/4 alignees sur le code prod (salon g3 = cible bureau ramenee au salon, bureau g2 = eco en chauffage) ; tccsj_* renomme tccj_*.
-[2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes). -->
+[2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes).
+[2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece) au lieu de la valeur envoyee ; config_hash feb1f6683d7f047c. -->

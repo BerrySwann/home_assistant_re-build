@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cahier des charges - ReBuild</title>
+<style>
+  :root {
+    --fg: #1f2933;
+    --muted: #5b6770;
+    --accent: #1565c0;
+    --accent-soft: #e3f0fb;
+    --border: #d5dde5;
+    --bg: #ffffff;
+    --code-bg: #f4f6f8;
+    --table-head: #eef3f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #eef1f4;
+    color: var(--fg);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  main {
+    max-width: 980px;
+    margin: 32px auto;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 40px 48px 56px;
+    box-shadow: 0 2px 10px rgba(20, 40, 70, 0.06);
+  }
+  h1 {
+    font-size: 1.9em;
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 0 0 6px;
+  }
+  h2 {
+    font-size: 1.35em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-top: 34px;
+  }
+  h3 {
+    font-size: 1.1em;
+    color: #24303a;
+    margin-top: 24px;
+  }
+  h4 { font-size: 1em; margin: 18px 0 6px; }
+  p { margin: 8px 0; }
+  a { color: var(--accent); }
+  ul, ol { margin: 6px 0 10px; padding-left: 26px; }
+  li { margin: 3px 0; }
+  blockquote {
+    margin: 12px 0;
+    padding: 8px 14px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    color: var(--muted);
+  }
+  code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    line-height: 1.35;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.86em;
+    white-space: pre;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    font-size: 0.95em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--table-head); }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+  .toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin: 18px 0 26px;
+  }
+  .toc ul { list-style: none; padding-left: 14px; }
+  .toc > ul { padding-left: 0; }
+  .toc a { text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9em;
+    margin-bottom: 24px;
+  }
+  header.doc-head {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+  }
+  header.doc-head .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72em;
+    color: var(--muted);
+  }
+  footer {
+    margin-top: 40px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82em;
+  }
+  @media print {
+    body { background: #fff; }
+    main { box-shadow: none; border: none; margin: 0; padding: 0; max-width: none; }
+    h2 { page-break-after: avoid; }
+    pre, table, blockquote { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+<header class="doc-head">
+  <div class="kicker">ReBuild - Home Assistant</div>
+  <div class="meta">Document de conception - version 1.0 - genere le 2026-11-22 19:02</div>
+</header>
+<h1 id="cahier-des-charges-rebuild">Cahier des charges - ReBuild</h1>
+<div class="toc"><span class="toctitle">Sommaire</span><ul>
+<li><a href="#supervision-et-pilotage-domotique-de-lappartement-home-assistant">Supervision et pilotage domotique de l'appartement (Home Assistant)</a></li>
+<li><a href="#1-contexte-et-finalite">1. Contexte et finalité</a></li>
+<li><a href="#2-objectifs">2. Objectifs</a></li>
+<li><a href="#3-perimetre">3. Perimetre</a><ul>
+<li><a href="#31-inclus">3.1 Inclus</a></li>
+</ul>
+</li>
+<li><a href="#4-acteurs-et-cas-dusage">4. Acteurs et cas d'usage</a><ul>
+<li><a href="#41-acteurs">4.1 Acteurs</a></li>
+<li><a href="#42-cas-dusage-principaux">4.2 Cas d'usage principaux</a></li>
+</ul>
+</li>
+<li><a href="#5-exigences-fonctionnelles">5. Exigences fonctionnelles</a><ul>
+<li><a href="#51-p0-energie-globale">5.1 P0 - Energie globale</a></li>
+<li><a href="#52-p1-chauffage-et-climatisation">5.2 P1 - Chauffage et climatisation</a></li>
+<li><a href="#53-p2-prises">5.3 P2 - Prises</a></li>
+<li><a href="#54-p3-eclairage">5.4 P3 - Eclairage</a></li>
+<li><a href="#55-p4-presence">5.5 P4 - Presence</a></li>
+<li><a href="#56-tableau-de-bord">5.6 Tableau de bord</a></li>
+<li><a href="#57-notifications">5.7 Notifications</a></li>
+<li><a href="#58-securite-et-surveillance">5.8 Securite et surveillance</a></li>
+<li><a href="#59-meteo-et-environnement">5.9 Meteo et environnement</a></li>
+</ul>
+</li>
+<li><a href="#6-exigences-non-fonctionnelles">6. Exigences non fonctionnelles</a><ul>
+<li><a href="#61-fiabilite">6.1 Fiabilite</a></li>
+<li><a href="#62-maintenabilite">6.2 Maintenabilite</a></li>
+<li><a href="#63-tracabilite-et-audit">6.3 Tracabilite et audit</a></li>
+<li><a href="#64-securite">6.4 Securite</a></li>
+<li><a href="#65-performance">6.5 Performance</a></li>
+<li><a href="#66-sauvegarde-versioning-et-retour-arriere">6.6 Sauvegarde, versioning et retour arriere</a></li>
+<li><a href="#67-protocoles-de-session">6.7 Protocoles de session</a></li>
+</ul>
+</li>
+<li><a href="#7-architecture-cible">7. Architecture cible</a><ul>
+<li><a href="#71-infrastructure">7.1 Infrastructure</a></li>
+<li><a href="#72-structure-de-la-configuration">7.2 Structure de la configuration</a></li>
+<li><a href="#73-pipeline-de-publication">7.3 Pipeline de publication</a></li>
+</ul>
+</li>
+<li><a href="#8-conventions-et-normes">8. Conventions et normes</a><ul>
+<li><a href="#81-numerotation">8.1 Numerotation</a></li>
+<li><a href="#82-nommage-et-chaine-de-transformation">8.2 Nommage et chaine de transformation</a></li>
+<li><a href="#83-en-tetes-obligatoires">8.3 En-tetes obligatoires</a></li>
+<li><a href="#84-documentation">8.4 Documentation</a></li>
+<li><a href="#85-conventions-specifiques">8.5 Conventions specifiques</a></li>
+<li><a href="#86-pieges-techniques-a-eviter">8.6 Pieges techniques a eviter</a></li>
+<li><a href="#87-emplacements-piegeux">8.7 Emplacements piegeux</a></li>
+</ul>
+</li>
+<li><a href="#9-contraintes">9. Contraintes</a></li>
+<li><a href="#10-competences-requises">10. Competences requises</a></li>
+<li><a href="#11-livrables-et-phases">11. Livrables et phases</a><ul>
+<li><a href="#phase-1-socle">Phase 1 - Socle</a></li>
+<li><a href="#phase-2-energie">Phase 2 - Energie</a></li>
+<li><a href="#phase-3-confort">Phase 3 - Confort</a></li>
+<li><a href="#phase-4-presence-et-securite">Phase 4 - Presence et securite</a></li>
+<li><a href="#phase-5-restitution">Phase 5 - Restitution</a></li>
+<li><a href="#phase-6-fiabilisation">Phase 6 - Fiabilisation</a></li>
+</ul>
+</li>
+<li><a href="#12-criteres-dacceptation">12. Criteres d'acceptation</a></li>
+<li><a href="#13-gouvernance-et-methode-de-travail">13. Gouvernance et methode de travail</a></li>
+</ul>
+</div>
+<h2 id="supervision-et-pilotage-domotique-de-lappartement-home-assistant">Supervision et pilotage domotique de l'appartement (Home Assistant)</h2>
+<blockquote>
+<p>Version 1.0 - document de conception.<br />
+Objet : specifier ReBuild comme s'il partait de zéro, sans se caler sur l'existant.<br />
+Auteur : Hermes. A valider par Eric avant toute intégration dans docs/.</p>
+</blockquote>
+<hr />
+<h2 id="1-contexte-et-finalite">1. Contexte et finalité</h2>
+<p>ReBuild est le projet de supervision et de pilotage domotique d'un appartement situe a Vence (06140), immeuble de 1980, 4e etage sous toiture, traversant sud/nord, simple vitrage, VMC en salle de bain.</p>
+<p>Le projet repose sur Home Assistant comme cerveau central. Il doit permettre de mesurer et reduire la consommation electrique, d'automatiser le confort (chauffage, climatisation, eclairage, prises), de surveiller les equipements et la securite, et de presenter l'ensemble sur un tableau de bord unique.</p>
+<p>La finalite n'est pas la collection de gadgets : c'est un systeme fiable, maintenable et tracable, qui tient dans le temps et qu'un humain peut reprendre sans avoir tout refait.</p>
+<hr />
+<h2 id="2-objectifs">2. Objectifs</h2>
+<ul>
+<li>Centraliser toutes les donnees de la maison dans une interface unique.</li>
+<li>Automatiser les usages qui le meritent, sans dependre d'un cloud ferme ni d'une box proprietaire.</li>
+<li>Rendre chaque modification tracable et reversible.</li>
+<li>Permettre un audit permanent : consommation, coherence, versions.</li>
+<li>Documenter le projet pour qu'il reste comprehensible sans l'auteur.</li>
+<li>Rester exploitable par plusieurs intervenants : Eric et des agents IA.</li>
+</ul>
+<hr />
+<h2 id="3-perimetre">3. Perimetre</h2>
+<h3 id="31-inclus">3.1 Inclus</h3>
+<ul>
+<li>Energie : compteur Linky (MyElectricalData, J-1 HP/HC) et pince Nodon (temps reel).</li>
+<li>Chauffage et climatisation : salon, cuisine, bureau, salle de bain, chambre.</li>
+<li>Prises connectees : entree, salon, cuisine, bureau, chambre.</li>
+<li>Eclairage : 19 points lumineux Hue plus un relais, avec aggregation par unite, zone et total.</li>
+<li>Presence : telephones mobiles et capteurs Wi-Fi, avec un groupe de presence.</li>
+<li>Meteo et environnement : Meteo France, qualite de l'air, pollution, pollen, vigilance eau.</li>
+<li>Securite : alarme congelateur, surveillance fenetres, piles des modules.</li>
+<li>Tableau de bord unique a 18 vignettes plus une page d'accueil.</li>
+<li>Documentation, versioning et sauvegarde.</li>
+</ul>
+<hr />
+<h2 id="4-acteurs-et-cas-dusage">4. Acteurs et cas d'usage</h2>
+<h3 id="41-acteurs">4.1 Acteurs</h3>
+<ul>
+<li>Eric : proprietaire, technicien maintenance electrique, concepteur et exploitant.</li>
+<li>Mamour : utilisatrice au quotidien, non technicienne.</li>
+<li>Agents IA : redaction de YAML, documentation, audit, sans autonomie de decision finale.</li>
+</ul>
+<h3 id="42-cas-dusage-principaux">4.2 Cas d'usage principaux</h3>
+<ul>
+<li>Consulter l'etat de la maison (temperatures, consommation, air, securite).</li>
+<li>Piloter une piece (clim, chauffage, lumiere) manuellement ou par automatisation.</li>
+<li>Suivre et reduire la consommation par poste.</li>
+<li>Recevoir une alerte quand un equipement deraille (congelateur, fenetre ouverte, batterie faible).</li>
+<li>Auditer l'ecart entre configuration et realite.</li>
+<li>Revenir en arriere apres une erreur.</li>
+</ul>
+<hr />
+<h2 id="5-exigences-fonctionnelles">5. Exigences fonctionnelles</h2>
+<h3 id="51-p0-energie-globale">5.1 P0 - Energie globale</h3>
+<ul>
+<li>Mesurer la consommation Linky en HP et HC, avec un jour de retard (MyElectricalData).</li>
+<li>Mesurer la puissance instantanee via la pince Nodon.</li>
+<li>Produire les cycles quotidien, hebdomadaire, mensuel et annuel.</li>
+<li>Exposer un cout et une puissance par poste, pour piloter les economies.</li>
+</ul>
+<h3 id="52-p1-chauffage-et-climatisation">5.2 P1 - Chauffage et climatisation</h3>
+<ul>
+<li>Piloter la climatisation du salon, du bureau et de la chambre, ainsi que le chauffage de la salle de bain.</li>
+<li>Calculer une cible de confort par piece a partir de la temperature exterieure et de la presence.</li>
+<li>Gerer un mode absent ete et hiver avec des consignes distinctes.</li>
+<li>Eviter la derive nocturne et les conflits de consigne.</li>
+</ul>
+<h3 id="53-p2-prises">5.3 P2 - Prises</h3>
+<ul>
+<li>Mesurer la consommation par prise (cuisine, bureau, salon, chambre).</li>
+<li>Agreger par piece et par poste.</li>
+<li>Couper automatiquement ce qui le justifie (veilles, appareils oublies).</li>
+</ul>
+<h3 id="54-p3-eclairage">5.4 P3 - Eclairage</h3>
+<ul>
+<li>Piloter 19 points lumineux et un relais.</li>
+<li>Agreger en trois niveaux : unite, zone (piece), total appartement.</li>
+<li>Mesurer la consommation par niveau.</li>
+<li>Fournir des commandes manuelles coherentes avec les automatisations.</li>
+</ul>
+<h3 id="55-p4-presence">5.5 P4 - Presence</h3>
+<ul>
+<li>Determiner qui est present (absent, Mamour seule, Eric seul, les deux).</li>
+<li>Exposer cette information comme un groupe unique consomme par les autres poles.</li>
+<li>Ne jamais bloquer la maison si le detecteur de presence tombe.</li>
+</ul>
+<h3 id="56-tableau-de-bord">5.6 Tableau de bord</h3>
+<ul>
+<li>Une page d'accueil et 18 vignettes en 6 lignes et 3 colonnes : meteo, temperatures, commandes clim, consommation generale, consommation clim, consommation eclairage, commandes eclairage, commandes eco, fenetres et stores, mini-PC, Proxmox, mises a jour, piles, batteries portables, MariaDB, air, pollution et pollen, vigilance eau.</li>
+<li>Lisibilite prioritaire sur tablette et telephone.</li>
+<li>Aucune donnee inventee : chaque carte pointe vers une entite qui existe.</li>
+</ul>
+<h3 id="57-notifications">5.7 Notifications</h3>
+<ul>
+<li>Alerter sur les evenements critiques : congelateur, fenetre ouverte, equipement indisponible, batterie faible.</li>
+<li>Messages sans dependance a un service ferme.</li>
+</ul>
+<h3 id="58-securite-et-surveillance">5.8 Securite et surveillance</h3>
+<ul>
+<li>Alarme congelateur.</li>
+<li>Controle de coherence des entites Zigbee.</li>
+<li>Surveillance des piles Hue, IKEA et Sonoff.</li>
+</ul>
+<h3 id="59-meteo-et-environnement">5.9 Meteo et environnement</h3>
+<ul>
+<li>Meteo France pour les previsions et les tendances.</li>
+<li>Qualite de l'air et vigilance eau pour le confort.</li>
+</ul>
+<hr />
+<h2 id="6-exigences-non-fonctionnelles">6. Exigences non fonctionnelles</h2>
+<h3 id="61-fiabilite">6.1 Fiabilite</h3>
+<ul>
+<li>La maison doit rester pilotable manuellement si une automatisation tombe.</li>
+<li>Aucune automatisation ne doit dependre d'un seul capteur sans repli.</li>
+</ul>
+<h3 id="62-maintenabilite">6.2 Maintenabilite</h3>
+<ul>
+<li>Une seule convention de nommage, appliquee partout.</li>
+<li>Un fichier YAML egal a un seul pole, jamais plusieurs.</li>
+<li>Toute logique metier en YAML versionne, pas en helper UI.</li>
+</ul>
+<h3 id="63-tracabilite-et-audit">6.3 Tracabilite et audit</h3>
+<ul>
+<li>Chaque modification laisse une trace datee : auteur, quoi, pourquoi.</li>
+<li>Un audit recurrent compare configuration, production et depot.</li>
+<li>Un ecart constate est un fait a traiter, pas une opinion.</li>
+</ul>
+<h3 id="64-securite">6.4 Securite</h3>
+<ul>
+<li>Aucun secret en clair dans les fichiers du projet.</li>
+<li>Acces distants maitrises (Tailscale, tunnel chiffre).</li>
+<li>Mots de passe et jetons hors du code.</li>
+</ul>
+<h3 id="65-performance">6.5 Performance</h3>
+<ul>
+<li>Le tableau de bord doit s'afficher sans attente perceptible.</li>
+<li>Les calculs couteux sont evites ou mutualises.</li>
+</ul>
+<h3 id="66-sauvegarde-versioning-et-retour-arriere">6.6 Sauvegarde, versioning et retour arriere</h3>
+<p>Le systeme devra assurer une sauvegarde systematique de tout fichier versionnable avant modification, avec une retention maitrisee pour ne pas saturer le disque.</p>
+<p>Versioning d'un fichier.</p>
+<ul>
+<li>Avant toute modification d'un fichier versionnable, le systeme devra creer une sauvegarde horodatee a cote du fichier, au format x.bak_AAAA_MM_JJ_HHhMMmSSs.yaml.</li>
+<li>Il devra ensuite modifier le fichier de travail, qui garde son nom sans date : x.yaml.</li>
+<li>Le fichier de travail ne devra jamais porter de date dans son nom.</li>
+</ul>
+<p>Retention journaliere.</p>
+<ul>
+<li>Le systeme devra conserver au maximum 10 sauvegardes par fichier et par jour.</li>
+<li>A la 11e sauvegarde du jour, la plus ancienne devra partir a la corbeille Windows.</li>
+</ul>
+<p>Consolidation et retention longue.</p>
+<ul>
+<li>Quand le nettoyage est termine (via l'outil histo final, qui fait aussi d'autres taches), le systeme devra garder la sauvegarde la plus recente du jour, renommee x.bak_AAAA_MM_JJ.yaml, et envoyer les autres a la corbeille Windows.</li>
+<li>Il devra conserver au maximum 3 sauvegardes consolidees par fichier ; la 4e devra partir a la corbeille Windows.</li>
+<li>Le fichier de travail le plus recent devra toujours s'appeler x.yaml, sans date.</li>
+</ul>
+<p>Fichiers de production.</p>
+<ul>
+<li>Le systeme ne devra jamais effacer definitivement un fichier de production.</li>
+<li>Tout retrait devra passer par une corbeille, jamais une suppression definitive.</li>
+<li>Mecanique de retrait d'un fichier de production :<br />
+  1. copier le fichier de la production vers le dossier TEMPO en local ;<br />
+  2. verifier par MD5 que la copie est identique a l'original ;<br />
+  3. envoyer cette copie a la corbeille Windows ;<br />
+  4. seulement apres ces trois etapes, retirer le fichier de la production.</li>
+<li>Ainsi, la production ne perd jamais definitivement un fichier : la copie TEMPO verifiee sert de filet, et la corbeille Windows permet une restauration tant qu'elle n'est pas videe. Aucun retrait de production ne devra etre fait sans cette sequence TEMPO puis MD5 puis corbeille.</li>
+</ul>
+<p>Retour arriere.</p>
+<ul>
+<li>Une restauration complete devra etre possible en cas de corruption, en reprenant la sauvegarde locale voulue.</li>
+<li>Le depot GitHub devra servir de filet de secours historique.</li>
+</ul>
+<p>Purge de la corbeille.</p>
+<ul>
+<li>La corbeille Windows devra etre videe periodiquement.</li>
+<li>La frequence normale devra etre de 3 mois.</li>
+<li>Si la corbeille depasse un seuil de taille qui reste a definir, la purge devra etre avancee a 1 mois.</li>
+<li>La purge ne devra jamais toucher aux fichiers de travail ni aux sauvegardes conservees (les 10 du jour et les 3 consolidees).</li>
+</ul>
+<h3 id="67-protocoles-de-session">6.7 Protocoles de session</h3>
+<p>Debut de session.</p>
+<ul>
+<li>Le systeme devra demander d'abord si des modifications ont ete faites depuis la derniere session, avec un autre outil ou un autre agent.</li>
+<li>Si oui, il devra lancer l'audit MD5 de la configuration et l'audit MD5 des docs avant toute action.</li>
+</ul>
+<p>Audit a trois voies (trigul).</p>
+<ul>
+<li>Il devra comparer local, production et depot par empreinte.</li>
+<li>Il devra inclure une etape profonde qui compare les automations et les scripts unite par unite.</li>
+<li>Un ecart signale juste apres un push pourra etre le cache du CDN : il devra etre confirme par l'API avant d'etre traite.</li>
+</ul>
+<p>Prod fonctionnelle.</p>
+<ul>
+<li>Une automatisation devra etre testee en conditions reelles, pas seulement validee en YAML.</li>
+</ul>
+<p>Fin de session.</p>
+<ul>
+<li>Il devra produire un recapitulatif date dans historique, mettre a jour l'interface de suivi des taches et le journal des modifications.</li>
+</ul>
+<hr />
+<h2 id="7-architecture-cible">7. Architecture cible</h2>
+<h3 id="71-infrastructure">7.1 Infrastructure</h3>
+<ul>
+<li>Home Assistant OS en machine virtuelle sur Proxmox VE.</li>
+<li>Mini-PC Intel NUC, SSD 512 Go, RAM 16 Go.</li>
+<li>Conteneurs dedies : Zigbee2MQTT, MariaDB, MyElectricalData.</li>
+<li>Passerelle Zigbee Sonoff EFR32MG21.</li>
+</ul>
+<h3 id="72-structure-de-la-configuration">7.2 Structure de la configuration</h3>
+<ul>
+<li>Configuration eclatee en fichiers par pole et par type (sensors, templates, utility_meter, command_line).</li>
+<li>Automations et scripts separes, jamais edites a chaud dans le fichier live.</li>
+<li>Dashboards decrits en YAML et documentes en Markdown.</li>
+</ul>
+<h3 id="73-pipeline-de-publication">7.3 Pipeline de publication</h3>
+<ol>
+<li>Ecriture locale, source de verite.</li>
+<li>Copie verifiee par MD5 vers la production.</li>
+<li>Publication vers le depot GitHub.</li>
+<li>Controle a trois voies : local, production, depot.</li>
+</ol>
+<p>Regle absolue : on ne corrige jamais la production puis on recopie en local. Le sens est local puis production puis depot.</p>
+<hr />
+<h2 id="8-conventions-et-normes">8. Conventions et normes</h2>
+<h3 id="81-numerotation">8.1 Numerotation</h3>
+<ul>
+<li>Poles P0 a P4 : energie, chauffage et clim, prises, eclairage, presence.</li>
+<li>Pieces numerotees de 1 a 9 : entree, cellier, toilette, salon, cuisine, couloir, bureau, salle de bain, chambre.</li>
+<li>Prefixes hors poles pour la meteo, l'air, les stores et le mini-PC.</li>
+</ul>
+<h3 id="82-nommage-et-chaine-de-transformation">8.2 Nommage et chaine de transformation</h3>
+<p>Le nom d'une entite raconte son histoire. Chaque suffixe indique la derniere transformation qu'elle a subie, donc par ou elle est passee. Un fichier de configuration porte un pole, un type, les cycles couverts et une variante.</p>
+<p>Dossiers Home Assistant et prefixes :</p>
+<ul>
+<li>SNS -&gt; sensors/ : capteurs de base.</li>
+<li>UM -&gt; utility_meter/ : accumulation de l'energie sur un cycle.</li>
+<li>TPL -&gt; templates/ : mise en forme, conversion et calcul.</li>
+<li>CMD -&gt; command_line/ : commandes systeme.</li>
+<li>GRP_ -&gt; groups/ : groupes d'entites (batteries Hue, IKEA, Sonoff).</li>
+</ul>
+<p>Chaine de transformation d'une entite energie :</p>
+<ol>
+<li>Source brute. Fournie par l'integration native (Hue, Z2M, Shelly, Nodon). Suffixe : _energy. Exemple : sensor.hue_white_lamp_table_energy.</li>
+<li>Utility Meter (UM). L'integration utility_meter accumule la source sur un cycle (quotidien, hebdomadaire, mensuel, annuel). Suffixe : _um, qui veut dire utility meter. Exemple : sensor.hue_white_lamp_table_quotidien_um.</li>
+<li>Template kWh (TPL). Un template remet le compteur en forme et le convertit en kWh exploitable. Suffixe : _um_kwh_tpl. Le um vient du utility meter d'origine, kwh de la conversion, tpl du template qui la produit. Exemple : sensor.hue_white_lamp_table_quotidien_um_kwh_tpl.</li>
+<li>Agregation par zone (P3, niveau 2). On somme les lampes d'une piece. Le suffixe reste _um_kwh_tpl, mais le nom porte la zone et le nombre de lampes. Exemple : eclairage_salon_5_quotidien_um_kwh_tpl.</li>
+<li>Total appartement (P3, niveau 3). Suffixe _kwh_tpl, sans <em>um</em>, reserve au niveau total. Exemple : eclairage_total_unit_quotidien_kwh_tpl.</li>
+<li>Moyenne de puissance. Calculee depuis le um (P0, P1, P2) ou depuis le _um_kwh_tpl (P3). Suffixe : <em>avg_watts</em>{cycle}. Exemple : hue_white_lamp_table_avg_watts_quotidien.</li>
+</ol>
+<p>Autres types de fichiers de configuration :</p>
+<ul>
+<li>kWh : energie specifique (Riemann ou calcul dedie).</li>
+<li>DUT : duree d'utilisation.</li>
+<li>DIAG : template de diagnostic sur un cycle.</li>
+<li>POWER : puissance instantanee totale.</li>
+<li>MINI_MAXI_AVG : statistiques minimum, maximum et moyenne sur periode glissante.</li>
+<li>UI_DASHBOARD : template d'affichage uniquement (texte, couleur, icone), jamais de calcul d'energie.</li>
+<li>BV, IB, SW : bouton virtuel, input boolean et switch template lies.</li>
+</ul>
+<p>Exemple de bout en bout, de la lampe au tableau de bord :</p>
+<ul>
+<li>Hue fournit sensor.hue_white_lamp_table_energy.</li>
+<li>P3_UM_AMHQ_1_UNITE.yaml produit sensor.hue_white_lamp_table_quotidien_um.</li>
+<li>P3_TPL_AMHQ_1_UNITE.yaml produit sensor.hue_white_lamp_table_quotidien_um_kwh_tpl.</li>
+<li>P3_TPL_AMHQ_2_ZONE.yaml agrege en eclairage_salon_5_quotidien_um_kwh_tpl.</li>
+<li>P3_TPL_AMHQ_3_TOTAL.yaml agrege en eclairage_total_unit_quotidien_kwh_tpl.</li>
+<li>La vignette L2C3 (consommation eclairage) lit le total et les zones.</li>
+</ul>
+<p>Regles associees :</p>
+<ul>
+<li>Unique id et nom lisible decrivent la meme entite.</li>
+<li>Un fichier egale un seul pole, jamais plusieurs.</li>
+<li>Un slug est le miroir exact de l'unique id qui le suit.</li>
+<li>Aucun accent ni caractere special dans les noms de fichiers de documentation.</li>
+</ul>
+<p>Exemple concret : les trois lignes d'un bloc d'entite, alignees pour montrer qu'elles decrivent la meme entite.</p>
+<pre><code class="language-yaml">#        --- hue_white_lamp_table_quotidien_um ---
+- name:     &quot;Hue White Lamp Table Quotidien UM&quot;
+  unique_id: hue_white_lamp_table_quotidien_um
+</code></pre>
+<p>Les trois lignes a retenir :</p>
+<ul>
+<li>le slug (entre --- et ---) : minuscules et underscores, identique au unique_id qui suit ;</li>
+<li>le name : majuscule a chaque mot, entre guillemets, lisible ;</li>
+<li>le unique_id : minuscules et underscores, identique au slug.</li>
+</ul>
+<p>Un slug par entite, jamais plusieurs entites groupees sous un seul slug. Pour un utility_meter, un slug par cycle (annuel, mensuel, hebdomadaire, quotidien).</p>
+<h3 id="83-en-tetes-obligatoires">8.3 En-tetes obligatoires</h3>
+<p>Chaque fichier de configuration porte, juste sous sa boite ASCII, cinq en-tetes dans cet ordre :</p>
+<ul>
+<li>Description</li>
+<li>Calcul et sources</li>
+<li>Chaine de dependances (materiel, capteur brut, ce fichier, aval)</li>
+<li>Important (pieges)</li>
+<li>Tableau de bord (vignettes concernees)</li>
+</ul>
+<p>Les boites ont une largeur standard, mais elles s adaptent si le texte est trop long.</p>
+<p>Titre principal : coins arrondis, largeur standard 78 caracteres.</p>
+<pre><code class="language-text">╭────────────────────────────────────────────────────────────────────────────╮
+│ EXEMPLE - TITRE PRINCIPAL - LARGEUR STANDARD 78 CARACTERES                 │
+╰────────────────────────────────────────────────────────────────────────────╯
+</code></pre>
+<p>Titre secondaire : coins carres, largeur standard 37 caracteres, numerotation 1 a 9.</p>
+<pre><code class="language-text">┌───────────────────────────────────┐
+│ 1 - TITRE SECONDAIRE - LARGEUR 37 │
+└───────────────────────────────────┘
+</code></pre>
+<p>Regle d adaptation : si le titre ne tient pas dans la largeur standard, on elargit la boite. Le haut, le titre et le bas doivent toujours garder la meme largeur. La largeur n est donc pas une limite, c est un cadre par defaut.</p>
+<h3 id="84-documentation">8.4 Documentation</h3>
+<ul>
+<li>Une fiche par vignette et par module.</li>
+<li>Une carte de dependances maintenue par generateur.</li>
+<li>Un journal date des modifications.</li>
+<li>Un backlog vivant des taches.</li>
+</ul>
+<h3 id="85-conventions-specifiques">8.5 Conventions specifiques</h3>
+<ul>
+<li>Zero helper UI : aucun input_boolean, input_number ou input_select pour la logique metier. Tout doit etre en YAML.</li>
+<li>Pas de valeur en dur : une valeur qui existe ailleurs dans Home Assistant (seuil, duree, liste d'entites) devra etre lue, jamais recopiee.</li>
+<li>PowerCalc : perimetre strict au pole P3, lampes Hue sans monitoring natif, plus le relais de la salle de bain a 10 W fixe.</li>
+<li>Bouton virtuel : la paire input_boolean et switch template est obligatoire.</li>
+<li>File notify : les notifications devront passer par un fichier, pour ne pas dependre d'un service ferme.</li>
+<li>sensor.groupe : groupe_1 absent, groupe_2 Mamour seule, groupe_3 Eric seul, groupe_4 les deux.</li>
+<li>Strategie thermique : absence hiver 17 degres, 18 si T° ext inferieure a 10, 19 si inferieure a 8 ; absence ete 28 degres ; logique T° ext vers cible vers confort.</li>
+<li>Badges shields.io : une date dans un badge devra utiliser un double tiret, sinon le badge ne s'affiche pas.</li>
+<li>Les trois copies du contexte general devront rester identiques octet pour octet, controlees par MD5.</li>
+<li>L'historique ne devra jamais etre reecrit : journaux et archives restent figes, meme lors d'un grand nettoyage.</li>
+<li>Les automations et les scripts ne devront jamais etre edites directement dans leur fichier live : la modification devra passer par l'interface Home Assistant.</li>
+</ul>
+<h3 id="86-pieges-techniques-a-eviter">8.6 Pieges techniques a eviter</h3>
+<ul>
+<li>Windows ignore la casse : docs et Docs designent le meme dossier. Verifier la casse reelle avant tout renommage.</li>
+<li>Les antislashs doubles en ecriture et en lecture peuvent fausser un remplacement ; controler le style reel du fichier.</li>
+<li>Les fins de ligne CRLF et LF ne se supposent pas : controler en lecture binaire avant d'inserer.</li>
+<li>Les outils natifs (Python, git) attendent un chemin natif ; un chemin de shell peut ne rien trouver sans erreur.</li>
+<li>Un script inline trop gros est bloque : l'ecrire dans un fichier avant de l'executer.</li>
+<li>Un deplacement qui ecrase une cible existante ne passe pas par la corbeille : copier avant, jamais deplacer a l'aveugle.</li>
+</ul>
+<h3 id="87-emplacements-piegeux">8.7 Emplacements piegeux</h3>
+<ul>
+<li>Les MOC vivent dans un dossier MOC, hors de docs : ils sortent de la cascade.</li>
+<li>INDEX_GLOBAL existe en deux exemplaires qui divergent ; il faudra verifier lequel est publie avant d'editer.</li>
+<li>Les fichiers de racine (README, INDEX_GLOBAL) sont miroirs dans un dossier Github, pas a la racine du projet local.</li>
+</ul>
+<hr />
+<h2 id="9-contraintes">9. Contraintes</h2>
+<ul>
+<li>Materiel existant a reutiliser, aucune dependance a un abonnement cloud obligatoire.</li>
+<li>Reseau local et acces distant via tunnel maitrise.</li>
+<li>Exploitation par une personne RQTH : l'interface doit rester lisible et privilegier le texte clair.</li>
+<li>Temps disponible limite : chaque chantier doit etre livrable par etapes courtes.</li>
+<li>Multi-agents : les regles de travail doivent etre ecrites pour etre respectees par un humain comme par un agent IA.</li>
+</ul>
+<hr />
+<h2 id="10-competences-requises">10. Competences requises</h2>
+<p>Le projet ne pourra pas etre tenu par un intervenant qui ne maitrise pas a la fois Home Assistant et les conventions ReBuild. Les competences suivantes devront etre disponibles.</p>
+<p>Home Assistant.</p>
+<ul>
+<li>YAML, Jinja2 et templates.</li>
+<li>Automations, scripts et declencheurs.</li>
+<li>Utility meter, integration sur cycle et calcul de consommation.</li>
+<li>Dashboards Lovelace et cartes custom.</li>
+<li>Integrations : Zigbee2MQTT, Hue, MyElectricalData, Meross, HACS.</li>
+<li>PowerCalc dans son perimetre strict.</li>
+</ul>
+<p>Conventions ReBuild.</p>
+<ul>
+<li>Nommage des poles, des pieces et des fichiers.</li>
+<li>Chaine de suffixes et chaine de transformation des entites.</li>
+<li>Boites ASCII et en-tetes obligatoires.</li>
+<li>Regles de sauvegarde et de versioning.</li>
+<li>Cascade local vers production vers depot.</li>
+</ul>
+<p>Infrastructure.</p>
+<ul>
+<li>Proxmox, conteneurs LXC et sauvegarde de VM.</li>
+<li>Samba, SSH, Tailscale et tunnel chiffre.</li>
+<li>Audit MD5 et comparaison a trois voies.</li>
+</ul>
+<p>Metier.</p>
+<ul>
+<li>Notions d'electricite et de comptage d'energie.</li>
+<li>Notions de thermique du batiment et de confort.</li>
+</ul>
+<p>Agents IA et competences outillees.</p>
+<ul>
+<li>Le projet devra s'appuyer sur des competences outillees (skills) propres a Home Assistant, pas sur la culture generale d'un modele.</li>
+<li>Chaque tache recurrente devra disposer d'une procedure ecrite : push YAML, push docs, audit MD5, trigul, histo, creation de YAML, verification d'en-tete.</li>
+<li>Un agent qui n'a pas la competence correspondante ne devra pas intervenir sur le fichier concerne.</li>
+</ul>
+<hr />
+<h2 id="11-livrables-et-phases">11. Livrables et phases</h2>
+<h3 id="phase-1-socle">Phase 1 - Socle</h3>
+<ul>
+<li>Home Assistant stabilise, sauvegarde, versioning, conventions de nommage.</li>
+</ul>
+<h3 id="phase-2-energie">Phase 2 - Energie</h3>
+<ul>
+<li>P0 : Linky, Nodon, cycles de consommation, cout.</li>
+</ul>
+<h3 id="phase-3-confort">Phase 3 - Confort</h3>
+<ul>
+<li>P1 chauffage et clim, P2 prises, P3 eclairage.</li>
+</ul>
+<h3 id="phase-4-presence-et-securite">Phase 4 - Presence et securite</h3>
+<ul>
+<li>P4 presence, alarmes et surveillances.</li>
+</ul>
+<h3 id="phase-5-restitution">Phase 5 - Restitution</h3>
+<ul>
+<li>Tableau de bord 18 vignettes, page d'accueil, notifications.</li>
+</ul>
+<h3 id="phase-6-fiabilisation">Phase 6 - Fiabilisation</h3>
+<ul>
+<li>Audit recurrent, documentation complete, retour arriere teste.</li>
+</ul>
+<hr />
+<h2 id="12-criteres-dacceptation">12. Criteres d'acceptation</h2>
+<ul>
+<li>Le tableau de bord s'affiche sans entite cassee.</li>
+<li>Les automatisations critiques ont un repli et ne bloquent pas la maison.</li>
+<li>Chaque fichier de configuration respecte les conventions de nommage et d'en-tete.</li>
+<li>L'audit a trois voies ne signale aucun ecart non explique.</li>
+<li>Une modification volontaire peut etre annulee depuis sa sauvegarde.</li>
+<li>Une personne exterieure peut comprendre le projet a partir de la documentation.</li>
+</ul>
+<hr />
+<h2 id="13-gouvernance-et-methode-de-travail">13. Gouvernance et methode de travail</h2>
+<ul>
+<li>Le local fera foi, puis la production, puis le depot.</li>
+<li>Une instruction d'Eric ou de Claude vaudra validation ; toute autre source ne sera qu'information.</li>
+<li>Une correction devra s'appliquer d'un seul passage dans toutes les pieces concernees.</li>
+<li>La concision et la preuve devront primer sur la flatterie : un fait faux devra etre dit et corrige.</li>
+<li>La documentation devra faire foi face a la memoire.</li>
+<li>Avant d'affirmer un fait precis, il faudra pouvoir nommer sa source : etabli, deduit ou inconnu.</li>
+<li>Un desaccord devra etre exprime avant de continuer, sans menagement.</li>
+<li>Un prompt imprecis ou sensible devra etre signale avant traitement.</li>
+<li>Le systeme devra refuser d'ecrire des caracteres hors de l'ecriture courante dans tout fichier publie.</li>
+<li>Chaque operation devra se terminer par DONE.</li>
+<li>Un nouveau type d'objet Home Assistant (script, helper) devra etre valide avant introduction.</li>
+<li>Le document d'Eric fera foi quand il contredit une note ou une memoire.</li>
+<li>Un fichier livre devra passer le controle typographique.</li>
+</ul>
+<p>DONE</p>
+<footer>
+  Cahier des charges ReBuild. Document genere depuis le markdown de travail.
+</footer>
+</main>
+</body>
+</html>

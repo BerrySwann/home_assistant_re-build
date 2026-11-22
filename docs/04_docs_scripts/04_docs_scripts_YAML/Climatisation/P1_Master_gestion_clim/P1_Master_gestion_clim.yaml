@@ -266,19 +266,20 @@ p1_master_gestion_clim:
           {%- else -%}
             {%- if 'groupe_1' in groupe_presence and mode_saison in ['heat', 'cool'] -%}
               {%- set entete = '[ECO HEAT]' if mode_saison == 'heat' else '[ECO COOL]' -%}
-              {%- set t_s = t_salon_target -%}
-              {%- set t_b = t_bureau_target -%}
-              {%- set t_c = t_chambre_target -%}
+              {%- set t_s = (t_salon_target | float(0)) + (states('sensor.correction_temperature_salon') | float(0)) -%}
+              {%- set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau') | float(0)) -%}
+              {%- set t_c = (t_chambre_target | float(0)) + (states('sensor.correction_temperature_chambre') | float(0)) -%}
             {%- else -%}
               {%- set entete = 'Mode : ' ~ (mode_saison | upper) ~ (' (NUIT)' if periode == 'nuit' else '') -%}
-              {%- set t_s = t_salon_target -%}
-              {%- set t_b = t_bureau_target -%}
-              {%- set t_c = t_chambre_target -%}
+              {%- set t_s = (t_salon_target | float(0)) + (states('sensor.correction_temperature_salon') | float(0)) -%}
+              {%- set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau') | float(0)) -%}
+              {%- set t_c = (t_chambre_target | float(0)) + (states('sensor.correction_temperature_chambre') | float(0)) -%}
             {%- endif -%}
           {{ entete }}
-          Salon  : {{ (t_s | string ~ '°') if prise_salon else '[OFF]' }}
-          Bureau : {{ (t_b | string ~ '°') if prise_bureau else '[OFF]' }}
-          Chambre: {{ (t_c | string ~ '°') if prise_chambre else '[OFF]' }}
+          Salon  : {{ (t_s | round(1) | string ~ '°') if prise_salon else '[OFF]' }}
+          Bureau : {{ (t_b | round(1) | string ~ '°') if prise_bureau else '[OFF]' }}
+          Chambre: {{ (t_c | round(1) | string ~ '°') if prise_chambre else '[OFF]' }}
           {%- endif -%}
 # annotations_log:
 # [2026-11-22] eco groupe_1 chauffage : eco_hc_salon, eco_hc_bureau, eco_hc_chambre (eco moins correction, plancher min_temp) ; notification = t_*_target ; fichier reconstruit depuis la prod (config_hash ee25a74797646c88), l ancienne copie datait du 2026-11-17
+# [2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece : t_s, t_b, t_c), plus la valeur envoyee ; arrondi a 1 decimale ; config_hash feb1f6683d7f047c
