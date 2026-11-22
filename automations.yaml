@@ -2930,6 +2930,8 @@
           %} {% set ons = states('sensor.offset_salon') | float(none) %} {{ thst is
           not none and tcns is not none and ons is not none\n   and (thst | round(1,
           'floor')) > (tcns + ons) }}"
+      - condition: template
+        value_template: '{{ not is_state(''sensor.groupe'', ''groupe_1'') }}'
       sequence:
       - action: input_number.set_value
         target:
@@ -2977,6 +2979,8 @@
           %} {% set onb = states('sensor.offset_bureau') | float(none) %} {{ thbt
           is not none and tcnb is not none and onb is not none\n   and (thbt | round(1,
           'floor')) > (tcnb + onb) }}"
+      - condition: template
+        value_template: '{{ not is_state(''sensor.groupe'', ''groupe_1'') }}'
       sequence:
       - action: input_number.set_value
         target:
@@ -3024,6 +3028,8 @@
           %} {% set onc = states('sensor.offset_chambre') | float(none) %} {{ thct
           is not none and tcnc is not none and onc is not none\n   and (thct | round(1,
           'floor')) > (tcnc + onc) }}"
+      - condition: template
+        value_template: '{{ not is_state(''sensor.groupe'', ''groupe_1'') }}'
       sequence:
       - action: input_number.set_value
         target:

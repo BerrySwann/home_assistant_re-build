@@ -77,7 +77,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 #### SALON
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | - | eco (hc ou ec selon saison) |
+| `groupe_1` (absent) | - | chauffage : `eco_hc_salon` (eco moins la correction du salon, plancher `min_temp` de la clim) ; clim : eco ete |
 | `groupe_2` (Mamour) | JOUR | `tccsj_s` |
 | `groupe_3` (Eric) | JOUR | `tccsj_s` |
 | `groupe_4` (Tous) | JOUR | `tccsj_s` |
@@ -88,7 +88,7 @@ Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, 
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | - | eco |
+| `groupe_1` (absent) | - | chauffage : `eco_hc_bureau` (eco moins la correction du bureau, plancher `min_temp`) ; clim : eco ete |
 | `groupe_2` (Mamour) | JOUR | `tccsj_b` |
 | `groupe_3` (Eric) | JOUR | `tccsj_b` |
 | `groupe_4` (Tous) | JOUR | `tccsj_b` |
@@ -100,9 +100,11 @@ chauffage et `tccsj_b` en clim.
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | - | eco |
+| `groupe_1` (absent) | - | chauffage : `eco_hc_chambre` (eco moins la correction de la chambre, plancher `min_temp`) ; clim : eco ete |
 | tout autre | JOUR | `tccsj_c` |
 | tout | NUIT | `tccn_c` |
+
+**Eco en groupe_1, chauffage (depuis le 2026-11-22)** : le script calcule `eco_hc_salon`, `eco_hc_bureau` et `eco_hc_chambre`, c est a dire l eco moins la correction de la piece (1 / 2 / 2), sans descendre sous le `min_temp` lu sur l entite climate (16 au salon, 10 au bureau et a la chambre). Avec l eco a 17, il envoie 16 / 15 / 15, soit 17 reel partout. Avant : 17 envoye, donc 18 / 19 / 19 reel. L eco ete (`temp_eco_ec`), le mode degrade (`eco_saison_val`) et le bureau en groupe_2 de jour (eco sans correction) restent inchanges. La notification affiche `t_salon_target`, `t_bureau_target` et `t_chambre_target`, c est a dire la valeur reellement envoyee.
 
 ### 6. Exécution
 
@@ -192,6 +194,7 @@ chauffage et `tccsj_b` en clim.
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-22 | Claude | **Eco corrige en groupe_1 (chauffage).** Trois variables `eco_hc_salon`, `eco_hc_bureau`, `eco_hc_chambre` : eco moins la correction de la piece (1 / 2 / 2), plancher `min_temp` de la clim lu sur l entite climate (16 salon, 10 bureau et chambre). Envoye 16 / 15 / 15 au lieu de 17, reel 17 partout au lieu de 18 / 19 / 19. Notification : vrais sauts de ligne, valeurs `t_salon_target`, `t_bureau_target`, `t_chambre_target` (valeur reellement envoyee). YAML local reconstruit depuis la prod (il datait du 2026-11-17). | `ee25a74797646c88` |
 | 2026-11-17 | Claude | **Fiche realignee sur la prod.** Capteurs `correction_temperature_salon`, `_bureau`, `_chambre` (sans `_nuit_`), valeurs relevees dans HA le 2026-11-17 : 1 / 2 / 2. La fiche annoncait 1 / 3 / 3 ; auteur et date du passage de 3 a 2 inconnus. | - |
 | 2026-11-12 | Hermes | **Cible et consigne envoyee separees.** `tccn_s/b/c` ne valent plus `temperature_confort_nuit` mais `temperature_consigne_nuit_*` moins `correction_temperature_nuit_*`. Trois capteurs de correction crees dans le template : 1 au salon, 3 au bureau et a la chambre, mesures du 2026-11-10 (ecarts 1,5 / 4,0 / 3,6 du capteur de reprise d'air). Le script envoie donc 18 / 16 / 16 alors que la cible reste 19. La soustraction avait d'abord ete posee dans le template, ce qui cassait J K L : la cible tombait a 18 et 16, les automatisations declenchaient en permanence et le -1 restait colle. | - |
 | 2026-11-07 | Hermes | **References aux entites supprimees** : 11 references remplacees apres la suppression de `sensor.consigne_de_base` et `sensor.temperature_cible` le meme jour. `consigne_de_base` devient `sensor.consigne` (renommage pur, meme valeur). `temperature_cible` devient `sensor.temperature_confort_jour`, qui porte desormais la cible du jour dans le template P1_01. **Pourquoi c'etait urgent** : `float()` sur une entite inconnue rend 0, donc `temp_cible` valait 0.0 et le repli `eco_saison_val` tombait aussi a 0.0, ce qui aurait envoye une consigne de 0 C aux trois clims des qu'une branche degradee s'activait. Apres correction : 20.0 et 20.0. Signale par Spook. | - |
@@ -201,4 +204,5 @@ chauffage et `tccsj_b` en clim.
 | 2026-09-06 | S1 | **Fix `temp_out_of_range`** : bloc `INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE` reécrit avec clamp Jinja2 `[[_v, min_temp]|max, max_temp]|min` sur `state_attr` live pour `t_salon_target`, `t_bureau_target`, `t_chambre_target`. Empêche tout appel `climate.set_temperature` hors plage physique AC (Salon 16-32°C, Bureau/Chambre 18-32°C). 279→291 lignes. | `83cd286eafa2f8df` |
 
 <!-- annotations_log:
-[2026-11-17] noms des capteurs de correction (sans _nuit_) et valeurs 1/2/2 alignes sur HA ; repli 18 ou 17. -->
+[2026-11-17] noms des capteurs de correction (sans _nuit_) et valeurs 1/2/2 alignes sur HA ; repli 18 ou 17.
+[2026-11-22] eco groupe_1 chauffage : correction soustraite, plancher min_temp (eco_hc_salon, eco_hc_bureau, eco_hc_chambre) ; notification = valeur envoyee ; YAML local realigne sur la prod (ee25a74797646c88). -->

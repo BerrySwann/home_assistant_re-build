@@ -394,8 +394,17 @@ p1_master_gestion_clim:
         mode_ete_ok == ''true'' and mode_saison_brut == ''cool'' %} {{ states(''sensor.temperature_eco_ete_corrige'')
         | float }} {% else %}{{ states(''sensor.temperature_confort_jour'') | float
         }}{% endif %}'
+      eco_hc_salon: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_salon'')
+        | float(0)), state_attr(''climate.clim_salon_rm4_mini'', ''min_temp'') | float(0)]
+        | max }}'
+      eco_hc_bureau: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_bureau'')
+        | float(0)), state_attr(''climate.clim_bureau_rm4_mini'', ''min_temp'') |
+        float(0)] | max }}'
+      eco_hc_chambre: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_chambre'')
+        | float(0)), state_attr(''climate.clim_chambre_rm4_mini'', ''min_temp'') |
+        float(0)] | max }}'
       t_salon_target: "{% if mode_degrade_eco == 'true' %} {{ eco_saison_val }} {%
-        elif 'groupe_1' in groupe_presence %} {{ temp_eco_hc if mode_saison == 'heat'
+        elif 'groupe_1' in groupe_presence %} {{ eco_hc_salon if mode_saison == 'heat'
         else temp_eco_ec }} {% elif periode == 'jour' and 'groupe_3' in groupe_presence
         %} {{ tccj_b + (states('sensor.correction_temperature_bureau') | float(0)\n
         \  - states('sensor.correction_temperature_salon') | float(0)) }}\n{% elif
@@ -403,16 +412,16 @@ p1_master_gestion_clim:
         %} {{ tccj_s }} {% elif periode == 'jour' %} {{ temp_eco_hc if mode_saison
         == 'heat' else temp_eco_ec }} {% else %} {{ tccn_s }} {% endif %}"
       t_bureau_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-        {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
-        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and (''groupe_3''
+        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_bureau if mode_saison
+        == ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and (''groupe_3''
         in groupe_presence or ''groupe_4'' in groupe_presence) %} {{ tccj_b }} {%
         elif periode == ''jour'' and ''groupe_2'' in groupe_presence %} {{ temp_eco_hc
         if mode_saison == ''heat'' else tccj_b }} {% elif periode == ''jour'' %} {{
         temp_eco_hc if mode_saison == ''heat'' else temp_eco_ec }} {% else %} {{ tccn_b
         }} {% endif %}'
       t_chambre_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-        {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
-        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and (''groupe_2''
+        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_chambre if mode_saison
+        == ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and (''groupe_2''
         in groupe_presence or ''groupe_3'' in groupe_presence or ''groupe_4'' in groupe_presence)
         %} {{ tccj_c }} {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison
         == ''heat'' else temp_eco_ec }} {% else %} {{ tccn_c }} {% endif %}'
@@ -521,21 +530,20 @@ p1_master_gestion_clim:
       data:
         title: '{{ prefix }} {{ states(''sensor.presence'') }}'
         message: "{%- set prise_salon   = is_state('switch.clim_salon_nous', 'on')
-          -%} {%- set prise_bureau  = is_state('switch.clim_bureau_nous', 'on') -%}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') -%} {%-
-          if not (prise_salon or prise_bureau or prise_chambre) -%} [UNITS OFF] Aucune
-          clim alimentee. {%- else -%}\n  {%- if 'groupe_1' in groupe_presence and
+          -%}\n{%- set prise_bureau  = is_state('switch.clim_bureau_nous', 'on') -%}\n{%-
+          set prise_chambre = is_state('switch.clim_chambre_nous', 'on') -%}\n{%-
+          if not (prise_salon or prise_bureau or prise_chambre) -%}\n[UNITS OFF] Aucune
+          clim alimentee.\n{%- else -%}\n  {%- if 'groupe_1' in groupe_presence and
           mode_saison in ['heat', 'cool'] -%}\n    {%- set entete = '[ECO HEAT]' if
-          mode_saison == 'heat' else '[ECO COOL]' -%}\n    {%- set eco = temp_eco_hc
-          if mode_saison == 'heat' else temp_eco_ec -%}\n    {%- set t_s = eco -%}\n
-          \   {%- set t_b = eco -%}\n    {%- set t_c = eco -%}\n  {%- else -%}\n    {%-
-          set entete = 'Mode : ' ~ (mode_saison | upper) ~ (' (NUIT)' if periode ==
-          'nuit' else '') -%}\n    {%- set t_s = (t_bureau_target | float + 1) if
-          ('groupe_3' in groupe_presence) else t_salon_target -%}\n    {%- set t_b
-          = t_bureau_target -%}\n    {%- set t_c = t_chambre_target -%}\n  {%- endif
-          -%}\n{{ entete }} Salon  : {{ (t_s | string ~ '°') if prise_salon else '[OFF]'
-          }} Bureau : {{ (t_b | string ~ '°') if prise_bureau else '[OFF]' }} Chambre:
-          {{ (t_c | string ~ '°') if prise_chambre else '[OFF]' }} {%- endif -%}"
+          mode_saison == 'heat' else '[ECO COOL]' -%}\n    {%- set t_s = t_salon_target
+          -%}\n    {%- set t_b = t_bureau_target -%}\n    {%- set t_c = t_chambre_target
+          -%}\n  {%- else -%}\n    {%- set entete = 'Mode : ' ~ (mode_saison | upper)
+          ~ (' (NUIT)' if periode == 'nuit' else '') -%}\n    {%- set t_s = t_salon_target
+          -%}\n    {%- set t_b = t_bureau_target -%}\n    {%- set t_c = t_chambre_target
+          -%}\n  {%- endif -%}\n{{ entete }}\nSalon  : {{ (t_s | string ~ '°') if
+          prise_salon else '[OFF]' }}\nBureau : {{ (t_b | string ~ '°') if prise_bureau
+          else '[OFF]' }}\nChambre: {{ (t_c | string ~ '°') if prise_chambre else
+          '[OFF]' }}\n{%- endif -%}"
 sdb_soufflant_demarrer:
   alias: 'SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s)'
   description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou

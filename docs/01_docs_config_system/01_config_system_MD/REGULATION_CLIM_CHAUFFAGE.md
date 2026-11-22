@@ -144,7 +144,7 @@ En ete les pieces ne suivent plus le confort du tout : elles lisent directement 
 marche, entre 26 et 28 degres dehors.
 
 Depuis le 2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccj_s`, `tccj_b` et `tccj_c`.
-La seule exception reste `groupe_1`, qui envoie l eco aux trois.
+La seule exception reste `groupe_1`, qui envoie l eco aux trois (en chauffage, l eco moins la correction de la piece, voir section 9).
 
 ## 6. Confort jour, confort nuit, et consigne de nuit
 
@@ -233,6 +233,8 @@ l absence : le script prend l eco des que le groupe de presence vaut `groupe_1`,
 manque et qu il bascule en mode degrade. Quand une fenetre est ouverte, le script ne calcule pas d eco :
 il coupe les trois unites.
 
+En chauffage et en `groupe_1`, le script soustrait la correction de la piece a l eco, comme pour les autres cibles, depuis le 2026-11-22. Avec l eco a 17 et des corrections de 1, 2 et 2, il envoie 16 au salon, 15 au bureau et 15 a la chambre, soit 17 reel partout (avant : 17 envoye, 18 / 19 / 19 reel). Le plancher est le `min_temp` de chaque clim, lu sur l entite climate : 16 au salon, 10 au bureau et a la chambre. L eco d ete, le mode degrade et l eco du bureau en `groupe_2` de jour restent envoyes sans correction.
+
 ## 10. Le script `p1_master_gestion_clim`
 
 C est lui qui pilote. Le template ne fait que fournir des nombres.
@@ -257,7 +259,7 @@ Le choix des cibles :
 
 | Groupe | Periode | Salon | Bureau | Chambre |
 |:--|:--|:--|:--|:--|
-| groupe_1, absent | jour et nuit | eco de saison | eco de saison | eco de saison |
+| groupe_1, absent | jour et nuit | eco de saison (chauffage : moins la correction) | idem | idem |
 | groupe_2, 3 ou 4 | jour | tccj_s | tccj_b | tccj_c |
 | tout groupe sauf 1 | nuit | tccn_s | tccn_b | tccn_c |
 
@@ -351,4 +353,5 @@ Le fichier est critique : toute modification impacte toutes les automations clim
 copies ne veut rien dire, il faut comparer le YAML relu.
 
 <!-- annotations_log:
-[2026-11-17] automatisations J a O realignees sur offset_* (ancien nom offset_nuit_*). -->
+[2026-11-17] automatisations J a O realignees sur offset_* (ancien nom offset_nuit_*).
+[2026-11-22] section 9 : eco groupe_1 chauffage moins la correction de la piece, plancher min_temp (script p1_master_gestion_clim). -->
