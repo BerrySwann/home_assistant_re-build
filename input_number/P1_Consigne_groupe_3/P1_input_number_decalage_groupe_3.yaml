@@ -1,0 +1,31 @@
+# ┌───────────────────────────────────────────────────────────┐
+# │ DECALAGE GROUPE 3 (ERIC SEUL), JOUR, CHAUFFAGE
+# └───────────────────────────────────────────────────────────┘
+# Reglage de la temperature REELLE visee dans les 3 pieces quand
+# le groupe est groupe_3 (Eric seul), en periode jour et en mode
+# chauffage. Lu par le script p1_master_gestion_clim.
+#
+# Temperature reelle visee = min(temperature_confort_jour + cet
+# input, max_chaud_hiver). La consigne envoyee a chaque clim est
+# cette valeur moins la correction de la piece
+# (correction_temperature_salon / _bureau / _chambre).
+#
+# Exemple : confort jour 20 et decalage -2 donnent 18 reel partout,
+# soit 17 au salon, 16 au bureau et 16 a la chambre envoyes.
+# Le decalage suit le confort : quand il fait plus froid dehors,
+# le confort monte et la cible aussi.
+#
+# Sans effet sur les autres groupes, ni en mode froid, ni la nuit.
+# Si l input est indisponible, le script garde l ancienne logique.
+#
+# Include en merge_named : la cle est l identifiant, la valeur
+# le bloc de configuration. Une liste ici ne serait pas montee.
+# Pas de initial : la valeur choisie est restauree au redemarrage.
+
+clim_decalage_groupe_3:
+  name: "Clim decalage groupe 3 jour"
+  min: -5
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer-minus
