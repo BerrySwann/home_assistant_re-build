@@ -48,7 +48,6 @@ triggers:
   entity_id:
   - sensor.groupe
   - sensor.th_balcon_nord_temperature
-  - sensor.mode_ete_hiver
   - sensor.temperature_confort_nuit
   id: sensor_update
 - alias: 'CONSIGNE NUIT : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
@@ -58,6 +57,10 @@ triggers:
   - sensor.temperature_consigne_nuit_bureau
   - sensor.temperature_consigne_nuit_chambre
   id: sensor_update
+- alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
+  trigger: state
+  entity_id: sensor.mode_ete_hiver
+  id: force_run
 conditions:
 - condition: time
   after: '21:00:00'

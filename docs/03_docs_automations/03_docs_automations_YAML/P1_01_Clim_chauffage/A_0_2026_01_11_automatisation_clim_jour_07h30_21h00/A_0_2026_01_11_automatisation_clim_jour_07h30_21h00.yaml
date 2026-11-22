@@ -48,9 +48,12 @@ triggers:
   entity_id:
   - sensor.groupe
   - sensor.th_balcon_nord_temperature
-  - sensor.mode_ete_hiver
   - sensor.temperature_confort_jour
   id: sensor_update
+- alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
+  trigger: state
+  entity_id: sensor.mode_ete_hiver
+  id: force_run
 conditions:
 - condition: time
   after: 07:30:00

@@ -47,7 +47,7 @@ Le template ne pilote rien. Il produit des nombres. C est le script qui agit.
 | `correction_temperature_chambre` | 3 | idem, chambre |
 
 Il n existe plus de capteurs `delta_*`. Les majorations de confort sont ecrites en clair dans la formule :
-`consigne + 1` et `consigne + 2`. Un delta declare en capteur pour etre relu avec un repli sur sa propre
+`consigne + 1`, `consigne + 2` et `consigne + 3`. Un delta declare en capteur pour etre relu avec un repli sur sa propre
 valeur n etait qu une valeur en dur avec un capteur de plus.
 
 Le suffixe `nuit` a ete retire des corrections le 2026-11-12 : elles servent aussi au jour, seule la cible
@@ -93,12 +93,14 @@ En chauffage :
 
 | Exterieur | Confort | Formule |
 |:--|--:|:--|
-| sous 8 | 21 | consigne + 2 |
-| de 8 a 12 exclu | 20 | consigne + 1 |
-| au-dessus | 19 | consigne |
+| sous 8 | 22 | consigne + 3 |
+| de 8 a 12 exclu | 21 | consigne + 2 |
+| au-dessus | 20 | consigne + 1 |
 
-Les trois paliers sont distincts depuis le 2026-11-14. La branche du palier doux calculait `consigne + 1`
-et donnait 20, si bien que le palier 19 n existait pas et que la maison restait a 20 par temps doux.
+Les trois paliers sont distincts depuis le 2026-11-14. Depuis le fichier prod du 2026-11-21 20h17 (aligne en local le
+2026-11-22), ils valent 20, 21 et 22 : chaque palier prend un degre de plus qu avant (19, 20, 21). Releve du
+2026-11-22 : exterieur 15,7, consigne 19, confort 20. Hors zone chaude la zone off tombe aussi dans la branche
+chauffage, donc le confort y vaut 20.
 
 En climatisation :
 
@@ -106,9 +108,9 @@ En climatisation :
 |:--|--:|:--|
 | au-dessus de 34 | exterieur - 7 | exterieur moins 7 |
 | de 32 exclu a 34 | exterieur - 5 | exterieur moins 5 |
-| jusqu a 32 | 26 | consigne |
+| jusqu a 32 | 25 | consigne moins 1 |
 
-Le confort n est pas monotone en ete : 26 a 32, 28 a 33, puis 27 a 34, puis il remonte (29 a 36).
+Le confort n est pas monotone en ete : 25 a 32, 28 a 33, puis 27 a 34, puis il remonte (29 a 36).
 Le decrochement a 34 vient du passage de moins 5 a moins 7.
 
 ## 5. Les corrections par piece
@@ -122,17 +124,17 @@ Le decrochement a 34 vient du passage de moins 5 a moins 7.
 **Le salon prend un degre de plus que le confort, bureau et chambre un degre de moins.** Et ce decalage
 s applique APRES le plafonnement, jamais sur le plafond. La formule `min(confort, max_chaud_hiver - 1)`
 plafonnait la piece a 21 et donnait 19, 20, 20 : le palier bas et le palier median se confondaient.
-`min(confort, max_chaud_hiver) - 1` donne 18, 19, 20 et garde les trois paliers.
+`min(confort, max_chaud_hiver) - 1` donne 19, 20, 21 avec les paliers actuels (20, 21, 22) et garde les trois paliers.
 
 Avec la consigne a 19 et `max_chaud_hiver` a 22 :
 
 | Piece | Ext >= 12 | Ext 8 a 12 | Ext < 8 |
 |:--|--:|--:|--:|
-| Salon | 20 | 21 | 22 |
-| Bureau | 18 | 19 | 20 |
-| Chambre | 18 | 19 | 20 |
+| Salon | 21 | 22 | 23 |
+| Bureau | 19 | 20 | 21 |
+| Chambre | 19 | 20 | 21 |
 
-Le salon est la seule piece a pouvoir atteindre 22, et c est voulu : il y a son epouse, la piece est
+Le salon est la seule piece a pouvoir atteindre 23, et c est voulu : il y a son epouse, la piece est
 occupee toute la journee. Le bureau compense par le PC qui tourne, la chambre est la piece la plus froide.
 
 Les trois `input_number` de jour, `clim_consigne_jour_salon`, `_bureau` et `_chambre`, valent 0 par defaut
@@ -143,8 +145,8 @@ En ete les pieces ne suivent plus le confort du tout : elles lisent directement 
 **sans plancher** puisque le plancher ne s applique qu a l interieur de `temperature_confort`. Une seule
 marche, entre 26 et 28 degres dehors.
 
-Depuis le 2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccj_s`, `tccj_b` et `tccj_c`.
-La seule exception reste `groupe_1`, qui envoie l eco aux trois (en chauffage, l eco moins la correction de la piece, voir section 9).
+Le jour, les groupes 2, 3 et 4 recoivent `tccj_s`, `tccj_b` et `tccj_c`, avec deux ecarts voulus par Eric : en `groupe_3` le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction du bureau - correction du salon), et en `groupe_2` le bureau recoit l eco en chauffage (`tccj_b` en clim).
+`groupe_1` envoie l eco aux trois (en chauffage, l eco moins la correction de la piece, voir section 9).
 
 ## 6. Confort jour, confort nuit, et consigne de nuit
 
@@ -156,9 +158,10 @@ un seuil indisponible a 0 ferait tomber `min()` a zero et enverrait une consigne
 | Saison | Nuit | Formule |
 |:--|--:|:--|
 | heat | 19 | confort + 1, plafonne par seuil_chauffage |
-| cool | 26 | confort, plafonne par seuil_clim |
+| cool | 25 | confort, plafonne par seuil_clim (26 au-dela de 32 dehors) |
 
-En hiver la nuit est plate a 19, le plafond ecrase les 20 et 21 du confort. En ete elle est plate a 26.
+En hiver la nuit est plate a 19, le plafond ecrase les 20, 21 et 22 du confort. En ete elle vaut 25 jusqu a 32 degres
+dehors, puis 26.
 
 **Cette nuit n est plus la consigne envoyee.** Le script lit `temperature_consigne_nuit_*`, voir section 8.
 `temperature_confort_nuit` alimente encore les captures de nuit et part dans `delta_ademe_recommande`,
@@ -260,7 +263,9 @@ Le choix des cibles :
 | Groupe | Periode | Salon | Bureau | Chambre |
 |:--|:--|:--|:--|:--|
 | groupe_1, absent | jour et nuit | eco de saison (chauffage : moins la correction) | idem | idem |
-| groupe_2, 3 ou 4 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_2 | jour | tccj_s | eco en chauffage (tccj_b en clim) | tccj_c |
+| groupe_3 | jour | tccj_b + (correction bureau - correction salon) | tccj_b | tccj_c |
+| groupe_4 | jour | tccj_s | tccj_b | tccj_c |
 | tout groupe sauf 1 | nuit | tccn_s | tccn_b | tccn_c |
 
 Et ces variables ne valent pas la cible : le script soustrait la correction au moment de l envoi, au jour
@@ -308,11 +313,12 @@ au 2026-11-14 sur M, N et O.
 
 | Exterieur | Mode | Confort | Nuit | Salon | Bureau | Chambre |
 |:--|:--|--:|--:|--:|--:|--:|
-| 0 a 7 | heat | 21 | 19 | 22 | 20 | 20 |
-| 8 a 18 | heat | 20 | 19 | 21 | 19 | 19 |
-| 19 a 25 | off | 19 | 19 | 20 | 18 | 18 |
-| 26 a 27 | cool | 26 | 26 | 25 | 26 | 27 |
-| 28 a 32 | cool | 26 | 26 | 26 | 27 | 27 |
+| 0 a 7 | heat | 22 | 19 | 23 | 21 | 21 |
+| 8 a 11 | heat | 21 | 19 | 22 | 20 | 20 |
+| 12 a 18 | heat | 20 | 19 | 21 | 19 | 19 |
+| 19 a 25 | off | 20 | 19 | 21 | 19 | 19 |
+| 26 a 27 | cool | 25 | 25 | 25 | 26 | 27 |
+| 28 a 32 | cool | 25 | 25 | 26 | 27 | 27 |
 | 33 | cool | 28 | 26 | 26 | 27 | 27 |
 | 34 | cool | 27 | 26 | 26 | 27 | 27 |
 | 36 a 40 | cool | 29 a 33 | 26 | 26 | 27 | 27 |
@@ -354,4 +360,6 @@ copies ne veut rien dire, il faut comparer le YAML relu.
 
 <!-- annotations_log:
 [2026-11-17] automatisations J a O realignees sur offset_* (ancien nom offset_nuit_*).
-[2026-11-22] section 9 : eco groupe_1 chauffage moins la correction de la piece, plancher min_temp (script p1_master_gestion_clim). -->
+[2026-11-22] section 9 : eco groupe_1 chauffage moins la correction de la piece, plancher min_temp (script p1_master_gestion_clim).
+[2026-11-22] cibles de jour groupes 2/3/4 alignees sur le code (salon g3 = cible bureau ramenee au salon, bureau g2 = eco en chauffage).
+[2026-11-22] paliers de confort alignes sur la prod (chauffage consigne + 1 / + 2 / + 3 = 20 / 21 / 22 ; clim jusqu a 32 = consigne - 1 = 25) : tableaux sections 4, 5, 6 et 12 recalcules (releve live ext 15,7 : confort 20, salon 21, bureau 19, chambre 19). -->

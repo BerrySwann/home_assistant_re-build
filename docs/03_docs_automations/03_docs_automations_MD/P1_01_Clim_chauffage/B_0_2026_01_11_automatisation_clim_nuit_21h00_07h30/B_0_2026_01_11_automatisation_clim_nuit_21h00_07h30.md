@@ -38,7 +38,9 @@ La nuit, les 3 pièces utilisent une cible uniforme `temp_nuit` (sauf groupe_1 �
 | `force_run` | `state` | 3 prises clim NOUS |
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
-| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_confort_nuit` |
+| `sensor_update` | `state` | `sensor.temperature_consigne_nuit_salon`, `_bureau`, `_chambre` (anti-dérive) |
+| `force_run` | `state` | `sensor.mode_ete_hiver` (changement de saison, redémarrage forcé) |
 
 ---
 
@@ -93,3 +95,6 @@ Une seule action :
 - La nuit, `t_salon_target` = `t_bureau_target` = `t_chambre_target` = `temp_nuit` (sauf groupe_1 → eco).
 - `sensor.groupe` ajouté au trigger `sensor_update` lors du refactoring.
 - **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés), même correctif que (A-0) : silence de l'avertissement lors des rafales de déclenchement au démarrage de HA.
+
+<!-- annotations_log:
+[2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT. -->

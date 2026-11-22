@@ -37,7 +37,8 @@ et délègue **intégralement** la logique à `script.p1_master_gestion_clim` av
 | `force_run` | `state` | `switch.clim_salon_nous`, `switch.clim_bureau_nous`, `switch.clim_chambre_nous` |
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
-| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_jour` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_confort_jour` |
+| `force_run` | `state` | `sensor.mode_ete_hiver` (changement de saison, redémarrage forcé) |
 
 > ⚠️ `sensor.groupe` a été **ajouté** au trigger `sensor_update` lors du refactoring (2026-06).
 > L'ancienne version ne déclenchait pas sur un changement de présence direct.
@@ -92,7 +93,11 @@ Une seule action :
 ## ⚠️ Points d'attention
 
 - **Refactoring 2026-06** : logique inline (~250 lignes) déplacée dans le script master. L'automation est maintenant un simple wrapper de 30 lignes.
-- **SALON groupe_3 JOUR** : Eric seul → `tccsj_s`, comme les autres groupes depuis le 2026-11-08. Avant, ce cas recevait `tccsj_b`, la consigne du bureau, soit 3 °C de moins.
+- **SALON groupe_3 JOUR** : Eric seul, le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), comme le code du script en prod (relu le 2026-11-22). La fiche annoncait a tort `tccsj_s` pour tous les groupes depuis le 2026-11-08.
 - `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
 - Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
 - **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).
+
+<!-- annotations_log:
+[2026-11-22] note SALON groupe_3 JOUR corrigee : salon g3 = cible du bureau ramenee au salon (code prod relu le 2026-11-22).
+[2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT. -->

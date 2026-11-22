@@ -26,6 +26,8 @@
           %} {% set ons = states('sensor.offset_salon') | float(none) %} {{ thst
           is not none and tcns is not none and ons is not none\n   and (thst | round(1,
           'floor')) > (tcns + ons) }}"
+      - condition: template
+        value_template: '{{ not is_state(''sensor.groupe'', ''groupe_1'') }}'
       sequence:
       - action: input_number.set_value
         target:
@@ -45,3 +47,6 @@
         data:
           value: 0
   mode: single
+
+# annotations_log:
+# [2026-11-22] condition template not groupe_1 ajoutee dans conditions[0] du premier choose : anti-derive inactive en groupe_1, comme M, N et O ; prod mise a jour par API le meme jour

@@ -292,11 +292,11 @@
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% if t_ext >= (states('sensor.point_tres_chaud') | float(34)) %}{{ (t_ext - 7) | round(1) }}
           {% elif t_ext > (states('sensor.point_chaud') | float(32)) %}{{ (t_ext - 5) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% else %}{{ consigne -1 | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 2) | round(1) }}
-          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 1) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 3) | round(1) }}
+          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 2) | round(1) }}
+          {% else %}{{ consigne + 1 | round(1) }}{% endif %}
         {% endif %}
       device_class: temperature
       icon: "mdi:home-thermometer"
@@ -668,3 +668,7 @@
 #             (Vert/Jaune/Orange/Rouge) ajouté plus tôt aujourd'hui — sensor.alerte_canicule
 #             n'est plus consommé par ce fichier. Branches >32/>34/>palier + variables 5/7
 #             supprimées de temperature_confort_nuit (devenues inutiles).
+# - [Resync]  2026-11-22 (15h20) : local realigne sur la prod qui tourne (fichier prod modifie le 2026-11-21 20:17,
+#             non journalise). temperature_confort chauffage : consigne + 1 / + 2 sous point_froid / + 3 sous
+#             point_tres_froid (20 / 21 / 22 avec consigne 19) ; refroidissement hors zone chaude : consigne - 1.
+#             Etat reel constate le 2026-11-22 : sensor.temperature_confort = 20 pour ext 15.7 et consigne 19.

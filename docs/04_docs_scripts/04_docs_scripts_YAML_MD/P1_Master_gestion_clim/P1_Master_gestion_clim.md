@@ -68,9 +68,9 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `tccn_s` | `sensor.temperature_consigne_nuit_salon` moins `sensor.correction_temperature_salon` |
 | `tccn_b` | `sensor.temperature_consigne_nuit_bureau` moins `sensor.correction_temperature_bureau` |
 | `tccn_c` | `sensor.temperature_consigne_nuit_chambre` moins `sensor.correction_temperature_chambre` |
-| `tccsj_s` | `sensor.temperature_corrige_salon` |
-| `tccsj_b` | `sensor.temperature_corrige_bureau` |
-| `tccsj_c` | `sensor.temperature_corrige_chambre` |
+| `tccj_s` | `sensor.temperature_corrige_salon` moins `sensor.correction_temperature_salon` |
+| `tccj_b` | `sensor.temperature_corrige_bureau` moins `sensor.correction_temperature_bureau` |
+| `tccj_c` | `sensor.temperature_corrige_chambre` moins `sensor.correction_temperature_chambre` |
 
 ### 5. Calcul cibles par pièce
 
@@ -78,31 +78,32 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_salon` (eco moins la correction du salon, plancher `min_temp` de la clim) ; clim : eco ete |
-| `groupe_2` (Mamour) | JOUR | `tccsj_s` |
-| `groupe_3` (Eric) | JOUR | `tccsj_s` |
-| `groupe_4` (Tous) | JOUR | `tccsj_s` |
+| `groupe_2` (Mamour) | JOUR | `tccj_s` |
+| `groupe_3` (Eric) | JOUR | `tccj_b` + (correction bureau - correction salon) |
+| `groupe_4` (Tous) | JOUR | `tccj_s` |
 | tout | NUIT | `tccn_s` |
 
-Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_3` recevait `tccsj_b`. 
+Le groupe_3 recoit la cible du bureau ramenee au salon : `tccj_b` + (correction du bureau - correction du salon), c est a dire `temperature_corrige_bureau` moins la correction du salon. Les groupes 2 et 4 recoivent `tccj_s`.
 
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_bureau` (eco moins la correction du bureau, plancher `min_temp`) ; clim : eco ete |
-| `groupe_2` (Mamour) | JOUR | `tccsj_b` |
-| `groupe_3` (Eric) | JOUR | `tccsj_b` |
-| `groupe_4` (Tous) | JOUR | `tccsj_b` |
+| `groupe_2` (Mamour) | JOUR | chauffage : `temp_eco_hc` (eco sans correction) ; clim : `tccj_b` |
+| `groupe_3` (Eric) | JOUR | `tccj_b` |
+| `groupe_4` (Tous) | JOUR | `tccj_b` |
 | tout | NUIT | `tccn_b` |
 
-Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_2` recevait l eco en
-chauffage et `tccsj_b` en clim.
+En groupe_2, le jour, le bureau recoit l eco (`temp_eco_hc`, sans correction) en chauffage et `tccj_b` en clim ; confirme voulu par Eric le 2026-11-22. Les groupes 3 et 4 recoivent `tccj_b`.
 
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_chambre` (eco moins la correction de la chambre, plancher `min_temp`) ; clim : eco ete |
-| tout autre | JOUR | `tccsj_c` |
+| `groupe_2`, `groupe_3`, `groupe_4` | JOUR | `tccj_c` |
 | tout | NUIT | `tccn_c` |
+
+Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco de saison (`temp_eco_hc` ou `temp_eco_ec`).
 
 **Eco en groupe_1, chauffage (depuis le 2026-11-22)** : le script calcule `eco_hc_salon`, `eco_hc_bureau` et `eco_hc_chambre`, c est a dire l eco moins la correction de la piece (1 / 2 / 2), sans descendre sous le `min_temp` lu sur l entite climate (16 au salon, 10 au bureau et a la chambre). Avec l eco a 17, il envoie 16 / 15 / 15, soit 17 reel partout. Avant : 17 envoye, donc 18 / 19 / 19 reel. L eco ete (`temp_eco_ec`), le mode degrade (`eco_saison_val`) et le bureau en groupe_2 de jour (eco sans correction) restent inchanges. La notification affiche `t_salon_target`, `t_bureau_target` et `t_chambre_target`, c est a dire la valeur reellement envoyee.
 
@@ -172,9 +173,7 @@ chauffage et `tccsj_b` en clim.
 
 - **Libelles de `hs_list`** : le rapport de sante nomme les capteurs muets sous forme courte (`corrige_salon`, `corrige_bureau`, `corrige_chambre`, `eco_hiver_corrige`, `eco_ete_corrige`, `groupe`). Ces etiquettes sont ecrites en dur dans le script et ne suivent PAS automatiquement le renommage des entites : apres chaque renommage de capteur il faut les corriger separement, dans la copie locale ET dans la prod. Un oubli ne casse rien a l'execution, il fait seulement diverger les deux copies en silence.
 - **HA reecrit `scripts.yaml`** : apres chaque enregistrement depuis l'interface, Home Assistant reformate le fichier (guillemets, passages a la ligne, echappements). Un diff brut montre alors des dizaines de lignes differentes qui ne sont que de la mise en forme : la comparaison doit se faire sur le YAML relu, jamais sur le texte.
-- **SALON groupe_3 JOUR** : comportement historique supprime le 2026-11-08. Eric seul recoit desormais
-  `tccsj_s` comme les autres groupes. L ancien comportement (`tccsj_b`, la consigne du bureau, soit 3 C de moins)
-  avait ete conserve apres l essai du 2026-11-07, il a ete retire depuis.
+- **SALON groupe_3 JOUR** : Eric seul, le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), c est a dire `temperature_corrige_bureau` moins la correction du salon. C est le code du script en prod (relu le 2026-11-22) et la regle voulue par Eric : groupe_3 le jour seulement, pas la nuit. La fiche annoncait a tort `tccsj_s` pour tous les groupes depuis le 2026-11-08.
 - **CIBLE ET CONSIGNE ENVOYEE SONT DEUX CHOSES (2026-11-12).** `temperature_consigne_nuit_*` est la CIBLE,
   celle que lisent les automatisations J K L, `ecart_nuit_*` et `derive_nuit_*`. La correction de dérive du
   capteur de reprise d'air se soustrait ICI, dans `tccn_*`, au moment de l'envoi. L'avoir mise dans le capteur
@@ -194,6 +193,7 @@ chauffage et `tccsj_b` en clim.
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-22 | Claude | **Fiche corrigee, script inchange.** Cibles de jour des groupes 2, 3 et 4 alignees sur le code : salon en groupe_3 = cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), bureau en groupe_2 = eco en chauffage et `tccj_b` en clim. Variables `tccsj_*` renommees `tccj_*` (corrige moins correction), comme dans le script. | `ee25a74797646c88` |
 | 2026-11-22 | Claude | **Eco corrige en groupe_1 (chauffage).** Trois variables `eco_hc_salon`, `eco_hc_bureau`, `eco_hc_chambre` : eco moins la correction de la piece (1 / 2 / 2), plancher `min_temp` de la clim lu sur l entite climate (16 salon, 10 bureau et chambre). Envoye 16 / 15 / 15 au lieu de 17, reel 17 partout au lieu de 18 / 19 / 19. Notification : vrais sauts de ligne, valeurs `t_salon_target`, `t_bureau_target`, `t_chambre_target` (valeur reellement envoyee). YAML local reconstruit depuis la prod (il datait du 2026-11-17). | `ee25a74797646c88` |
 | 2026-11-17 | Claude | **Fiche realignee sur la prod.** Capteurs `correction_temperature_salon`, `_bureau`, `_chambre` (sans `_nuit_`), valeurs relevees dans HA le 2026-11-17 : 1 / 2 / 2. La fiche annoncait 1 / 3 / 3 ; auteur et date du passage de 3 a 2 inconnus. | - |
 | 2026-11-12 | Hermes | **Cible et consigne envoyee separees.** `tccn_s/b/c` ne valent plus `temperature_confort_nuit` mais `temperature_consigne_nuit_*` moins `correction_temperature_nuit_*`. Trois capteurs de correction crees dans le template : 1 au salon, 3 au bureau et a la chambre, mesures du 2026-11-10 (ecarts 1,5 / 4,0 / 3,6 du capteur de reprise d'air). Le script envoie donc 18 / 16 / 16 alors que la cible reste 19. La soustraction avait d'abord ete posee dans le template, ce qui cassait J K L : la cible tombait a 18 et 16, les automatisations declenchaient en permanence et le -1 restait colle. | - |
@@ -205,4 +205,6 @@ chauffage et `tccsj_b` en clim.
 
 <!-- annotations_log:
 [2026-11-17] noms des capteurs de correction (sans _nuit_) et valeurs 1/2/2 alignes sur HA ; repli 18 ou 17.
-[2026-11-22] eco groupe_1 chauffage : correction soustraite, plancher min_temp (eco_hc_salon, eco_hc_bureau, eco_hc_chambre) ; notification = valeur envoyee ; YAML local realigne sur la prod (ee25a74797646c88). -->
+[2026-11-22] eco groupe_1 chauffage : correction soustraite, plancher min_temp (eco_hc_salon, eco_hc_bureau, eco_hc_chambre) ; notification = valeur envoyee ; YAML local realigne sur la prod (ee25a74797646c88).
+[2026-11-22] cibles de jour des groupes 2/3/4 alignees sur le code prod (salon g3 = cible bureau ramenee au salon, bureau g2 = eco en chauffage) ; tccsj_* renomme tccj_*.
+[2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes). -->
