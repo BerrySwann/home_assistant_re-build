@@ -39,9 +39,10 @@ Ce skill fait le point sur une session de travail et remet tout en ordre : il ec
 
 ## Regles cles
 
-- Pas de confirmation entre les etapes. Seule pause possible : le dry-run du menage la toute premiere fois sur un dossier.
+- Pas de confirmation entre les etapes. Premiere regle (Eric, 2026-11-23) : lire CLAUDE.md, le skill et ses fichiers de reference avant de commencer. Aucune pause, menage compris (open bar, pas de go).
+- Controler avant d'ecrire OK dans la trace (Eric, 2026-11-23) : verifier le resultat (MD5 source et destination, fichier present, etat relu) puis ecrire `fin OK` ; sinon `ATTENTION` ou `ECHEC` avec la raison, et continuer.
 - Trace : une ligne avant et apres chaque etape dans `historique/01_JOURNAL_TRACE/LOGS/` (script `histo_trace.py`). Une etape sans fin revele un blocage silencieux.
-- Histo definitif ou non : le menage des `.bak` de `docs` et `Claude md SAVE` n'est fait que si Eric a repondu Oui a "Histo final definitif ?" (question posee par `/histo-final`). `/histo` seul ne fait jamais ce menage.
+- Histo definitif ou non : le menage des `.bak` de `docs` et `Claude md SAVE` est toujours fait par `/histo-final` (toujours definitif, sans question, Eric 2026-11-23). `/histo` seul ne fait jamais ce menage.
 - Corbeille Windows : le menage n'envoie que des fichiers a la corbeille (jamais de suppression definitive). Seuls les elements de plus de 3 mois sont purges, au menage definitif.
 - Jamais de sauvegarde sur `H:` ni sur `D:` : les `.bak` sont locaux.
 - Les controles sont en lecture seule : un ecart est signale, jamais corrige sans demande d'Eric (sauf les 2 fichiers memoire de Claude, que Claude corrige).
@@ -69,3 +70,6 @@ Ce skill fait le point sur une session de travail et remet tout en ordre : il ec
 Chaque fois que `histo.md` ou un de ses 3 fichiers de reference change dans `05_docs_skills_PURE/skill_histo/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo/` doit rester identique a la copie `histo.md`.
 <!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->
 <!-- annotations_log: [2026-11-04] alignement des skills histo sur Hermes, ordre d'Eric -->
+<!-- annotations_log: [2026-11-23] menage : plus de go ni de dry-run bloquant, meme a la premiere execution sur un dossier (open bar, demande d Eric) -->
+<!-- annotations_log: [2026-11-23] regle 1 : lire les regles avant de commencer ; histo-final toujours definitif, sans question (demande d Eric) -->
+<!-- annotations_log: [2026-11-23] trace : controler le resultat avant d ecrire fin OK (demande d Eric) -->

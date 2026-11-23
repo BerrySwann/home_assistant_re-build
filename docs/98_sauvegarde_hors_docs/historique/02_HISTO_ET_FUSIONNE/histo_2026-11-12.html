@@ -1,0 +1,64 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-12</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-12</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-12_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-12</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h 35 (18h35 a 21h10)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml</code> - master clim, <code>b4522e66</code>, range en 7 parties <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_jour_anti_derive/</code> - trois <code>clim_consigne_jour_*</code>, <code>0.0</code>, de -5 a 5 <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_jour_07h30_21h00/</code> - trois timers 10 mn, <code>idle</code> <strong>[v]</strong></li>
+<li>🟢 <code>H:\scripts.yaml</code> - <code>4403010f</code>, <code>tccn_*</code> soustraient <code>correction_temperature_*</code> <strong>[v]</strong></li>
+<li>🟢 <code>H:\automations.yaml</code> - <code>e1c04a21</code>, 68 automatisations, les trois de jour M N O ajoutees <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md</code> - <code>6a1a2063</code> <strong>[v]</strong></li>
+<li>🟢 Fiches <code>J</code>, <code>K</code>, <code>L</code> et <code>P1_Master_gestion_clim.md</code> mises a jour et poussees <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Automatisations de jour M, N, O - <strong>[unavailable]</strong> : creees, <code>config_check</code> accepte, l API les connait, mais elles refusent de se charger. Piste non testee : redemarrage complet de HA. Non bloquant, le jour se comporte comme avant.</li>
+<li>🟠 Sous-titres JOUR / NUIT dans le master - <strong>[a reprendre]</strong> : les pieces portent bien 04 / 07 / 09 dans les blocs 5 et 6, mais pas le suffixe de partie. A faire dans la boite ASCII existante, pas en ajoutant un second en-tete.</li>
+<li>🟠 Corrections de derive a remesurer - <strong>[a confirmer]</strong> : 1 / 3 / 3 posees, valeurs tirees d une seule nuit. Si les pieces montent a 20, passer a 2 / 4 / 4.</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Master annoncait <code>delta_3</code> sous 8 degres alors que le code fait <code>delta_2</code>. <strong>-&gt; en-tete et fiche corriges</strong> <strong>[resolu]</strong></li>
+<li>🔴 Coquille <code>temperaturle_eco_ete</code> dans le master en prod. <strong>-&gt; corrigee, <code>dd84a1ab</code></strong> <strong>[resolu]</strong></li>
+<li>🔴 J avais lu le YAML LOCAL des automatisations, date du 11/11, et je l ai presente comme la prod. La prod compare bien <code>th floor</code> a <code>temperature_consigne_nuit + offset</code>. <strong>-&gt; local realigne sur la prod, J <code>4dbb0273</code>, K <code>2ab23871</code>, L <code>a0154545</code></strong> <strong>[resolu]</strong></li>
+<li>🔴 Local des trois automatisations perime : le prochain push aurait ecrase la prod de 18h31. <strong>-&gt; realigne avant tout push</strong> <strong>[resolu]</strong></li>
+<li>🔴 Input de jour ecrits en LISTE alors que l include est <code>include_dir_merge_named</code>, qui attend des dictionnaires. <strong>-&gt; reecrits avec la cle en identifiant</strong> <strong>[resolu]</strong></li>
+<li>🔴 Timer de jour dont la cle etait <code>salon_10mn</code> au lieu de <code>clim_consigne_jour_salon_10mn</code>. <strong>-&gt; nom reconstruit</strong> <strong>[resolu]</strong></li>
+<li>🔴 Templates des automatisations M N O avec <code>{{{{ }}</code> au lieu de <code>{{ }}</code>. <strong>-&gt; corrige</strong> <strong>[resolu]</strong></li>
+<li>🔴 Deux passes de sous-titres dans le master : 12 titres au lieu de 6, puis 25 ancres en double et le bloc nuit sans en-tete. <strong>-&gt; master restaure a <code>b4522e66</code></strong> <strong>[resolu]</strong></li>
+<li>🔴 Test de nuit force : j ai touche la CONDITION de B0 (<code>after 19:55</code>) au lieu de son trigger. <strong>-&gt; condition remise a 21:00:00, <code>automations.yaml</code> revenu a son empreinte d origine</strong> <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Debloquer les trois automatisations de jour M N O</li>
+<li>📌 Poser les suffixes JOUR / NUIT dans les boites ASCII du master</li>
+<li>📌 Relire les trois pieces demain matin et ajuster les corrections</li>
+<li>📌 Mettre a jour la fiche de <code>clim_consigne_jour_*</code> et des timers de jour (pas encore ecrite)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Relever les temperatures des trois pieces au reveil : si elles tiennent 19, le couple correction / timer est bon. Si elles sont a 20, monter les corrections a 2 / 4 / 4 sans toucher aux dix minutes.</li>
+</ul>
+<h4>Notes de seance</h4>
+<ul>
+<li>Mises a jour HA : core 2026.11.1 <strong>ecarte</strong> (plus grosse release jamais publiee, HACS devient le Marketplace, 900 entites changent de nom affiche) ; SmartIR 1.18.2 <strong>ecarte</strong> car son manifest exige <code>homeassistant: 2026.11.0</code>. Installes : wind rose v2.8.0, custom brand 2026.11.2, samba 12.11.0. Sauvegarde <code>de57b416</code> avant.</li>
+<li>Test de nuit a 19h55 : B0 declenche, clims a 18 / 16 / 16, chaine validee en service.</li>
+<li>A 21h06, premiere vraie nuit : J et L ecrivent -1, cibles 18 / 19 / 18, clims a 17 / 16 / 15. Couplage cible / correction / envoi conforme.</li>
+<li>Mesure de la nuit du 11 : 22 passages a -1, ecarts de 11 a 157 minutes, aucun emballement.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

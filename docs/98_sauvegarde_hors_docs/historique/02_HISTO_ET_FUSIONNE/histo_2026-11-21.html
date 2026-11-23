@@ -1,0 +1,37 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-21</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-21</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-21_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-21</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>Session : <strong>2026-11-21</strong>, soiree</li>
+<li>Branche active : <code>docs/</code></li>
+<li>Perimetre : <code>H:</code> non ecrit, <code>docs/</code> non modifie (seul TODO.html touche)</li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>TODO/TODO.html</code> - ajout point R144.1 A VERIFIER (clim verifier temperatures) <strong>[valide]</strong></li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li><strong>Restauration de la logique par groupe dans <code>p1_master_gestion_clim</code>.</strong> Les blocs salon/bureau/chambre (groupe_2/3/4) ont ete reconstruits depuis la sauvegarde du 08/11, corriges pour le YAML (scalaire <code>&gt;-</code>) et les noms de variables renommes (<code>tccsj_*</code> -&gt; <code>tccj_*</code>, <code>temp_nuit</code> -&gt; <code>tccn_*</code>). Pas encore appliques au script <code>H:/scripts.yaml</code>, en attente de l'accord d'Eric. <strong>[en cours]</strong></li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><strong>Erreur YAML "missed comma between flow collection entries" (ligne 229 col 12).</strong> Cause : bloc Jinja multi-lignes colle sans indicateur de scalaire (<code>&gt;-</code>), le <code>{</code> de <code>{%</code>/<code>{{</code> est lu comme une collection en flux. Explique, bloc corrige fourni. <strong>[resolu]</strong></li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>R144.1 CLIM-VERIFIER-TEMPERATURES-CONSIGNE (A VERIFIER) - verifier que les consignes des 3 clims collent a la logique par groupe (groupe_2 = 21/17/18, groupe_3 = 18/18/18, groupe_4 = 21/18/18), avec le point a trancher bureau groupe_2 (17 vs 18).</li>
+</ul>
+<h4>Prochaine action</h4>
+<p>Appliquer la logique par groupe au script clim (salon/bureau/chambre) avec l'accord d'Eric, puis verifier les temperatures (R144.1).</p>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

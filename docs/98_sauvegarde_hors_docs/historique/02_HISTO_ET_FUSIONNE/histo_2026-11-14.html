@@ -1,0 +1,48 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-14</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-14</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-14_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-14</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li><strong>Session</strong> : 20h00 - 21h35 (estimation)</li>
+<li><strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li>Aucun fichier HA ReBuild n'a ete modifie dans cette session.</li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li><strong>Application Android GEMAYA EDL</strong> (hors depot ReBuild) : version <strong>1.07.007</strong> publiee dans <code>BerrySwann/gemaya-maj</code>, <strong>[a tester sur le telephone]</strong></li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><strong>APK partis sans le jeton GitHub</strong> : les versions 0.94 a 0.98 avaient ete compilees juste apres une generation <code>--sans-cle</code> destinee a la maquette publique, donc l'application retombait sur l'URL raw du depot prive et toutes les verifications de mise a jour rendaient 404. Correction : regenerer les assets SANS le drapeau avant chaque compilation, et controler <code>GH_JETON_DEFAUT</code> dans l'APK produit. <strong>[resolu]</strong></li>
+<li><strong>Compilation bloquee par un fichier de sortie verrouille</strong> : <code>packageRelease</code> ne pouvait plus supprimer <code>outputs/apk/release</code> (<code>Device or resource busy</code>). Correction : dossier de sortie par version via <code>GEMAYA_SORTIE</code>. <strong>[resolu]</strong></li>
+<li><strong>Conflit Kotlin introduit par androidx.biometric</strong> : <code>Duplicate class kotlin.collections.jdk8...</code> entre kotlin-stdlib 1.8.22 et les variantes jdk7/jdk8 1.6.21. Correction : <code>resolutionStrategy.force</code> sur 1.8.22 pour les deux variantes. <strong>[resolu]</strong></li>
+<li><strong><code>@Override</code> deplace sur une methode inseree</strong> : la compilation echouait sur <code>method does not override or implement a method from a supertype</code>. Correction : ancrer l'insertion sur la ligne d'annotation et la reposer sur la bonne methode. <strong>[resolu]</strong></li>
+</ul>
+<h4>Decisions</h4>
+<ul>
+<li>Numerotation des versions de l'application en <code>1.XX.XXX</code> a deux puis trois chiffres, pour ne pas atteindre la dizaine en dix livraisons.</li>
+<li>Le dictionnaire des equipements ne porte qu'une entree par libelle : son lot est le lot <strong>par defaut</strong>, jamais impose. Une fiche peut garder un autre lot (cas particulier mesure : interrupteur de proximite en CFO ou en CVC).</li>
+<li>Une fiche rangee dans un autre lot que le dictionnaire n'est pas un doublon : elle porte une <strong>erreur de lot</strong>, ecrite sous la ligne, avec le lot recommande et une correction en un clic.</li>
+<li>Interrupteur et Hublot vont en <strong>ECL</strong> dans le lexique du metier.</li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>Aucune modification de <code>TODO.html</code> dans cette session.</li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Application GEMAYA EDL : trancher les quatre erreurs de lot restantes sur l'inventaire, puis definir les colonnes attribuees par type d'equipement (question posee, reponse non donnee).</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

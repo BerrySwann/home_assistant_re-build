@@ -80,7 +80,7 @@ TREE :
 - controle sous_context_ia: dossiers=[n] baks=[n] ecarts=[n] casses=[n] ; ecarts : [liste fichier : ecart] | aucun
 MEMOIRE CLAUDE :
 - controle Check_DEPENDANCES: ecarts=[n] ; [liste] | aucun ; corrections faites : [liste]
-- PROD FONCTIONNELLE : palier 1 = [N] fichiers sur 98 verts dans les 4 colonnes ; ecarts=[liste] | aucun ; rapport : [chemin] ; bloque l'extinction : [oui | non] (ne bloque jamais le 5C)
+- PROD FONCTIONNELLE : palier 1 = [N] fichiers sur 98 verts dans les 4 colonnes ; ecarts=[liste] | aucun ; rapport : [chemin] ; signale en tete du rapport : [oui | non] (ne bloque jamais ni l'extinction ni le 5C)
 - CLAUDE.md : chemins docs/00_IA cites=[n] morts=[n]
 - entites introuvables a verifier : [liste] | aucune
 
@@ -119,3 +119,4 @@ TOKENS :
 <!-- [2026-11-01] Point 14 PROD FONCTIONNELLE (trace controles_6H) et ligne de rapport ajoutes : le controle existait dans CLAUDE.md mais /histo ne le lancait pas -->
 
 <!-- [2026-11-04] Point 14 aligned (palier 1 blocks the shutdown only, GitHub column not judged, diagnose before repair), point 15 rule 6 added, report lines updated (Eric 2026-11-01 and 2026-11-03), aligned on Hermes's histo skill -->
+<!-- annotations_log: [2026-11-23] extinction jamais bloquee : une etape en echec est sautee et consignee dans le rapport (demande d Eric) -->

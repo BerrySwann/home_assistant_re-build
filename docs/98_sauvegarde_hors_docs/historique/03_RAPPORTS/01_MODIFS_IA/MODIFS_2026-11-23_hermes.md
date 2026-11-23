@@ -1,0 +1,3 @@
+# MODIFS 2026-11-23 - hermes
+2026-11-23 20:53:30 | hermes | MODIFIE | C:\Users\Berry Swann\AppData\Local\hermes\.env | avant=243c7796 apres=6958333b | retrait OPENROUTER_API_KEY (bascule fallback openrouter -> deepseek direct) ; bak : .env.bak_2026_11_23_20h53m04s.env
+2026-11-23 21:26:37 | hermes | MODIFIE | C:\Users\Berry Swann\AppData\Local\hermes\skills\smart-home\ha-trigul\SKILL.md | avant=9eb0539c apres=17e5270c | fusion alignee sur skill Claude (.claude) : chemin rapport 06_MD5, ancien .sh "ne plus lancer", hermes_md5_audit_md_*.txt "no longer produced", chemins profond/categories -> 01_TRIGUL_PROFOND/02_CATEGORIES_HA ; etapes D/E, XX_ check et audit entites conserves ; bak : SKILL.bak_2026_11_23_21h17m23s.md

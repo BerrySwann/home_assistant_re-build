@@ -228,7 +228,7 @@ foreach ($d in $dest, $destPM) {
 
 Optional global check (read-only, 5 locations):
 `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`
-(report in `historique\MD5\03_verif_emplacements\`). After the push, the file must come out
+(report in `historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\`). After the push, the file must come out
 SYNC or GITHUB EN ATTENTE DU BACKUP.
 
 ### 8 - HA reload
@@ -271,3 +271,4 @@ SYNC or GITHUB EN ATTENTE DU BACKUP.
 ## Maintenance note
 
 This is the usable English copy of the skill (written in English to save tokens). Paths, file names, entity ids and report labels stay in French. The French explanation sheet is `docs/05_docs_skills/05_docs_skills_MD/skill_ha_push_yaml/ha_push_yaml.md`: when this file changes, re-read that sheet and update it. The installed skill `.claude/skills/ha-push-yaml/SKILL.md` must stay identical to this copy.
+<!-- annotations_log: [2026-11-23] chemin historique\MD5 -> historique\03_RAPPORTS\06_MD5 (demande d Eric) -->

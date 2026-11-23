@@ -1,0 +1,65 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-15</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-15</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-15_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-15</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>Session : <strong>2026-11-15</strong>, soiree, environ 3 h 30 de travail continu</li>
+<li>Branche active : hors depot HA (chantier application Android GEMAYA EDL)</li>
+<li>Perimetre : <code>H:</code> non ecrit, <code>docs/</code> de ReBuild non modifie (arbre de travail propre)</li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>gemaya_rev61\inv\maquettes-edl-v2.html</code> - maquette de l'ecran fiche (etapes 1 a 4) <strong>[valide]</strong></li>
+<li><code>gemaya_rev61\inv\apk\app\src\main\assets\app.js</code> - logique de fiche, import CSV, export <strong>[valide]</strong></li>
+<li><code>gemaya_rev61\inv\apk\app\build.gradle</code> - versionCode 107139 / versionName 1.07.139 <strong>[valide]</strong></li>
+<li><code>BerrySwann/gemaya-maj</code> (prive) - <code>update.json</code> en 107139, APK <code>apk/EDL-GEMAYA-1.07.139.apk</code> (9 863 123 octets) <strong>[valide]</strong></li>
+</ul>
+<h4>Versions publiees dans la soiree</h4>
+<p>Chaine identique a chaque fois : maquette modifiee, <code>construire_assets.py</code>, <code>gradle assembleRelease</code>, installation sur l'emulateur, controle a l'ecran, puis publication de l'APK et de <code>update.json</code> dans <code>gemaya-maj</code>.</p>
+<ul>
+<li>1.07.131 : libelle "Equipement" en double retire au-dessus de la carte de l'etape 2</li>
+<li>1.07.132 : "Famille et nombre d'equipements a renseigner" devient "Lot / Famille"</li>
+<li>1.07.133 : descriptif de famille place sous le libelle (mauvaise lecture de la demande)</li>
+<li>1.07.134 : descriptif replace sous la selection CVC, sa place voulue</li>
+<li>1.07.135 : bouton [+] de l'etape 3 sous Numero de serie, texte "Confiance faible" retire</li>
+<li>1.07.136 : liste du [+] limitee aux colonnes marquees * du fichier Excel du 13/11</li>
+<li>1.07.137 : neuf cases ajoutees (Reference, Tension, Nombre de phase, Cosphi, Frequence, Pa / mbar, Capacite, Kg, IP) + Annuler en pastille dans les deux boites de liste</li>
+<li>1.07.138 : Annuler en pastille en face du titre dans les huit boites a choix</li>
+<li>1.07.139 : les trois champs fixes deviennent MARQUE, TYPE / MODELE, RÉFÉRENCE, le numero de serie passe dans la liste du [+]</li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><strong>Export CSV mal indexe, defaut anterieur et invisible.</strong> Les cases techniques sont reperees par leur place dans le DOM ; <code>INDEX_QUANTITE</code>, <code>INDEX_ANNEE</code> et <code>INDEX_COMMENTAIRE</code> avaient trois crans de retard. Mesure avant correction : la case 14 etait "Annee de mise en service" alors que l'export y lisait la quantite, la 15 "Intensite" lue comme annee, la 16 "Vitesse" lue comme commentaire. Corrige, et l'import CSV resout desormais chaque champ par son libelle (<code>indexChampTechnique</code>) au lieu d'un numero. <strong>[resolu]</strong></li>
+<li><strong>Ma liste des colonnes sans * etait incomplete.</strong> J'avais annonce quatre cases a retirer ; "Technologie" et "Nombre de points" n'ont pas non plus de colonne marquee. Signale a Eric apres coup, regle stricte appliquee, six cases retirees. <strong>[resolu]</strong></li>
+<li><strong><code>bloc-quantite</code> est un conteneur vide</strong> dans la maquette (les champs Quantite et Dont defectueux vivent dans le bloc de l'etape 2). Constat verifie sur une sauvegarde anterieure a la session : ce n'est pas une degradation du jour. <strong>[constat]</strong></li>
+<li><strong>Le fichier Excel du 13/11 a change pendant la session</strong> (172 542 octets, colonne N1 nommee "RÉFÉRENCE" apres coup). Les étoiles que Eric annoncait sur "Kg (Poid)" et "IP" ne sont pas dans le fichier relu a 21h14 ; signale, et les deux cases ont ete ajoutees quand meme sur sa liste. <strong>[constat]</strong></li>
+</ul>
+<h4>Decisions</h4>
+<ul>
+<li>Regle stricte validee par Eric : la liste du [+] ne propose que les champs dont la colonne porte une étoile dans l'Excel du 13/11.</li>
+<li>Les neuf cases ajoutees restent en famille non attribuee (<code>data-fam="*"</code>) : le dispatching par famille viendra plus tard, sur sa demande.</li>
+<li>Annuler passe en pastille arrondie en face du titre dans TOUTES les boites a choix. Seules les boites du code d'acces ne sont pas touchees, la page du mot de passe etant validee.</li>
+<li>Regle notee dans le skill <code>gemaya-edl-app</code> (references <code>modifier-et-tester-les-assets.md</code>), avec le piege de l'indexation par position et celui des blocs HTML qui contiennent plusieurs champs.</li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li><strong>Reimport du CSV du 13/11 a faire sur le telephone.</strong> Les 560 fiches deja presentes portent les anciens indices : verifie sur la fiche 234 ("Radiateur Electrique"), son annee 2001 n'apparait plus dans le champ Annee. Il faut reimporter <code>inventaire-NIKAIA-2026-11-13-pour-appli.csv</code> avec la 1.07.139 pour les realigner. <strong>[a faire]</strong></li>
+<li>Le telephone physique <code>95e5164f</code> est reste en <code>unauthorized</code> sur adb : la fenetre d'autorisation USB n'a jamais ete acceptee, donc aucun depot par cable n'a abouti. <strong>[a faire]</strong></li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>Dispatch des neuf nouvelles cases par famille (CFO pour tension, phases, cosphi, frequence ; PBL pour la capacite en litres ; le reste a decider).</li>
+<li>Verifier si "Kg (Poid)" et "IP" doivent porter l'étoile dans l'Excel, le fichier ne l'a pas.</li>
+</ul>
+<h4>Prochaine action</h4>
+<p>Reimporter l'inventaire du 13/11 dans l'application 1.07.139 pour remettre les 560 fiches sur les bons indices, puis decider du dispatching des neuf cases par famille.</p>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

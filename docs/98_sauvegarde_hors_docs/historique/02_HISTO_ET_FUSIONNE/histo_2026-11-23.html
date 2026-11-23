@@ -5,12 +5,12 @@ pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 1
 code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
 ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
 table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
-<h1>Journal de bord du 2026-11-23</h1><p class="mut">1 session(s)</p>
-<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<h1>Journal de bord du 2026-11-23</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
 <section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-23_s1.md</p>
 <h3>📓 Journal HA ReBuild - <strong>2026-11-23</strong> (Session <strong>S1</strong>)</h3>
 <ul>
-<li>⏱️ <strong>Session</strong> : N/A (ce bloc reprend les journaux des modifs de claude du <strong>2026-11-21</strong> et du <strong>2026-11-22</strong> (les journaux histo d'hermes de ces deux jours existent deja et ne sont pas repris), plus l'histo-final du <strong>2026-11-23</strong> ; aucun journal de modifs pour les <strong>2026-11-18</strong> a <strong>2026-11-20</strong>)</li>
+<li>⏱️ <strong>Session</strong> : N/A (rattrapage de journal : les sessions du <strong>2026-11-18</strong> au <strong>2026-11-22</strong> n'ont pas eu de /histo ; ce bloc reprend les journaux des modifs de claude et d'hermes, plus l'histo-final du <strong>2026-11-23</strong>)</li>
 <li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
 </ul>
 <h4>✅ Fichiers valides</h4>
@@ -44,5 +44,37 @@ table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2
 <li>Terminer l'histo-final du <strong>2026-11-23</strong> (menage <code>.bak</code> de <code>docs</code> non fait : histo non definitif) et trancher les 3 fichiers plats seuls en prod, les entites orphelines <code>offset_nuit_*</code> / <code>seuil_non_*</code> / <code>correction_temperature_nuit_*</code> et le groupe_3 jour</li>
 </ul>
 <p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-11-23_s2.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-23</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li><strong>Session</strong> : de 20h24 a 22h07 environ (apres le /histo-final de 19h06) ; lancement du /histo-final du soir a 22h07</li>
+<li><strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>A_0_2026_01_11_automatisation_clim_jour_07h30_21h00</code> (prod <code>automation.a_0_2026_01_11_automatisation_clim_jour_07h30_21h00</code>) - <strong>2026-11-23</strong> : declencheur <code>CONSIGNE JOUR : CHANGEMENT PAR PIECE (CORRECTION ANTI-DERIVE)</code> ajoute (3 capteurs <code>sensor.temperature_corrige_salon/bureau/chambre</code>, id <code>sensor_update</code>), insere apres ENVIRONNEMENT et avant SAISON ; local, prod (relu) et miroir H:\docs alignes, fiche <code>.md</code> mise a jour <strong>[v]</strong></li>
+<li><code>GLOBAL_INDEX_REPO.md</code> - balise <code>&lt;details&gt;</code> en double (ligne 157) retiree, 446/446 ; copies local, H:\ et H:\docs alignees <strong>[v]</strong></li>
+<li><code>Dashboard_COMPLET/Dashboard_2026_11_22.yaml</code> - copie locale de <code>H:\Dashboard_2026_11_22.yaml</code> (export du 22/11) <strong>[v]</strong></li>
+<li>3 fiches <code>.md</code> creees pour <code>P1_Master_gestion_clim</code> : <code>_Lisible</code>, <code>_corrige_2026_11_22</code>, <code>_corrige_pour_editeur_UI</code> (8 badges chacune) <strong>[v]</strong></li>
+<li><code>Check_prod_fonctionnelle.py</code> - <code>CAHIER_DES_CHARGES_REBUILD_v1.html</code> ajoute a KNOWN_ROOT (derive 6H 1 -&gt; 0) <strong>[v]</strong></li>
+<li><code>O_P1_Clim_Chambre_Consigne_jour_anti_derive</code> - .bak mal nomme renomme a la norme <code>.bak_2026_11_17_06h19m09s.yaml</code> <strong>[v]</strong></li>
+</ul>
+<h4>Regles et skills (demandes d'Eric)</h4>
+<ul>
+<li>Menage .bak : open bar, sans go ni dry-run bloquant ; <code>/histo-final</code> toujours definitif et sans question ; aucune etape ne bloque l'extinction (etape en echec sautee et consignee dans le rapport)</li>
+<li>Regle 1 : lire CLAUDE.md, le skill et ses references avant de commencer ; trace : controler le resultat avant d'ecrire <code>fin OK</code></li>
+<li>Chemin <code>historique\MD5</code> remplace par <code>historique\03_RAPPORTS\06_MD5</code> ; chemin du dry-run du menage corrige (<code>historique\03_RAPPORTS\02_MENAGE_BAK</code>)</li>
+<li>Infra_Proxmox en prod sans ses .bak : exception retiree de <code>Push_5C.py</code>, regle 98 precisee dans CLAUDE.md</li>
+<li>Dossier A_0 : 3 derniers .bak gardes (un par jour, sans heure), les reconstitutions git erronees retirees ; 143 .bak restaures de la corbeille a traiter par le menage de ce /histo-final</li>
+</ul>
+<h4>En attente / a decider avec Eric</h4>
+<ul>
+<li>Hermes ha-trigul : option A ou B</li>
+<li>Dossier orphelin <code>historique\MD5</code> (6 fichiers hermes_md5_audit) a signaler</li>
+<li>Garder ou archiver les 2 anciens snapshots <code>P1_Master_gestion_clim_corrige_*</code></li>
+<li>2 .bak a revoir a la main : <code>Check_prod_fonctionnelle.bak_2026_11_01.md</code>, <code>hermes_aligne.bak_2026_11_04.md</code></li>
+<li>Palier 1 trigul : ECART sur <code>automations.yaml</code> (prod modifiee apres l'edit A_0), a relire apres le trigul profond</li>
+</ul>
 </section>
 </body></html>

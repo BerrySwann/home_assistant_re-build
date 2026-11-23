@@ -40,3 +40,50 @@
 18:58:20.572 | DEBUT      | push_docs          | rattrapage point 13
 18:58:57.839 | FIN        | push_docs          | ATTENTION rattrapage : 21 pousses, MD5 differents=0, 1 PROD INCONNUE, 7 .bak re-pousses (98) retires
 18:58:57.895 | DEBUT      | controles_6H       | 
+19:05:53.742 | FIN        | controles_6H       | OK palier1 vert 111/111 apres realignement P4_groupe_presence, trigul profond 69/69 et export local Track_Clim ; derive=1 (CAHIER_DES_CHARGES_REBUILD_v1.html), qualite prod 1 octet de controle (copie 98 du journal hermes)
+19:05:53.799 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+19:06:20.049 | DEBUT      | notification       | 
+19:06:38.493 | FIN        | notification       | OK notify.mobile_app_eric envoyee, heure annoncee 19:11
+19:06:38.551 | DEBUT      | lumieres           | 
+19:06:59.457 | FIN        | lumieres           | OK Hue Sync coupe (stream.active false), 3 Play en mode normal puis off, prise ecran_p_c_3_play_hue restee on, automation.nouvelle_automatisation remise on
+19:06:59.516 | DEBUT      | arret_pc           | shutdown /s /t 300 apres le message final
+19:06:59.607 | FIN        | arret_pc           | OK commande shutdown /s /t 300 lancee en dernier appel
+19:06:59.664 | SEQ_FIN    | SEQUENCE           | fin de sequence
+22:07:00.706 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:07:00.760 | NOTE       | regles             | CLAUDE.md lu (MD5 766CA6B3), skill et refs lus
+22:07:00.815 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+22:07:00.870 | NOTE       | menage             | definitif : oui (histo-final)
+22:07:00.931 | DEBUT      | automation_off     | 
+22:07:14.201 | FIN        | automation_off     | OK automation.nouvelle_automatisation relue off (retour du service)
+22:07:14.255 | DEBUT      | journal            | 
+22:08:35.410 | FIN        | journal            | OK histo_2026-11-23_s2.md ecrit (2601 octets)
+22:08:35.465 | DEBUT      | sync_index         | 
+22:09:57.229 | NOTE       | sync_index         | skills histo et histo-final deja alignes sur PURE ; generateurs 8-11 et Recap_index casses=0 ; DEPENDANCES, IA_INDEX_AUTOMATIONS, GLOBAL_INDEX_REPO mis a jour ; IA_AUTOMATIONS_NOTIFS inchange (69 automations = prod)
+22:09:57.283 | FIN        | sync_index         | OK generateurs casses=0, index mis a jour, GLOBAL_INDEX_REPO local=PR=PM 4D396411
+22:09:57.338 | DEBUT      | fusionne           | 
+22:10:41.045 | FIN        | fusionne           | OK bloc S2 ajoute, fences paires, pas de BOM, pas de LF isole, 1 banniere, bak 22h10m32s
+22:10:41.100 | DEBUT      | obsidian           | 
+22:10:41.450 | FIN        | obsidian           | OK copie D: MD5 3521ECD6 identique a la source
+22:10:41.503 | DEBUT      | pages_html         | 
+22:11:43.306 | FIN        | pages_html         | OK pages du jour (2 sections) et fusionne creees, 22 originaux a la corbeille, rapport pages_html_2026-11-23.txt
+22:11:43.361 | DEBUT      | menage             | 
+22:14:22.251 | FIN        | menage             | ATTENTION 65 renommes, 217 corbeille, 0 echec, plan final a 0 action ; 28 groupes en collision rapportes, 3 noms hors format, 2 badges .bak a revoir, historique\MD5 orphelin signale, corbeille Windows rien de plus de 3 mois
+22:14:22.306 | DEBUT      | export_5B          | 
+22:15:09.903 | FIN        | export_5B          | OK un seul export en prod (racine et miroir) : Dashboard_2026_11_22.yaml 62C981CB = dernier local ; supprime du miroir : Dashboard_2026_11_07.yaml
+22:15:09.957 | DEBUT      | push_docs          | 
+22:16:24.112 | FIN        | push_docs          | ATTENTION 66 pousses, MD5 differents=0, non pousses=0, 10 PROD INCONNUE poussees, 5 SEUL_EN_PROD, purge TEMPO 8 KO_PURGE (echec connu), Check_qualite_docs code 1 sur MODIFS_2026-11-22_hermes.md (deja en prod, non pousse), Check_XX_presents OK
+22:16:24.165 | DEBUT      | tree               | 
+22:17:39.633 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour (local 2435, prod 1250, GitHub 2469 objets dont 1602 docs, commit 1c309a4a), local = prod 607DBE1B
+22:17:39.689 | DEBUT      | controles_6B       | 
+22:17:40.244 | DEBUT      | controles_6C       | 
+22:17:40.615 | DEBUT      | controles_6D       | 
+22:17:43.255 | DEBUT      | controles_6E       | 
+22:17:53.179 | FIN        | controles_6B       | OK sous_context_ia dossiers=13 baks=40 ecarts=0 casses=0
+22:17:53.234 | FIN        | controles_6C       | OK global_index index=8 liens=1036 casses=0 ecarts=0
+22:17:53.287 | FIN        | controles_6D       | ATTENTION ANOMALIES x27 dont 7 ABSENT PR+GR deja presents avant la session (3 fichiers plats P1_01_MASTER, 4 timers SDB), 20 presents ailleurs qu'en local
+22:17:53.341 | FIN        | controles_6E       | OK ANOMALIES 0, 8 integrations File conformes
+22:17:53.394 | DEBUT      | controles_6F       | 
+22:17:59.687 | FIN        | controles_6F       | ATTENTION sources sans fiche=0 (03: 72/72, 04 SH 41/41, 04 YAML 12/12, dashboard 71/71) ; badges fiches=278 conformes=278 ; .bak a_revoir=2 (Check_prod_fonctionnelle.bak_2026_11_01.md, hermes_aligne.bak_2026_11_04.md)
+22:17:59.743 | DEBUT      | controles_6G       | 
+22:17:59.955 | DEBUT      | controles_6H       | 
+22:18:18.551 | DEBUT      | push_docs          | 

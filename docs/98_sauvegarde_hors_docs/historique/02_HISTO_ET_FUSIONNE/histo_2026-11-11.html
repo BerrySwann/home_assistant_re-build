@@ -1,0 +1,62 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-11</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-11</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-11_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-11</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 4 h (17h05 a 21h00)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml</code> - master clim, <code>0811c4b3</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_nuit_anti_derive/</code> - trois <code>clim_consigne_nuit_*</code>, 19,0, min 10 max 30 pas 0,5 <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/Meteo/previous.temperature_et_humidity.yaml</code> - <code>24018795</code>, renomme (humidit -&gt; humidity) <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_nuit_21h_7h30/</code> - trois timers 10 mn, <code>restore: true</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md</code> - fiche reecrite, <code>3831b638</code>, trois exemplaires alignes <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml</code> - <code>5fd5e24c</code>, offsets 1 / 3 / 3 <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Automatisations J K L - <strong>[a raccorder]</strong> : elles comparent encore la temperature brute a la consigne plus un offset, elles ne lisent pas <code>derive_nuit_*</code>. Juste en hiver, aveugle en ete.</li>
+<li>🟠 <code>temperature_confort</code> - <strong>[a aligner]</strong> : lit la sonde du balcon avec <code>float(0)</code>, donc calcule sur zero degre si elle manque, au lieu de sortir <code>unknown</code> comme le fait <code>mode_ete_hiver</code>.</li>
+<li>🟠 Borne ete <code>&gt; 32</code> - <strong>[a corriger]</strong> : avec le plancher, la branche canicule est atteinte un demi-degre plus tard qu avec la sonde brute. Il faudrait ecrire <code>&gt;= 33</code>.</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>temperature_confort</code> : en-tete du master annoncait <code>delta_3</code> sous 8 degres, <code>delta_2</code> de 8 a 12, <code>delta_1</code> au-dela. Le code reel fait <code>delta_2</code> sous 8 et <code>delta_1</code> au-dela, la correction du 2026-11-10 ayant ete annulee au retour arriere du matin. <strong>-&gt; corrige</strong> dans l en-tete et dans la fiche <strong>[resolu]</strong></li>
+<li>🔴 <code>th_balcon_nord_t_unite</code> : cree avec <code>round(0)</code> (arrondi), qui deplace les bornes d un demi-degre. A 7,9 il rend 8 et la comparaison <code>8 &lt; 8</code> devient fausse. <strong>-&gt; passe en <code>round(0, floor)</code>, puis supprime</strong> puisque le plancher est applique directement dans <code>temperature_confort</code> <strong>[resolu]</strong></li>
+<li>🔴 Replis disperses : <code>seuil_non_chauffage</code> vaut 19 mais deux templates repliaient sur <code>float(18)</code>. Le capteur tombe, le calcul continue a 18, toute la partie hivernale decale d un degre sans rien signaler. <strong>-&gt; passes a 19, zero <code>float(18)</code> restant</strong> <strong>[resolu]</strong></li>
+<li>🔴 Fins de ligne mixtes dans le master, deux fois : blocs Python ecrits avec <code>\n</code> dans un fichier CRLF. <strong>-&gt; renormalise, 593 CRLF et zero LF isole</strong> <strong>[resolu]</strong></li>
+<li>🔴 Fiche <code>REGULATION_CLIM_CHAUFFAGE.md</code> datee du 2026-11-08 et fausse sur trois points : <code>delta_3</code> presente comme utilise, paliers de piece decrits comme fixes, nuit decrite comme la consigne envoyee. <strong>-&gt; reecrite </strong>[resolu]**</li>
+<li>🔴 <code>tccsj_*</code> cite dans l exemplaire de <code>03_docs_automations</code> : ce nom n existe pas. Le vrai est <code>tccj_*</code> pour le jour et <code>tccn_*</code> pour la nuit. <strong>-&gt; corrige, trois exemplaires sur <code>3831b638</code></strong> <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Raccorder J K L sur <code>derive_nuit_*</code></li>
+<li>📌 Aligner <code>temperature_confort</code> sur <code>mode_ete_hiver</code> pour le cas sonde absente</li>
+<li>📌 Corriger la borne <code>&gt; 32</code> en <code>&gt;= 33</code></li>
+<li>📌 Decider si les seuils passent en <code>input_number</code> (plus de repli du tout) et si les sept sondes gagnent une memoire</li>
+<li>📌 Trancher les trois exemplaires de <code>REGULATION_CLIM_CHAUFFAGE.md</code></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Raccorder les trois automatisations de nuit sur <code>derive_nuit_*</code>, puis rejouer une nuit de mesure avant de toucher a l ete.</li>
+</ul>
+<h4>Notes de seance</h4>
+<ul>
+<li>Retour arriere demande en debut de session : master restaure a <code>7d559cfc</code>, script a <code>8a6de2ad</code>. Trois timers, trois <code>input_number</code> et la structure <code>input_number</code> realignee ensuite.</li>
+<li>Cinq rechargements passes en 200 : <code>input_number</code>, <code>timer</code>, <code>template</code>, <code>script</code>, <code>automation</code>. Climats en service 20 / 19 / 19.</li>
+<li>Simulation de cascade : sur la fenetre jour 7h30 a 21h, la cible ne change que deux fois. De 13,9 a 17,2 (journee reelle), aucun changement, la zone 12 a 19 est plate.</li>
+<li>Mesure sur 24 h : la sonde du balcon produit 44 changements d etat, 18 valeurs distinctes au dixieme, mais seulement 4 valeurs entieres et 5 transitions. Le plancher divise par trois le bruit, l arrondi par dix-huit mais se trompe de seuil.</li>
+<li>Verifie en relisant le script : si <code>mode_ete_hiver</code> est <code>unknown</code>, <code>mode_ete_ok</code> passe a <code>false</code>, <code>off_securite</code> a <code>true</code>, le script notifie et coupe les trois clims. Le balcon est le seul capteur dont la panne declenche cette securite, et elle fonctionne.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

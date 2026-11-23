@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-22</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-22</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-22_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-22</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>Session : soiree (21h00 - 22h20)</li>
+<li>Branche active : docs/</li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li>docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml : cibles de jour pilotees par les capteurs correction_script_* (salon 3, bureau 1, chambre 1) ; chauffage = tccj_* - correction, clim = tccj_* seul ; version lisible |- ; pousse en prod [valide]</li>
+<li>docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml : 3 capteurs correction_script_salon/bureau/chambre crees (3/1/1), pousses en prod et rechargees [valide]</li>
+<li>H:\scripts.yaml : bloc p1_master_gestion_clim remplace, reload OK, md5 e4ac94a4 puis retour version compacte [valide]</li>
+<li>docs/04_docs_scripts/04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md : fiches et tableaux SALON/BUREAU/CHAMBRE alignes sur le code [valide]</li>
+<li>docs/01_docs_config_system/01_config_system_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md et ses 3 copies : phrase et tableau des cibles de jour mis a jour [valide]</li>
+<li>docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/A_0_...clim_jour...md : note salon groupe_3 mise a jour [valide]</li>
+<li>docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md : note datee 2026-11-22 ajoutee [valide]</li>
+<li>TEMPO/CAHIER_DES_CHARGES_REBUILD_v1.md : sections 6.7, 8.5, 8.6, 8.7, 10 et 13 ajoutees ; purge corbeille ; competences requises [valide]</li>
+<li>TEMPO/CAHIER_DES_CHARGES_REBUILD_v1.html : version HTML generee et poussee a la racine de H: [valide]</li>
+<li>88 .bak mal nommes renommes en HHhMMmSSs dans tout ReBuild, journalises [valide]</li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li>(aucun)</li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li>Patch applique sur l'ancienne version compacte alors que le fichier etait la version lisible : lignes cassees (elif disparu, apostrophes doublees), restauration depuis P1_Master_gestion_clim.bak_2026_11_22_22h13m57s.yaml puis re-patch correct [resolu]</li>
+<li>En-tete "COPIE DE LECTURE, NE PAS DEPLOYER" herite du fichier Lisible dans le fichier principal : retire, local et prod identiques [resolu]</li>
+<li>Notifications : template |- verifie, rendu propre sans \n parasite [resolu]</li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>Verifier au retour le comportement en mode cool : cibles salon 20, bureau 17, chambre 17 sans correction.</li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Au prochain demarrage, verifier que le script p1_master_gestion_clim en prod (version compacte) est bien celui charge et que les cibles de jour sont correctes en heat et en cool.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

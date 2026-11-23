@@ -1,0 +1,51 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-10</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-10</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-10_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-10</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h 45 (18h35 -&gt; 21h20)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml</code> - <code>temperature_confort</code>, <code>temperature_corrige_bureau</code>, <code>temperature_corrige_chambre</code>, <code>offset_salon</code>, <code>offset_bureau</code>, <code>offset_chambre</code> <strong>[v]</strong> master a 26 capteurs, md5 <code>cd447963</code></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml</code> - script <code>p1_master_gestion_clim</code> <strong>[v]</strong> offsets appliques a l envoi, md5 <code>b49290ea</code>, pousse dans <code>H:\scripts.yaml</code> md5 <code>0a4846a4</code></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_MD/README/README.md</code> - README original aligne sur la racine <strong>[v]</strong> <code>eb3a126a</code> -&gt; <code>855f79cd</code>, quatre emplacements convergents</li>
+<li>🟢 <code>docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md</code> - entree de journal ajoutee <strong>[v]</strong> <code>71164c2b</code> -&gt; <code>e2fa125f</code>, poussee en prod</li>
+<li>🟢 <code>docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md</code> - section 4 completee <strong>[v]</strong> <code>b44326d4</code> -&gt; <code>40eb9f47</code></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md</code> et sa copie racine - section 6 et 6 bis <strong>[v]</strong> <code>770d4b8a</code> -&gt; <code>7deaf5a5</code></li>
+<li>🟢 Skills <code>histo</code> et <code>histo-final</code>, quatre emplacements + deux copies PURE <strong>[v]</strong> carte des emplacements, ordre et exceptions, procedure automations/scripts</li>
+<li>🟢 <code>historique</code> racine videe de ses 19 fichiers <strong>[v]</strong> 10 journaux ranges, 8 plans ranges, 1 liste morte a la corbeille</li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Question des deltas <code>d1</code> a <code>d7</code> laissee a demain : <code>d2</code> et <code>d3</code> ne servent qu au salon en hiver, <code>d5</code> et <code>d7</code> ne produisent aucun effet visible car neutralises par les plafonds <strong>[a decider]</strong></li>
+<li>🟠 <code>REGULATION_CLIM_CHAUFFAGE.md</code> existe en double, une copie dans <code>P1_01_Clim_chauffage/</code> et une a la racine de <code>01_config_system_MD/</code>, memes octets, les deux maintenues a la main <strong>[a trancher]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Mon diagnostic sur le README etait <strong>faux</strong> : j avais annonce un bug du trigul ligne 23 alors que <code>IA_CARTE_EMPLACEMENTS</code> designe le README de <code>docs</code> comme l ORIGINAL. Le script avait raison -&gt; diagnostic retire, regle lue et appliquee <strong>[resolu]</strong></li>
+<li>🔴 <code>hermes_gen_dependances.py</code> lance sur <code>DEPENDANCES_GLOBALES_HERMES_V1.md</code> a <strong>efface les 8 badges</strong> en tete (2755 -&gt; 2544 lignes) -&gt; restauration depuis le <code>.bak</code>, <code>80a94329</code> <strong>[resolu]</strong></li>
+<li>🔴 Asservissement place dans le <strong>master</strong> alors que la consigne doit y rester et la formule aller dans le script -&gt; bloc retire, master revenu a <code>ae36a0dc</code> <strong>[resolu]</strong></li>
+<li>🔴 Master lu en <strong>mode texte</strong>, ses 439 fins de ligne CRLF converties en LF -&gt; restauration en binaire, format d origine retrouve <strong>[resolu]</strong></li>
+<li>🔴 <strong>Integrateur dans le script</strong> : <code>envoi = envoi precedent + 0,3 x (cible - piece)</code>. En trois cycles l envoi est descendu 15 -&gt; 14 -&gt; 13 -&gt; 12 sans s arreter. En mode heat la clim ne peut pas refroidir, la piece reste a 22, l erreur reste a -4, l integrateur accumule. <strong>Windup</strong> -&gt; retire, retour a l offset fixe <strong>[resolu]</strong></li>
+<li>🔴 Un <code>.bak</code> cree par moi au mauvais format (<code>IA_CARTE_EMPLACEMENTS.md.bak_...</code>) -&gt; renomme, md5 inchange <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Deltas <code>d1</code> a <code>d7</code> : arbitrer si le salon doit continuer de monter de deux degres quand il gele</li>
+<li>📌 Doublon <code>REGULATION_CLIM_CHAUFFAGE.md</code></li>
+<li>📌 <code>automation_eco_prises</code> / <code>from_json</code> toujours ouvert ; vigieau 0.13.1 en 404 ; APK 0.49 impossible sur ce PC</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<p>Reprendre la question des deltas, en sachant que <code>d5</code> et <code>d7</code> sont inertes et que <code>d2</code> et <code>d3</code> ne pilotent que le salon.</p>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

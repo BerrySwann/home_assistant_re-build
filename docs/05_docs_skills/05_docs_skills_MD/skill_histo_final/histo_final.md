@@ -28,7 +28,7 @@ Fin de journee : le skill lance tout `/histo`, verifie que tout est ecrit et pou
 
 ## Les etapes
 
-1. Question de depart (le tout premier geste) : "Histo final definitif ?", Oui ou Non. Oui = le menage des `.bak` de `docs` et `Claude md SAVE` est fait, avec la purge de la corbeille (elements de plus de 3 mois). Non = essai, pas de ce menage. Pas de reponse : Non. Puis coupure de l'automation qui rallume les Play, et lancement de `/histo`.
+1. Avant tout, lecture des regles (CLAUDE.md, le skill et ses fichiers de reference). Aucune question (Eric, 2026-11-23) : /histo-final est toujours definitif, le menage des `.bak` de `docs` et `Claude md SAVE` est toujours fait, avec la purge de la corbeille (elements de plus de 3 mois). Puis coupure de l'automation qui rallume les Play, et lancement de `/histo`.
 2. Verification que tout est ecrit : journal des modifs complet, aucun script encore en cours, MD5 de `GLOBAL_INDEX_REPO.md` et de `DEPENDANCES_GLOBALES_CLAUDE_memoire.md` identiques en local et en prod, rapport des emplacements et du push, `histo_trace.py verifier` sans echec.
 3. Pas de question : enchainement direct.
 4. Notification sur le telephone (`notify.mobile_app_eric`), attente de 10 s, puis arret du flux Hue Sync par l'API du pont, attente du mode normal des 3 Play, `light.turn_off` sur les 3 Play, et remise en route de l'automation.
@@ -37,8 +37,8 @@ Fin de journee : le skill lance tout `/histo`, verifie que tout est ecrit et pou
 ## Regles cles
 
 - La sequence est irreversible : l'arret du PC coupe la liaison avec Claude, donc tout doit etre ecrit et verifie avant. Aucun appel d'outil apres la commande d'arret.
-- Pas d'extinction (ni lumieres ni PC) si une etape de `/histo` a echoue ou reste incomplete : le PC reste allume et le rapport le dit.
-- Ne bloquent pas l'extinction : le controle des fiches et badges, un ecart restant sur les fichiers memoire de Claude, un fichier signale "PROD DIFFERENTE INCONNUE" (non ecrase). Bloque l'extinction : un MD5 different apres une copie en prod, une etape sans fin ou en echec dans la trace.
+- Aucune etape ne bloque l'extinction (Eric, 2026-11-23) : une etape echouee ou incomplete est sautee, on continue au fichier ou a l'etape suivante, et on la consigne dans le rapport (etape ou fichier, raison, ce qui n'a pas ete fait). Les lumieres s'eteignent et le PC s'arrete quand meme.
+- Ne bloquent pas l'extinction : le controle des fiches et badges, un ecart restant sur les fichiers memoire de Claude, un fichier signale "PROD DIFFERENTE INCONNUE" (non ecrase). Rien ne bloque l'extinction : un MD5 different apres une copie en prod, une etape sans fin ou en echec dans la trace sont dits dans le rapport (Eric, 2026-11-23).
 - Les lumieres eteintes sont les 3 Hue Play (`light.hue_play_1_pc_bureau`, `_2_`, `_3_`). La prise `switch.ecran_p_c_3_play_hue` reste toujours `on`.
 - La cle du pont Hue est dans la variable d'environnement Windows `HUE_BRIDGE_KEY` : elle n'est jamais affichee ni ecrite.
 - Le statut des fiches (`Actif`, `bak_h`, `bak_d`, `Trash`...) est pose par `/histo`, jamais par `/histo-final`.
@@ -61,3 +61,5 @@ Fin de journee : le skill lance tout `/histo`, verifie que tout est ecrit et pou
 Chaque fois que `histo_final.md` change dans `05_docs_skills_PURE/skill_histo_final/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo-final/` doit rester identique a la copie `histo_final.md`.
 <!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->
 <!-- annotations_log: [2026-11-04] alignement des skills histo sur Hermes, ordre d'Eric -->
+<!-- annotations_log: [2026-11-23] extinction jamais bloquee : une etape en echec est sautee et consignee dans le rapport (demande d Eric) -->
+<!-- annotations_log: [2026-11-23] regle 1 : lire les regles avant de commencer ; histo-final toujours definitif, sans question (demande d Eric) -->

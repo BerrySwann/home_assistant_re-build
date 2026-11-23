@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-23 (nuit, /histo-final S2 : docs 2435 dont 1120 sauvegardes ; prod H:/docs 1250 fichiers dont 0 sauvegarde ; historique 698 dont 106 sauvegardes ; 00_IA 72, 01_docs_config_system 288, 02_docs_dashboard 502, 03_docs_automations 481, 04_docs_scripts 323, 05_docs_skills 109, 06_docs_technique 3, 98_sauvegarde_hors_docs 649, 99_docs_MD_system 8 ; GitHub commit 1c309a4a : 2469 objets dont 1602 dans docs/). Session : declencheur anti-derive jour sur A_0, corrections d index, menage .bak definitif execute (65 renommes, 217 a la corbeille), export Dashboard_2026_11_22 en prod.*
 *Derniere mise a jour : 2026-11-23 (soir, /histo-final S1 : docs 2398 dont 1130 sauvegardes ; prod H:/docs 1204 fichiers dont 0 sauvegarde ; historique 673 dont 99 sauvegardes ; 00_IA 69, 01_docs_config_system 263, 02_docs_dashboard 502, 03_docs_automations 487, 04_docs_scripts 350, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 608, 99_docs_MD_system 8 ; GitHub commit ca1a0907 : 2448 objets dont 1582 dans docs/). Session : reprise des modifs du 2026-11-21 et 22 (clim par groupe, Track_Clim, L6C1 air quality) ; menage .bak de docs non fait (histo non definitif).*
 *Derniere mise a jour : 2026-11-21 (soir, /histo-final S1 : docs 2313 dont 1101 sauvegardes ; prod H:/docs 1158 fichiers dont 0 sauvegarde ; historique 649 dont 99 sauvegardes ; 00_IA 71, 01_docs_config_system 265, 02_docs_dashboard 480, 03_docs_automations 478, 04_docs_scripts 325, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit 6a5b863c : 2409 objets dont 1560 dans docs/). Session : point TODO R144.1 clim verifier temperatures ; logique par groupe du script clim reconstituee mais non appliquee.*
 *Derniere mise a jour : 2026-11-17 (matin, /histo S1 : docs 2367 dont 1145 sauvegardes ; prod H:/docs 1168 fichiers dont 0 sauvegarde ; historique 639 dont 98 sauvegardes ; 00_IA 81, 01_docs_config_system 295, 02_docs_dashboard 481, 03_docs_automations 487, 04_docs_scripts 329, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit d8f60df1 : 2356 objets dont 1525 dans docs/). Session clim : fiches .md alignees sur HA (offset_*, corrections 1/2/2, filtre eco_prises). Sous-comptages des branches 00_IA, 04_docs_scripts (prod) et 98 non releves cette fois.*
@@ -114,7 +115,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (673 dont 99 sauvegardes)                                                            │
+│ ├── historique/                               │ (698 dont 106 sauvegardes)                                                           │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -126,7 +127,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (2398 fichiers dont 1130 sauvegardes)                                                │
+│ └── docs/                                     │ (2435 fichiers dont 1120 sauvegardes)                                                │
 │     │                                         │                                                                                      │
 │     ├── 00_IA/                                │ (12 dont 9 sauvegardes hors 00_IA_SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,    │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
@@ -138,7 +139,7 @@
 │     │ (43 dont 32 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │ (41 dont 30 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index  │
 │     │                                         │ arbo), chacun avec son .md et ses sauvegardes dedans ; regle du 2026-10-13)          │
 │     │                                         │                                                                                      │
-│     ├── 01_docs_config_system/                │ (263 dont 137 sauvegardes)                                                           │
+│     ├── 01_docs_config_system/                │ (288 dont 162 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │ (75 dont 62 sauvegardes - un dossier par fichier) │ (22 dont 9 sauvegardes - un dossier par fichier)                                     │
 │     │   │                                     │                                                                                      │
@@ -162,19 +163,19 @@
 │     │   │                                     │                                                                                      │
 │     │ (148 fichiers dont 52 sauvegardes - copie de /config) │ (140 fichiers dont 44 sauvegardes - copie de /config)                                │
 │     │                                         │                                                                                      │
-│     ├── 02_docs_dashboard/                    │ (502 dont 303 sauvegardes)                                                           │
+│     ├── 02_docs_dashboard/                    │ (502 dont 302 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │   ├── 02_dashboard_docs_MD                 │ (113)                                                                                │
 │     │   │                                     │                                                                                      │
 │     │   └── 02_dashboard_docs_YAML               │ (161)                                                                                │
 │     │                                         │                                                                                      │
-│     ├── 03_docs_automations/                  │ (487 dont 330 sauvegardes)                                                           │
+│     ├── 03_docs_automations/                  │ (481 dont 322 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │   ├── 03_docs_automations_MD               │                                                                                      │
 │     │   │                                     │                                                                                      │
 │     │   └── 03_docs_automations_YAML             │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 04_docs_scripts/                      │ (350 dont 220 sauvegardes)                                                           │
+│     ├── 04_docs_scripts/                      │ (323 dont 190 sauvegardes)                                                           │
 │     │   ├── 04_docs_script_ORIGINAL/         │ (15)                                                                                 │
 │     │   │                                    │                                                                                      │
 │     │   ├── 04_docs_scripts_JSON/            │ (1)                                                                                  │
@@ -190,7 +191,7 @@
 │     │   └── 04_docs_scripts_YAML_MD/         │ (27)                                                                                 │
 │     ├── 99_docs_MD_system/                    │ (8 dont 6 sauvegardes)                                                               │
 │     │                                         │                                                                                      │
-│     ├── 05_docs_skills/                       │ (108 dont 72 sauvegardes ; releve 2026-11-23)                                        │
+│     ├── 05_docs_skills/                       │ (109 dont 73 sauvegardes ; releve 2026-11-23)                                        │
 │     │   │                                     │                                                                                      │
 │     │   ├── 05_docs_skills_PURE/              │ (15 skill_<nom>/ : copies utilisables en anglais, sans badges)                       │
 │     │   │                                     │                                                                                      │
@@ -250,7 +251,7 @@
 │ │   │                                           │                                                                                    │
 │ │   ├── README.md                               │                                                                                    │
 │ │   │                                           │                                                                                    │
-│ │   ├── Dashboard_2026_11_07.yaml               │ (export le plus récent)                                                            │
+│ │   ├── Dashboard_2026_11_22.yaml               │ (export le plus récent)                                                            │
 │ │   │                                           │                                                                                    │
 │ │   ├── .HA_VERSION                             │                                                                                    │
 │ │   │                                           │                                                                                    │
@@ -500,7 +501,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (1204 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
+│ └── docs/                                       │ (1250 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (16 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -524,26 +525,26 @@
 │     │       │                                   │                                                                                    │
 │     │       └── Dashboard_COMPLET/              │ (1 export en prod)                                                                 │
 │     │                                           │                                                                                    │
-│     ├── 03_docs_automations/                    │ (153)                                                                              │
+│     ├── 03_docs_automations/                    │ (155)                                                                              │
 │     │   │                                       │                                                                                    │
 │     │ (74)                                         │                                                                                    │
 │     │   │                                       │                                                                                    │
 │     │ (66)                                         │                                                                                    │
 │     │                                           │                                                                                    │
-│     ├── 04_docs_scripts/                        │ (110)                                                                              │
+│     ├── 04_docs_scripts/                        │ (113)                                                                              │
 │     │   ├── 04_docs_script_ORIGINAL/           │ (0)                                                                                │
 │     │   │                                      │                                                                                    │
 │     │   ├── 04_docs_scripts_JSON/              │ (1)                                                                                │
 │     │   │                                      │                                                                                    │
 │     │   ├── 04_docs_scripts_JSON_MD/           │ (1)                                                                                │
 │     │   │                                      │                                                                                    │
-│     │   ├── 04_docs_scripts_SH/                │ (39)                                                                               │
+│     │   ├── 04_docs_scripts_SH/                │ (41)                                                                               │
 │     │   │                                      │                                                                                    │
-│     │   ├── 04_docs_scripts_SH_MD/             │ (39)                                                                               │
+│     │   ├── 04_docs_scripts_SH_MD/             │ (41)                                                                               │
 │     │   │                                      │                                                                                    │
-│     │   ├── 04_docs_scripts_YAML/              │ (9)                                                                                │
+│     │   ├── 04_docs_scripts_YAML/              │ (12)                                                                               │
 │     │   │                                      │                                                                                    │
-│     │   └── 04_docs_scripts_YAML_MD/           │ (10)                                                                               │
+│     │   └── 04_docs_scripts_YAML_MD/           │ (13)                                                                               │
 │     │                                                 │                                                                                    │
 │     ├── 99_docs_MD_system/                      │ (0 - absent de la prod, local seul depuis le 2026-10-25 ; liste = ancien releve)   │
 │     │   │                                       │                                                                                    │
@@ -570,8 +571,8 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-11-23 - **2448 objets** dont 1582 dans docs/ ; dernier commit `ca1a0907` (2026-11-23 17:10 CET)
-- Répartition : `docs/` 1582 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
+- **Dernier relevé arbre (API git trees)** : 2026-11-23 - **2469 objets** dont 1602 dans docs/ ; dernier commit `1c309a4a` (2026-11-23 21:10 CET)
+- Répartition : `docs/` 1602 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
 

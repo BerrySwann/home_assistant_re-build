@@ -1,0 +1,81 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-13</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-13</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-13_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-11-13</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li><strong>Session</strong> : soir, environ 18h35 a 20h55</li>
+<li><strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>01_config_system_SH_PY_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml</code> - master clim, empreinte finale <code>7c99252d</code>, 39 capteurs <strong>[v]</strong></li>
+<li><code>04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml</code> - script d'envoi aux clims, <code>5821ccbf</code> <strong>[v]</strong></li>
+</ul>
+<h4>Modifications de la session</h4>
+<h5>Uniformisation des capteurs du master</h5>
+<ul>
+<li><code>device_class: temperature</code> et icone ajoutes sur les 39 capteurs du master, ordre des cles uniformise <code>name, unique_id, unit_of_measurement, state, device_class, icon</code> <strong>[v]</strong></li>
+<li>Cinq capteurs restent sans <code>device_class</code>, volontairement : <code>mode_ete_hiver</code> (texte), les trois <code>derive_nuit_*</code> (booleens), <code>temperature_delta_affichage</code> (phrase) <strong>[v]</strong></li>
+</ul>
+<h5>Anti-derive de jour, aligne sur la nuit</h5>
+<ul>
+<li><code>temperature_corrige_*</code> : ajout de l'input de jour, <code>( min(cible, plafond) ) + input_number.clim_consigne_jour_*</code> <strong>[v]</strong></li>
+<li>Script : <code>tccj_s</code>, <code>tccj_b</code>, <code>tccj_c</code> soustraient maintenant <code>correction_temperature_*</code>, comme <code>tccn_*</code> le faisait deja en nuit <strong>[v]</strong></li>
+<li>Chaine du jour desormais symetrique de la nuit : <code>min(confort, plafond) + input_jour - correction</code> <strong>[v]</strong></li>
+</ul>
+<h5>Plafonds du jour</h5>
+<ul>
+<li><code>min_froid</code> passe de 19 a 22 <strong>[v]</strong></li>
+<li>Salon : <code>[tccsj_s, min_froid]</code> ; bureau et chambre : <code>[tccsj_X, min_froid - 1]</code> <strong>[v]</strong></li>
+<li>Consequence mesuree en service : les trois consignes de jour valent 20 / 20 / 20, alors qu'elles valaient 20 / 19 / 19 avant <strong>[a valider par Eric]</strong></li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><strong>Cles d'attributs placees hors de leur capteur.</strong> Mon script d'insertion prenait la derniere ligne non vide du bloc ; quand un capteur etait suivi d'un commentaire de section, l'icone et le <code>device_class</code> tombaient apres le titre. Repare, puis verifie par un controle qui raisonne par BLOC et non par ligne <strong>[resolu]</strong></li>
+</ul>
+<ul>
+<li><strong>Titres de section dupliques.</strong> Ma premiere reparation reconstruisait les blocs en reprenant les commentaires de section, alors que ces commentaires etaient deja dans les blocs extraits : chaque titre est sorti deux fois. Restauration depuis une sauvegarde propre, puis deplacement des cles sans reconstruire les blocs <strong>[resolu]</strong></li>
+</ul>
+<ul>
+<li><strong>Deux <code>.bak</code> dans <code>H:\templates</code> charges par Home Assistant.</strong> <code>!include_dir_merge_list templates/</code> prend tous les <code>.yaml</code>, et un nom <code>...autom.bak_2026_11_13_20h_32m_33s.yaml</code> finit par <code>.yaml</code>. Trois definitions du meme <code>unique_id</code> se chargeaient, la derniere gagnait, et le capteur restait fige a 19 pendant que la formule rendait 20. Les deux <code>.bak</code> sont sortis vers <code>TEMPO/baks_hors_templates_*</code>, MD5 verifie avant retrait <strong>[resolu]</strong></li>
+</ul>
+<ul>
+<li><strong>Plafond du salon ecrase.</strong> Le passage des litteraux aux capteurs avait remplace <code>[tccsj_s, 22]</code> par <code>[tccsj_s, seuil_non_chauffage]</code>, qui vaut 19. Prouve par comparaison de sauvegardes a 19h04:24 et 19h04:48. Remis en <code>22</code> puis porte par <code>min_froid</code> <strong>[resolu]</strong></li>
+</ul>
+<ul>
+<li><strong>Capteurs crees en double.</strong> Ne trouvant <code>minimum_froid</code> ni <code>maximum_chaud</code> dans les fichiers, je les ai crees ; ils existaient deja sous les <code>unique_id</code> <code>min_froid</code> et <code>max_chaud</code>. Home Assistant a fabrique <code>minimum_froid_2</code> et <code>maximum_chaud_2</code>, tous deux unavailable. Mes ajouts ont ete retires <strong>[resolu]</strong></li>
+</ul>
+<h4>Constats</h4>
+<ul>
+<li><strong>Le <code>unique_id</code> ne donne pas l'<code>entity_id</code>.</strong> Le bloc porte <code>unique_id: min_froid</code> et <code>name: Min froid</code>, mais l'entite vivante est <code>sensor.minimum_froid</code>. Une formule qui ecrit <code>sensor.min_froid</code> ne trouve rien et retombe sur son <code>float()</code> de repli sans erreur visible. Verifier avec l'API des etats, jamais en deduisant du nom <strong>[a retenir]</strong></li>
+</ul>
+<ul>
+<li><strong>Les capteurs de seuils <code>min_froid</code> et <code>max_chaud</code> existent bien dans le master</strong>, ils n'y manquaient pas. C'etait mon diagnostic qui etait faux</li>
+</ul>
+<ul>
+<li><strong>Deux entites fantomes au registre</strong> : <code>sensor.minimum_froid_2</code> et <code>sensor.maximum_chaud_2</code>, en unavailable. Suppression par Parametres &gt; Entites, a la main d'Eric, non faite d'office <strong>[a traiter]</strong></li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li><strong>Les consignes de jour valent 20 / 20 / 20 au lieu de 20 / 19 / 19.</strong> Les plafonds sont passes de 22 / 19 / 19 a 22 / 21 / 21. Ce n'est pas ce qu'Eric avait decrit au depart et il n'a pas tranche <strong>[a valider]</strong></li>
+</ul>
+<ul>
+<li><strong>Chaine de jour jamais observee en vrai.</strong> La soustraction de la correction au jour n'a pas encore tourne sur un cycle complet : elle attend le prochain declenchement de A0</li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Faire trancher Eric sur les consignes de jour : 20 / 19 / 19 avec des plafonds 22 / 19 / 19, ou 20 / 20 / 20 avec 22 / 21 / 21</li>
+</ul>
+<ul>
+<li>Verifier au reveil ce que les clims ont recu cette nuit, la chaine de nuit n'ayant pas ete modifiee</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

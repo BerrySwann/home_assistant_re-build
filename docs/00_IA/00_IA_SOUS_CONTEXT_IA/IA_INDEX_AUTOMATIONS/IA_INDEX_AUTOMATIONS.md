@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--09-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -48,7 +48,7 @@ docs/03_docs_automations/
 
 ## Comptage (verifie 2026-10-30)
 
-**69 automations** dans `automations.yaml` prod (controle du script au 2026-11-23 : 69 en prod, Track_Clim sans YAML ni fiche, 74 YAML locaux retenus, 81 fiches dont 71 rattachees, 5 hors prod).
+**69 automations** dans `automations.yaml` prod (controle du script au 2026-11-23 : 69 en prod, 75 YAML locaux retenus, 82 fiches dont 72 rattachees, 5 hors prod, aucune automation sans YAML ni fiche).
 
 | Categories HA | Nb reel |
 |:--------------|:--------|
