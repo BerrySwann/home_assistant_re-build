@@ -38,6 +38,7 @@ et délègue **intégralement** la logique à `script.p1_master_gestion_clim` av
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
 | `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_confort_jour` |
+| `sensor_update` | `state` | `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_bureau`, `sensor.temperature_corrige_chambre` (décalage anti-dérive jour, ajouté 2026-11-23) |
 | `force_run` | `state` | `sensor.mode_ete_hiver` (changement de saison, redémarrage forcé) |
 
 > ⚠️ `sensor.groupe` a été **ajouté** au trigger `sensor_update` lors du refactoring (2026-06).
@@ -100,4 +101,5 @@ Une seule action :
 
 <!-- annotations_log:
 [2026-11-22] note SALON groupe_3 JOUR : salon g3 = tccj_s - correction_script_salon (heat) / tccj_s (cool).
-[2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT. -->
+[2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT.
+[2026-11-23] ajout du declencheur CONSIGNE JOUR (sensor.temperature_corrige_salon/bureau/chambre, id sensor_update) : symetrique du declencheur CONSIGNE NUIT de B_0 ; pousse en prod (hash 9dc24b95753d556a -> 0618d1589aa1ff01). -->

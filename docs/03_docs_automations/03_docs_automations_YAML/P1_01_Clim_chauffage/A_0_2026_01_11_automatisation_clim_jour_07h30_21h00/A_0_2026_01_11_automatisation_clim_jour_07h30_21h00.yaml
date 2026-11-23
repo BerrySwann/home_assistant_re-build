@@ -50,6 +50,13 @@ triggers:
   - sensor.th_balcon_nord_temperature
   - sensor.temperature_confort_jour
   id: sensor_update
+- alias: 'CONSIGNE JOUR : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
+  trigger: state
+  entity_id:
+  - sensor.temperature_corrige_salon
+  - sensor.temperature_corrige_bureau
+  - sensor.temperature_corrige_chambre
+  id: sensor_update
 - alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
   trigger: state
   entity_id: sensor.mode_ete_hiver
@@ -67,3 +74,6 @@ actions:
 mode: queued
 max: 5
 max_exceeded: silent
+
+# annotations_log:
+# [2026-11-23] ajout du declencheur CONSIGNE JOUR (sensor.temperature_corrige_salon/bureau/chambre, id sensor_update) apres ENVIRONNEMENT, symetrique de B_0 : un changement de consigne jour par piece relance le pilotage sans rallumer une clim eteinte.

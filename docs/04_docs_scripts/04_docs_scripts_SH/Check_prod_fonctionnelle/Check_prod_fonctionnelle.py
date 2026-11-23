@@ -37,7 +37,7 @@ KNOWN_ROOT = (P1_FILES + P1_DIRS + [
     "notifs", "Dashboard_*.yaml", "www", "custom_components", ".storage", "docs", "blueprints", "themes",
     "scenes.yaml", "ip_bans.yaml", "secrets.yaml", ".secrets", ".cloud", ".cache", ".git", ".gitignore",
     ".ha_mcp", ".logs", ".vscode", "deps", "tts", ".HA_VERSION", ".ha_run.lock", "README.md",
-    "GLOBAL_INDEX_REPO.md", "home-assistant_v2.db*", "home-assistant.log*", ".uuid", ".google.token"])
+    "GLOBAL_INDEX_REPO.md", "CAHIER_DES_CHARGES_REBUILD_v1.html", "home-assistant_v2.db*", "home-assistant.log*", ".uuid", ".google.token"])
 
 
 def md5(p):
@@ -456,3 +456,6 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+# annotations_log:
+# [2026-11-23] KNOWN_ROOT : ajout de CAHIER_DES_CHARGES_REBUILD_v1.html (copie de reference a la racine de H:, identique au local et a docs, decide par Eric) : la derive=1 du controle 6H disparait.

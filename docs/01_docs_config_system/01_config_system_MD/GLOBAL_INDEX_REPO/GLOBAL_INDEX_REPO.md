@@ -155,7 +155,6 @@
 </details>
 
 <details>
-<details>
 <summary><b>timers/P1_Consigne_nuit_21h_7h30/</b> &nbsp;|&nbsp; Helpers timer de la consigne de nuit (10 mn par pièce, anti-dérive)</summary>
 <blockquote>
 ⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_nuit_21h_7h30/P1_timer_10mn_consigne_nuit_salon.yaml">P1_timer_10mn_consigne_nuit_salon.yaml</a><br>
@@ -4461,6 +4460,9 @@ Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
 <blockquote>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md">Doc master</a><br>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">YAML source</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim_Lisible.md">Fiche Lisible</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim_corrige_2026_11_22.md">Fiche corrige_2026_11_22</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim_corrige_pour_editeur_UI.md">Fiche corrige_pour_editeur_UI</a><br>
 Appelé par les automations (A-0) et (B-0) - voir section 03.
 
 <blockquote>
@@ -4789,3 +4791,6 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 *Bloc ecrit par `recap_index.py`, encadre par deux marqueurs : il est remplace a chaque passage, jamais edite a la main. Classification : NAT <integration> si l entree de registre a un config entry ; NAT <integration> pour le coeur de Home Assistant, HACS <integration> pour ce qui vient de HACS ou d un depot (dossier custom_components) ; CREE <famille> sinon, famille = dossier du YAML qui declare l objet ; RASPI-PI4-4GO pour les trois entites du Pi 4 4 Go (materiel hors tension, entites existantes) ; SUPPRIMEE pour les noms remplaces ; ARTEFACT-TEMPLATE pour les mots-cles qui ne sont pas des entites.*
 
 <!-- RECAP-ENTITES:FIN -->
+
+<!-- annotations_log:
+[2026-11-23] balise details en double retiree avant le bloc timers/P1_Consigne_nuit_21h_7h30 (section 01) : 447 ouvrantes / 446 fermantes -> 446 / 446, ecart present depuis au moins le 2026-11-13 (demande d Eric) -->

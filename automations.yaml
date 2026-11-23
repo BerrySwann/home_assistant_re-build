@@ -668,6 +668,13 @@
     - sensor.th_balcon_nord_temperature
     - sensor.temperature_confort_jour
     id: sensor_update
+  - alias: 'CONSIGNE JOUR : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
+    trigger: state
+    entity_id:
+    - sensor.temperature_corrige_salon
+    - sensor.temperature_corrige_bureau
+    - sensor.temperature_corrige_chambre
+    id: sensor_update
   - alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
     trigger: state
     entity_id: sensor.mode_ete_hiver
