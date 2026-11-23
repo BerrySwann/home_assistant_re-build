@@ -120,8 +120,8 @@
             [Eric: {{ e_stat }}/{{ m_stat }}]
           {%- else -%}
             {# Fallback : PERSONNE n'est a la maison. Le nom affiche est celui de la personne
-               presente quand il y en a une (m_here / e_here) ; sinon PAR DEFAUT c'est Mamour,
-               avec m_stat en premier (regle dite par Eric le 2026-11-03). #}
+              presente quand il y en a une (m_here / e_here) ; sinon PAR DEFAUT c'est Mamour,
+              avec m_stat en premier (regle dite par Eric le 2026-11-03). #}
             [Mamour: {{ m_stat }} / {{ e_stat }}]
           {%- endif -%}
         {%- endif -%}

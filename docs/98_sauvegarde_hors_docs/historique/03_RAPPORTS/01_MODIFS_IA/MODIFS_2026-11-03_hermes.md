@@ -74,3 +74,5 @@ NOTE : la session du 2026-11-02 s'est poursuivie apres l'extinction du PC et a r
 2026-11-13 20:58:44 | hermes | ACTION | PC | arret programme (histo-final)
 2026-11-14 21:37:09 | hermes | ACTION | PC | arret programme (histo-final)
 2026-11-15 21:45:44 | hermes | ACTION | PC | arret programme (histo-final)
+2026-11-21 21:58:37 | hermes | ACTION | PC | arret programme (histo-final)
+2026-11-22 22:23:01 | hermes | ACTION | PC | arret programme (histo-final)

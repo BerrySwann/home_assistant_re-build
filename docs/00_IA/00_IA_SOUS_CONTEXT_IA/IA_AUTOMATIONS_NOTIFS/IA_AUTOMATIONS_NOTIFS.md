@@ -12,7 +12,7 @@
 
 </div>
 
-*Dernière mise à jour : 2026-11-17 (relevé prod du jour : automations.yaml = 68 automations ; je ne reconte pas le nombre avec notify, il date du 2026-11-09 sur un parc plus petit de cinq automations, donc le chiffre de 32 est a recompter si on en a besoin, scripts.yaml = 9 scripts dont 5 avec notify ; refonte d'origine du 2026-07-18)*
+*Dernière mise à jour : 2026-11-23 (relevé prod du jour : automations.yaml = 69 automations, dont Track_Clim ajoutee le 2026-11-21 ; je ne reconte pas le nombre avec notify, il date du 2026-11-09 sur un parc plus petit de cinq automations, donc le chiffre de 32 est a recompter si on en a besoin, scripts.yaml = 9 scripts dont 5 avec notify ; refonte d'origine du 2026-07-18)*
 *Lire ce fichier si : création/modification d'une automation, écriture d'un message notify, script HA.*
 
 ---

@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-23 (soir, /histo-final S1 : docs 2398 dont 1130 sauvegardes ; prod H:/docs 1204 fichiers dont 0 sauvegarde ; historique 673 dont 99 sauvegardes ; 00_IA 69, 01_docs_config_system 263, 02_docs_dashboard 502, 03_docs_automations 487, 04_docs_scripts 350, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 608, 99_docs_MD_system 8 ; GitHub commit ca1a0907 : 2448 objets dont 1582 dans docs/). Session : reprise des modifs du 2026-11-21 et 22 (clim par groupe, Track_Clim, L6C1 air quality) ; menage .bak de docs non fait (histo non definitif).*
 *Derniere mise a jour : 2026-11-21 (soir, /histo-final S1 : docs 2313 dont 1101 sauvegardes ; prod H:/docs 1158 fichiers dont 0 sauvegarde ; historique 649 dont 99 sauvegardes ; 00_IA 71, 01_docs_config_system 265, 02_docs_dashboard 480, 03_docs_automations 478, 04_docs_scripts 325, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit 6a5b863c : 2409 objets dont 1560 dans docs/). Session : point TODO R144.1 clim verifier temperatures ; logique par groupe du script clim reconstituee mais non appliquee.*
 *Derniere mise a jour : 2026-11-17 (matin, /histo S1 : docs 2367 dont 1145 sauvegardes ; prod H:/docs 1168 fichiers dont 0 sauvegarde ; historique 639 dont 98 sauvegardes ; 00_IA 81, 01_docs_config_system 295, 02_docs_dashboard 481, 03_docs_automations 487, 04_docs_scripts 329, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit d8f60df1 : 2356 objets dont 1525 dans docs/). Session clim : fiches .md alignees sur HA (offset_*, corrections 1/2/2, filtre eco_prises). Sous-comptages des branches 00_IA, 04_docs_scripts (prod) et 98 non releves cette fois.*
 *Derniere mise a jour : 2026-11-13 (soir, /histo-final S1 : docs 2237 dont 1082 sauvegardes, contre 2266 et 1110 la veille ; prod H:/docs 1138 fichiers dont 40 sauvegardes ; historique 622 dont 106 sauvegardes (1 fichier a la racine, le plan de menage du jour) ; 00_IA 71, 01_docs_config_system 282, 02_docs_dashboard 480, 03_docs_automations 455, 04_docs_scripts 322, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 508, 99_docs_MD_system 8). Session clim : anti-derive de jour alignee sur la nuit, plafonds de jour repares, 39 capteurs du master uniformises.*
@@ -38,7 +39,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-11-21)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-11-23)
 
 ```text
 ┌───────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────┐
@@ -113,7 +114,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (649 dont 99 sauvegardes)                                                            │
+│ ├── historique/                               │ (673 dont 99 sauvegardes)                                                            │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -125,7 +126,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (2313 fichiers dont 1101 sauvegardes)                                                │
+│ └── docs/                                     │ (2398 fichiers dont 1130 sauvegardes)                                                │
 │     │                                         │                                                                                      │
 │     ├── 00_IA/                                │ (12 dont 9 sauvegardes hors 00_IA_SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,    │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
@@ -137,7 +138,7 @@
 │     │ (43 dont 32 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │ (41 dont 30 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index  │
 │     │                                         │ arbo), chacun avec son .md et ses sauvegardes dedans ; regle du 2026-10-13)          │
 │     │                                         │                                                                                      │
-│     ├── 01_docs_config_system/                │ (295 dont 171 sauvegardes)                                                           │
+│     ├── 01_docs_config_system/                │ (263 dont 137 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │ (75 dont 62 sauvegardes - un dossier par fichier) │ (22 dont 9 sauvegardes - un dossier par fichier)                                     │
 │     │   │                                     │                                                                                      │
@@ -161,7 +162,7 @@
 │     │   │                                     │                                                                                      │
 │     │ (148 fichiers dont 52 sauvegardes - copie de /config) │ (140 fichiers dont 44 sauvegardes - copie de /config)                                │
 │     │                                         │                                                                                      │
-│     ├── 02_docs_dashboard/                    │ (481 dont 290 sauvegardes)                                                           │
+│     ├── 02_docs_dashboard/                    │ (502 dont 303 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │   ├── 02_dashboard_docs_MD                 │ (113)                                                                                │
 │     │   │                                     │                                                                                      │
@@ -173,7 +174,7 @@
 │     │   │                                     │                                                                                      │
 │     │   └── 03_docs_automations_YAML             │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 04_docs_scripts/                      │ (329 dont 202 sauvegardes)                                                           │
+│     ├── 04_docs_scripts/                      │ (350 dont 220 sauvegardes)                                                           │
 │     │   ├── 04_docs_script_ORIGINAL/         │ (15)                                                                                 │
 │     │   │                                    │                                                                                      │
 │     │   ├── 04_docs_scripts_JSON/            │ (1)                                                                                  │
@@ -189,7 +190,7 @@
 │     │   └── 04_docs_scripts_YAML_MD/         │ (27)                                                                                 │
 │     ├── 99_docs_MD_system/                    │ (8 dont 6 sauvegardes)                                                               │
 │     │                                         │                                                                                      │
-│     ├── 05_docs_skills/                       │ (108 dont 72 sauvegardes ; releve 2026-11-17)                                        │
+│     ├── 05_docs_skills/                       │ (108 dont 72 sauvegardes ; releve 2026-11-23)                                        │
 │     │   │                                     │                                                                                      │
 │     │   ├── 05_docs_skills_PURE/              │ (15 skill_<nom>/ : copies utilisables en anglais, sans badges)                       │
 │     │   │                                     │                                                                                      │
@@ -214,7 +215,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-11-21)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-11-23)
 
 ```text
 ┌─────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────┐
@@ -249,7 +250,7 @@
 │ │   │                                           │                                                                                    │
 │ │   ├── README.md                               │                                                                                    │
 │ │   │                                           │                                                                                    │
-│ │   ├── Dashboard_2026_10_26.yaml               │ (export le plus récent)                                                            │
+│ │   ├── Dashboard_2026_11_07.yaml               │ (export le plus récent)                                                            │
 │ │   │                                           │                                                                                    │
 │ │   ├── .HA_VERSION                             │                                                                                    │
 │ │   │                                           │                                                                                    │
@@ -499,7 +500,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (1158 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
+│ └── docs/                                       │ (1204 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (16 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -509,13 +510,13 @@
 │     │   │                                       │                                                                                    │
 │     │   └── 00_IA_SOUS_CONTEXT_IA/                    │ (12 dossiers d'un fichier chacun, dont IA_SKILLS_INVENTAIRE)                       │
 │     │                                           │                                                                                    │
-│     ├── 01_docs_config_system/                  │ (127)                                                                              │
+│     ├── 01_docs_config_system/                  │ (119)                                                                              │
 │     │   │                                       │                                                                                    │
-│     │   ├── 01_config_system_MD/                   │ (16)                                                                               │
+│     │   ├── 01_config_system_MD/                   │ (11)                                                                               │
 │     │   │                                       │                                                                                    │
-│     │   └── 01_config_system_SH_PY_YAML/           │ (111 - copie de /config, releve 2026-11-17)                                        │
+│     │   └── 01_config_system_SH_PY_YAML/           │ (108 - copie de /config, releve 2026-11-23)                                        │
 │     │                                           │                                                                                    │
-│     ├── 02_docs_dashboard/                      │ (159)                                                                              │
+│     ├── 02_docs_dashboard/                      │ (167)                                                                              │
 │     │   │                                       │                                                                                    │
 │     │ (59)                                         │ (61)                                                                               │
 │     │   │                                       │                                                                                    │
@@ -529,7 +530,7 @@
 │     │   │                                       │                                                                                    │
 │     │ (66)                                         │                                                                                    │
 │     │                                           │                                                                                    │
-│     ├── 04_docs_scripts/                        │ (107)                                                                              │
+│     ├── 04_docs_scripts/                        │ (110)                                                                              │
 │     │   ├── 04_docs_script_ORIGINAL/           │ (0)                                                                                │
 │     │   │                                      │                                                                                    │
 │     │   ├── 04_docs_scripts_JSON/              │ (1)                                                                                │
@@ -569,8 +570,8 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-11-21 - **2409 objets** dont 1560 dans docs/ ; dernier commit `6a5b863c` (2026-11-21 21:10 CET)
-- Répartition : `docs/` 1525 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
+- **Dernier relevé arbre (API git trees)** : 2026-11-23 - **2448 objets** dont 1582 dans docs/ ; dernier commit `ca1a0907` (2026-11-23 17:10 CET)
+- Répartition : `docs/` 1582 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
 
@@ -603,4 +604,5 @@ Exemples :
 - `hermes_gen_dependances.py` : écrit dans `%LOCALAPPDATA%\Temp` et lit `docs/01_docs_config_system/01_config_system_SH_PY_YAML` (script repointe le 2026-10-25, ligne 18 du script).
 
 <!-- annotations_log: [2026-11-17] /histo : comptages local, prod et GitHub mis a jour (update-arbo)
-[2026-11-21] /histo-final : comptages local, prod et GitHub mis a jour (update-arbo) -->
+[2026-11-21] /histo-final : comptages local, prod et GitHub mis a jour (update-arbo)
+[2026-11-23] /histo-final : comptages local, prod et GitHub mis a jour (update-arbo) -->

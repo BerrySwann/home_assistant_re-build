@@ -39,7 +39,7 @@
 #
 # | MATERIEL       | CAPTEUR BRUT (source)                            | CE FICHIER (unique_id)                                                                    | AVAL                        |
 # |:---------------|:-------------------------------------------------|:------------------------------------------------------------------------------------------|:----------------------------|
-# | [calcule]      | valeurs codees en dur                            | temperature_eco_hiver/_ete, seuil_non_chauffage/_clim, delta_1/_2/_3/_5/_7, offset_nuit_* | tout le reste               |
+# | [calcule]      | valeurs codees en dur                            | temperature_eco_hiver/_ete, seuil_non_chauffage/_clim, delta_1/_2/_3/_5/_7, offset_* | tout le reste               |
 # | Sonde balcon   | sensor.th_balcon_nord_temperature                | mode_ete_hiver, consigne, temperature_confort                                             | L1C3, script 5C             |
 # | Sonde balcon   | + constantes                                     | temperature_confort_jour/_nuit, temperature_eco_*_corrige                                 | script 5C                   |
 # | input_number   | input_number.clim_consigne_nuit_*                | temperature_consigne_nuit_salon/_bureau/_chambre                                          | script 5C en periode nuit   |
@@ -229,6 +229,30 @@
       device_class: temperature
       icon: "mdi:swap-vertical"
 
+# --- correction_script_salon ---
+    - name: "Correction script Salon"
+      unique_id: correction_script_salon
+      unit_of_measurement: "°C"
+      state: "3"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+# --- correction_script_bureau ---
+    - name: "Correction script Bureau"
+      unique_id: correction_script_bureau
+      unit_of_measurement: "°C"
+      state: "1"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+# --- correction_script_chambre ---
+    - name: "Correction script Chambre"
+      unique_id: correction_script_chambre
+      unit_of_measurement: "°C"
+      state: "1"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
 # ┌───────────────────────────────────────────────────────────┐
 # │                                                           │
 # │ 2 - DETECTION DU MODE ETE / HIVER                         │
@@ -292,11 +316,11 @@
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% if t_ext >= (states('sensor.point_tres_chaud') | float(34)) %}{{ (t_ext - 7) | round(1) }}
           {% elif t_ext > (states('sensor.point_chaud') | float(32)) %}{{ (t_ext - 5) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% else %}{{ consigne -1 | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 2) | round(1) }}
-          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 1) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 3) | round(1) }}
+          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 2) | round(1) }}
+          {% else %}{{ consigne + 1 | round(1) }}{% endif %}
         {% endif %}
       device_class: temperature
       icon: "mdi:home-thermometer"
@@ -668,3 +692,7 @@
 #             (Vert/Jaune/Orange/Rouge) ajouté plus tôt aujourd'hui — sensor.alerte_canicule
 #             n'est plus consommé par ce fichier. Branches >32/>34/>palier + variables 5/7
 #             supprimées de temperature_confort_nuit (devenues inutiles).
+# - [Resync]  2026-11-22 (15h20) : local realigne sur la prod qui tourne (fichier prod modifie le 2026-11-21 20:17,
+#             non journalise). temperature_confort chauffage : consigne + 1 / + 2 sous point_froid / + 3 sous
+#             point_tres_froid (20 / 21 / 22 avec consigne 19) ; refroidissement hors zone chaude : consigne - 1.
+#             Etat reel constate le 2026-11-22 : sensor.temperature_confort = 20 pour ext 15.7 et consigne 19.

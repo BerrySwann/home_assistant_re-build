@@ -1,0 +1,43 @@
+19:13:02.112 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\04_JOURNAL_TRIGUL\trigul_journal_2026-11-22.log
+19:13:02.116 | INFO      | LANCEUR        | H: accessible : True
+19:13:02.118 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+19:13:16.771 | INFO      | A_arbres       | FIN code de retour 0 en 14.7 s, 3 lignes de sortie
+19:13:16.773 | SORTIE    | A_arbres       | RESULTAT : 1188 chemins ; SYNC 911 ; a traiter 8 ; ecarts attendus 269 ; erreurs du script 0
+19:13:16.775 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-22.txt
+19:13:16.776 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-22.html
+19:13:16.777 | INFO      | A_arbres       | rapport ecrit 49167 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-22.txt
+19:13:16.784 | INFO      | A_arbres       | rapport ecrit 315830 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-22.html
+19:13:16.785 | OK        | A_arbres       | verdict de l etape
+19:13:16.786 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+19:13:17.522 | INFO      | B1_profond     | FIN code de retour 0 en 0.7 s, 26 lignes de sortie
+19:13:17.524 | SORTIE    | B1_profond     | ABSENT_LOCAL             | 1795272726443  | prod=DB41FF27 local=- | - | (P) (CLIM) Track_Clim journal des consignes
+19:13:17.525 | SORTIE    | B1_profond     | 
+19:13:17.526 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+19:13:17.528 | SORTIE    | B1_profond     | DIFFERENT                | p1_master_gestion_clim             | prod=B650C38F local=F9C7F70F | Climatisation\P1_Master_gestion_clim\P1_Master_gestion_clim_Lisible.yaml
+19:13:17.529 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\01_TRIGUL_PROFOND\trigul_profond_2026-11-22.txt 76BA4BD5
+19:13:17.531 | INFO      | B1_profond     | rapport ecrit 18424 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\01_TRIGUL_PROFOND\trigul_profond_2026-11-22.txt
+19:13:17.532 | OK        | B1_profond     | verdict de l etape
+19:13:17.534 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py
+19:13:19.718 | INFO      | C_emplacements | FIN code de retour 0 en 2.2 s, 4 lignes de sortie
+19:13:19.720 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_2026-11-22.txt
+19:13:19.721 | SORTIE    | C_emplacements | GitHub : commit 48a45935 du 2026-11-22T18:10:00Z (HAOS auto-backup: 2026-11-22 19:10:00 CET (HA 2026.10.4))
+19:13:19.722 | SORTIE    | C_emplacements | ANOMALIES : x 28
+19:13:19.723 | SORTIE    | C_emplacements | RESULTAT : 112 fichiers suivis - ABSENT 7 - PROD 1 - SYNC 104 - presents ailleurs qu en local 20 - structure non conforme 0
+19:13:19.725 | INFO      | C_emplacements | rapport ecrit 20787 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_2026-11-22.txt
+19:13:19.731 | OK        | C_emplacements | verdict de l etape
+19:13:19.732 | INFO      | D_prod_fonctionnelle | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_prod_fonctionnelle\Check_prod_fonctionnelle.py
+19:13:29.795 | INFO      | D_prod_fonctionnelle | FIN code de retour 1 en 10.1 s, 184 lignes de sortie
+19:13:29.796 | SORTIE    | D_prod_fonctionnelle | IMAGES du dashboard : OK - 18 attendues, 18 presentes
+19:13:29.798 | SORTIE    | D_prod_fonctionnelle | DERIVE : 1 element(s) a la racine de H: hors manifeste : CAHIER_DES_CHARGES_REBUILD_v1.html
+19:13:29.799 | SORTIE    | D_prod_fonctionnelle | RESULTAT : palier1=ECART palier2=OK images=OK derive=1
+19:13:29.800 | SORTIE    | D_prod_fonctionnelle | qualite prod : 1108 fichier(s) texte, octets de controle=0, YAML invalide=0, BOM=14 -> OK
+19:13:29.801 | SORTIE    | D_prod_fonctionnelle | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\06_PROD_FONCTIONNELLE\prod_fonctionnelle_2026-11-22.txt
+19:13:29.803 | ECHEC     | D_prod_fonctionnelle | code de retour 1 (0 attendu)
+19:13:29.804 | INFO      | D_prod_fonctionnelle | rapport ecrit 16765 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\06_PROD_FONCTIONNELLE\prod_fonctionnelle_2026-11-22.txt
+19:13:29.811 | ATTENTION | D_prod_fonctionnelle | la sortie contient "ECART" : resultat partiel
+19:13:29.812 | ECHEC     | D_prod_fonctionnelle | verdict de l etape
+19:13:29.813 | OK        | SYNTHESE       | A_arbres
+19:13:29.815 | OK        | SYNTHESE       | B1_profond
+19:13:29.816 | OK        | SYNTHESE       | C_emplacements
+19:13:29.817 | ECHEC     | SYNTHESE       | D_prod_fonctionnelle
+19:13:29.818 | INFO      | LANCEUR        | FIN DU LANCEUR - code 1

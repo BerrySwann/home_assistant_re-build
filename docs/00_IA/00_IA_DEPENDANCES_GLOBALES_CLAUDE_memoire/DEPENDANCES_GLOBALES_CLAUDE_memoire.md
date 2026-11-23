@@ -2,7 +2,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-23 19h04 (histo-final de rattrapage, export local et fiche de Track_Clim ajoutes, d apres les journaux des modifs de claude des 2026-11-21 et 2026-11-22. Clim : cibles jour par groupe 2/3/4 essayees puis retirees sur demande d Eric ; script p1_master_gestion_clim : eco groupe_1 chauffage corrige (eco_hc_*), notification = cible reelle ; automations J, K, L : condition not groupe_1 ; automations A_0 et B_0 : declencheur SAISON id force_run sur sensor.mode_ete_hiver (la clim restait OFF au retour de heat/cool). Nouvelle automation (P) (CLIM) Track_Clim journal des consignes, id 1795272726443 : toutes les 15 min et a chaque changement de sensor.groupe, ecrit dans notify.track_clim (fichier notifs/Track_Clim.txt). input_number.clim_decalage_groupe_3 cree, inutilise par le script. L6C1 : 4 cartes PM2.5 et tCOV bureau et chambre deployees. Etat constate le 2026-11-23 : template P1_01_clim_logique_system_autom.yaml identique en prod racine, local et miroir (MD5 a47f7718), il porte les capteurs correction_script_* du complement du 2026-11-22 ci-dessous. Copie plate perimee du miroir docs realignee sur la prod. A verifier avec Eric : deux agents ont modifie les memes fichiers clim les 2026-11-21 et 2026-11-22.)*
 *Derniere mise a jour : 2026-11-17 07h13 (journee de correctifs eco_prises et clim, fiches realignees. Automatisations J a O : sensor.offset_nuit_* remplace par sensor.offset_* (06h30). Automation eco_prises : seconde condition qui ignore les transitions vers unavailable pendant un rechargement des templates (06h36). sensor.eco_prises_spy : garde de disponibilite (06h41). sensor.eco_prises_spy_pc_tv : entite absente toleree, duree = min(veille, prise) (06h52). Fiche master clim : capteurs correction_temperature_salon/bureau/chambre aux valeurs 1 / 2 / 2 relevees dans HA. 40 fichiers .bak retires de H:/docs, copies en local.)*
 *Derniere mise a jour : 2026-11-17 06h30 (clim : restauration du calcul de la consigne de nuit. Le script lisait sensor.seuil_non_chauffage, renomme en seuil_chauffage le 13/11, avec un float sans repli : les trois consignes de nuit echouaient et le salon chauffait a 20 au lieu de 18. Presence : la condition exigeait network_type == wifi, un telephone sur VPN etait vu absent alors que son SSID est celui de la maison ; le groupe tombait en groupe_1. 68 automations en prod, 68 identiques en logique apres realignement de quatre fiches locales.)*
 *Derniere mise a jour : 2026-11-13 21h00 (anti-derive de jour aligne sur la nuit, plafonds de jour repares. Master clim P1_01_clim_logique_system_autom.yaml : temperature_corrige_* recoit l'input de jour, min_froid porte a 22, salon [tccsj_s, min_froid] et bureau/chambre [tccsj_X, min_froid - 1]. Script P1_Master_gestion_clim.yaml : tccj_s/b/c soustraient correction_temperature_* comme tccn_* le faisait en nuit. device_class et icones poses sur les 39 capteurs du master. Deux .bak retires de H:/templates, ils y etaient charges comme des templates et bloquaient les capteurs sur une ancienne valeur.)
@@ -1806,10 +1807,10 @@ templates/Air_Quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml` | ✅ |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` | ✅ |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` | ✅ |
-| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml` | ✅ (créé 2026-11-22, non déployé) |
-| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml` | ✅ (créé 2026-11-22, non déployé) |
-| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml` | ✅ (créé 2026-11-22, non déployé) |
-| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml` | ✅ (créé 2026-11-22, non déployé) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml` | ✅ (créé 2026-11-22, déployé dans la vue air-quality du dashboard-tablette le 2026-11-22) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml` | ✅ (créé 2026-11-22, déployé dans la vue air-quality du dashboard-tablette le 2026-11-22) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml` | ✅ (créé 2026-11-22, déployé dans la vue air-quality du dashboard-tablette le 2026-11-22) |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml` | ✅ (créé 2026-11-22, déployé dans la vue air-quality du dashboard-tablette le 2026-11-22) |
 
 ---
 
@@ -4172,6 +4173,20 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 ---
 
 
+## (P) (CLIM) Track_Clim journal des consignes - automation 1795272726443
+
+- Entite : `automation.m_clim_track_clim_journal_des_consignes` (id `1795272726443`, mode queued, max 5, categorie CLIM, etiquettes tracker et clim), creee le 2026-11-21.
+- Export local (ajoute le 2026-11-23, extrait tel quel de la prod) : `docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.yaml`, fiche `docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.md`.
+- Declencheurs : `time_pattern` toutes les 15 minutes (id quinze_minutes) et changement d etat de `sensor.groupe` (id changement_groupe).
+- Condition : `sensor.groupe` ni unknown ni unavailable.
+- Action : `notify.send_message` vers `notify.track_clim` (integration File, fichier `/config/notifs/Track_Clim.txt`, ligne ajoutee dans `integrations_file.md`). Nuit (21h00 a 07h30) et jour ont le meme gabarit : par piece (salon, bureau, chambre), T reel (`sensor.th_<piece>_temperature`), groupe, CNC (consigne non corrigee), CT (`sensor.correction_temperature_<piece>`), CAD (consigne anti-derive, `input_number.clim_consigne_nuit_<piece>` ou `_jour_`), CRE (consigne reelle lue sur `climate.clim_<piece>_rm4_mini`).
+- Entites lues : `sensor.groupe`, `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_consigne_nuit_<piece>`, `sensor.temperature_corrige_<piece>`, `sensor.correction_temperature_<piece>`.
+- Source : relu dans HA le 2026-11-23 (config_hash `faa1899ef971568f`). Pas encore de YAML local ni de fiche .md pour cette automation (signale par gen_global_index_automations).
+
+---
+
 <!-- annotations_log:
 [2026-10-24] Section L5C1 mise à jour d'après HA et le yaml prod synchronisé : page = 4 cartes (section Contacts IKEA retirée), IKEA 9 entités dont sensor.inter_reserve_ikea_rodret_battery (absente de group.ikea_devices, 8), thermostats SONOFF 9, group.sonoff_devices 13 (comptage corrigé), ligne yaml dupliquée supprimée, Hue entrée renommés entree (R83) ; demande d'Eric 15:42
-[2026-11-17] fiches clim J a O, REGULATION x3, master clim, eco_prises, spy pc_tv realignees sur la prod ; offset_* ; correction 1/2/2 ; garde spy. -->
+[2026-11-17] fiches clim J a O, REGULATION x3, master clim, eco_prises, spy pc_tv realignees sur la prod ; offset_* ; correction 1/2/2 ; garde spy.
+[2026-11-23] histo-final : maj d apres les journaux de modifs 2026-11-21 et 2026-11-22 ; section Track_Clim ; 4 cartes L6C1 passees en deployees ; copie plate du miroir realignee.
+[2026-11-23 19h04] histo-final : export local YAML (P_Track_Clim_journal_des_consignes.yaml, extrait de la prod) et fiche .md de Track_Clim crees, palier 1 du controle prod fonctionnelle. -->

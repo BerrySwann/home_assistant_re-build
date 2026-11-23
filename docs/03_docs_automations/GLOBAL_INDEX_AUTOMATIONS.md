@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--21-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,17 +13,17 @@
 
 </div>
 
-Fichier GENERE le 2026-11-21 21:51 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-23 19:02 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - Automatisations en prod (automations.yaml) : 69
-- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 74
-- Fiches .md retenues : 81 dont 71 rattachees a un YAML
-- Automatisations de la prod sans YAML local : 1 ((P) (CLIM) Track_Clim journal des consignes)
-- Automatisations de la prod sans fiche rattachee : 1 ((P) (CLIM) Track_Clim journal des consignes)
+- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 75
+- Fiches .md retenues : 82 dont 72 rattachees a un YAML
+- Automatisations de la prod sans YAML local : 0
+- Automatisations de la prod sans fiche rattachee : 0
 - Automatisations sans entity_id dans le registre HA : 0
 - YAML locaux absents de la prod ou sans id : 5 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
@@ -126,7 +126,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 | 41 | (M) (CLIM) Consigne jour anti-derive Salon | 1794417183991 | 1794417183991 | `automation.m_clim_consigne_jour_anti_derive_salon` | [M_P1_Clim_Salon_Consigne_jour_anti_derive.md](03_docs_automations_MD/P1_01_Clim_chauffage/M_P1_Clim_Salon_Consigne_jour_anti_derive/M_P1_Clim_Salon_Consigne_jour_anti_derive.md) | [M_P1_Clim_Salon_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/M_P1_Clim_Salon_Consigne_jour_anti_derive/M_P1_Clim_Salon_Consigne_jour_anti_derive.yaml) |  |
 | 42 | (N) (CLIM) Consigne jour anti-derive Bureau | 1794417183992 | 1794417183992 | `automation.n_clim_consigne_jour_anti_derive_bureau` | [N_P1_Clim_Bureau_Consigne_jour_anti_derive.md](03_docs_automations_MD/P1_01_Clim_chauffage/N_P1_Clim_Bureau_Consigne_jour_anti_derive/N_P1_Clim_Bureau_Consigne_jour_anti_derive.md) | [N_P1_Clim_Bureau_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/N_P1_Clim_Bureau_Consigne_jour_anti_derive/N_P1_Clim_Bureau_Consigne_jour_anti_derive.yaml) |  |
 | 43 | (O) (CLIM) Consigne jour anti-derive Chambre | 1794417183993 | 1794417183993 | `automation.o_clim_consigne_jour_anti_derive_chambre` | [O_P1_Clim_Chambre_Consigne_jour_anti_derive.md](03_docs_automations_MD/P1_01_Clim_chauffage/O_P1_Clim_Chambre_Consigne_jour_anti_derive/O_P1_Clim_Chambre_Consigne_jour_anti_derive.md) | [O_P1_Clim_Chambre_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/O_P1_Clim_Chambre_Consigne_jour_anti_derive/O_P1_Clim_Chambre_Consigne_jour_anti_derive.yaml) |  |
-| 44 | (P) (CLIM) Track_Clim journal des consignes | 1795272726443 | aucun YAML local | `automation.m_clim_track_clim_journal_des_consignes` | aucune | aucun |  |
+| 44 | (P) (CLIM) Track_Clim journal des consignes | 1795272726443 | 1795272726443 | `automation.m_clim_track_clim_journal_des_consignes` | [P_Track_Clim_journal_des_consignes.md](03_docs_automations_MD/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.md) | [P_Track_Clim_journal_des_consignes.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.yaml) |  |
 
 ## P1_02_Cuisine (2)
 

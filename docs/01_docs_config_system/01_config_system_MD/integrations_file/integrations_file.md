@@ -35,7 +35,7 @@ Chaque entrée File écrit les messages qu'elle reçoit à la suite d'un fichier
 | `/config/notifs/ecart_histo.txt` | `notify.log_ecart_histo` | A - [P0] Histo Linky quotidien + Ecart J-1 (corrigé par C et D via script) | non |
 | `/config/notifs/nodon_histo.txt` | `notify.log_nodon_histo` | B - [P0] Histo Nodon quotidien | non |
 | `/config/notifs/nodon_complet_histo.txt` | `notify.nodon_complet_histo` | E - [P0] Histo Nodon complet quotidien (Total HP HC Cout) | non |
-| `/config/notifs/Track_Clim.txt` | `notify.track_clim` | (M) (CLIM) Track_Clim journal des consignes | non (la date et l'heure sont écrites dans le message) |
+| `/config/notifs/Track_Clim.txt` | `notify.track_clim` | (M) (CLIM) Track_Clim journal des consignes ; date et heure ecrites dans le message | non |
 
 Identifiants des entrées (`entry_id`) : `01KP8X8BBAGWX8ZP1S7Z9M5MGG` (diag_conso_elec), `01KPXW28JQBWE7KSS84ZHF2NGB` (ecart_liky_vs_nodon), `01KVGEBAK9411S889HDG49QK1T` (zone_eric), `01M1A41V4S9QDRBM7ARJ4HJP3H` (linky_histo), `01M1CG4WC7JZWBATG1NGKHZBCG` (ecart_histo), `01M1A3W9N3DZNQ54S31QG48KDF` (nodon_histo), `01M5N0WW6XZPAMBB3RXSYDGBD0` (nodon_complet_histo).
 
@@ -64,3 +64,6 @@ L'association entité / fichier se déduit du nom donné à la création et de l
 - Il compare le tableau ci-dessus aux entrées File de HA (`core.config_entries` et `core.entity_registry`, domaine et plateforme `file`) : chemin, entité notify, horodatage, entrée désactivée.
 - Rapport : `historique/03_RAPPORTS/06_MD5/05_VERIF_INTEGRATIONS_FILE/verif_integrations_file_AAAA-MM-JJ.txt` (dernières lignes ANOMALIES et RESULTAT).
 - Après un ajout, un retrait ou une modification d'intégration : mettre à jour le tableau de cette fiche, puis relancer le script.
+
+<!-- annotations_log:
+[2026-11-23] /histo-final : colonne Horodatage de Track_Clim ramenee a non pour Verif_integrations_file, note deplacee en colonne Ecrit par -->

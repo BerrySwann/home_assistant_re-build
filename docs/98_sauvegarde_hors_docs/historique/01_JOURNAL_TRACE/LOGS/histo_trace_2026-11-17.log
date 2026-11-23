@@ -16,3 +16,25 @@
 07:22:00.682 | DEBUT      | export_5B          | 
 07:22:09.165 | FIN        | export_5B          | OK un seul export en prod (Dashboard_2026_11_07.yaml), = dernier local
 07:22:09.222 | DEBUT      | push_docs          | 
+07:23:30.390 | FIN        | push_docs          | ATTENTION 104 pousses, 0 MD5 different, racine GLOBAL_INDEX_REPO poussee ; purge TEMPO > 7 j en echec (8 KO_PURGE) ; 5 SEUL_EN_PROD a decider
+07:23:46.803 | DEBUT      | tree               | 
+07:27:37.924 | FIN        | tree               | OK IA_ARBO_DETAIL maj : local 2367/1145 bak, prod 1168/0 bak, GitHub d8f60df1 2356 objets/1525 docs ; push prod MD5 identique
+07:27:45.034 | DEBUT      | controles_6B       | 
+07:27:45.625 | FIN        | controles_6B       | OK rc=0 IA_P4_PRESENCE : prod=OK ; FIGE depuis 2026-11-03 (controle de contenu ignore) / controle sous_context_ia: dossiers=13 baks=44 ecarts=0 casses=0
+07:27:45.680 | DEBUT      | controles_6C       | 
+07:27:46.057 | FIN        | controles_6C       | ATTENTION rc=1 controle des index globaux (lecture seule) / controle global_index: index=8 liens=1008 casses=0 ecarts=1
+07:27:46.113 | DEBUT      | controles_6D       | 
+07:27:48.600 | FIN        | controles_6D       | OK rc=0 ANOMALIES : x 28 / RESULTAT : 112 fichiers suivis - ABSENT 7 - GITHUB 1 - SYNC 104 - presents ailleurs qu en local 20 - structure non conforme 0
+07:27:48.655 | DEBUT      | controles_6E       | 
+07:27:48.799 | FIN        | controles_6E       | OK rc=0 ANOMALIES : 0 / RESULTAT : OK
+07:28:11.458 | DEBUT      | controles_6F       | 
+07:29:09.781 | FIN        | controles_6F       | ATTENTION fiches 270/270 conformes ; sources avec fiche : 03=71/71, 04=41/41+9/9, dashboard 67/67 ; .bak : 99 corriges bak_h, 5 restent (2 a revoir a la main, 3 IA_BADGES_FICHES faux positifs du script)
+07:29:09.838 | DEBUT      | controles_6G       | 
+07:29:28.027 | FIN        | controles_6G       | OK Check_DEPENDANCES ecarts=0 apres Gen_GLOBAL_INDEX_ia + Recap_index (IA_GLOBAL_INDEX_memoire regenere)
+07:30:14.868 | DEBUT      | push_docs          | rattrapage : fichiers modifies par les points 11 et 12
+07:30:15.031 | FIN        | push_docs          | OK rattrapage : 1 fichier (IA_GLOBAL_INDEX_memoire.md), MD5 IDENTIQUE ; les 99 .bak badges ne partent pas en prod
+07:30:15.086 | DEBUT      | controles_6H       | 
+07:31:12.960 | FIN        | controles_6H       | ATTENTION palier1 ECART : 1 fichier (miroir docs flat P1_01_clim_logique_system_autom.yaml perime 064dfc2a, 2026-11-16, vs prod racine = local sous-dossier = miroir sous-dossier af785749) ; SEUL_EN_PROD hors local, signale a Eric, non touche ; palier2 OK, images OK, derive 0
+07:31:20.583 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+07:31:20.639 | NOTE       | rapport            | controles 6B..6H faits ; 6I : aucun ecart nouveau a reparer
+07:31:20.697 | SEQ_FIN    | SEQUENCE           | fin de sequence

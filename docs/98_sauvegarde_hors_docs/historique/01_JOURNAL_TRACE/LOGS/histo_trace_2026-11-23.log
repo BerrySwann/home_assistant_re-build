@@ -1,0 +1,42 @@
+18:44:43.771 | SEQ_DEBUT  | SEQUENCE           | histo-final
+18:44:43.831 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+18:44:43.887 | NOTE       | menage             | definitif : non (pas de reponse a la question, traite comme Non)
+18:44:43.943 | DEBUT      | automation_off     | 
+18:44:56.511 | FIN        | automation_off     | OK automation.nouvelle_automatisation off confirme
+18:45:05.217 | NOTE       | automation_off     | miroir plat P1_01_clim_logique_system_autom.yaml realigne sur la prod racine (ordre d'Eric)
+18:45:11.069 | DEBUT      | journal            | 
+18:46:08.955 | FIN        | journal            | OK histo_2026-11-23_s1.md (rattrapage des journaux de modifs du 2026-11-21 et 2026-11-22)
+18:46:35.715 | DEBUT      | sync_index         | 
+18:48:56.735 | FIN        | sync_index         | OK 9 fichiers : index regeneres 0 casse (liens AUTOMATIONS 156, VIGNETTES 168, IA 47) ; DEPENDANCES, GLOBAL_INDEX_REPO, IA_AUTOMATIONS_NOTIFS, IA_INDEX_AUTOMATIONS mis a jour ; Recap_index ecrit ; gap : Track_Clim sans YAML ni fiche
+18:48:56.790 | DEBUT      | fusionne           | 
+18:50:44.665 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-11-23.md cree (5443 lignes, CRLF, sans BOM, 740 fences, 1 banniere RESTE A FAIRE)
+18:50:44.722 | DEBUT      | obsidian           | 
+18:50:51.040 | FIN        | obsidian           | OK 2 fichiers copies, MD5 identiques ; histo 11-10 a 11-22 deja presents
+18:50:51.100 | DEBUT      | pages_html         | 
+18:51:24.918 | NOTE       | obsidian           | correction : la ligne fin obsidian OK de 18:50:51 etait prematuree (erreur de chemin, rien copie) ; copie refaite a 18:5x, 2 fichiers, MD5 identiques
+18:51:24.978 | FIN        | obsidian           | OK 2 fichiers copies (fusionne 11-23, histo 11-23 s1), MD5 identiques ; histo 11-10 a 11-22 deja presents
+18:51:38.298 | FIN        | pages_html         | OK 2 pages creees (jour, fusionne) + 2 index ; 2 originaux a la corbeille ; rapport pages_html_2026-11-23.txt ; histo 11-10..11-22 et fusionnes .md sans page laisses en place
+18:51:38.360 | DEBUT      | menage             | 
+18:52:26.746 | NOTE       | menage             | definitif : non (choix [No preference] traite comme non)
+18:52:26.806 | FIN        | menage             | OK histo non definitif : docs et Claude md SAVE non touches ; historique, TODO, 06_MD5 : 6 renommes, 2 corbeille, 0 echec ; 3 anciens formats signales ; rapport menage_historique_2026-11-23.txt
+18:52:26.864 | DEBUT      | export_5B          | 
+18:53:00.533 | FIN        | export_5B          | ATTENTION un seul export en prod racine : Dashboard_2026_11_22.yaml (62c981cb) ; dernier export local dans Dashboard_COMPLET : Dashboard_2026_11_07.yaml : l'export du 11-22 n'est pas en local, Dashboard_COMPLET non touche (regle 9), a decider par Eric
+18:53:00.591 | DEBUT      | push_docs          | 
+18:54:33.612 | FIN        | push_docs          | ATTENTION 58 pousses, MD5 differents=0 ; 1 PROD INCONNUE poussee (IA_GLOBAL_INDEX_memoire, ancienne prod dans TEMPO) ; 5 SEUL_EN_PROD ; purge TEMPO 8 KO_PURGE ; 7 .bak re-pousses (98 Infra_Proxmox) retires ; rapport push_docs_2026-11-23_claude.txt
+18:54:33.669 | DEBUT      | tree               | 
+18:56:15.620 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour (local 2398 dont 1130 bak, prod 1204, GitHub ca1a0907 2448 objets dont 1582 docs/) ; pousse en prod MD5 identique ; sous-lignes de 04_docs_scripts et sections non listees par update-arbo non rafraichies
+18:56:15.677 | DEBUT      | controles_6B       | 
+18:56:20.499 | FIN        | controles_6B       | OK 13 dossiers, 41 baks, ecarts=0, casses=0
+18:56:20.559 | DEBUT      | controles_6C       | 
+18:56:20.979 | DEBUT      | controles_6D       | 
+18:56:23.452 | DEBUT      | controles_6E       | 
+18:57:24.107 | FIN        | controles_6C       | ATTENTION 8 index, 1029 liens, 0 casse ; 1 ecart : GLOBAL_INDEX_REPO balises details 445/444 (ecart d une balise deja present avant la session : 442/441 le 11-22, bloc #MPC_01_monitor_temp.sh.# sans fermeture) ; prod racine GLOBAL_INDEX_REPO realignee (238ba8af)
+18:57:26.576 | FIN        | controles_6D       | ATTENTION apres push racine GLOBAL_INDEX_REPO : voir ANOMALIES du rapport ; ecarts anterieurs : P4_groupe_presence.yaml prod differente du local, 3 fichiers plats seuls en prod, 4 timers seuls en prod racine, automations.yaml et scripts.yaml absents du local (attendu)
+18:57:26.633 | FIN        | controles_6E       | OK 8 integrations File, ANOMALIES 0 apres correction de la colonne Horodatage de Track_Clim dans la fiche
+18:57:26.689 | DEBUT      | controles_6F       | 
+18:58:05.857 | FIN        | controles_6F       | ATTENTION sources: automations 71/71, scripts SH 41/41, YAML 9/12 (3 sans fiche, anterieur), dashboard 71/71 ; badges fiches 274/274 conformes apres creation sur 4 fiches L6C1 ; badges .bak : 107 corriges, reste a_corriger=5 (3 faux positifs connus IA_BADGES_FICHES + 2 a revoir a la main : Check_prod_fonctionnelle.bak_2026_11_01.md, hermes_aligne.bak_2026_11_04.md)
+18:58:05.915 | DEBUT      | controles_6G       | 
+18:58:20.507 | FIN        | controles_6G       | OK DEPENDANCES ecarts=0 (header 2026-11-23 18:55, 69 automations, 0 chemin mort) ; IA_GLOBAL_INDEX_memoire regenere apres edit de IA_ARBO_DETAIL, 0 fichier plus recent
+18:58:20.572 | DEBUT      | push_docs          | rattrapage point 13
+18:58:57.839 | FIN        | push_docs          | ATTENTION rattrapage : 21 pousses, MD5 differents=0, 1 PROD INCONNUE, 7 .bak re-pousses (98) retires
+18:58:57.895 | DEBUT      | controles_6H       | 

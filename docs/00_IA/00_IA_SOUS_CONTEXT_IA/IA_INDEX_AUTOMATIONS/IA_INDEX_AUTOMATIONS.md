@@ -13,7 +13,7 @@
 
 </div>
 
-*Mis a jour le : 2026-11-17 (comptage 68 automations ; version precedente du 2026-11-09 qui annoncait 63)*
+*Mis a jour le : 2026-11-23 (comptage 69 automations ; version precedente du 2026-11-17 qui annoncait 68)*
 
 ---
 
@@ -48,7 +48,7 @@ docs/03_docs_automations/
 
 ## Comptage (verifie 2026-10-30)
 
-**68 automations** dans `automations.yaml` prod (controle du script au 2026-11-17 : 68 en prod, 74 YAML locaux retenus, 81 fiches dont 71 rattachees, 5 hors prod).
+**69 automations** dans `automations.yaml` prod (controle du script au 2026-11-23 : 69 en prod, Track_Clim sans YAML ni fiche, 74 YAML locaux retenus, 81 fiches dont 71 rattachees, 5 hors prod).
 
 | Categories HA | Nb reel |
 |:--------------|:--------|

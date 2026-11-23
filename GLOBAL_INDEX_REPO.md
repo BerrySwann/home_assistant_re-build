@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -15,6 +15,7 @@
 
 *Index unique de navigation - YAML, docs, entités, scripts*
 *Dernière mise à jour : 2026-11-17 (07h25) - fiches realignees sur la prod : automatisations J a O (offset_* a la place de offset_nuit_*), eco_prises (filtre unavailable + garde du spy sensor.eco_prises_spy), spy PC/TV durci, master clim (correction 1/2/2). Aucune entree ajoutee ni retiree.*
+*Dernière mise à jour : 2026-11-23 (histo-final) - entrées ajoutées : input_number/P1_Consigne_groupe_3/ (decalage groupe 3) et CAHIER_DES_CHARGES_REBUILD_v1.html. Automation Track_Clim (id 1795272726443) : export local YAML et fiche crees le 2026-11-23, entree ajoutee apres (H).*
 *Dernière mise à jour : 2026-11-12 (21h, /histo-final) - entrées ajoutées : les 3 automatisations de jour (M, N, O) Consigne jour anti-derive Salon / Bureau / Chambre, les 3 input_number clim_consigne_jour_* et les 3 timers clim_consigne_jour_*_10mn ; budget MAJ : core 2026.11.1 et SmartIR ecartes, wind rose, custom brand et samba installes
 *Dernière mise à jour : 2026-11-11 (21h, /histo-final) - entrées ajoutées : les 3 timers de consigne de nuit (timers/P1_Consigne_nuit_21h_7h30/) et les 3 input_number de consigne de nuit (input_number/P1_Consigne_nuit_anti_derive/) ; dossier input_number/Meteo/ corrigé (previous.temperature_et_humidit -> previous.temperature_et_humidity) ; bloc timers SDB remis sur les dossiers réels P1_Soufflant_SDB et P1_timers_seche_serviette_SDB (l'ancien chemin P1_timers/ n'existe plus)
 *Dernière mise à jour : 2026-11-09 (20h45, /histo-final) - entrée ajoutée : IA_PRISE_eCO.md (fiche des prises eCO, docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/)*
@@ -195,6 +196,20 @@
 ⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/Meteo/previous.temperature_et_humidity.yaml">previous.temperature_et_humidity.yaml</a>
 </blockquote>
 </details>
+<details>
+<summary><b>input_number/P1_Consigne_groupe_3/</b> &nbsp;|&nbsp; Decalage reglable du groupe 3 (-5 a +5, pas 0,5), cree le 2026-11-22, inutilise par le script</summary>
+<blockquote>
+&#9881;&#65039; <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_groupe_3/P1_input_number_decalage_groupe_3.yaml">P1_input_number_decalage_groupe_3.yaml</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>01_config_system_SH_PY_YAML/ (racine)</b> &nbsp;|&nbsp; Cahier des charges du projet</summary>
+<blockquote>
+&#9881;&#65039; <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/CAHIER_DES_CHARGES_REBUILD_v1.html">CAHIER_DES_CHARGES_REBUILD_v1.html</a> (copie de H:\CAHIER_DES_CHARGES_REBUILD_v1.html)
+</blockquote>
+</details>
+
 
 
 ---
@@ -2882,6 +2897,16 @@ le total ~49.
 </details>
 
 <details>
+<summary>🧩 <b>Cartes mushroom</b> - PM2.5 et tCOV, Bureau et Chambre <i>- ajouté 2026-11-22</i></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.md">L6C1_Carte_PM_BUREAU (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.md">L6C1_Carte_VOC_BUREAU (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_04_Carte_VOC_Bureau/L6C1_Carte_VOC_BUREAU.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.md">L6C1_Carte_PM_CHAMBRE (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_05_Carte_PM_Chambre/L6C1_Carte_PM_CHAMBRE.yaml">YAML</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.md">L6C1_Carte_VOC_CHAMBRE (doc)</a> &nbsp; ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_06_Carte_VOC_Chambre/L6C1_Carte_VOC_CHAMBRE.yaml">YAML</a><br>
+</blockquote>
+</details>
+
+<details>
 <summary>📄 <b>Page</b> - 6 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.md">Doc Page</a><br>
@@ -3517,6 +3542,24 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>🔌 Entités (1)</summary>
 <blockquote><ul>
 <li><code>sensor.mode_ete_hiver</code></li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
+<details>
+<summary>✅ <b>(P) (CLIM) Track_Clim journal des consignes</b></summary>
+<blockquote>
+<i>Journal des consignes de la clim (par pièce : T réel, groupe, CNC, CT, CAD, CRE) écrit dans notifs/Track_Clim.txt</i><br><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.yaml">YAML source</a><br>
+<br><b>Déclencheurs :</b> 🔄`time_pattern`, `state`<br>
+<br><details>
+<summary>🔌 Entités (2)</summary>
+<blockquote><ul>
+<li><code>sensor.groupe</code></li>
+<li><code>notify.track_clim</code></li>
 </ul></blockquote>
 </details>
 
