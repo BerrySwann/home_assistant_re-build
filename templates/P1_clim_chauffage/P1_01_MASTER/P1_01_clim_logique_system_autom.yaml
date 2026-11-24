@@ -193,7 +193,7 @@
     - name: "Offset Bureau"
       unique_id: offset_bureau
       unit_of_measurement: "°C"
-      state: "0.3"
+      state: "0.5"
       device_class: temperature
       icon: "mdi:tune-vertical"
 
@@ -201,7 +201,7 @@
     - name: "Offset Chambre"
       unique_id: offset_chambre
       unit_of_measurement: "°C"
-      state: "0.3"
+      state: "0.5"
       device_class: temperature
       icon: "mdi:tune-vertical"
 
@@ -225,7 +225,7 @@
     - name: "Correction temperature Chambre"
       unique_id: correction_temperature_chambre
       unit_of_measurement: "°C"
-      state: "2"
+      state: "1"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
