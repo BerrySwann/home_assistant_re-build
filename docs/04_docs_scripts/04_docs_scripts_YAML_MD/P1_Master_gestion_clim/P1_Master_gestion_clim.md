@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--22-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--25-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -160,7 +160,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 |:---|:---|
 | `climate.clim_salon_rm4_mini` | `set_temperature` (hvac_mode + temperature) |
 | `climate.clim_bureau_rm4_mini` | `set_temperature` |
-| `climate.clim_chambre_rm4_mini` | `set_temperature` (temperature simple - SmartIR Daikin) |
+| `climate.clim_chambre_rm4_mini` | `set_temperature` (hvac_mode + temperature, comme le salon et le bureau) |
 | `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_rm4_mini` | `set_hvac_mode: off` (urgence fenêtre) |
 
 ### Notifications
@@ -196,6 +196,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-25 | Claude | **Chambre alignee sur salon et bureau.** Une seule action `climate.set_temperature` (hvac_mode + temperature) a la place de `set_hvac_mode` puis `set_temperature`. Dans le code SmartIR de la prod (`custom_components/smartir/climate.py`, lignes 299 a 333), `set_temperature` avec un mode envoie une seule commande infrarouge ; l'ancienne chambre en envoyait deux, la premiere avec l'ancienne consigne. Aucun autre script modifie. Ordre d'Eric. | `0e382c68bb71898f` |
 | 2026-11-22 | Hermes | **Cibles de jour pilotees par capteurs.** Remplacement des offsets fixes (-3/-1) par `sensor.correction_script_salon` (3), `_bureau` (1), `_chambre` (1), crees dans P1_01_clim_logique_system_autom.yaml. Salon groupe_3 = `tccj_s` - 3 ; bureau g2/g3/g4 = `tccj_b` - 1 ; chambre g2/g3/g4 = `tccj_c` - 1. Salon g2/g4 reste `tccj_s` sans offset. Version lisible |- poussee en prod. | - |
 | 2026-11-22 | Claude | **Fiche corrigee, script inchange.** Cibles de jour des groupes 2, 3 et 4 alignees sur le code : salon en groupe_3 = cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), bureau en groupe_2 = eco en chauffage et `tccj_b` en clim. Variables `tccsj_*` renommees `tccj_*` (corrige moins correction), comme dans le script. | `ee25a74797646c88` |
 | 2026-11-22 | Claude | **Notification resume : cibles reelles.** Le resume affiche valeur envoyee + correction de la piece (`t_s`, `t_b`, `t_c`) au lieu de la valeur envoyee, arrondie a 1 decimale. Les consignes envoyees aux clims ne changent pas. | `feb1f6683d7f047c` |
@@ -214,4 +215,5 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 [2026-11-22] cibles de jour des groupes 2/3/4 alignees sur le code prod (salon g3 = cible bureau ramenee au salon, bureau g2 = eco en chauffage) ; tccsj_* renomme tccj_*.
 [2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes).
 [2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece) au lieu de la valeur envoyee ; config_hash feb1f6683d7f047c.
-[2026-11-22] cibles de jour : offsets fixes remplaces par sensor.correction_script_salon (3), _bureau (1), _chambre (1) ; salon g2/g4 sans offset ; version lisible |- poussee en prod. -->
+[2026-11-22] cibles de jour : offsets fixes remplaces par sensor.correction_script_salon (3), _bureau (1), _chambre (1) ; salon g2/g4 sans offset ; version lisible |- poussee en prod.
+[2026-11-25] chambre : etape set_hvac_mode supprimee, une seule action set_temperature (hvac_mode + temperature) comme salon et bureau ; config_hash 0e382c68bb71898f. -->

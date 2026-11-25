@@ -371,20 +371,17 @@ p1_master_gestion_clim:
               entity_id: input_boolean.clim_chambre_arret_securise_en_cours
               state: 'off'
             sequence:
-            - alias: 'COMMANDE : MODE CHAMBRE'
-              action: climate.set_hvac_mode
-              target:
-                entity_id: climate.clim_chambre_rm4_mini
-              data:
-                hvac_mode: |-
-                  {% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_rm4_mini', 'off') %}off
-                  {% else %}{{ mode_saison }}
-                  {% endif %}
-            - alias: 'COMMANDE : CONSIGNES CHAMBRE (SmartIR Daikin - temperature simple)'
+            - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE CHAMBRE'
               action: climate.set_temperature
               target:
                 entity_id: climate.clim_chambre_rm4_mini
               data:
+                hvac_mode: |-
+                  {% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_rm4_mini', 'off') %}
+                    off
+                  {% else %}
+                    {{ mode_saison }}
+                  {% endif %}
                 temperature: |-
                   {{ t_chambre_target }}
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
@@ -417,3 +414,6 @@ p1_master_gestion_clim:
             Bureau : {{ (t_b | round(1) | string ~ '°') if prise_bureau else '[OFF]' }}
             Chambre: {{ (t_c | round(1) | string ~ '°') if prise_chambre else '[OFF]' }}
             {%- endif -%}
+
+# annotations_log:
+# [2026-11-25] Chambre alignee sur salon et bureau : une seule action climate.set_temperature (hvac_mode + temperature) au lieu de set_hvac_mode puis set_temperature (2 commandes infrarouge SmartIR, la premiere avec l'ancienne consigne). Ordre d'Eric.

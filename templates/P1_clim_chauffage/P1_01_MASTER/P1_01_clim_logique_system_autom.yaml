@@ -185,7 +185,7 @@
     - name: "Offset Salon"
       unique_id: offset_salon
       unit_of_measurement: "°C"
-      state: "0.5"
+      state: "0.3"
       device_class: temperature
       icon: "mdi:tune-vertical"
 
@@ -193,7 +193,7 @@
     - name: "Offset Bureau"
       unique_id: offset_bureau
       unit_of_measurement: "°C"
-      state: "0.5"
+      state: "0.3"
       device_class: temperature
       icon: "mdi:tune-vertical"
 
@@ -201,7 +201,7 @@
     - name: "Offset Chambre"
       unique_id: offset_chambre
       unit_of_measurement: "°C"
-      state: "0.5"
+      state: "0.3"
       device_class: temperature
       icon: "mdi:tune-vertical"
 
@@ -209,7 +209,7 @@
     - name: "Correction temperature Salon"
       unique_id: correction_temperature_salon
       unit_of_measurement: "°C"
-      state: "0"
+      state: "1"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
@@ -217,7 +217,7 @@
     - name: "Correction temperature Bureau"
       unique_id: correction_temperature_bureau
       unit_of_measurement: "°C"
-      state: "0"
+      state: "1"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
@@ -225,7 +225,7 @@
     - name: "Correction temperature Chambre"
       unique_id: correction_temperature_chambre
       unit_of_measurement: "°C"
-      state: "0"
+      state: "1"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
