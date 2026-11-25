@@ -1533,3 +1533,23 @@ CAD = Consigne Anti Dérive
 | 2026_11_25 05:00:00 | T° Salon   Réel =  20.7° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
 | 2026_11_25 05:00:00 | T° Bureau  Réel =  21.6° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
 | 2026_11_25 05:00:00 | T° Chambre Réel =  21.8° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_25 05:15:00 | T° Salon   Réel =  20.7° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
+| 2026_11_25 05:15:00 | T° Bureau  Réel =  21.6° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
+| 2026_11_25 05:15:00 | T° Chambre Réel =  21.6° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_25 05:30:00 | T° Salon   Réel =  20.7° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
+| 2026_11_25 05:30:00 | T° Bureau  Réel =  21.6° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
+| 2026_11_25 05:30:00 | T° Chambre Réel =  21.6° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_25 05:38:37 | T° Salon   Réel =  20.7° | Groupe_2 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
+| 2026_11_25 05:38:37 | T° Bureau  Réel =  21.6° | Groupe_2 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
+| 2026_11_25 05:38:37 | T° Chambre Réel =  21.6° | Groupe_2 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_25 05:45:00 | T° Salon   Réel =  20.7° | Groupe_2 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
+| 2026_11_25 05:45:00 | T° Bureau  Réel =  21.6° | Groupe_2 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
+| 2026_11_25 05:45:00 | T° Chambre Réel =  21.6° | Groupe_2 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_25 06:00:00 | T° Salon   Réel =  20.7° | Groupe_2 | CNC_Salon   =  19.0° - CT_Salon    0.0° - CAD  0.0° = CRE_Salon   =  19.0° |
+| 2026_11_25 06:00:00 | T° Bureau  Réel =  21.6° | Groupe_2 | CNC_Bureau  =  19.0° - CT_Bureau   0.0° - CAD  0.0° = CRE_Bureau  =  19.0° |
+| 2026_11_25 06:00:00 | T° Chambre Réel =  21.6° | Groupe_2 | CNC_Chambre =  19.0° - CT_Chambre  0.0° - CAD  0.0° = CRE_Chambre =  19.0° |
