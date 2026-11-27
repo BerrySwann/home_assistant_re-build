@@ -88,3 +88,4 @@ Home Assistant notifications (Log started: 2026-08-31T18:24:31.482888+00:00)
 23/11 | Linky : 9.58 kWh
 24/11 | Linky : 12.88 kWh
 25/11 | Linky : 0.00 kWh (MANQUANT)
+26/11 | Linky : 0.00 kWh (MANQUANT)
