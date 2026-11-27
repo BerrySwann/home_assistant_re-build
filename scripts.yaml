@@ -605,24 +605,24 @@ p1_master_gestion_clim:
       data:
         title: '{{ prefix }} {{ states(''sensor.presence'') }}'
         message: "{%- set prise_salon   = is_state('switch.clim_salon_nous', 'on')
-          -%} {%- set prise_bureau  = is_state('switch.clim_bureau_nous', 'on') -%}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') -%} {%-
-          if not (prise_salon or prise_bureau or prise_chambre) -%} [UNITS OFF] Aucune
-          clim alimentee. {%- else -%} {%- if 'groupe_1' in groupe_presence and mode_saison
-          in ['heat', 'cool'] -%}\n    {%- set entete = '[ECO HEAT]' if mode_saison
-          == 'heat' else '[ECO COOL]' -%}\n    {%- set t_s = (t_salon_target | float(0))
-          + (states('sensor.correction_temperature_salon') | float(0)) -%}\n    {%-
-          set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau')
+          -%}\n{%- set prise_bureau  = is_state('switch.clim_bureau_nous', 'on')\n-%}
+          {%- set prise_chambre = is_state('switch.clim_chambre_nous',\n'on') -%}
+          {%- if not (prise_salon or prise_bureau or prise_chambre)\n-%} [UNITS OFF]
+          Aucune clim alimentee. {%- else -%} {%- if\n'groupe_1' in groupe_presence
+          and mode_saison in ['heat', 'cool']\n-%}\n    {%- set entete = '[ECO HEAT]'
+          if mode_saison == 'heat' else '[ECO COOL]' -%}\n    {%- set t_s = (t_salon_target
+          | float(0)) + (states('sensor.correction_temperature_salon') | float(0))
+          -%}\n    {%- set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau')
           | float(0)) -%}\n    {%- set t_c = (t_chambre_target | float(0)) + (states('sensor.correction_temperature_chambre')
           | float(0)) -%}\n{%- else -%}\n    {%- set entete = 'Mode : ' ~ (mode_saison
           | upper) ~ (' (NUIT)' if periode == 'nuit' else '') -%}\n    {%- set t_s
           = (t_salon_target | float(0)) + (states('sensor.correction_temperature_salon')
           | float(0)) -%}\n    {%- set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau')
           | float(0)) -%}\n    {%- set t_c = (t_chambre_target | float(0)) + (states('sensor.correction_temperature_chambre')
-          | float(0)) -%}\n{%- endif -%}\n{{ entete }}\nSalon  : {{ (t_s | round(1)
-          | string ~ '°') if prise_salon else '[OFF]' }} Bureau : {{ (t_b | round(1)
-          | string ~ '°') if prise_bureau else '[OFF]' }} Chambre: {{ (t_c | round(1)
-          | string ~ '°') if prise_chambre else '[OFF]' }}\n{%- endif -%}"
+          | float(0)) -%}\n{%- endif -%}\n\n{{ entete }}\n\nSalon  : {{ (t_s | round(1)
+          | string ~ '°') if prise_salon else\n'[OFF]' }} Bureau : {{ (t_b | round(1)
+          | string ~ '°') if\nprise_bureau else '[OFF]' }} Chambre: {{ (t_c | round(1)
+          | string ~\n'°') if prise_chambre else '[OFF]' }}\n\n{%- endif -%}"
 sdb_soufflant_demarrer:
   alias: 'SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s)'
   description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou
