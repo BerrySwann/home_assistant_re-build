@@ -2381,3 +2381,15 @@ CAD = Consigne Anti Dérive
 | 2026_11_27 06:00:00 | T° Salon   Réel =  20.5° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    1.0° - CAD  0.0° = CRE_Salon   =  18.0° |
 | 2026_11_27 06:00:00 | T° Bureau  Réel =  20.8° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   1.0° - CAD  0.0° = CRE_Bureau  =  18.0° |
 | 2026_11_27 06:00:00 | T° Chambre Réel =  20.6° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  1.0° - CAD  1.0° = CRE_Chambre =  17.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_27 06:15:00 | T° Salon   Réel =  20.5° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    1.0° - CAD  0.0° = CRE_Salon   =  18.0° |
+| 2026_11_27 06:15:00 | T° Bureau  Réel =  20.8° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   1.0° - CAD  0.0° = CRE_Bureau  =  18.0° |
+| 2026_11_27 06:15:00 | T° Chambre Réel =  20.6° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  1.0° - CAD  0.0° = CRE_Chambre =  18.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_27 06:30:00 | T° Salon   Réel =  20.5° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    1.0° - CAD  0.0° = CRE_Salon   =  18.0° |
+| 2026_11_27 06:30:00 | T° Bureau  Réel =  20.8° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   1.0° - CAD  0.0° = CRE_Bureau  =  18.0° |
+| 2026_11_27 06:30:00 | T° Chambre Réel =  20.4° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  1.0° - CAD  1.0° = CRE_Chambre =  17.0° |
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+| 2026_11_27 06:45:00 | T° Salon   Réel =  20.5° | Groupe_4 | CNC_Salon   =  19.0° - CT_Salon    1.0° - CAD  0.0° = CRE_Salon   =  18.0° |
+| 2026_11_27 06:45:00 | T° Bureau  Réel =  20.6° | Groupe_4 | CNC_Bureau  =  19.0° - CT_Bureau   1.0° - CAD  1.0° = CRE_Bureau  =  17.0° |
+| 2026_11_27 06:45:00 | T° Chambre Réel =  20.4° | Groupe_4 | CNC_Chambre =  19.0° - CT_Chambre  1.0° - CAD  1.0° = CRE_Chambre =  17.0° |
