@@ -24495,3 +24495,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [CELL] | 28/11 09:15 | Hyg:0.39 | Cuis:0.09 | Froid:0.29 | Chauff:2.61 | Avg 4:282.3 | Multi:0.62 | Lum:0.13 | Autres:0.19 | Ti:20.7°C | Ext:9.7°C | DUT S/R/B/C:1.4/0.4/3.6/2.3
 [2] en [CELL] | 28/11 09:30 | Hyg:0.39 | Cuis:0.09 | Froid:0.3 | Chauff:2.63 | Avg 4:277.0 | Multi:0.72 | Lum:0.14 | Autres:0.19 | Ti:20.6°C | Ext:9.5°C | DUT S/R/B/C:1.4/0.4/3.6/2.4
 [2] en [WIFI] | 28/11 09:45 | Hyg:0.39 | Cuis:0.09 | Froid:0.3 | Chauff:2.74 | Avg 4:281.2 | Multi:0.72 | Lum:0.16 | Autres:0.19 | Ti:20.6°C | Ext:9.9°C | DUT S/R/B/C:1.5/0.4/3.7/2.6
+[2] en [WIFI] | 28/11 10:00 | Hyg:0.39 | Cuis:0.09 | Froid:0.32 | Chauff:2.86 | Avg 4:286.1 | Multi:0.83 | Lum:0.18 | Autres:0.19 | Ti:20.7°C | Ext:10.3°C | DUT S/R/B/C:1.7/0.4/3.8/2.6
