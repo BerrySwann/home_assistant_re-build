@@ -302,6 +302,7 @@ p1_master_gestion_clim:
         not in ['unknown', 'unavailable', '0']) else 'false' }}\n{% endif %}"
       hs_list: '{% set ns = namespace(hs=[]) %}
 
+
         {% if mode_ete_ok == ''false'' %}{% set ns.hs = ns.hs + [''mode_ete_hiver'']
         %}
 
@@ -311,40 +312,53 @@ p1_master_gestion_clim:
 
         {% endif %}
 
-        {% if states(''sensor.temperature_eco_hiver_corrige'') in [''unknown'', ''unavailable'',
-        ''0''] %}{% set ns.hs = ns.hs + [''eco_hiver_corrige''] %}
+        {% if states(''sensor.temperature_eco_hiver_corrige'') in [''unknown'',
+
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''eco_hiver_corrige''] %}
 
         {% endif %}
 
-        {% if states(''sensor.temperature_eco_ete_corrige'') in [''unknown'', ''unavailable'',
-        ''0''] %}{% set ns.hs = ns.hs + [''eco_ete_corrige''] %}
+        {% if states(''sensor.temperature_eco_ete_corrige'') in [''unknown'',
+
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''eco_ete_corrige''] %}
 
         {% endif %}
 
-        {% if states(''sensor.temperature_corrige_salon'') in [''unknown'', ''unavailable'',
-        ''0''] %}{% set ns.hs = ns.hs + [''corrige_salon''] %}
+        {% if states(''sensor.temperature_corrige_salon'') in [''unknown'',
+
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_salon''] %}
 
         {% endif %}
 
-        {% if states(''sensor.temperature_corrige_bureau'') in [''unknown'', ''unavailable'',
-        ''0''] %}{% set ns.hs = ns.hs + [''corrige_bureau''] %}
+        {% if states(''sensor.temperature_corrige_bureau'') in [''unknown'',
+
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_bureau''] %}
 
         {% endif %}
 
-        {% if states(''sensor.temperature_corrige_chambre'') in [''unknown'', ''unavailable'',
-        ''0''] %}{% set ns.hs = ns.hs + [''corrige_chambre''] %}
+        {% if states(''sensor.temperature_corrige_chambre'') in [''unknown'',
+
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_chambre''] %}
 
         {% endif %}
 
         {% if periode == ''jour'' and states(''sensor.temperature_confort_jour'')
-        in [''unknown'', ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''temperature_confort_jour'']
-        %}
+        in
+
+        [''unknown'', ''unavailable'', ''0''] %}{% set ns.hs = ns.hs +
+
+        [''temperature_confort_jour''] %}
 
         {% endif %}
 
+
         {% if periode == ''nuit'' and states(''sensor.temperature_confort_nuit'')
-        in [''unknown'', ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''temperature_confort_nuit'']
-        %}
+        in
+
+        [''unknown'', ''unavailable'', ''0''] %}{% set ns.hs = ns.hs +
+
+        [''temperature_confort_nuit''] %}
+
 
         {% endif %} {{ ns.hs | join('', '') }}'
       besoin_eco: '{{ ''true'' if (groupe_ok == ''false'' or temps_normales_ok ==
@@ -441,68 +455,65 @@ p1_master_gestion_clim:
 
         {% endif %}'
       eco_hc_salon: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_salon'')
-        | float(0)), state_attr(''climate.clim_salon_rm4_mini'', ''min_temp'') | float(0)]
-        | max }}'
+        |
+
+        float(0)), state_attr(''climate.clim_salon_rm4_mini'', ''min_temp'') |
+
+        float(0)] | max }}'
       eco_hc_bureau: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_bureau'')
         | float(0)), state_attr(''climate.clim_bureau_rm4_mini'', ''min_temp'') |
         float(0)] | max }}'
       eco_hc_chambre: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_chambre'')
         | float(0)), state_attr(''climate.clim_chambre_rm4_mini'', ''min_temp'') |
         float(0)] | max }}'
-      t_salon_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-
-        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_salon if mode_saison
-        == ''heat'' else temp_eco_ec }}
-
-        {% elif periode == ''jour'' and ''groupe_3'' in groupe_presence %} {{ (tccj_s
-        - (states(''sensor.correction_script_salon'') | float(0))) if mode_saison
-        == ''heat'' else tccj_s }}
-
-        {% elif periode == ''jour'' and (''groupe_2'' in groupe_presence or ''groupe_4''
-        in groupe_presence) %} {{ tccj_s }}
-
-        {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat'' else
-        temp_eco_ec }}
-
-        {% else %} {{ tccn_s }}
-
-        {% endif %}'
-      t_bureau_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-
-        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_bureau if mode_saison
-        == ''heat'' else temp_eco_ec }}
-
-        {% elif periode == ''jour'' and ''groupe_3'' in groupe_presence %} {{ (tccj_b
-        - (states(''sensor.correction_script_bureau'') | float(0))) if mode_saison
-        == ''heat'' else tccj_b }}
-
-        {% elif periode == ''jour'' and (''groupe_2'' in groupe_presence or ''groupe_4''
-        in groupe_presence) %} {{ (tccj_b - (states(''sensor.correction_script_bureau'')
-        | float(0))) if mode_saison == ''heat'' else tccj_b }}
-
-        {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat'' else
-        temp_eco_ec }}
-
-        {% else %} {{ tccn_b }}
-
-        {% endif %}'
+      t_salon_target: "{% if mode_degrade_eco == 'true' %}\n  {{ eco_saison_val }}\n{%
+        elif 'groupe_1' in groupe_presence %} \n  {{ eco_hc_salon if mode_saison ==
+        'heat' else temp_eco_ec }}\n{% elif periode == 'jour' and 'groupe_3' in groupe_presence
+        %}\n  {{ (tccj_s - (states('sensor.correction_script_salon') | float(0)))
+        if mode_saison == 'heat' else tccj_s }}\n{% elif periode == 'jour' and ('groupe_2'
+        in groupe_presence or 'groupe_4' in groupe_presence) %}\n  {{ tccj_s }}\n{%
+        elif periode == 'jour' %} \n  {{ temp_eco_hc if mode_saison == 'heat' else
+        temp_eco_ec }}\n{% else %}\n  {{ tccn_s }}\n{% endif %}"
+      t_bureau_target: "{% if mode_degrade_eco == 'true' %}\n  {{ eco_saison_val }}\n{%
+        elif 'groupe_1' in groupe_presence %}\n  {{ eco_hc_bureau if mode_saison ==
+        'heat' else temp_eco_ec }}\n{% elif periode == 'jour' and 'groupe_3' in groupe_presence
+        %}\n  {{ (tccj_b - (states('sensor.correction_script_bureau') | float(0)))
+        if mode_saison == 'heat' else tccj_b }}\n{% elif periode == 'jour' and ('groupe_2'
+        in groupe_presence or 'groupe_4' in groupe_presence) %}\n  {{ (tccj_b - (states('sensor.correction_script_bureau')
+        | float(0))) if mode_saison == 'heat' else tccj_b }}\n{% elif periode == 'jour'
+        %}\n  {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}\n{% else
+        %}\n  {{ tccn_b }}\n{% endif %}\n  "
       t_chambre_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
 
-        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_chambre if mode_saison
-        == ''heat'' else temp_eco_ec }}
 
-        {% elif periode == ''jour'' and ''groupe_3'' in groupe_presence %} {{ (tccj_c
-        - (states(''sensor.correction_script_chambre'') | float(0))) if mode_saison
+        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_chambre if
+
+        mode_saison == ''heat'' else temp_eco_ec }}
+
+
+        {% elif periode == ''jour'' and ''groupe_3'' in groupe_presence %} {{
+
+        (tccj_c - (states(''sensor.correction_script_chambre'') | float(0))) if
+
+        mode_saison == ''heat'' else tccj_c }}
+
+
+        {% elif periode == ''jour'' and (''groupe_2'' in groupe_presence or
+
+        ''groupe_4'' in groupe_presence) %} {{ (tccj_c -
+
+        (states(''sensor.correction_script_chambre'') | float(0))) if mode_saison
+
         == ''heat'' else tccj_c }}
 
-        {% elif periode == ''jour'' and (''groupe_2'' in groupe_presence or ''groupe_4''
-        in groupe_presence) %} {{ (tccj_c - (states(''sensor.correction_script_chambre'')
-        | float(0))) if mode_saison == ''heat'' else tccj_c }}
 
-        {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat'' else
-        temp_eco_ec }}
+        {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat''
+
+        else temp_eco_ec }}
+
 
         {% else %} {{ tccn_c }}
+
 
         {% endif %}'
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
@@ -525,17 +536,17 @@ p1_master_gestion_clim:
         action: notify.mobile_app_eric
         data:
           title: '{{ prefix }} CLIM {{ periode | upper }} COUPÉE'
-          message: "{% if trigger_entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'\n
+          message: "{% if trigger_entity_id ==\n'binary_sensor.contact_fenetre_salon_sonoff_contact'\n
             \  and is_state('binary_sensor.contact_fenetre_salon_sonoff_contact',
-            'on') %}\nLa fenêtre du Salon a été ouverte.\n{% elif trigger_entity_id
-            == 'binary_sensor.contact_fenetre_cuisine_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_cuisine_sonoff_contact',
-            'on') %}\nLa fenêtre de la Cuisine a été ouverte.\n{% elif trigger_entity_id
-            == 'binary_sensor.contact_fenetre_bureau_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_bureau_sonoff_contact',
-            'on') %}\nLa fenêtre du Bureau a été ouverte.\n{% elif trigger_entity_id
-            == 'binary_sensor.contact_fenetre_chambre_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
-            'on') %}\nLa fenêtre de la Chambre a été ouverte.\n{% else %} Une fenêtre
-            est ouverte (Mise à jour globale).\n{% endif %}\n{% if states('sensor.nombre_de_fenetres_ouvertes')
-            | int == 4 %} Toutes les fenêtres sont ouvertes.\n{% endif %}"
+            'on') %}\nLa fenêtre du Salon a été ouverte.\n\n{% elif trigger_entity_id
+            ==\n'binary_sensor.contact_fenetre_cuisine_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_cuisine_sonoff_contact',
+            'on') %}\nLa fenêtre de la Cuisine a été ouverte.\n\n{% elif trigger_entity_id
+            ==\n'binary_sensor.contact_fenetre_bureau_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_bureau_sonoff_contact',
+            'on') %}\nLa fenêtre du Bureau a été ouverte.\n\n{% elif trigger_entity_id
+            ==\n'binary_sensor.contact_fenetre_chambre_sonoff_contact'\n   and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
+            'on') %}\nLa fenêtre de la Chambre a été ouverte.\n\n{% else %} Une fenêtre
+            est ouverte (Mise à jour globale).\n\n{% endif %}\n\n{% if states('sensor.nombre_de_fenetres_ouvertes')
+            | int == 4 %}\nToutes les fenêtres sont ouvertes.\n\n{% endif %}"
       - alias: 'SÉCURITÉ : ARRÊT IMMÉDIAT POUR ÉVITER DOUBLON'
         stop: Coupure fenêtre effectuée
     default:
@@ -557,7 +568,7 @@ p1_master_gestion_clim:
             target:
               entity_id: climate.clim_salon_rm4_mini
             data:
-              hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_salon_rm4_mini',
+              hvac_mode: "{% if trigger_id == 'sensor_update' and\nis_state('climate.clim_salon_rm4_mini',
                 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
               temperature: '{{ t_salon_target }}'
       - alias: LOGIQUE BUREAU
@@ -619,10 +630,10 @@ p1_master_gestion_clim:
           = (t_salon_target | float(0)) + (states('sensor.correction_temperature_salon')
           | float(0)) -%}\n    {%- set t_b = (t_bureau_target | float(0)) + (states('sensor.correction_temperature_bureau')
           | float(0)) -%}\n    {%- set t_c = (t_chambre_target | float(0)) + (states('sensor.correction_temperature_chambre')
-          | float(0)) -%}\n{%- endif -%}\n\n{{ entete }}\n\nSalon  : {{ (t_s | round(1)
-          | string ~ '°') if prise_salon else\n'[OFF]' }} Bureau : {{ (t_b | round(1)
-          | string ~ '°') if\nprise_bureau else '[OFF]' }} Chambre: {{ (t_c | round(1)
-          | string ~\n'°') if prise_chambre else '[OFF]' }}\n\n{%- endif -%}"
+          | float(0)) -%}\n{%- endif -%}\n{{ entete }}\nSalon  : {{ (t_s | round(1)
+          | string ~ '°') \n  if prise_salon else'[OFF]' }}\nBureau : {{ (t_b | round(1)
+          | string ~ '°')\n  if prise_bureau else '[OFF]' }}\nChambre: {{ (t_c | round(1)
+          | string ~ '°')\n  if prise_chambre else '[OFF]' }}\n{%- endif -%}"
 sdb_soufflant_demarrer:
   alias: 'SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s)'
   description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou

@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--25-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -49,7 +49,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - Si `trigger_id == 'ha_restart'` → attente 1 minute
 
 ### 3. Boucle attente capteurs (max 10 × 30s)
-- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_salon`, `temperature_corrige_bureau`, `temperature_corrige_chambre` + selon `periode` : `temperature_confort_jour` (JOUR) ou `temperature_confort_nuit` (NUIT)
+- Vérifie 8 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_salon`, `temperature_corrige_bureau`, `temperature_corrige_chambre` + selon `periode` : `temperature_confort_jour` (JOUR) ou `temperature_confort_nuit` (NUIT)
 - Aucune notif pendant la boucle (fini le spam par essai)
 - Au 10e cycle, **diagnostic 3 sorties** :
   - **SORTIE 1 - OFF sécurité** : `mode_ete_hiver` HS, OU éco de saison HS alors qu'on en a besoin (groupe_1, groupe HS, ou une température normale HS) → off des 3 clims + message « Arrêt sécurité capteur HS »
@@ -136,6 +136,8 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 | `sensor.temperature_eco_hiver` | Fallback éco hiver |
 | `sensor.temperature_eco_ete` | Fallback éco été |
 | `sensor.temperature_confort_jour` | T° cible jour |
+| `sensor.temperature_confort_nuit` | Verifie par la boucle d attente et le diagnostic (periode nuit) |
+| `sensor.seuil_chauffage` | Repli de `tccn_*` si la consigne de nuit est indisponible |
 | `sensor.temperature_consigne_nuit_salon` | Cible de nuit salon, seuil + décalage |
 | `sensor.temperature_consigne_nuit_bureau` | Cible de nuit bureau |
 | `sensor.temperature_consigne_nuit_chambre` | Cible de nuit chambre |
@@ -166,7 +168,8 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 ### Notifications
 | Service | Titre | Déclenchement |
 |:---|:---|:---|
-| `notify.mobile_app_eric` | `[AJ/AN] ATTENTE CAPTEURS` | Boucle relance si KO |
+| `notify.mobile_app_eric` | `[AJ/AN] SÉCURITÉ CLIM` | Sortie 1 du diagnostic (capteur critique HS, clims coupees), une seule fois au 10e cycle |
+| `notify.mobile_app_eric` | `[AJ/AN] MODE DÉGRADÉ` | Sortie 2 du diagnostic (mode degrade eco), une seule fois au 10e cycle |
 | `notify.mobile_app_eric` | `[AJ/AN] CLIM JOUR/NUIT COUPÉE` | Fenêtre ouverte |
 | `notify.mobile_app_eric` | `[AJ/AN] presence` | Résumé après commandes |
 
@@ -176,7 +179,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 
 - **Libelles de `hs_list`** : le rapport de sante nomme les capteurs muets sous forme courte (`corrige_salon`, `corrige_bureau`, `corrige_chambre`, `eco_hiver_corrige`, `eco_ete_corrige`, `groupe`). Ces etiquettes sont ecrites en dur dans le script et ne suivent PAS automatiquement le renommage des entites : apres chaque renommage de capteur il faut les corriger separement, dans la copie locale ET dans la prod. Un oubli ne casse rien a l'execution, il fait seulement diverger les deux copies en silence.
 - **HA reecrit `scripts.yaml`** : apres chaque enregistrement depuis l'interface, Home Assistant reformate le fichier (guillemets, passages a la ligne, echappements). Un diff brut montre alors des dizaines de lignes differentes qui ne sont que de la mise en forme : la comparaison doit se faire sur le YAML relu, jamais sur le texte.
-- **SALON groupe_3 JOUR** : Eric seul, le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), c est a dire `temperature_corrige_bureau` moins la correction du salon. C est le code du script en prod (relu le 2026-11-22) et la regle voulue par Eric : groupe_3 le jour seulement, pas la nuit. La fiche annoncait a tort `tccsj_s` pour tous les groupes depuis le 2026-11-08.
+- **SALON groupe_3 JOUR** : Eric seul, le salon recoit `tccj_s` moins `sensor.correction_script_salon` en chauffage, `tccj_s` seul en clim (comme le tableau du salon et le code en prod, relu le 2026-11-28). Regle voulue par Eric : groupe_3 le jour seulement, pas la nuit. L ancienne formule (cible du bureau ramenee au salon, `tccj_b` + correction bureau - correction salon) a ete remplacee lors du changement du 2026-11-22 (voir changelog).
 - **CIBLE ET CONSIGNE ENVOYEE SONT DEUX CHOSES (2026-11-12).** `temperature_consigne_nuit_*` est la CIBLE,
   celle que lisent les automatisations J K L, `ecart_nuit_*` et `derive_nuit_*`. La correction de dérive du
   capteur de reprise d'air se soustrait ICI, dans `tccn_*`, au moment de l'envoi. L'avoir mise dans le capteur
@@ -196,6 +199,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-28 | Claude | **Fiche relue contre le script live, script inchange.** Note SALON groupe_3 JOUR alignee sur le code (`tccj_s` moins `correction_script_salon`), 8 capteurs et non 9 dans la boucle d attente, tableau Notifications (SECURITE CLIM et MODE DEGRADE ajoutes, ATTENTE CAPTEURS retire), entites lues `temperature_confort_nuit` et `seuil_chauffage` ajoutees, badge HA 2026.11.3. Hash live relu : `44a5e408c6bb01de` (ecart avec `0e382c68bb71898f` non explique, base de calcul non verifiee). Ordre d Eric. | - |
 | 2026-11-25 | Claude | **Chambre alignee sur salon et bureau.** Une seule action `climate.set_temperature` (hvac_mode + temperature) a la place de `set_hvac_mode` puis `set_temperature`. Dans le code SmartIR de la prod (`custom_components/smartir/climate.py`, lignes 299 a 333), `set_temperature` avec un mode envoie une seule commande infrarouge ; l'ancienne chambre en envoyait deux, la premiere avec l'ancienne consigne. Aucun autre script modifie. Ordre d'Eric. | `0e382c68bb71898f` |
 | 2026-11-22 | Hermes | **Cibles de jour pilotees par capteurs.** Remplacement des offsets fixes (-3/-1) par `sensor.correction_script_salon` (3), `_bureau` (1), `_chambre` (1), crees dans P1_01_clim_logique_system_autom.yaml. Salon groupe_3 = `tccj_s` - 3 ; bureau g2/g3/g4 = `tccj_b` - 1 ; chambre g2/g3/g4 = `tccj_c` - 1. Salon g2/g4 reste `tccj_s` sans offset. Version lisible |- poussee en prod. | - |
 | 2026-11-22 | Claude | **Fiche corrigee, script inchange.** Cibles de jour des groupes 2, 3 et 4 alignees sur le code : salon en groupe_3 = cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), bureau en groupe_2 = eco en chauffage et `tccj_b` en clim. Variables `tccsj_*` renommees `tccj_*` (corrige moins correction), comme dans le script. | `ee25a74797646c88` |
@@ -216,4 +220,5 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 [2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes).
 [2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece) au lieu de la valeur envoyee ; config_hash feb1f6683d7f047c.
 [2026-11-22] cibles de jour : offsets fixes remplaces par sensor.correction_script_salon (3), _bureau (1), _chambre (1) ; salon g2/g4 sans offset ; version lisible |- poussee en prod.
-[2026-11-25] chambre : etape set_hvac_mode supprimee, une seule action set_temperature (hvac_mode + temperature) comme salon et bureau ; config_hash 0e382c68bb71898f. -->
+[2026-11-25] chambre : etape set_hvac_mode supprimee, une seule action set_temperature (hvac_mode + temperature) comme salon et bureau ; config_hash 0e382c68bb71898f.
+[2026-11-28] fiche relue contre le live (hash 44a5e408c6bb01de) : note SALON groupe_3, 8 capteurs, tableau notifications, entites lues, badge HA. -->
