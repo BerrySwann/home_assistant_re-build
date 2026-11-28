@@ -463,9 +463,9 @@ p1_master_gestion_clim:
       eco_hc_bureau: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_bureau'')
         | float(0)), state_attr(''climate.clim_bureau_rm4_mini'', ''min_temp'') |
         float(0)] | max }}'
-      eco_hc_chambre: '{{ [temp_eco_hc - (states(''sensor.correction_temperature_chambre'')
-        | float(0)), state_attr(''climate.clim_chambre_rm4_mini'', ''min_temp'') |
-        float(0)] | max }}'
+      eco_hc_chambre: "{{ [temp_eco_hc - (states('sensor.correction_temperature_chambre')
+        | float(0)), state_attr('climate.clim_chambre_rm4_mini', 'min_temp') | float(0)]
+        | max }}\n  "
       t_salon_target: "{% if mode_degrade_eco == 'true' %}\n  {{ eco_saison_val }}\n{%
         elif 'groupe_1' in groupe_presence %} \n  {{ eco_hc_salon if mode_saison ==
         'heat' else temp_eco_ec }}\n{% elif periode == 'jour' and 'groupe_3' in groupe_presence
@@ -483,39 +483,16 @@ p1_master_gestion_clim:
         | float(0))) if mode_saison == 'heat' else tccj_b }}\n{% elif periode == 'jour'
         %}\n  {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}\n{% else
         %}\n  {{ tccn_b }}\n{% endif %}\n  "
-      t_chambre_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-
-
-        {% elif ''groupe_1'' in groupe_presence %} {{ eco_hc_chambre if
-
-        mode_saison == ''heat'' else temp_eco_ec }}
-
-
-        {% elif periode == ''jour'' and ''groupe_3'' in groupe_presence %} {{
-
-        (tccj_c - (states(''sensor.correction_script_chambre'') | float(0))) if
-
-        mode_saison == ''heat'' else tccj_c }}
-
-
-        {% elif periode == ''jour'' and (''groupe_2'' in groupe_presence or
-
-        ''groupe_4'' in groupe_presence) %} {{ (tccj_c -
-
-        (states(''sensor.correction_script_chambre'') | float(0))) if mode_saison
-
-        == ''heat'' else tccj_c }}
-
-
-        {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat''
-
-        else temp_eco_ec }}
-
-
-        {% else %} {{ tccn_c }}
-
-
-        {% endif %}'
+      t_chambre_target: "{% if mode_degrade_eco == 'true' %}\n  {{ eco_saison_val
+        }}\n{% elif 'groupe_1' in groupe_presence %}\n  {{ eco_hc_chambre if mode_saison
+        == 'heat' else temp_eco_ec }}\n{% elif periode == 'jour' and 'groupe_3' in
+        groupe_presence %} \n  {{ (tccj_c - (states('sensor.correction_script_chambre')
+        | float(0))) if mode_saison == 'heat' else tccj_c }}\n{% elif periode == 'jour'
+        and ('groupe_2' in groupe_presence or 'groupe_4' in groupe_presence) %}\n
+        \ {{ (tccj_c - (states('sensor.correction_script_chambre') | float(0))) if
+        mode_saison == 'heat' else tccj_c }}\n{% elif periode == 'jour' %} \n  {{
+        temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}\n{% else %} \n  {{
+        tccn_c }}\n{% endif %}"
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
     choose:
     - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
