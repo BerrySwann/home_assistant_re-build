@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P2_éCO. Prises/gestion_tv_chambre_scene_de_fin_notif/gestion_tv_chambre_scene_de_fin_notif.yaml`
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P2_eCO_prises/Gestion_tv_chambre_scene_de_fin_notif/Gestion_tv_chambre_scene_de_fin_notif.yaml`
 > **ID HA :** `1775330762844`
 > **Mode HA :** `single`
 > **MàJ :** 2026-09-23 (refonte anti-raté)
@@ -89,3 +89,4 @@ extinction sur veille CONFIRMÉE (puissance < 40W pendant 12 min via
 
 <!-- annotations_log:
 [2026-11-17] sensor.eco_prises_spy_pc_tv durci (entite absente tolere, duree = min(veille, prise)). -->
+<!-- annotations_log: [2026-11-28] Gestion_tv_chambre : lot 2 verif fiches: chemin YAML cite mis au reel (Gestion_tv_chambre_scene_de_fin_notif.yaml) -->

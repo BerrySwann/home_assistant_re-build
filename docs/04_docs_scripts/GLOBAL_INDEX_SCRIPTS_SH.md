@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-23 22:08 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-28 18:47 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre les index SH, PY et YAML
 
@@ -26,7 +26,7 @@ Fichier GENERE le 2026-11-23 22:08 par docs/04_docs_scripts/04_docs_scripts_SH/g
 
 - Scripts SH indexes : 8
 - Scripts sans fiche dans 04_docs_scripts_SH_MD : 0
-- Scripts presents dans H:\.scripts avec un contenu different du local : 0
+- Scripts presents dans H:\.scripts avec un contenu different du local : 1 (Ha_git_backup.sh)
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
 - Fichiers du dossier 04_docs_scripts_SH ni shell ni python, hors index : aucun
 - Autre type de script : voir GLOBAL_INDEX_SCRIPTS_PY.md (dossier 04_docs_scripts_SH, classement identique).
@@ -37,7 +37,7 @@ Fichier GENERE le 2026-11-23 22:08 par docs/04_docs_scripts/04_docs_scripts_SH/g
 
 | Script | Type | Copie dans H:\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |
 |:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|
-| [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | shell_command.git_backup_push, shell_command.git_backup_push_manual, shell_command.git_backup_push_weekly | automation [01-Backup] Git hourly H+10, automation [02-Backup] Git daily (03:00), automation [06-Backup] Git au démarrage HA, automation [04-Backup] Git push manuel, automation [03-Backup] Git weekly (dim 01:30), automation [05-Backup] Git push weekly manuel | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
+| [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | DIFFERENT | shell_command.git_backup_push, shell_command.git_backup_push_manual, shell_command.git_backup_push_weekly | automation [01-Backup] Git hourly H+10, automation [02-Backup] Git daily (03:00), automation [06-Backup] Git au démarrage HA, automation [04-Backup] Git push manuel, automation [03-Backup] Git weekly (dim 01:30), automation [05-Backup] Git push weekly manuel | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
 | [Mf_vigilance_images.sh](04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | [Mf_vigilance_images.md](04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md) | Mf_vigilance_images |
 | [MPC_01_monitor_temp.sh](04_docs_scripts_SH/XX_MPC_01_monitor_temp_sh_RASPI%20%28a%20ne%20pas%20jeter%29/MPC_01_monitor_temp.sh) | bash | absent de H:\.scripts | - | - | - | [MPC_01_monitor_temp.md](04_docs_scripts_SH_MD/XX_MPC_01_monitor_temp_sh_RASPI%20%28a%20ne%20pas%20jeter%29/MPC_01_monitor_temp.md) | XX_MPC_01_monitor_temp_sh_RASPI (a ne pas jeter) |
 
@@ -80,7 +80,7 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT hue | 35 | integration `hue` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | HACS atmofrance | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Atmo France - Vence` |
-| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 38 entrees (premiere : `Hue ambiance lamp salon 1`) |
+| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 39 entrees (premiere : `Hue ambiance lamp salon 1`) |
 | NAT systemmonitor | 11 | integration `systemmonitor` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | HACS scheduler | 9 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Scheduler` |
 | CREE statistics | 8 | creee par un YAML du depot, dossier `statistics`, sans aucune integration dans Appareils et services |
@@ -104,6 +104,7 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | CREE script | 2 | creee par un YAML du depot, dossier `script`, sans aucune integration dans Appareils et services |
 | HACS vigieau | 2 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Vigieau AEP` |
 | NAT generic_thermostat | 2 | integration `generic_thermostat` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT-SANS-REGISTRE | 2 | fournie par Home Assistant sans entree au registre (zone.home) |
 | ARTEFACT-TEMPLATE | 1 | mot-cle de template, pas une entite |
 | CREE automation | 1 | creee par un YAML du depot, dossier `automation`, sans aucune integration dans Appareils et services |
 | CREE input_datetime | 1 | creee par un YAML du depot, dossier `input_datetime`, sans aucune integration dans Appareils et services |
@@ -111,11 +112,9 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | CREE powercalc | 1 | creee par un YAML du depot, dossier `powercalc`, sans aucune integration dans Appareils et services |
 | CREE rest | 1 | creee par un YAML du depot, dossier `rest`, sans aucune integration dans Appareils et services |
 | CREE sql | 1 | creee par un YAML du depot, dossier `sql`, sans aucune integration dans Appareils et services |
-| HACS hacs | 1 | installee via HACS (qui va etre renomme marketplace) ; son entree dans Appareils et services n a pas de nom affiche |
 | NAT cpuspeed | 1 | integration `cpuspeed` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT moon | 1 | integration `moon` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT season | 1 | integration `season` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT-SANS-REGISTRE | 1 | fournie par Home Assistant sans entree au registre (zone.home) |
 
 > **Chaine la plus fragile** : les `NAT mqtt` ne dependent pas que de Home Assistant. Mesure du 2026-11-03 : l integration `mqtt` pointe le broker add-on `core-mosquitto` (1883), et les mesures viennent de Zigbee2MQTT, conteneur 200 sur 10.32.154.244. Conteneur arrete, broker en vrac ou integration retiree : les entites tombent, sans que rien ne le signale dans l interface. A la meme date, 114 des 128 entites citees avaient remonte dans les 2 heures.
 

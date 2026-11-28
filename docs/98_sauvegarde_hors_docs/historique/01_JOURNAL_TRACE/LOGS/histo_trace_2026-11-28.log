@@ -1,0 +1,19 @@
+18:47:05.761 | SEQ_DEBUT  | SEQUENCE           | histo
+18:47:05.824 | NOTE       | regles             | CLAUDE.md lu (MD5 ea4cc45b), skill et refs lus
+18:47:05.880 | NOTE       | menage             | definitif : non (histo seul)
+18:47:05.939 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+18:47:18.993 | DEBUT      | journal            | 
+18:47:19.096 | FIN        | journal            | OK histo_2026-11-28_s1.md
+18:47:50.025 | DEBUT      | sync_index         | 
+18:48:41.721 | FIN        | sync_index         | OK index generes + Recap_index + GLOBAL_INDEX_REPO pousse
+18:49:14.574 | DEBUT      | fusionne           | 
+18:49:14.670 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-11-28.md
+18:49:37.650 | DEBUT      | obsidian           | 
+18:49:38.282 | FIN        | obsidian           | OK copie et MD5 verifies
+18:49:38.338 | DEBUT      | pages_html         | 
+18:50:23.213 | FIN        | pages_html         | OK pages HTML creees, 2 originaux a la corbeille
+18:50:46.271 | DEBUT      | menage             | 
+18:50:46.374 | FIN        | menage             | OK histo non definitif (docs/Claude md SAVE conserves), scan historique/TODO fait
+18:50:46.432 | DEBUT      | export_5B          | 
+18:50:46.523 | FIN        | export_5B          | OK controle racine H: fait
+18:50:46.578 | DEBUT      | push_docs          | 

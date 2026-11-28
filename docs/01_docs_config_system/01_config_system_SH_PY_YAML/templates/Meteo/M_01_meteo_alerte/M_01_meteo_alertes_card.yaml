@@ -202,3 +202,4 @@
 # - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x) ; date inconnue, antérieure au retrait du repli du 2026-10-15 (numéros de ligne d'avant ce retrait)
 #   Règle CLAUDE.md : unique_id ne doit PAS contenir 'sensor.' (slug seul).
 # - 2026-11-28 : capteur alerte_avalanches inhibe (bloc commente) puis REACTIVE le meme jour a la demande d Eric (la tuile Avalanches du pop-up Meteo disparaissait) ; bloc de nouveau actif, templates recharges (capteur a Jaune a 13h34)
+# [2026-11-28] M_01_meteo_alertes_card : local recale sur la prod (Eric a reactive le bloc alerte_avalanches a 13:34 en prod, prod avant=cf86ec4e) + commentaire annotations_log mis a jour (inhibe puis reactive) ; bak _2026_11_28_13h42m23s ; pousse H:\templates (commentaire seul, rien a recharger) et H:\docs

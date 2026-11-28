@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -27,6 +27,7 @@ cette automation fait taire la clim pendant 10 minutes quand la piece depasse vr
 Quand `sensor.th_bureau_temperature` arrondi au plancher depasse `sensor.temperature_consigne_nuit_bureau` plus
 `sensor.offset_bureau` pendant la plage 21h a 7h30, elle met la consigne a 18 et
 demarre `timer.clim_consigne_nuit_bureau_10mn`. A la fin du timer, elle remet 19.
+Elle est inactive quand `sensor.groupe` vaut `groupe_1` (absence), comme M, N et O (condition ajoutée le 2026-11-22).
 
 ---
 
@@ -42,7 +43,7 @@ demarre `timer.clim_consigne_nuit_bureau_10mn`. A la fin du timer, elle remet 19
 ## ⚙️ Actions
 
 Si le déclencheur est `mesure` et qu'on est entre 21h et 7h30 et que la pièce dépasse la consigne
-plus l'offset : elle écrit `-1` dans l'`input_number`, ce qui fait passer la cible de 19 à 18, puis démarre le timer de 10 minutes.
+plus l'offset, et que `sensor.groupe` n'est pas `groupe_1` : elle écrit `-1` dans l'`input_number`, ce qui fait passer la cible de 19 à 18, puis démarre le timer de 10 minutes.
 
 Si le déclencheur est `fin_timer` : elle remet `0` dans l'`input_number`, la cible repasse à 19.
 
@@ -56,6 +57,7 @@ Si le déclencheur est `fin_timer` : elle remet `0` dans l'`input_number`, la ci
 | Lit | `sensor.temperature_consigne_nuit_bureau` |
 | Écrit | `input_number.clim_consigne_nuit_bureau` (-1 puis 0) |
 | Lit | `sensor.offset_bureau` |
+| Lit | `sensor.groupe` (condition : différent de `groupe_1`) |
 | Écrit | `timer.clim_consigne_nuit_bureau_10mn` |
 | Aval | script `p1_master_gestion_clim`, qui envoie cette consigne à `climate.clim_bureau_rm4_mini` |
 
@@ -74,3 +76,4 @@ Si le déclencheur est `fin_timer` : elle remet `0` dans l'`input_number`, la ci
 
 <!-- annotations_log:
 [2026-11-17] offset_nuit_bureau remplace par offset_bureau (rename du 06h30, bande morte 0,3) ; correction_temperature_bureau valeur 2 ; fiche realignee sur la prod. -->
+<!-- annotations_log: [2026-11-28] K_P1_Clim_Bureau_Consigne_nuit_anti_deri : lot 3 verif fiches: condition 'pas groupe_1' (ajoutee au YAML le 2026-11-22) documentee -->

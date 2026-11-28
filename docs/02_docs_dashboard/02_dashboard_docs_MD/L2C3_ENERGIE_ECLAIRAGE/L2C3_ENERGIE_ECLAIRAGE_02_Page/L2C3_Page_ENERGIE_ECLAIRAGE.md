@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--04--29-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -85,7 +85,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 │   └── Séparateur
 │
 ├── SALLE DE BAIN (2 lampes - rgb(3, 155, 229))
-│   ├── Heading title (badges light.lampe_sdb + switch.miroir_sonoff)
+│   ├── Heading title (badges light.hue_white_lamp_salle_de_bain + switch.relais_lumiere_sdb_sonoff)
 │   ├── tabbed-card
 │   │   ├── JOUR  → donut 2 lampes (Miroir + Hue SDB)
 │   │   ├── MOIS  → donut 2 lampes
@@ -1516,3 +1516,4 @@ column_span: 3
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L2C3_Vignette_ENERGIE_ECLAIRAGE]]  [[L3C1_Vignette_ECLAIRAGE]]*
+<!-- annotations_log: [2026-11-28] L2C3 : lot 1 verif fiches: badges SDB: light.hue_white_lamp_salle_de_bain + switch.relais_lumiere_sdb_sonoff -->

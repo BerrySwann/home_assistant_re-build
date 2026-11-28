@@ -254,3 +254,4 @@ fi
 #              → Suppression git push origin master (branche inexistante)
 #              → Ajout trap ERR global pour logger toute erreur inattendue
 #              → Log du commit créé (📝) pour meilleure traçabilité
+# [2026-11-28] ha_git_backup : resync local depuis H:\.scripts\ha_git_backup.sh ; bak _2026_11_28_13h52m54s

@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -179,9 +179,6 @@ Affiche sur une seule vignette carrée : l'icône HA (colorisée selon l'état),
 | `update.home_assistant_supervisor_update` | Natif HA | Automatique |
 | `update.hacs_update` | HACS | Paramètres > Intégrations |
 | `update.*` (add-ons, Z2M, etc.) | Natif HA / intégrations | Automatique |
-| `sensor.current_version` | Natif HA | Automatique |
-| `sensor.processor_use` | System Monitor | Paramètres > Intégrations |
-| `sensor.memory_use_percent` | System Monitor | Paramètres > Intégrations |
 
 ---
 
@@ -257,3 +254,4 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_MAJ_GAUCHE]]  [[PAGE_MAJ_DROITE]]  [[L4C1_VIGNETTE_empty]]  [[L4C2_VIGNETTE_MINI_PC]]*
+<!-- annotations_log: [2026-11-28] L4C3 : lot 1 verif fiches: suppression de 3 lignes d entites absentes (current_version, processor_use, memory_use_percent) -->

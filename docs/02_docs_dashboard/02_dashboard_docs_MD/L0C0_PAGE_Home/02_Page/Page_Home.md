@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--15-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.1-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -364,7 +364,6 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `sensor.vence_uv` / `vence_cloud_cover` | `meteofrance` | idem |
 | `sensor.vence_freeze_chance` / `vence_snow_chance` | `meteofrance` | idem |
 | `sensor.06_weather_alert` / `vence_next_rain` | `meteofrance` | idem |
-| `sensor.moon_api` (attr: `moon_parallactic_angle`) | `moon` (HACS) | Intégrations → Moon |
 | `climate.clim_*_rm4_mini` | `smartir` | configuration.yaml |
 | `climate.radiateur_cuisine` | `smartir` | configuration.yaml |
 | `climate.soufflant_salle_de_bain` | `smartir` | configuration.yaml |
@@ -391,10 +390,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 |--------|--------|------|
 | `weather.vence` | `meteofrance` | Météo principale (ciel, conditions) |
 | `sun.sun` | Natif HA | Position soleil (azimut + élévation) |
-| `sensor.luna_lunar_azimuth` | Intégration Luna | Position lune (auto-détecté par meteo-card) |
-| `sensor.luna_lunar_elevation` | Intégration Luna | Élévation lune (auto-détecté) |
-| `sensor.luna_lunar_phase` | Intégration Luna | Phase lunaire (auto-détecté) |
-| `sensor.luna_lunar_phase_degrees` | Intégration Luna | Degrés phase (auto-détecté) |
+| `sensor.luna_lunar_*` | Intégration Luna (non installée) | Entités absentes de HA au 2026-11-28, aucun YAML ne les cite ; la couche lune de la carte est conservée |
 | `sensor.vence_original_condition` | `command_line/meteo/carte_meteo_france.yaml` | Condition texte (ex: "Ensoleillé") |
 | `sensor.alerte_meteo` | `templates/meteo/M_01_meteo_alertes_card.yaml` | Niveau alerte (Vert/Jaune/Orange/Rouge) |
 | `sensor.th_balcon_nord_temperature` | SONOFF via Z2M | T° extérieure affichée (bas carte) |
@@ -564,3 +560,6 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[CARD_METEOALARM_HOME]]  [[CARD_PRESENCE_HOME]]*
+<!-- annotations_log: [2026-11-28] Page_Home : section 9 : ligne Masquee si sensor.alerte_avalanches = unavailable ; bak _2026_11_28_11h42m03s ; pousse H:\docs -->
+<!-- annotations_log: [2026-11-28] Page_Home : section 9 : masquee si alerte_avalanches vaut Jaune ; bak _2026_11_28_13h42m23s ; pousse H:\docs -->
+<!-- annotations_log: [2026-11-28] Page_Home : lot 1 verif fiches: suppression sensor.moon_api, luna_lunar_* remplace par une ligne de note -->

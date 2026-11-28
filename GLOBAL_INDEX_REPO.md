@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--23-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,9 @@
 </div>
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-11-28 (19h) - entrée IA_PRISE_eCO.md retirée (fiche mise à la corbeille sur ordre d'Eric)*
+*Dernière mise à jour : 2026-11-28 (18h) - entrées ajoutées pour docs/00_IA après la refonte de CLAUDE.md en sous-contextes : DEPENDANCES_GLOBALES_CLAUDE_memoire, IA_AUDIT_ENERGETIQUE_ET_THERMIQUE, IA_BADGES_FICHES, IA_EQUIPEMENTS_REFERENTIELS, IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE, IA_NOM_DES_REPERTOIRES_ET_FICHIERS, IA_PROTOCOLES_ET_ECHANGES, IA_REGLES_YAML_ET_P3, IA_SKILLS_INVENTAIRE*
+*Dernière mise à jour : 2026-11-28 (15h28) - libellés de 10 entrées alignés sur les noms réels des fichiers (les liens étaient déjà corrects), section 05 SKILLS : hermes-aligne ajouté (15 -> 16 skills), nom du script P1_Master_gestion_clim corrigé*
 *Dernière mise à jour : 2026-11-17 (07h25) - fiches realignees sur la prod : automatisations J a O (offset_* a la place de offset_nuit_*), eco_prises (filtre unavailable + garde du spy sensor.eco_prises_spy), spy PC/TV durci, master clim (correction 1/2/2). Aucune entree ajoutee ni retiree.*
 *Dernière mise à jour : 2026-11-23 (histo-final) - entrées ajoutées : input_number/P1_Consigne_groupe_3/ (decalage groupe 3) et CAHIER_DES_CHARGES_REBUILD_v1.html. Automation Track_Clim (id 1795272726443) : export local YAML et fiche crees le 2026-11-23, entree ajoutee apres (H).*
 *Dernière mise à jour : 2026-11-12 (21h, /histo-final) - entrées ajoutées : les 3 automatisations de jour (M, N, O) Consigne jour anti-derive Salon / Bureau / Chambre, les 3 input_number clim_consigne_jour_* et les 3 timers clim_consigne_jour_*_10mn ; budget MAJ : core 2026.11.1 et SmartIR ecartes, wind rose, custom brand et samba installes
@@ -77,6 +80,13 @@
 </details>
 
 <details>
+<summary><b>DEPENDANCES_GLOBALES_CLAUDE_memoire.md</b> &nbsp;|&nbsp; Chaîne de dépendances du dashboard : vignettes, entités, fichiers et automations par domaine (tenue par Claude via /sync_index et /histo)</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
 <summary><b>IA_ARBO_DETAIL.md</b> &nbsp;|&nbsp; Arborescence complète prod + local, URLs GitHub raw</summary>
 <blockquote>
 📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md">Doc</a>
@@ -84,9 +94,23 @@
 </details>
 
 <details>
+<summary><b>IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md</b> &nbsp;|&nbsp; Prompt expert audit : logement, équipements, méthodes d'analyse, format du rapport de conso et thermique</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
 <summary><b>IA_AUTOMATIONS_NOTIFS.md</b> &nbsp;|&nbsp; Création/modif automations, messages notify, scripts HA</summary>
 <blockquote>
 📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_BADGES_FICHES.md</b> &nbsp;|&nbsp; Inventaire des badges des fiches .md : valeurs, couleurs, cas déjà rencontrés</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md">Doc</a>
 </blockquote>
 </details>
 
@@ -101,6 +125,20 @@
 <summary><b>IA_CMD_TERMINAL_HA.md</b> &nbsp;|&nbsp; Commandes tree prod, audit MD5, git backup, chemins /homeassistant/, logs HA</summary>
 <blockquote>
 📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_EQUIPEMENTS_REFERENTIELS.md</b> &nbsp;|&nbsp; Infra, équipements par pôle, dashboard (18 vignettes), référentiels et logement (extrait de CLAUDE.md le 2026-11-28)</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_EQUIPEMENTS_REFERENTIELS/IA_EQUIPEMENTS_REFERENTIELS.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE.md</b> &nbsp;|&nbsp; Source de vérité, sauvegardes .bak, versioning, emplacements et routage des fichiers (extrait de CLAUDE.md le 2026-11-28)</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE/IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE.md">Doc</a>
 </blockquote>
 </details>
 
@@ -126,6 +164,13 @@
 </details>
 
 <details>
+<summary><b>IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md</b> &nbsp;|&nbsp; Règles de nommage des dossiers et fichiers de docs, relevé des écarts à renommer (brouillon à valider par Eric)</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
 <summary><b>IA_P4_PRESENCE.md</b> &nbsp;|&nbsp; sensor.presence, format notif avec présence, logique groupe Wi-Fi</summary>
 <blockquote>
 📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md">Doc</a>
@@ -133,9 +178,23 @@
 </details>
 
 <details>
-<summary><b>IA_PRISE_eCO.md</b> &nbsp;|&nbsp; Prises coupées volontairement et prises eCO : cascade avec la prise de comptage, groupes de présence, ce que chacune coupe, entités indisponibles normales</summary>
+<summary><b>IA_PROTOCOLES_ET_ECHANGES.md</b> &nbsp;|&nbsp; Protocoles de session, trigul, audit MD5, TODO et échanges Claude / Hermes (extrait de CLAUDE.md le 2026-11-28)</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PROTOCOLES_ET_ECHANGES/IA_PROTOCOLES_ET_ECHANGES.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_REGLES_YAML_ET_P3.md</b> &nbsp;|&nbsp; Règles YAML, nommage des fichiers de docs et P3 éclairage (extrait de CLAUDE.md le 2026-11-28)</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_REGLES_YAML_ET_P3/IA_REGLES_YAML_ET_P3.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_SKILLS_INVENTAIRE.md</b> &nbsp;|&nbsp; Inventaire des skills Hermes par sujet, avec les skills communes à Claude</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/IA_SKILLS_INVENTAIRE.md">Doc</a>
 </blockquote>
 </details>
 
@@ -392,7 +451,7 @@
 </details>
 
 <details>
-<summary><code>M_03_meteo_sensors_blitzortung.yaml</code> - 1 entité(s) - <a href="sensors/Meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_meteo_sensors_blitzortung.yaml</code> - 1 entité(s) - <a href="sensors/Meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.blitzortung_lightning_localisation</code> - <a href="sensors/Meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
 </ul></blockquote>
@@ -649,7 +708,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG_AMHQ_TOTAL.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_rad_total_avg_watts_quotidien</code></li>
 </ul></blockquote>
@@ -860,7 +919,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_BV_01_SW_inter_souflant_sdb.yaml</code> - 2 entité(s) - <a href="templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml">voir fichier</a></summary>
+<summary><code>P1_BV_IB_SW_inter_souflant_SDB.yaml</code> - 2 entité(s) - <a href="templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>switch.inter_soufflant_salle_de_bain</code></li>
 <li><code>switch.voyant_thermostat_soufflant_salle_de_bain</code></li>
@@ -978,7 +1037,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>P0_MINI_MAXI_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_conso_maxi_24h</code></li>
 <li><code>sensor.genelec_appart_conso_mini_24h</code></li>
@@ -1020,7 +1079,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>P0_MINI_MAXI_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_conso_maxi_24h</code></li>
 <li><code>sensor.genelec_appart_conso_mini_24h</code></li>
@@ -1113,7 +1172,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>01_UM_AMHQ.yaml</code> - 3 entité(s) - <a href="utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P0_UM_AMHQ.yaml</code> - 3 entité(s) - <a href="utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hebdomadaire_um</code></li>
 <li><code>sensor.genelec_appart_mensuel_um</code></li>
@@ -1122,7 +1181,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>02_UM_genelec_appart_HPHC_AMHQ.yaml</code> - 6 entité(s) - <a href="utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml">voir fichier</a></summary>
+<summary><code>P0_UM_AMHQ_HPHC.yaml</code> - 6 entité(s) - <a href="utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hc</code></li>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hp</code></li>
@@ -1529,7 +1588,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_AVG.yaml</code> - 12 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_UNITE.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG_AMHQ_UNITE.yaml</code> - 12 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_UNITE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_bureau_avg_watts_mensuel</code></li>
 <li><code>sensor.clim_bureau_avg_watts_quotidien</code></li>
@@ -1547,7 +1606,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG_AMHQ_TOTAL.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_rad_total_avg_watts_quotidien</code></li>
 </ul></blockquote>
@@ -1708,7 +1767,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>P3_etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_appartement_etat</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -1878,7 +1937,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 7 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>P3_etats_status.yaml</code> - 7 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_etat</code></li>
 <li><code>sensor.chambre_etat</code></li>
@@ -1938,7 +1997,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>P3_etats_status.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_couloir_etat</code></li>
 <li><code>sensor.lumiere_cuisine_etat</code></li>
@@ -1949,7 +2008,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </details>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
+<summary><code>S_01_store.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>cover.store_salon</code></li>
 </ul></blockquote>
@@ -2007,7 +2066,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>P3_etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.chambre_nb_allumes</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -2019,7 +2078,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </details>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
+<summary><code>S_01_store.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>cover.store_bureau</code></li>
 </ul></blockquote>
@@ -2172,7 +2231,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <blockquote>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
+<summary><code>S_01_store.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.store_bureau_status</code></li>
 <li><code>sensor.store_salon_status</code></li>
@@ -2208,7 +2267,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <blockquote>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
+<summary><code>S_01_store.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_store.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.store_bureau_status</code></li>
 <li><code>sensor.store_salon_status</code></li>
@@ -2982,7 +3041,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <blockquote>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 6 entité(s) - <a href="sensors/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></summary>
+<summary><code>AQ_01_air_quality.yaml</code> - 6 entité(s) - <a href="sensors/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></li>
 <li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></li>
@@ -2994,7 +3053,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 </details>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 3 entité(s) - <a href="templates/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></summary>
+<summary><code>AQ_01_air_quality.yaml</code> - 3 entité(s) - <a href="templates/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_Quality/AQ_01_air_quality.yaml">voir fichier</a></li>
@@ -3420,7 +3479,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 </ul></blockquote>
 <blockquote>
 ⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
-<a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
+<a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script P1_Master_gestion_clim.yaml</a> -
 ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
 </blockquote>
 </details>
@@ -3454,7 +3513,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 </ul></blockquote>
 <blockquote>
 ⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
-<a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
+<a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script P1_Master_gestion_clim.yaml</a> -
 ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
 </blockquote>
 </details>
@@ -4576,7 +4635,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 
 ## 05 - SKILLS
 
-*Copies des SKILL.md du projet (source : .claude/skills/), poussées vers H:\docs\05_docs_skills. Depuis le 2026-10-31 : copies utilisables en anglais dans docs/05_docs_skills/05_docs_skills_PURE/skill_<nom>/ (15 skills), fiches explicatives en francais dans docs/05_docs_skills/05_docs_skills_MD/skill_<nom>/ (histo et histo-final faites, les autres en cours), carte docs/05_docs_skills/MOC_SKILLS.md.*
+*Copies des SKILL.md du projet (source : .claude/skills/), poussées vers H:\docs\05_docs_skills. Depuis le 2026-10-31 : copies utilisables en anglais dans docs/05_docs_skills/05_docs_skills_PURE/skill_<nom>/ (16 skills), fiches explicatives en francais dans docs/05_docs_skills/05_docs_skills_MD/skill_<nom>/ (histo et histo-final faites, les autres en cours), carte docs/05_docs_skills/MOC_SKILLS.md.*
 
 ---
 
@@ -4647,6 +4706,13 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <summary><b>ha-verif-headers.md</b> &nbsp;|&nbsp; verifie en lecture seule les en-tetes des YAML de config (boites ASCII, 5 headers, slug, name, unique_id)</summary>
 <blockquote>
 <a href="docs/05_docs_skills/05_docs_skills_PURE/skill_ha_verif_headers/ha_verif_headers.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>hermes-aligne.md</b> &nbsp;|&nbsp; Hermes s'aligne sur Claude en lecture seule : il lit les règles et les modifications de Claude, les assimile et le dit, sans rien créer ni modifier</summary>
+<blockquote>
+<a href="docs/05_docs_skills/05_docs_skills_PURE/skill_hermes_aligne/hermes_aligne.md">Doc (anglais)</a> &nbsp;|&nbsp; <a href="docs/05_docs_skills/05_docs_skills_MD/skill_hermes_aligne/hermes_aligne.md">Fiche FR</a>
 </blockquote>
 </details>
 
@@ -4749,7 +4815,7 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT hue | 35 | integration `hue` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | HACS atmofrance | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Atmo France - Vence` |
-| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 38 entrees (premiere : `Hue ambiance lamp salon 1`) |
+| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 39 entrees (premiere : `Hue ambiance lamp salon 1`) |
 | NAT systemmonitor | 11 | integration `systemmonitor` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | HACS scheduler | 9 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Scheduler` |
 | CREE statistics | 8 | creee par un YAML du depot, dossier `statistics`, sans aucune integration dans Appareils et services |
@@ -4773,6 +4839,7 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | CREE script | 2 | creee par un YAML du depot, dossier `script`, sans aucune integration dans Appareils et services |
 | HACS vigieau | 2 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Vigieau AEP` |
 | NAT generic_thermostat | 2 | integration `generic_thermostat` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT-SANS-REGISTRE | 2 | fournie par Home Assistant sans entree au registre (zone.home) |
 | ARTEFACT-TEMPLATE | 1 | mot-cle de template, pas une entite |
 | CREE automation | 1 | creee par un YAML du depot, dossier `automation`, sans aucune integration dans Appareils et services |
 | CREE input_datetime | 1 | creee par un YAML du depot, dossier `input_datetime`, sans aucune integration dans Appareils et services |
@@ -4780,11 +4847,9 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 | CREE powercalc | 1 | creee par un YAML du depot, dossier `powercalc`, sans aucune integration dans Appareils et services |
 | CREE rest | 1 | creee par un YAML du depot, dossier `rest`, sans aucune integration dans Appareils et services |
 | CREE sql | 1 | creee par un YAML du depot, dossier `sql`, sans aucune integration dans Appareils et services |
-| HACS hacs | 1 | installee via HACS (qui va etre renomme marketplace) ; son entree dans Appareils et services n a pas de nom affiche |
 | NAT cpuspeed | 1 | integration `cpuspeed` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT moon | 1 | integration `moon` du coeur de Home Assistant, installee et visible dans Appareils et services |
 | NAT season | 1 | integration `season` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT-SANS-REGISTRE | 1 | fournie par Home Assistant sans entree au registre (zone.home) |
 
 > **Chaine la plus fragile** : les `NAT mqtt` ne dependent pas que de Home Assistant. Mesure du 2026-11-03 : l integration `mqtt` pointe le broker add-on `core-mosquitto` (1883), et les mesures viennent de Zigbee2MQTT, conteneur 200 sur 10.32.154.244. Conteneur arrete, broker en vrac ou integration retiree : les entites tombent, sans que rien ne le signale dans l interface. A la meme date, 114 des 128 entites citees avaient remonte dans les 2 heures.
 
@@ -4794,3 +4859,6 @@ Total : **684 entites**. Origine de chacune : type, puis le nom de l integration
 
 <!-- annotations_log:
 [2026-11-23] balise details en double retiree avant le bloc timers/P1_Consigne_nuit_21h_7h30 (section 01) : 447 ouvrantes / 446 fermantes -> 446 / 446, ecart present depuis au moins le 2026-11-13 (demande d Eric) -->
+<!-- annotations_log: [2026-11-28] GLOBAL_INDEX_REPO : libelles alignes sur les noms reels (10 entrees), skill hermes-aligne ajoute (16 skills), nom P1_Master_gestion_clim ; pas encore pousse en prod (2 emplacements) ; bak a cote bak_2026_11_28_15h28m57s.md -->
+<!-- annotations_log: [2026-11-28] index_repo : 9 entrees docs/00_IA ajoutees (refonte CLAUDE.md en sous-contextes), badge MaJ passe au 2026-11-28 (demande d Eric 2026-11-28) -->
+<!-- annotations_log: [2026-11-28] mise_a_jour : entree IA_PRISE_eCO.md retiree (fiche mise a la corbeille Windows sur ordre d Eric 2026-11-28) -->

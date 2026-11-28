@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -67,7 +67,8 @@ les cas ; l'effet du second `on_off` sur l'appareil est inconnu.
 
 ## Fichier source
 
-`docs/03_docs_automations/03_docs_automations_YAML/P1_03_Chauffage_Salle_de_Bain/c_salle_de_bain_watchdog_securite_soufflant/c_salle_de_bain_watchdog_securite_soufflant.yaml` (nom du fichier aligne sur l'alias HA ("soufflant") le 2026-10-11)
+`docs/03_docs_automations/03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml` (nom du fichier aligne sur l'alias HA ("soufflant") le 2026-10-11)
 
 ---
 *Doc générée le 2026-05-30, complétée le 2026-09-29 et le 2026-10-07 ; alias, ID HA et chemin source corrigés le 2026-10-11 (contenu relu contre le YAML, conforme).*
+<!-- annotations_log: [2026-11-28] C_watchdog_soufflant_SDB : lot 4 verif fiches: chemin du YAML corrige en casse -->

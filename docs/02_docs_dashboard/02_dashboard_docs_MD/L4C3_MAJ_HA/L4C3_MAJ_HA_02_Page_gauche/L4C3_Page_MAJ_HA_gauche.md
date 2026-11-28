@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -22,7 +22,7 @@
 | 📁 **Path dashboard** | `/dashboard-tablette/maj` |
 | 🔗 **Accès depuis** | Vignette L4C3 (clic) |
 | 🏗️ **Layout** | `type: grid` - 2 cartes de niveau 1 (heading + vertical-stack) |
-| 📄 **Fichier YAML** | `L4C3_MAJ_HA/02_page_gauche/page_L4C3_maj_ha_gauche.yaml` |
+| 📄 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C3_MAJ_HA/L4C3_MAJ_HA_02_Page_gauche/L4C3_Page_MAJ_HA_gauche.yaml` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 📅 **Modifié le** | 2026-10-11 |
 
@@ -607,3 +607,4 @@ Constatés dans le YAML tel qu'exporté le 2026-10-11, **non corrigés** (le fic
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L4C3_Vignette_MAJ_HA]]  [[PAGE_MAJ_DROITE]]*
+<!-- annotations_log: [2026-11-28] L4C3 : lot 2 verif fiches: chemin YAML cite mis au reel (L4C3_Page_MAJ_HA_gauche.yaml) -->

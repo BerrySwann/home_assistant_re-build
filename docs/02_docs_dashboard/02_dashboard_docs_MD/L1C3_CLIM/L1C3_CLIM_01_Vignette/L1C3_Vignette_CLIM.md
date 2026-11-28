@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--22-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -99,11 +99,13 @@ entities:
   - sensor.radiateur_cuisine_etat
   - sensor.clim_bureau_etat
   - sensor.sdb_soufflant_etat
+  - sensor.sdb_seche_serviette_etat
   - sensor.clim_chambre_etat
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
   - sensor.sdb_soufflant_power_status
+  - sensor.sdb_seche_serviette_power_status
   - sensor.chambre_power_status
   - climate.clim_salon_rm4_mini
   - climate.radiateur_cuisine
@@ -118,11 +120,13 @@ triggers_update:
   - sensor.radiateur_cuisine_etat
   - sensor.clim_bureau_etat
   - sensor.sdb_soufflant_etat
+  - sensor.sdb_seche_serviette_etat
   - sensor.clim_chambre_etat
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
   - sensor.sdb_soufflant_power_status
+  - sensor.sdb_seche_serviette_power_status
   - sensor.chambre_power_status
   - climate.clim_salon_rm4_mini
   - climate.radiateur_cuisine
@@ -225,12 +229,12 @@ custom_fields:
         return `<span style="display: block; text-align: left; line-height: 1.2; color: ${color};">${formattedMode}</span>`;
       }
       const modes = [
-        { entity: 'sensor.mode_ete_hiver_etat' },
-        { entity: 'sensor.clim_salon_etat' },
-        { entity: 'sensor.radiateur_cuisine_etat' },
-        { entity: 'sensor.clim_bureau_etat' },
-        { entity: 'sensor.sdb_soufflant_etat' },
-        { entity: 'sensor.clim_chambre_etat' }
+        { entity: 'sensor.mode_ete_hiver_etat', label: '.' },
+        { entity: 'sensor.clim_salon_etat', label: 'Salon' },
+        { entity: 'sensor.radiateur_cuisine_etat', label: 'Cuisine' },
+        { entity: 'sensor.clim_bureau_etat', label: 'Bureau' },
+        { entity: 'sensor.sdb_soufflant_etat', label: 'SdB' },
+        { entity: 'sensor.clim_chambre_etat', label: 'Chambre' }
       ];
       return [
         '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
@@ -251,20 +255,25 @@ custom_fields:
         }
         return 'N/A';
       }
+      // Fonction pour gérer la couleur (Gris si N/A) et le formatage
       function formatDisplay(value) {
         const color = value === 'N/A' ? '#aaaaaa' : 'inherit';
         const text = value === 'N/A' ? 'N/A' : value + '°C';
         return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
       }
+      // --- LOGIQUE DELTA ADEME RÉUTILISÉE ET FORMATÉE ---
       const deltaADEME = parseFloat(states['sensor.delta_ademe_recommande']?.state);
       const isCooling = states['sensor.mode_ete_hiver']?.state === 'cool';
       const deltaColor =
         !isNaN(deltaADEME) && isCooling && deltaADEME >= -8 && deltaADEME <= -4
-          ? 'lightgreen'
+          ? 'lightgreen' // Optimal
           : !isNaN(deltaADEME) && isCooling
-            ? '#FF0000'
-            : 'white';
-      const ademeDisplayValue = !isNaN(deltaADEME) ? `${deltaADEME.toFixed(1)}°C` : 'N/A';
+            ? '#FF0000' // Avertissement
+            : 'white'; // Neutre
+      const ademeDisplayValue = !isNaN(deltaADEME)
+        ? `${deltaADEME.toFixed(1)}°C`
+        : 'N/A';
+      // -----------------------------------------------------------
       const tempMoyenne = safeState('sensor.temperature_moyenne_interieure');
       const consigneSalon = safeState('climate.clim_salon_rm4_mini');
       const consigneCuisine = safeState('climate.radiateur_cuisine');
@@ -308,8 +317,10 @@ custom_fields:
 | `climate.clim_bureau_rm4_mini` | `[NAT]` SmartIR | Consigne T° bureau (attr: temperature) |
 | `climate.soufflant_salle_de_bain` | `[NAT]` Meross | Consigne T° soufflant SdB (attr: temperature) |
 | `climate.clim_chambre_rm4_mini` | `[NAT]` SmartIR | Consigne T° chambre (attr: temperature) |
+| `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État sèche-serviette SdB (dans les deux listes, non lu par le JS) |
+| `sensor.sdb_seche_serviette_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance sèche-serviette SdB (dans les deux listes, non lu par le JS) |
 
-> Les 18 entités sont identiques dans `entities:` et `triggers_update:` - recalcul instantané à chaque changement.
+> Les 20 entités sont identiques dans `entities:` et `triggers_update:` - recalcul instantané à chaque changement.
 
 > **Note `sensor.sdb_soufflant_etat`** : utilisé dans le JS colonne `mode` mais **absent de la liste `entities:`** - cela signifie qu'il ne déclenche pas de rafraîchissement automatique. Si nécessaire, l'ajouter à `triggers_update:`.
 
@@ -451,3 +462,14 @@ return 'N/A'
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_CLIM]]  [[L1C1_Vignette_METEO]]  [[L1C2_Vignette_TEMPERATURES]]  [[L2C2_Vignette_ENERGIE_CLIM]]*
+
+---
+
+## Modifications du 2026-11-28
+
+Le bloc de code source est resynchronisé avec le YAML docs. Différences par rapport à l'ancienne version de la fiche :
+
+- Deux capteurs ajoutés aux listes `entities:` et `triggers_update:` (18 devient 20) : `sensor.sdb_seche_serviette_etat` et `sensor.sdb_seche_serviette_power_status`, définis dans `P1_UI_DASHBOARD.yaml`. Le JS de la vignette ne les lit pas pour l'instant.
+- Chaque ligne du tableau reçoit un champ `label` (`.`, Salon, Cuisine, Bureau, SdB, Chambre).
+- Des commentaires ajoutés dans le JS et un formatage de la valeur ADEME sur plusieurs lignes, sans changement de logique.
+<!-- annotations_log: [2026-11-28] L1C3 : lot 3 verif fiches: code resynchronise avec le YAML docs, 2 capteurs sdb_seche_serviette ajoutes (18 -> 20 entites) -->

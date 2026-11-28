@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -82,7 +82,7 @@ Niveau X  /  Niveau Y
 
 ```yaml
 type: custom:button-card
-icon: mdi:face-mask-outline
+show_icon: false
 tap_action:
   action: navigate
   navigation_path: /dashboard-tablette/pollen-pollution
@@ -92,29 +92,28 @@ name: |-
     var pollenAlert = states['sensor.qualite_globale_pollen_vence'].state;
     function getColor(value) {
       var severity = [
-        { color: 'grey',    from: 0, to: 0 },
-        { color: 'green',   from: 1, to: 1 },
+        { color: 'grey', from: 0, to: 0 },
+        { color: 'green', from: 1, to: 1 },
         { color: 'lightgreen', from: 2, to: 2 },
-        { color: 'gold',    from: 3, to: 3 },
-        { color: 'orange',  from: 4, to: 4 },
-        { color: 'red',     from: 5, to: 5 },
+        { color: 'gold', from: 3, to: 3 },
+        { color: 'orange', from: 4, to: 4 },
+        { color: 'red', from: 5, to: 5 },
         { color: 'darkred', from: 6, to: 6 },
-        { color: 'purple',  from: 7, to: 7 }
+        { color: 'purple', from: 7, to: 7 }
       ];
       var color = severity.find(function(range) {
         return value >= range.from && value <= range.to;
       });
       return color ? color.color : 'black';
     }
-    var airColor    = getColor(airQuality);
+    var airColor = getColor(airQuality);
     var pollenColor = getColor(pollenAlert);
-    return `<div style="text-align: left; color: white; font-size: 13px; margin-bottom: 4px;">Pollulèn ©</div>
-            <div>
-              <span style="color: ${airColor}; font-weight: bold;">Niveau ${airQuality}</span> /
-              <span style="color: ${pollenColor}; font-weight: bold;">Niveau ${pollenAlert}</span>
-            </div>`;
+    return `<div style="text-align: left; color: white; font-size: 13px;margin-bottom: 4px;">Pollulèn ©</div>
+                  <div><span style="color: ${airColor}; font-weight: bold;">Air ${airQuality}</span> /
+                  <span style="color: ${pollenColor}; font-weight: bold;">Pollen ${pollenAlert}</span></div>`;
   ]]]
-size: 60%
+custom_fields:
+  emoji: 😷
 styles:
   card:
     - aspect-ratio: 1/1
@@ -123,15 +122,6 @@ styles:
     - border-width: 3px
     - border-color: white
     - border-style: double
-    - color: white
-    - font-size: 15px
-    - line-height: 1.2
-  icon:
-    - transform: rotate(350deg)
-    - left: 15%
-    - top: 15%
-    - color: white
-    - opacity: 1
   name:
     - color: white
     - top: 10px
@@ -139,6 +129,14 @@ styles:
     - font-size: 80%
     - font-weight: bold
     - position: absolute
+  custom_fields:
+    emoji:
+      - position: absolute
+      - left: 21%
+      - top: 46%
+      - font-size: 350%
+      - transform: rotate(340deg)
+      - line-height: "1"
 ```
 
 ---
@@ -191,3 +189,14 @@ La fonction `getColor()` retourne `'black'` si la valeur est hors de la plage 0-
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_POLLUTION_POLLEN]]  [[L6C1_Vignette_AIR_QUALITE]]  [[L6C3_Vignette_VIGIEAU]]*
+
+---
+
+## Modifications du 2026-11-28
+
+Le bloc de code source est resynchronisé avec le YAML docs. Différences par rapport à l'ancienne version de la fiche :
+
+- L'icône `mdi:face-mask-outline` est remplacée par un champ personnalisé `emoji` (un emoji masque), avec `show_icon: false`.
+- Le texte affiche `Air N / Pollen N` au lieu de `Niveau N / Niveau N`.
+- Le style de l'icône (rotation, position) est remplacé par celui du champ `emoji` (position absolue, taille 350 %, rotation 340 degrés).
+<!-- annotations_log: [2026-11-28] L6C2 : lot 3 verif fiches: code resynchronise avec le YAML docs (icone mdi remplacee par un champ emoji, libelles Air/Pollen) -->

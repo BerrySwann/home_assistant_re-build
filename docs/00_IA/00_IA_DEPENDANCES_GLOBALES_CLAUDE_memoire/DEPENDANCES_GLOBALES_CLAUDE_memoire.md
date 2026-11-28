@@ -36,6 +36,7 @@
 *Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
 *Derniere mise a jour : 2026-10-29 21h32 (regle de structure scripts et command_line : local range par dossier, HA toujours a plat, avertissement gyrophare, cascades bouton -> script -> fonction des audits MD5 et de la sauvegarde GitHub ; chemin du capteur audit_md5_journal corrige ; demande d'Eric)*
 *Derniere mise a jour : 2026-10-29 20h10 (11 automations ajoutees, section store salon reecrite, cascades P0 Linky/Nodon documentees, vignettes alarmes congelateur ; controle Check_DEPENDANCES.py cree et branche dans /histo ; aucune vignette modifiee)*
+*Derniere mise a jour : 2026-11-28 13h45 (carte Meteoalarm Home : condition de visibilite sur sensor.alerte_avalanches = Jaune ; capteur alerte_avalanches reactive dans M_01 apres inhibition le meme jour ; aucune entite ajoutee)*
 *Derniere mise a jour : 2026-10-29 19h30 (audit des entites en live demande par Eric : sensor.temperature_delta_valeur, button.pve_arreter, update.*_mise_a_jour corriges ; sun/moon/moon_api annotes introuvables ; chemin carte congelateur corrige ; aucune vignette modifiee)*
 *Derniere mise a jour : 2026-10-29 19h (sync_index demandé par Eric : automation P3 BUREAU Espace de loisirs actif (automation.nouvelle_automatisation) remplace Forcer Play ON retirée le 2026-10-27, section et index mis à jour ; fichier déplacé dans docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/ et renommé DEPENDANCES_GLOBALES_CLAUDE_memoire.md par Eric le 2026-10-29 ; aucune vignette modifiée)*
 *Derniere mise a jour : 2026-10-25 20h28 (renommages du 2026-10-25 : chemins des dossiers 00_ a 04_ remis aux noms reels, suffixes MD, SH, YAML en majuscules ; aucune entite ni vignette modifiee)*
@@ -171,7 +172,8 @@ HOME PAGE (type: grid)
   ├─→ [8] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
   │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT - IKEA Vallhorn via Z2M)
   ├─→ [9] meteoalarm-card - Alertes de vigilance Météo-France  (masquee si aucune alerte)
-  │     └─→ sensor.06_weather_alert  (NAT - Météo France, integration meteofrance ; aussi dans le pop-up #alert de L1C1)
+  │     ├─→ sensor.06_weather_alert  (NAT - Météo France, integration meteofrance ; aussi dans le pop-up #alert de L1C1)
+  │     └─→ sensor.alerte_avalanches  (visibilite de la carte : cachee si Jaune ; capteur reactive le 2026-11-28)
   ├─→ [10] bubble-card separator + 2× button - Présence
   │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/P4_wifi_detection.yaml)
   │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
@@ -4191,3 +4193,5 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 [2026-11-17] fiches clim J a O, REGULATION x3, master clim, eco_prises, spy pc_tv realignees sur la prod ; offset_* ; correction 1/2/2 ; garde spy.
 [2026-11-23] histo-final : maj d apres les journaux de modifs 2026-11-21 et 2026-11-22 ; section Track_Clim ; 4 cartes L6C1 passees en deployees ; copie plate du miroir realignee.
 [2026-11-23 19h04] histo-final : export local YAML (P_Track_Clim_journal_des_consignes.yaml, extrait de la prod) et fiche .md de Track_Clim crees, palier 1 du controle prod fonctionnelle. -->
+<!-- annotations_log: [2026-11-28] DEPENDANCES_GLOBALES_CLAUDE_memoire : arbre HOME carte 9 : dependance de visibilite sur sensor.alerte_avalanches + ligne Derniere mise a jour ; bak _2026_11_28_11h42m03s ; non pousse (00_IA hors perimetre push-docs) -->
+<!-- annotations_log: [2026-11-28] DEPENDANCES_GLOBALES_CLAUDE_memoire : arbre HOME carte 9 : visibilite Jaune, capteur reactive + ligne Derniere mise a jour ; bak _2026_11_28_13h42m23s ; non pousse (00_IA hors perimetre push-docs) -->

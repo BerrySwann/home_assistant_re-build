@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--05--09-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -42,12 +42,15 @@ Cette vignette est le point d'entrée principal vers toutes les informations mé
 
 ```yaml
 type: custom:button-card
-icon: mdi:weather-partly-cloudy
+show_icon: false
+show_entity_picture: true
+entity_picture: "[[[ return '/local/images/meteocons/' + states['weather.vence'].state + '.svg'; ]]]"
 tap_action:
   action: navigate
   navigation_path: /dashboard-tablette/meteo
 name: Météo
-size: 60%
+custom_fields:
+  info: "[[[ return states['sensor.vence_original_condition'].state + ' - ' + Math.round(parseFloat(states['sensor.th_balcon_nord_temperature'].state)) + '°' ]]]"
 styles:
   card:
     - aspect-ratio: 1/1
@@ -58,26 +61,39 @@ styles:
     - border-style: double
     - color: white
     - font-size: 15px
-  icon:
-    - transform: rotate(350deg)
-    - left: 20%
-    - top: 20%
-    - color: gold
-    - opacity: 1
+  entity_picture:
+    - width: 55%
+    - height: auto
+    - position: absolute
+    - left: 24%
+    - top: 19%
   name:
     - color: white
     - top: 12%
-    - left: 5%
+    - left: 10%
     - font-size: 80%
     - font-weight: bold
     - position: absolute
+  custom_fields:
+    info:
+      - position: absolute
+      - bottom: 10%
+      - width: 100%
+      - text-align: center
+      - color: white
+      - font-size: 80%
+      - font-weight: bold
 ```
 
 ---
 
 ## 📊 ENTITÉS UTILISÉES
 
-Aucune entité directement référencée dans cette vignette.
+| Entité | Source | Rôle |
+|--------|--------|------|
+| `weather.vence` | Météo-France | Son état choisit l'image `/local/images/meteocons/<état>.svg` |
+| `sensor.vence_original_condition` | Météo-France | Condition en texte, première partie de la ligne d'info |
+| `sensor.th_balcon_nord_temperature` | Zigbee - UI (Sonoff SNZB-02) | Température extérieure arrondie, deuxième partie de la ligne d'info |
 
 > Cette vignette est purement navigationnelle : elle sert uniquement de bouton d'accès vers la page météo détaillée. Toutes les entités météo sont présentes dans la page de destination.
 
@@ -245,3 +261,14 @@ border-color: white !important
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_METEO]]  [[TUTO_IMAGES_ALERTES_METEO_FRANCE]]  [[L1C2_Vignette_TEMPERATURES]]  [[L1C3_Vignette_CLIM]]*
+
+---
+
+## Modifications du 2026-11-28
+
+Le bloc de code source est resynchronisé avec le YAML docs. Différences par rapport à l'ancienne version de la fiche :
+
+- L'icône `mdi:weather-partly-cloudy` est remplacée par une image `entity_picture` (`/local/images/meteocons/<état de weather.vence>.svg`), avec `show_icon: false`.
+- Un champ `info` affiche la condition de `sensor.vence_original_condition` suivie de la température arrondie de `sensor.th_balcon_nord_temperature`.
+- La section ENTITÉS UTILISÉES est corrigée : la vignette lit bien trois entités, elle n'est plus purement navigationnelle.
+<!-- annotations_log: [2026-11-28] L1C1 : lot 3 verif fiches: code resynchronise avec le YAML docs, entites utilisees corrigees (weather.vence, vence_original_condition, th_balcon_nord_temperature) -->

@@ -222,3 +222,4 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 [2026-11-22] cibles de jour : offsets fixes remplaces par sensor.correction_script_salon (3), _bureau (1), _chambre (1) ; salon g2/g4 sans offset ; version lisible |- poussee en prod.
 [2026-11-25] chambre : etape set_hvac_mode supprimee, une seule action set_temperature (hvac_mode + temperature) comme salon et bureau ; config_hash 0e382c68bb71898f.
 [2026-11-28] fiche relue contre le live (hash 44a5e408c6bb01de) : note SALON groupe_3, 8 capteurs, tableau notifications, entites lues, badge HA. -->
+<!-- annotations_log: [2026-11-28] P1_Master_gestion_clim : fiche relue contre le script live (hash 44a5e408c6bb01de) : note SALON groupe_3 alignee, 8 capteurs, tableau notifications, entites lues, badges MaJ et HA 2026.11.3, ligne changelog ; bak _2026_11_28_12h33m50s ; pousse H:\docs (script inchange) -->

@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Original-ffeb3b?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -18,6 +18,10 @@
 > `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`
 > 56 automations (52 au 2026-04-05 + 4 timers SDB ajoutées le 2026-10-07 : E, F, H, I)
 > ⚠️ Ne jamais documenter depuis le dépôt PROD (`home-assistant-config`).
+> 
+> **Note de verification 2026-11-28 :** inventaire fige (etat de `automations.yaml` au 2026-10-07). L'etat reel se lit dans MOC_AUTOMATIONS et dans les YAML de 03_docs_automations_YAML. Les entites suivantes citees plus bas n'existent plus dans HA ni dans `H:\automations.yaml` au 2026-11-28.
+> - Equivalent probable (deduit : le YAML associe de docs utilise le nom de droite, non verifie en live) : `binary_sensor.studio_code_server_running` -> `binary_sensor.studio_code_server_en_cours_d_execution` ; `sensor.studio_code_server_cpu_percent` -> `sensor.studio_code_server_pourcentage_du_processeur` ; `sensor.blitzortung_lightning_counter` -> `sensor.maison_lightning_counter` ; `sensor.blitzortung_lightning_distance` -> `sensor.maison_lightning_distance` ; `light.hue_smart_tv_chambre` -> `light.hue_smart_eco_tv_chambre` ; `light.hue_smart_salon` -> `light.salon`.
+> - Aucun equivalent trouve : `binary_sensor.bureau_pc_status`, `binary_sensor.heures_creuses_electriques`, `input_text.dernier_impact_de_foudre_temps_ecoule`, `sensor.alerte_radiateur_cuisine_hors_plage`, `sensor.conso_multi_nuit_2h_5h`, `sensor.duree_cycle_seche_serviettes`, `sensor.groupe_clim`, `switch.hue_smart_eco_pc_bureau`, `switch.prise_ecran_bureau`, `switch.radiateur_cuisine`.
 
 ---
 
@@ -838,3 +842,4 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 *Généré depuis : `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`*
 *Mis à jour : 2026-04-05*
+<!-- annotations_log: [2026-11-28] Automations : lot 1 verif fiches: note de verification: 16 entites absentes de HA et de automations.yaml (inventaire fige) -->

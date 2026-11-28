@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--10-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L5C3_MARIADB/vignette_L5C3_mariadb_2026-05-10.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.yaml` |
 | 🔗 **Accès depuis** | Vue Home - Ligne 5, Colonne 3 |
 | 🔗 **tap →** | `/dashboard-tablette/reserve` |
 | 🏗️ **Layout** | `custom:button-card` → `custom:flex-horseshoe-card` |
@@ -286,3 +286,4 @@ custom_fields:
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_SYSTEME]]  [[L5C1_Vignette_PILES_BATTERIES]]  [[L5C2_Vignette_BATTERIES_PORTABLES]]*
+<!-- annotations_log: [2026-11-28] L5C3 : lot 2 verif fiches: chemin YAML cite mis au reel (L5C3_Vignette_MARIADB.yaml) -->

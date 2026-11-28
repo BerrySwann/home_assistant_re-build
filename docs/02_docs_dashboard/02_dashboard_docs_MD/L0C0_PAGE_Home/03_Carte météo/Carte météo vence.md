@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -56,7 +56,7 @@ Carte météo composite pour le dashboard tablette de Vence, basée sur **MeteoC
 | Logique de rendu (sky/sun/moon/background/foreground), calcul position soleil, couleurs par défaut | **Fichier JS de la carte HACS** (`meteocss-card.js`) - jamais modifié directement |
 | Configuration (entités, angle, layers, couleurs personnalisées) | **YAML de la carte** (ce document) |
 | Anciens fichiers Jinja (`meteo_settings.jinja`, `rotation.jinja`, `meteo.jinja`) | **Obsolètes** - appartenaient à l'ancien système "100% CSS/Jinja", non utilisés par MeteoCSS Card |
-| `demometeo.yaml`, `cssmeteo.yaml` | Probablement **obsolètes** également (à confirmer/nettoyer) |
+| `demometeo.yaml`, `cssmeteo.yaml` | **Obsolètes** : absents de la prod et de docs au 2026-11-28 (rien à nettoyer) |
 
 ---
 
@@ -240,3 +240,4 @@ card_mod:
 ## 📜 Historique des changements
 
 - **2026-06-26** : Diagnostic complet du problème "Unknown type" (cause : 6 instances `meteo-card` dupliquées sans `singleton_id`). Correction → 2 instances synchronisées. Recherche et intégration de dégradés sunrise/sunset moins saturés que les défauts d'origine.
+<!-- annotations_log: [2026-11-28] Carte météo vence : lot 1 verif fiches: demometeo/cssmeteo: obsoletes confirme (absents prod et docs) -->

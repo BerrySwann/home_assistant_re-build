@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--13-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/01_vignette/vignette_L4C2_proxmox.yaml` |
+| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.yaml` |
 | 🔗 **Accès depuis** | L4C2 - Matrice dashboard principal (ligne 4, colonne 2) |
 | 🏗️ **Type** | `custom:button-card` - grille custom 4×2 |
 | 📅 **Modifié le** | 2026-06-09 |
@@ -90,10 +90,11 @@ Vignette de supervision compacte du nœud Proxmox VE. Affiche la T° CPU package
 
 ## 🔗 FICHIERS LIÉS
 
-- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/01_vignette/vignette_L4C2_proxmox.yaml`
+- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.yaml`
 - `docs/L4C2_PROXMOX/PAGE_PROXMOX.md`
 - `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md`
 
 ---
 
 ← Retour : `L1C3_CLIM` | → Suivant : `PAGE_PROXMOX`
+<!-- annotations_log: [2026-11-28] L4C2 : lot 2 verif fiches: chemin YAML cite mis au reel (L4C2_Vignette_PROXMOX.yaml) -->

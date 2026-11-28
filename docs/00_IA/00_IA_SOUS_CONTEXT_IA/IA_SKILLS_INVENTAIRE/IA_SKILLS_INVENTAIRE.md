@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -20,6 +20,7 @@ Changements depuis la v2 (2026-10-11) : 4 skills supprimees le 16/10 (clim-smart
 Mise a jour 2026-10-24 : ha-resync-docs retire (supprime cote projet le 2026-10-20, dossier Hermes envoye a la corbeille le 2026-10-24) : communes 15 -> 14, total 186 -> 185. Les autres comptages datent du 2026-10-17 et ne sont pas recalcules (le doublon skill-library-mirroring a aussi ete supprime cote Hermes le 2026-10-24).
 
 Mise a jour 2026-10-31 : les skills du projet Claude sont traduits en anglais (histo, histo-final et fix-file faits, les autres en cours) et leurs copies utilisables sont dans docs/05_docs_skills/05_docs_skills_PURE/. Le corps n'est donc plus identique a celui des skills Hermes tant qu'Hermes n'est pas realigne : l'alignement du 2026-10-17 ci-dessous date d'avant la traduction.
+Mise a jour 2026-11-28 : verification des skills du projet Claude (`.claude/skills`) contre cet inventaire. `ha-verif-headers` (cree le 2026-10-20) n'existe que cote Claude : absent chez Hermes, donc ni dans les communes ni dans les propres a Hermes. `hermes-aligne` existe des deux cotes (dossier `autonomous-ai-agents/hermes-aligne` chez Hermes) mais n'est pas dans la table des communes : identite du corps non verifiee. `ha-update-check` et `ha-update-check-cli` : voir la ligne 14. Les comptages (14 communes, 171 propres a Hermes, 185 au total) datent du 2026-10-24 et ne sont pas recalcules.
 
 Les 14 skills communes avec Claude sont en face a face (corps identique, alignement du 2026-10-17 16h05).
 Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme theme sont les unes sous les autres.
@@ -334,3 +335,4 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 | **Total actives** | **185** |
 | Archivees (`.archive`) | 46 |
 <!-- annotations_log: [2026-11-04] colonne Hermes repointee sur AppData\Local\hermes\skills -->
+<!-- annotations_log: [2026-11-28] mise_a_jour : ligne Mise a jour 2026-11-28 ajoutee (ha-verif-headers Claude seul, hermes-aligne des deux cotes non classe, comptages non recalcules), badges MaJ et HA (demande d Eric 2026-11-28) -->

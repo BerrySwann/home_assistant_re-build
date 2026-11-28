@@ -68,3 +68,5 @@ Carte HACS utilisée : `custom:meteoalarm-card` (Meteoalarm Card, version 2.9.0 
 - YAML : `card_meteoalarm_home.yaml` (dossier `10_Carte Meteoalarm` côté YAML)
 - Page : [PAGE_HOME.md](../02_page/PAGE_HOME.md), carte 9
 - Capteurs du pop-up Météo : `templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml` (`sensor.alerte_*`)
+<!-- annotations_log: [2026-11-28] Card_meteoalarm_home : fiche carte : date et version HA, visibility, entite sensor.alerte_avalanches, points a verifier ; bak _2026_11_28_11h42m03s ; pousse H:\docs -->
+<!-- annotations_log: [2026-11-28] Card_meteoalarm_home : fiche : visibility Jaune, capteur reactive, effet sur les autres alertes, rendu a verifier ; bak _2026_11_28_13h42m23s ; pousse H:\docs -->

@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -21,7 +21,7 @@
 ## 📝 Description
 
 Notifie la fermeture d'une fenêtre. Précise la pièce concernée et indique
-si toutes les fenêtres sont maintenant fermées (via `sensor.nbre_de_fenetres_fermees`).
+si toutes les fenêtres sont maintenant fermées (via `sensor.nombre_de_fenetres_fermees`).
 
 ---
 
@@ -48,10 +48,11 @@ si toutes les fenêtres sont maintenant fermées (via `sensor.nbre_de_fenetres_f
 | `binary_sensor.contact_fenetre_cuisine_sonoff_contact` | Fenêtre cuisine |
 | `binary_sensor.contact_fenetre_bureau_sonoff_contact` | Fenêtre bureau |
 | `binary_sensor.contact_fenetre_chambre_sonoff_contact` | Fenêtre chambre |
-| `sensor.nbre_de_fenetres_fermees` | Compteur (message "toutes fermées") |
+| `sensor.nombre_de_fenetres_fermees` | Compteur (message "toutes fermées") |
 
 ### Notifications
 
 | Titre | Message |
 |:---|:---|
 | `Fermeture en cours` | Pièce identifiée + état global |
+<!-- annotations_log: [2026-11-28] E_clim_notification_de_fermeture_des_fen : lot 1 verif fiches: sensor.nbre_de_fenetres_fermees -> sensor.nombre_de_fenetres_fermees -->

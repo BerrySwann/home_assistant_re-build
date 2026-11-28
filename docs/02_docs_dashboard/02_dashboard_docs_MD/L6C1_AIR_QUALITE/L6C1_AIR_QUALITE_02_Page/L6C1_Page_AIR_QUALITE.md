@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L6C1_AIR_QUALITE/page_L6C1_air_qualite_2026-05-23.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` |
 | 🔗 **Accès depuis** | Vignette L6C1 tap → `/dashboard-tablette/air-quality` |
 | 🏗️ **Type carte** | `type: grid` (section unique) |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -327,7 +327,7 @@ Source : `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` - `device_cl
 | Rôle | Chemin |
 |------|--------|
 | Vignette L6C1 | `docs/L6C1_AIR_QUALITE/L6C1_Vignette_AIR_QUALITE.md` |
-| Page YAML | `Dashboard/L6C1_AIR_QUALITE/page_L6C1_air_qualite_2026-05-23.yaml` |
+| Page YAML | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml` |
 | Sensors statistics | `TREE_CORRIGE/sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
 | Templates ppb | `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
 | Carte PM Bureau | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_03_Carte_PM_Bureau/L6C1_Carte_PM_BUREAU.yaml` |
@@ -348,3 +348,4 @@ Source : `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` - `device_cl
 [2026-11-22] DEPLOYE en prod : les 4 cartes mushroom Bureau et Chambre ajoutees dans dashboard-tablette, vue air-quality (cartes 11-12 sous BUREAU, 20-21 sous CHAMBRE ; separateurs maintenant aux index 1, 10, 19 ; 28 cartes). Hash dashboard fa09dad1f0f5a828. Cartes Salon inchangees.
 [2026-11-22] YAML local de la page : 6 cartes mushroom (vertical-stack-in-card) inserees juste sous les separateurs SALON, BUREAU, CHAMBRE (28 cartes). Salon = copie exacte de la prod du 07/11 ; Bureau et Chambre = cartes L6C1_AIR_QUALITE_03 a 06. Controle : page moins les 4 cartes nouvelles == prod du 07/11. Non deploye en prod (le dashboard live n a pas ete modifie).
 [2026-11-22] 4 cartes mushroom (PM2.5 et tCOV, Bureau et Chambre) ajoutees au dossier L6C1 : voir les lignes Carte du tableau des fichiers lies. -->
+<!-- annotations_log: [2026-11-28] L6C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L6C1_Page_AIR_QUALITE.yaml) -->

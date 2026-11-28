@@ -18,3 +18,7 @@ visibility:
     state_not:
       - Jaune
 scaling_mode: disabled
+
+# annotations_log:
+# [2026-11-28] Card_meteoalarm_home : carte Meteoalarm Home : visibility state_not unavailable sur sensor.alerte_avalanches + scaling_mode disabled (alignement sur le dashboard HA) ; bak _2026_11_28_11h42m03s ; pousse H:\docs
+# [2026-11-28] Card_meteoalarm_home : visibility : state_not unavailable remplace par Jaune (valeur mise par Eric dans le dashboard a 13:3x) ; bak _2026_11_28_13h42m23s ; pousse H:\docs

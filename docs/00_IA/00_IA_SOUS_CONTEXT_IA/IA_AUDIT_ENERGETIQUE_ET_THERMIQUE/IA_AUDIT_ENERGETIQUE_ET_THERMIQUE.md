@@ -175,7 +175,7 @@ directives actives de codage)*
      structurel (enveloppe) domine.
 
 > Note : la stratégie thermique active (Mode Absence Hiver/Été, logique "Coeur du Système"
-> température cible/confort) reste dans `CLAUDE.md` (section LOGEMENT & STRATÉGIE THERMIQUE) -
+> température cible/confort) reste dans `IA_EQUIPEMENTS_REFERENTIELS` (section LOGEMENT & STRATÉGIE THERMIQUE) -
 > ce sont des directives de codage vivantes, pas seulement du contexte d'audit.
 
 ---
@@ -668,3 +668,4 @@ Ratio = 0.101 / 0.028 = 3.6x
 ---
 
 **Fin du prompt système - IA_AUDIT_ENERGETIQUE_ET_THERMIQUE v6.5**
+<!-- annotations_log: [2026-11-28] corrections_refonte : renvoi CLAUDE.md -> IA_EQUIPEMENTS_REFERENTIELS pour la section LOGEMENT & STRATEGIE THERMIQUE (section deplacee, demande d'Eric 2026-11-28) -->

@@ -87,3 +87,19 @@
 22:17:59.743 | DEBUT      | controles_6G       | 
 22:17:59.955 | DEBUT      | controles_6H       | 
 22:18:18.551 | DEBUT      | push_docs          | 
+22:18:49.923 | FIN        | controles_6G       | OK Check_DEPENDANCES ecarts 3 -> 0 apres regeneration de IA_GLOBAL_INDEX (Gen_GLOBAL_INDEX_ia puis Recap_index) et rattrapage push
+22:18:49.979 | FIN        | push_docs          | ATTENTION rattrapage : 8 pousses, MD5 differents=0, 1 PROD INCONNUE (IA_GLOBAL_INDEX_memoire), .bak dans H:\docs=0
+22:18:50.036 | FIN        | controles_6H       | ATTENTION palier1=OK palier2=OK images=OK derive=0 ; qualite prod : 1 fichier a octets de controle (MODIFS_2026-11-22_hermes.md, Hermes, 2 octets 0x4), YAML invalide=0, BOM=14
+22:19:07.293 | DEBUT      | verifications      | 
+22:19:07.472 | NOTE       | verifications      | journal MODIFS complet, GLOBAL_INDEX_REPO local=PR=PM, DEPENDANCES et IA_ARBO local=prod, aucun script Claude en cours
+22:19:23.354 | FIN        | verifications      | OK journal MODIFS complet, GLOBAL_INDEX_REPO local=PR=PM 4D396411, DEPENDANCES et IA_ARBO local=prod, aucun script Claude en cours (python restants = MCP et gateway Hermes)
+22:19:23.409 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+22:19:23.463 | DEBUT      | notification       | 
+22:19:33.089 | FIN        | notification       | OK notify.mobile_app_eric envoyee, annonce 22:25
+22:19:43.181 | DEBUT      | lumieres           | 
+22:20:03.032 | FIN        | lumieres           | OK Hue Sync coupe (API pont, stream.active=false), 3 Hue Play mode normal puis off confirme
+22:20:03.087 | DEBUT      | automation_on      | 
+22:20:03.141 | FIN        | automation_on      | OK automation.nouvelle_automatisation relue on, 3 Play toujours off
+22:20:03.226 | DEBUT      | arret_pc           | 
+22:20:03.280 | FIN        | arret_pc           | OK arret programme
+22:20:03.333 | SEQ_FIN    | SEQUENCE           | fin de sequence

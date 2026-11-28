@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L6C1_AIR_QUALITE/vignette_L6C1_air_qualite_2026-05-14.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml` |
 | 🔗 **Accès depuis** | Vue Home - L6C1 |
 | 🔗 **tap →** | `/dashboard-tablette/air-quality` |
 | 🏗️ **Layout** | `custom:button-card` - grille 9 lignes × 3 colonnes (Pièce / Type / Valeur) |
@@ -97,7 +97,7 @@ tap → /dashboard-tablette/air-quality
 
 ## 📍 CODE
 
-Le YAML complet de la vignette est volumineux (18 champs JS). Seuls les éléments structurants sont reproduits ici ; le code intégral est dans `Dashboard/L6C1_AIR_QUALITE/vignette_L6C1_air_qualite_2026-05-14.yaml`.
+Le YAML complet de la vignette est volumineux (18 champs JS). Seuls les éléments structurants sont reproduits ici ; le code intégral est dans `docs/02_docs_dashboard/02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml`.
 
 ```yaml
 type: custom:button-card
@@ -275,3 +275,4 @@ Source : `templates/air_qualite/tcov_ppb.yaml`
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_AIR_QUALITE]]  [[L6C2_Vignette_POLLUTION_POLLEN]]  [[L6C3_Vignette_VIGIEAU]]*
+<!-- annotations_log: [2026-11-28] L6C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L6C1_Vignette_AIR_QUALITE.yaml) -->

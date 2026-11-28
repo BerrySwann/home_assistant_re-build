@@ -696,3 +696,4 @@
 #             non journalise). temperature_confort chauffage : consigne + 1 / + 2 sous point_froid / + 3 sous
 #             point_tres_froid (20 / 21 / 22 avec consigne 19) ; refroidissement hors zone chaude : consigne - 1.
 #             Etat reel constate le 2026-11-22 : sensor.temperature_confort = 20 pour ext 15.7 et consigne 19.
+# [2026-11-28] P1_01_clim_logique_system_autom : resync local depuis la prod (correction_temperature_bureau et chambre 2 -> 1, lignes 220 et 228) ; bak _2026_11_28_13h52m41s ; non pousse (prod deja a jour)

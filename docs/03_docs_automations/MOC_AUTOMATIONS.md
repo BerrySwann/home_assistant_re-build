@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,14 +13,14 @@
 
 </div>
 
-Genere le 2026-11-08 13:43 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-28 15:27 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche qui cite le nom du YAML. Une fiche proche par le nom mais non rattachee est seulement proposee comme candidate (a valider par Eric, jamais comptee OK). Sont ignores : .bak, XX_*, *_ORIGINAL, *_archive*. Voir aussi GLOBAL_INDEX_AUTOMATIONS.md (lien avec les automations de la prod). Les liens sont relatifs a ce fichier.
 
 ## Controle
 
-- YAML suivis : 66
-- YAML avec fiche : 66
+- YAML suivis : 72
+- YAML avec fiche : 72
 - YAML sans fiche (MANQUANT) : 0 dont 0 avec une fiche candidate a valider
 - Fiches .md sans YAML correspondant : 4
 - Documents annexes (prefixe P1_XX_, fiche sans YAML voulue) : 3
@@ -74,7 +74,13 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .
 |  | [G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.md) |
 |  | [H_clim_debug_force_mode_correct_securite.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.md) |
 |  | [I_synchro_notif_clim_si_prise_coupee.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.md) |
-|  | [J_debug_notifier_les_changements_de_message_clim_mobile.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.md) |
+|  | [J_P1_Clim_Salon_Consigne_nuit_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/J_P1_Clim_Salon_Consigne_nuit_anti_derive/J_P1_Clim_Salon_Consigne_nuit_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/J_P1_Clim_Salon_Consigne_nuit_anti_derive/J_P1_Clim_Salon_Consigne_nuit_anti_derive.md) |
+|  | [K_P1_Clim_Bureau_Consigne_nuit_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/K_P1_Clim_Bureau_Consigne_nuit_anti_derive/K_P1_Clim_Bureau_Consigne_nuit_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/K_P1_Clim_Bureau_Consigne_nuit_anti_derive/K_P1_Clim_Bureau_Consigne_nuit_anti_derive.md) |
+|  | [L_P1_Clim_Chambre_Consigne_nuit_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/L_P1_Clim_Chambre_Consigne_nuit_anti_derive/L_P1_Clim_Chambre_Consigne_nuit_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/L_P1_Clim_Chambre_Consigne_nuit_anti_derive/L_P1_Clim_Chambre_Consigne_nuit_anti_derive.md) |
+|  | [M_P1_Clim_Salon_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/M_P1_Clim_Salon_Consigne_jour_anti_derive/M_P1_Clim_Salon_Consigne_jour_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/M_P1_Clim_Salon_Consigne_jour_anti_derive/M_P1_Clim_Salon_Consigne_jour_anti_derive.md) |
+|  | [N_P1_Clim_Bureau_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/N_P1_Clim_Bureau_Consigne_jour_anti_derive/N_P1_Clim_Bureau_Consigne_jour_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/N_P1_Clim_Bureau_Consigne_jour_anti_derive/N_P1_Clim_Bureau_Consigne_jour_anti_derive.md) |
+|  | [O_P1_Clim_Chambre_Consigne_jour_anti_derive.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/O_P1_Clim_Chambre_Consigne_jour_anti_derive/O_P1_Clim_Chambre_Consigne_jour_anti_derive.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/O_P1_Clim_Chambre_Consigne_jour_anti_derive/O_P1_Clim_Chambre_Consigne_jour_anti_derive.md) |
+|  | [P_Track_Clim_journal_des_consignes.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/P_Track_Clim_journal_des_consignes/P_Track_Clim_journal_des_consignes.md) |
 | <br> |  |  |
 | P1_02_Cuisine | [A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml](03_docs_automations_YAML/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/A_chauffage_cuisine/A_chauffage_cuisine.md) (par chemin cite) |
 |  | [B_chauffage_cuisine_vacances.yaml](03_docs_automations_YAML/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.md) |

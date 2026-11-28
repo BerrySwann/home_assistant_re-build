@@ -4117,3 +4117,7 @@ cards:
     columns: 3
   - type: custom:streamline-card
     template: nav_bar
+
+# annotations_log:
+# [2026-11-28] Page_Home : meme bloc visibility + scaling_mode sur la carte meteoalarm de la page Home (fins de ligne CRLF conservees) ; bak _2026_11_28_11h42m03s ; pousse H:\docs
+# [2026-11-28] Page_Home : carte meteoalarm : state_not Jaune (CRLF conservees) ; bak _2026_11_28_13h42m23s ; pousse H:\docs

@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -47,7 +47,7 @@
 - `sensor.temperature_confort_jour`
 - `sensor.temperature_confort_nuit`
 - `sensor.temperature_corrige_chambre`
-- `sensor.temperature_corrige_eric`
+- `sensor.temperature_corrige_bureau`
 - `sensor.temperature_corrige_salon`
 - `sensor.temperature_delta_affichage`
 - `sensor.temperature_differentielle`
@@ -87,3 +87,8 @@ bouge, pas les calculs.
 
 La chambre n'est pas concernee : `sensor.temperature_corrige_chambre` garde son nom et son comportement, mais elle
 reste la seule des trois a recopier `consigne_de_base` au lieu de passer par `temperature_confort_jour`.
+
+## Constat du 2026-11-28
+
+`sensor.consigne_de_base`, `sensor.temperature_cible` et `sensor.temperature_differentielle`, citees par le YAML de cette carte, n'existent plus dans HA : elles sont supprimees du registre des entites et aucun YAML de la prod ne les definit. Aucun dashboard de la prod (YAML et `.storage/lovelace*`) ne les cite non plus, donc cette carte n'est probablement pas deployee telle quelle (deduit, non confirme). La liste des entites ci-dessus a ete mise a jour du renommage du 2026-11-03 (eric devient bureau). A decider : refaire la carte sur les capteurs actuels ou la retirer.
+<!-- annotations_log: [2026-11-28] Card_calcule_temp_cible : lot 3 verif fiches: liste des entites mise a jour du renommage 2026-11-03, constat sur 3 entites supprimees de HA -->

@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -16,7 +16,7 @@
 | 📁 **Path dashboard** | `/dashboard-tablette/phone` (navigation de la vignette L5C2) |
 | 🔗 **Accès depuis** | Vignette L5C2 (tap) |
 | 🏗️ **Layout** | `type: grid` - 8 cartes de niveau 1 (4 appareils : 1 heading + 1 conditional chacun) |
-| 📄 **Fichier YAML** | `L5C2_BATTERIES_PORTABLES/02_page_gauche/page_L5C2_batteries_portables_gauche.yaml` |
+| 📄 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.yaml` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 📅 **Modifié le** | 2026-10-11 (MD réécrit à partir du YAML) |
 
@@ -328,3 +328,4 @@ cards:
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L5C2_Vignette_BATTERIES_PORTABLES]]  [[PAGE_BATTERIES_PORTABLES_DROITE]]*
+<!-- annotations_log: [2026-11-28] L5C2 : lot 2 verif fiches: chemin YAML cite mis au reel (L5C2_Page_BATTERIES_PORTABLES_gauche.yaml) -->

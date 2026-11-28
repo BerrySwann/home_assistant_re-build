@@ -9,8 +9,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -37,11 +37,11 @@ Règles de nommage des répertoires et des fichiers du dossier `docs`.
 
 ## 2. Exemples
 - `p3_salon_bouton_ikea_inter_salon` devient `P3_Salon_bouton_ikea_inter_salon`.
-- `02_dashboard_docs_MD` devient `02_dashboard_docs_MD`.
+- `dashboard_docs_md` devient `Dashboard_docs_md`.
 - `PAGE_HOME.md` devient `Page_Home.md`.
 - `vignette_L1C1_meteo.yaml` devient `Vignette_L1C1_meteo.yaml`.
-- Dossier yaml `L1C1_01_Meteo` devient `L1C1_01_METEO` (LxCx_{NOM} en majuscules).
-- Dossier `02_Page` de L1C1 devient `02_L1C1_Page`, avec le fichier `Page_L1C1_meteo.yaml` (et la même chose côté md).
+- Dossier yaml `L1C1_01_Meteo` devient `L1C1_METEO` (LxCx_{NOM} en majuscules, sans numero : regle du 2026-10-25, paragraphe 6.2).
+- Dossier `02_Page` de L1C1 devient `L1C1_METEO_02_Page`, avec le fichier `L1C1_Page_METEO.yaml` (meme chose cote md ; regle du 2026-10-25, paragraphe 6.2).
 - `Tuto_images_alertes_meteo_france.md` devient `TUTO_L1C1_images_alertes_meteo_france.md`.
 - `Couleurs_eclairage_par_piece.md` devient `COULEURS_ECLAIRAGE_PAR_PIECE.md`.
 
@@ -53,7 +53,7 @@ Liste donnée par Eric. Dans un nom, le pôle s'écrit `P` suivi du numéro (`P0
 - P3 : éclairage
 - P4 : présence (Wi-Fi, mobile)
 
-Préfixes hors-pôle (fichiers sans pôle énergie). Source : CLAUDE.md, section 3 "Répertoires HA & préfixes hors-pôles", sauf `AQ_` et `MPC_` décidés par Eric le 2026-10-17. Format d'un fichier : `{PREFIXE}_{index}_{description}.yaml`.
+Préfixes hors-pôle (fichiers sans pôle énergie). Source : IA_REGLES_YAML_ET_P3, section 3 "Répertoires HA & préfixes hors-pôles", sauf `AQ_` et `MPC_` décidés par Eric le 2026-10-17. Format d'un fichier : `{PREFIXE}_{index}_{description}.yaml`.
 - `M_` : Météo
 - `AQ_` : Air Quality (remplace `A_`, décision du 2026-10-17 ; CLAUDE.md et ses deux copies mis à jour le 2026-10-17)
 - `S_` : Stores (repris de CLAUDE.md, non rediscuté)
@@ -61,7 +61,7 @@ Préfixes hors-pôle (fichiers sans pôle énergie). Source : CLAUDE.md, section
 - À ne pas confondre avec l'ordre établi : dans les automations (`03_docs_automations`), les lettres `A_`, `B_`, `C_`, `D_`... placées devant le nom (exemples : `A_chauffage_cuisine`, `C_notif_temp_jour`, `D_notif_temp_nuit`) servent à les mettre dans un ordre défini. Ce ne sont pas des préfixes hors-pôle et elles ne sont pas concernées par `AQ_` (précisé par Eric le 2026-10-17).
 
 ## 4. Abréviations
-Liste donnée par Eric, avec l'orthographe corrigée. Elles servent aux noms des fichiers YAML modulaires (convention du fichier CLAUDE.md, section RÈGLES YAML - CONVENTIONS). Les sigles restent en majuscules (paragraphe 5).
+Liste donnée par Eric, avec l'orthographe corrigée. Elles servent aux noms des fichiers YAML modulaires (convention du fichier IA_REGLES_YAML_ET_P3, section RÈGLES YAML - CONVENTIONS). Les sigles restent en majuscules (paragraphe 5).
 
 Répertoires système :
 - SNS : répertoires système `sensors/`
@@ -94,11 +94,11 @@ Graphie fixe :
 - GitHub : s'écrit toujours ainsi, G et H majuscules (décidé le 2026-10-17, règle au paragraphe 6.13).
 - GLOBAL_INDEX : s'écrit toujours en majuscules, sauvegardes comprises (décidé le 2026-10-17, règle au paragraphe 6.14).
 
-Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des suffixes de niveau : l'extension du fichier reste `.yaml`.
+Niveaux (repris de la section P3 de CLAUDE.md, ajoutés le 2026-10-17 ; cette section est maintenant dans IA_REGLES_YAML_ET_P3). Ce sont des suffixes de niveau : l'extension du fichier reste `.yaml`.
 - UNITE : niveau 1, une lampe individuelle. Exemple `P3_AVG_AMHQ_1_UNITE.yaml`. P1 n'a pas de numéro : `P1_AVG_AMHQ_UNITE.yaml`.
 - ZONE : niveau 2, agrégat par pièce. Exemple `P3_AVG_AMHQ_2_ZONE.yaml`.
 - TOTAL : niveau 3, appartement entier (voir plus haut). Exemple `P3_POWER_3_TOTAL_ZONE.yaml`.
-- UNITE et ZONE s'écrivent en majuscules et sans accent (CLAUDE.md écrit UNITÉ dans un titre ; les noms de fichiers n'ont pas d'accent).
+- UNITE et ZONE s'écrivent en majuscules et sans accent (IA_REGLES_YAML_ET_P3 écrit UNITÉ dans un titre ; les noms de fichiers n'ont pas d'accent).
 - Règle : tout nom qui se termine par `_UNITE`, `_ZONE` ou `_TOTAL`, avec ou sans numéro de niveau devant (`_1_UNITE`, `_2_ZONE`, `_3_TOTAL`), garde ces suffixes en majuscules et n'est pas renommé à cause d'eux.
 - Exemples présents aujourd'hui, état du jour (7 fichiers de `01_docs_config_system\01_config_system_SH_PY_YAML`, zone dont la casse reste inchangée) :
 - `templates\P1_clim_chauffage\P1_AVG\P1_AVG_AMHQ_UNITE.yaml`
@@ -131,10 +131,9 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Écart relevé :
 - `00_IA\00_IA_CONTEXT_BASE\IA_CONTEXT_BASE_2026-07-19_15h46.md` (nouveau nom : `IA_CONTEXT_BASE_2026-07-19_15H46.md`)
 
-### 6.2 Dossiers LxCx de 02_docs_dashboard (décidé le 2026-10-17)
-- Les sous-dossiers directs de `02_dashboard_docs_MD` et de `02_dashboard_docs_YAML` s'écrivent `LxCx_{NOM}` en majuscules. Les sous-sous-dossiers ne sont pas concernés. Le numéro fait partie du {NOM} (déduit, non confirmé) : `L2C1_04_Energie_Generale` devient `L2C1_04_ENERGIE_GENERALE`.
-- Chaque dossier LxCx contient un dossier vignette `01_LxCx_Vignette[_suffixe]` et un ou plusieurs dossiers page `0N_LxCx_Page[_suffixe]` (`02_`, `03_`, `04_`...), avec LxCx remplacé par l'identifiant réel. Exemples : `01_L2C1_Vignette`, `02_L2C1_Page_temps_reel`.
-- Les fichiers du dossier vignette s'appellent `Vignette_LxCx[_suffixe]` et ceux du dossier page `Page_LxCx[_suffixe]`, en `.yaml` côté yaml et en `.md` côté md. Exemple d'Eric : `02_dashboard_docs_YAML\L1C1_01_Meteo\02_L1C1_Page` avec `Page_L1C1_meteo.yaml`, et la même chose côté md.
+### 6.2 Dossiers LxCx de 02_docs_dashboard (règle du 2026-10-25, remplace celle du 2026-10-17)
+- Regle en vigueur (decidee par Eric le 2026-10-25, definitive ; seul `L0C0_PAGE_Home` reste tel quel) : dans `02_dashboard_docs_MD` comme dans `02_dashboard_docs_YAML`, un dossier `LxCx_{NOM}` en majuscules et sans numéro (`L3C3_STORES`) contient `LxCx_{NOM}_01_Vignette` et `LxCx_{NOM}_02_Page` (`LxCx_{NOM}_03_Page`... si plusieurs pages), et les fichiers s'appellent `LxCx_Vignette_{NOM}.md` ou `.yaml` et `LxCx_Page_{NOM}.md` ou `.yaml` (`L3C3_STORES_01_Vignette\L3C3_Vignette_STORES.md`, `L3C3_STORES_02_Page\L3C3_Page_STORES.yaml`). Tout nom commence par `LxCx` pour repérer où on se trouve. Un suffixe éventuel (page gauche, page droite...) s'écrit en minuscules après le {NOM} dans le nom du fichier et dans le nom du dossier de page (`L3C1_ECLAIRAGE_02_Page_gauche`, `L3C1_Page_ECLAIRAGE_gauche.md`, validé par Eric le 2026-10-25).
+- Cette regle remplace celle du 2026-10-17 (numero dans le nom, `L2C1_04_ENERGIE_GENERALE`, dossiers `01_LxCx_Vignette`, fichiers `Vignette_LxCx`), qui n'est plus appliquee : les 19 dossiers LxCx de `02_dashboard_docs_YAML` et de `02_dashboard_docs_MD` sont sans numero (verifie sur disque le 2026-11-28).
 - Fichiers à part posés à la racine d'un dossier LxCx : première lettre en majuscule (`Card_*.yaml`). Fichiers dont le nom contient "couleur" : tout en majuscules. Tutos : `TUTO_LxCx[_suffixe].md` (TUTO et LxCx en majuscules, suffixe en minuscules), pour les tutos existants comme pour les futurs.
 - `L0C0_PAGE_Home` : tout ce qu'il contient reste où il est (spécifique à cette page), noms compris. Son propre nom reste à trancher (paragraphe 9).
 
@@ -335,7 +334,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Logique déjà utilisée pour les dossiers LxCx : le code du dossier au-dessus descend dans le nom de l'enfant (`02_L1C1_Page` et `Page_L1C1_meteo`).
 - Lecture retenue, à confirmer : "tous les pôles" = les dossiers de type de fichiers de `01_` à `04_`. Non concernés : `00_IA` (6.1), les dossiers nommés d'après un document (`99_docs_MD_system\DEPENDANCES_GLOBALES`...) ou un skill (`05_docs_skills\skill_histo`...), et `06_docs_technique\01_Pont_hue_hacking` (déjà numéroté).
 - Le reste du nom ne change pas, hors majuscule au premier mot (règle de base, paragraphe 1) : `docs_scripts_sh` devient `04_docs_scripts_SH`. Les enfants de ces dossiers ne changent pas.
-- Exception d'Eric (2026-10-18), levée le 2026-10-25 : dans `01_docs_config_system`, `config_system_MD` et `config_system_SH_PY_YAML` ont gardé leur nom sans numéro, puis ont reçu le préfixe `01_` (`01_config_system_MD`, `01_config_system_SH_PY_YAML`, majuscules conservées). `config_system_SH_PY_YAML` remplace `config_system_SH_PY_YAML` (ancien nom d'avant l'exception) (nouvelle organisation : `.scripts\01_scripts.sh`, `.scripts\02_scripts.py`, `sql.yaml`, `notifs`, sans `blueprints`). Les arbres plus bas dans ce document (tableau des chemins) ne sont pas régénérés : ils décrivent encore l'ancienne organisation.
+- Exception d'Eric (2026-10-18), levée le 2026-10-25 : dans `01_docs_config_system`, `config_system_MD` et `config_system_SH_PY_YAML` ont gardé leur nom sans numéro, puis ont reçu le préfixe `01_` (`01_config_system_MD`, `01_config_system_SH_PY_YAML`, majuscules conservées). `config_system_SH_PY_YAML` remplace `config_system_YAML` (ancien nom d'avant l'exception) (nouvelle organisation : `.scripts\01_scripts.sh`, `.scripts\02_scripts.py`, `sql.yaml`, `notifs`, sans `blueprints`). Les arbres plus bas dans ce document (tableau des chemins) ne sont pas régénérés : ils décrivent encore l'ancienne organisation.
 - Lot B renommé le 2026-10-25 en local et en prod, sur ordre d'Eric (9 dossiers ; ancien nom, puis nouveau nom) :
 - `02_docs_dashboard\Dashboard_docs_md` (nouveau nom : `02_docs_dashboard\02_dashboard_docs_MD`)
 - `02_docs_dashboard\Dashboard_docs_yaml` (nouveau nom : `02_docs_dashboard\02_dashboard_docs_YAML`)
@@ -2335,3 +2334,6 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 - Avant tout push en prod : renommer d'abord la prod à l'identique, puis supprimer les anciens noms avec un go explicite d'Eric (pas de corbeille sur `H:`).
 - Après renommage : corriger les chemins cités dans les skills, les générateurs, les fiches à liens relatifs, `Github\README.md` et les MOC, puis régénérer les index.
 - Les renommages de cette mise à jour (dossiers `0N_LxCx_...`, `LxCx_{NOM}`, accents, `TUTO_`, `COULEURS_`) touchent les liens des index : ils se font en une seule opération avec les corrections de chemins.
+<!-- annotations_log: [2026-11-28] corrections_refonte : paragraphe 6.2 (dossiers LxCx) et exemples du paragraphe 2 remplaces par la regle du 2026-10-25 sans numero, verifiee sur disque (19 dossiers) ; exemple ligne 40 et ligne 338 retablis d'apres le maitre historique du 2026-10-17 (deduit) ; renvoi CLAUDE.md section 3 -> IA_REGLES_YAML_ET_P3 (demande d'Eric 2026-11-28) -->
+<!-- annotations_log: [2026-11-28] titre_6.2 : titre du paragraphe 6.2 aligne sur la regle du 2026-10-25 (demande d'Eric 2026-11-28) -->
+<!-- annotations_log: [2026-11-28] mise_a_jour : renvois au present corriges (CLAUDE.md -> IA_REGLES_YAML_ET_P3, 3 lignes), badge MaJ (demande d Eric 2026-11-28) -->

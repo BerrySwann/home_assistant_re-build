@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -57,10 +57,10 @@ Vignette affichant l'état de vigilance sécheresse pour Vence depuis l'intégra
 type: custom:button-card
 icon: |
   [[[
+    // Récupère l'entité
     var sensor = states['sensor.alert_level_in_vence'];
-    var iconName = sensor && sensor.attributes && sensor.attributes.icon
-      ? sensor.attributes.icon
-      : 'mdi:water-outline';
+    // Récupère le nom de l'icône ou une icône par défaut
+    var iconName = sensor && sensor.attributes && sensor.attributes.icon ? sensor.attributes.icon : 'mdi:water-outline';
     return iconName;
   ]]]
 tap_action:
@@ -70,21 +70,12 @@ name: |
   [[[
     var sensor = states['sensor.alert_level_in_vence'];
     var alertLevel = sensor.state;
-    var alertColor = (sensor.attributes && sensor.attributes.Couleur)
-      ? sensor.attributes.Couleur
-      : 'grey';
+    var alertColor = (sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'grey';
     switch(alertLevel) {
       case 'vigilance (pas de restriction)':
         alertLevel = 'Aucune restriction';
-        break;                                    # [L1] break ajouté - fallthrough corrigé
       case 'alerte_renforcee':
         alertLevel = 'Alerte renforcée';
-        break;
-      case 'crise':
-        alertLevel = 'Crise';
-        break;
-      case 'alerte':
-        alertLevel = 'Alerte';
         break;
     }
     return `<div style="text-align: left; color: white; font-size: 13px; margin-bottom: 4px;">Vigieau / Vigi-Eau</div>
@@ -108,10 +99,8 @@ styles:
     - top: 15%
     - color: |
         [[[
-          var sensor = states['sensor.alert_level_in_vence'];
-          return (sensor && sensor.attributes && sensor.attributes.Couleur)
-            ? sensor.attributes.Couleur
-            : 'white';
+            var sensor = states['sensor.alert_level_in_vence'];
+            return (sensor && sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'white';
         ]]]
   name:
     - color: white
@@ -186,3 +175,81 @@ case 'alerte_renforcee':
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_VIGIEAU]]  [[L6C1_Vignette_AIR_QUALITE]]  [[L6C2_Vignette_POLLUTION_POLLEN]]*
+
+---
+
+## Modifications du 2026-11-28
+
+Le bloc de code source est resynchronisé avec le YAML docs. La carte du dashboard tablette (`.storage/lovelace.dashboard_tablette`) ne contient ni `case 'crise'` ni `case 'alerte'` : le YAML docs est donc ce que la prod exécute.
+
+L'ancien bloc de cette fiche contenait une version qui n'est pas en prod : des `break` ajoutés pour corriger le passage au cas suivant du `switch`, et deux niveaux supplémentaires `crise` et `alerte`. Elle est conservée ci-dessous comme piste de correction, à appliquer seulement après décision.
+
+```yaml
+type: custom:button-card
+icon: |
+  [[[
+    var sensor = states['sensor.alert_level_in_vence'];
+    var iconName = sensor && sensor.attributes && sensor.attributes.icon
+      ? sensor.attributes.icon
+      : 'mdi:water-outline';
+    return iconName;
+  ]]]
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/vigieau
+name: |
+  [[[
+    var sensor = states['sensor.alert_level_in_vence'];
+    var alertLevel = sensor.state;
+    var alertColor = (sensor.attributes && sensor.attributes.Couleur)
+      ? sensor.attributes.Couleur
+      : 'grey';
+    switch(alertLevel) {
+      case 'vigilance (pas de restriction)':
+        alertLevel = 'Aucune restriction';
+        break;                                    # [L1] break ajouté - fallthrough corrigé
+      case 'alerte_renforcee':
+        alertLevel = 'Alerte renforcée';
+        break;
+      case 'crise':
+        alertLevel = 'Crise';
+        break;
+      case 'alerte':
+        alertLevel = 'Alerte';
+        break;
+    }
+    return `<div style="text-align: left; color: white; font-size: 13px; margin-bottom: 4px;">Vigieau / Vigi-Eau</div>
+            <div><span style="color: ${alertColor}; font-weight: bold;">${alertLevel}</span></div>`;
+  ]]]
+size: 60%
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 15px
+    - line-height: 1.2
+  icon:
+    - transform: rotate(350deg)
+    - left: 15%
+    - top: 15%
+    - color: |
+        [[[
+          var sensor = states['sensor.alert_level_in_vence'];
+          return (sensor && sensor.attributes && sensor.attributes.Couleur)
+            ? sensor.attributes.Couleur
+            : 'white';
+        ]]]
+  name:
+    - color: white
+    - top: 10px
+    - left: 10px
+    - font-size: 80%
+    - font-weight: bold
+    - position: absolute
+```
+<!-- annotations_log: [2026-11-28] L6C3 : lot 3 verif fiches: code resynchronise avec le YAML docs (= prod), ancienne version conservee comme piste non appliquee -->

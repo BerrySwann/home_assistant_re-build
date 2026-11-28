@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L3C3_STORES/vignette_L3C3_stores_2026-05-14.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L3C3_STORES/L3C3_STORES_01_Vignette/L3C3_Vignette_STORES.yaml` |
 | 🔗 **Accès depuis** | Vue Home - L3C3 |
 | 🔗 **tap →** | `/dashboard-tablette/stores` |
 | 🏗️ **Layout** | `custom:button-card` - grille 3 colonnes (Pièce / Fenêtres / Stores) |
@@ -297,3 +297,4 @@ Lit l'état textuel du `sensor.store_*_status` (template) et l'affiche brut. Les
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_STORES]]  [[L3C1_Vignette_ECLAIRAGE]]  [[L3C2_Vignette_PRISES]]*
+<!-- annotations_log: [2026-11-28] L3C3 : lot 2 verif fiches: chemin YAML cite mis au reel (L3C3_Vignette_STORES.yaml) -->

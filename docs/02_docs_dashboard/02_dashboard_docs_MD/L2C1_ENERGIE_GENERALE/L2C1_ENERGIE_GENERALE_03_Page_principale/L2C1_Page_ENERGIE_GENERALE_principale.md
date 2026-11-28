@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--04--23-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_principale_2026-06-18.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.yaml` |
 | 🔗 **Accès depuis** | Vignette L2C1 → Dashboard HOME → tap → `/dashboard-tablette/energie` |
 | 🔗 **Liens vers** | Badge "Réel" → `/dashboard-tablette/energie-temps-reel` · Badge "Cumul Jrs" → `/dashboard-tablette/energie-mensuel` |
 | 🏗️ **Layout** | `type: grid` (column_span: 1) |
@@ -64,7 +64,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 ### Intégrations requises
 
 - ✅ **NODON** (smart plug général appartement) - `sensor.general_electric_appart_*`
-- ✅ **Riemann tampon** - `sensor.genelec_appart_totale_kwh` (source des UM)
+- ✅ **Source des UM** - `sensor.general_electric_appart_energy` (ancien Riemann tampon `genelec_appart_totale_kwh`, absent de HA au 2026-11-28)
 - ✅ **UM Genelec Appart** - `sensor.genelec_appart_*_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
 - ✅ **MyElectricalData / Linky** (`linky_card`) - `sensor.linky_*`
 - ✅ **MyElectricalData (tarifs Tempo)** - `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`, remontes en MQTT (unique_id `myelectricaldata_tempo_price_blue_*`). Ce ne sont PAS des capteurs de l integration de tarifs.
@@ -559,7 +559,7 @@ span:
 | Série | Entité | Type | Axe | Rôle |
 |-------|--------|------|-----|------|
 | Conso. ce jour | `sensor.genelec_appart_avg_watts_quotidien` | column | `daily` | Barres kWh (`func: max, duration: 24h`) |
-| Moy. glissante mois | `sensor.genelec_appart_totale_kwh` | line | `daily` | `func: avg, duration: 730h` |
+| Moy. glissante mois | `sensor.general_electric_appart_energy` | line | `daily` | `func: avg, duration: 730h` |
 | Moy. depuis minuit | `sensor.genelec_appart_avg_watts_quotidien` | line | `moyenne` | Axe secondaire |
 | Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | - | `daily` | En-tête uniquement (`in_chart: false`) |
 
@@ -608,7 +608,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 |--------|------|--------|
 | `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h UM quotidien - toujours 0 (reset minuit) | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
 | `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h UM quotidien - total journalier kWh | idem |
-| `sensor.genelec_appart_conso_moyenne_1h` | `mean` 1h UM quotidien - conso lissée (kWh) | idem |
+| `sensor.conso_moyenne_1h` | `mean` 1h UM quotidien - conso lissée (kWh) | idem |
 | `sensor.genelec_appart_avg_watts_quotidien` | Moyenne Watts depuis minuit | `templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml` |
 | `sensor.genelec_appart_avg_watts_hebdomadaire` | Moyenne Watts depuis lundi | idem |
 | `sensor.genelec_appart_avg_watts_mensuel` | Moyenne Watts depuis le 1er du mois | idem |
@@ -785,7 +785,7 @@ Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier 
 
 | Rôle | Chemin |
 |------|--------|
-| Dashboard YAML corrigé | `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_principale_2026-06-18.yaml` |
+| Dashboard YAML corrigé | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.yaml` |
 | Riemann tampon NODON | `TREE_CORRIGE/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart/P0_kWh_genelec_appart.yaml` |
 | UM kWh total AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml` |
 | UM HP/HC AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml` |
@@ -805,3 +805,5 @@ Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier 
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L2C1_Vignette_ENERGIE_GENERALE]]  [[PAGE_ENERGIE_MENSUEL]]  [[PAGE_ENERGIE_TEMPS_REEL]]*
+<!-- annotations_log: [2026-11-28] L2C1 : lot 1 verif fiches: entites genelec_* absentes: source UM = general_electric_appart_energy, conso_moyenne_1h -->
+<!-- annotations_log: [2026-11-28] L2C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L2C1_Page_ENERGIE_GENERALE_principale.yaml) -->

@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -16,7 +16,7 @@
 | 📁 **Path dashboard** | `/dashboard-tablette/lumieres` (navigation de la vignette L3C1) |
 | 🔗 **Accès depuis** | Vignette L3C1 (tap) |
 | 🏗️ **Layout** | `type: grid` - 14 cartes de niveau 1 (titre, Bureau, Écran, Salle de Bain, Chambre, Têtes de Lit, 3 popups bubble-card, barre de navigation) |
-| 📄 **Fichier YAML** | `L3C1_ECLAIRAGE/03_page_droite/page_L3C1_eclairage_droite.yaml` |
+| 📄 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.yaml` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 📅 **Modifié le** | 2026-10-28 (bloc Code YAML resynchronisé avec le YAML du 2026-10-26 ; MD réécrit le 2026-10-11 à partir du YAML et de l'ancien MD du 2026-03-21) |
 
@@ -2316,3 +2316,4 @@ cards:
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L3C1_Vignette_ECLAIRAGE]]  [[PAGE_ECLAIRAGE_GAUCHE]]*
+<!-- annotations_log: [2026-11-28] L3C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L3C1_Page_ECLAIRAGE_droite.yaml) -->

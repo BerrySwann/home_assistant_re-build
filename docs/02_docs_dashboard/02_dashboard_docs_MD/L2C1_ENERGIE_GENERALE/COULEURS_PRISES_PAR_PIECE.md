@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -15,7 +15,7 @@
 
 > **Source de vérité** : `IA_CONTEXT_BASE.md` § Palette Officielle (Pôles 3 & 2)
 > **Référence dashboard** : `apexcharts-card` (donuts + barres) et `--mdc-theme-primary` des `tabbed-card`.
-> **Entités sources** : `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_mensuel_2026-06-18.yaml` / `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_temps_reel_2026-06-18.yaml`
+> **Entités sources** : `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_04_Page_mensuel/L2C1_Page_ENERGIE_GENERALE_mensuel.yaml` / `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml`
 > **Dernière mise à jour** : 2026-03-08 (Refonte complète - entités réelles + palette Gemini)
 
 ---
@@ -129,3 +129,4 @@ Pattern général : `sensor.prise_{slug}_{marque}_{periode}_um`
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[L2C1_Vignette_ENERGIE_GENERALE]]  [[L3C2_Vignette_PRISES]]*
+<!-- annotations_log: [2026-11-28] COULEURS_PRISES_PAR_PIECE : lot 1 verif fiches: chemins sources: yaml docs actuels au lieu des Dashboard/..._2026-06-18 -->

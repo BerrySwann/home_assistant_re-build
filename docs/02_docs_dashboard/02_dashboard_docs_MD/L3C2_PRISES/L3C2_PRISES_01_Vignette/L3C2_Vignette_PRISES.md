@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -57,14 +57,14 @@ tap_action:
   navigation_path: /dashboard-tablette/prises
 entities:
   - switch.prise_horloge_ikea
-  - switch.hue_smart_eco_pc_bureau
+  - light.hue_smart_eco_pc_bureau
   - switch.prise_tete_de_lit_chambre
   - light.hue_smart_eco_salon
   - switch.prise_tv_salon_ikea
   - light.hue_smart_eco_tv_chambre
 triggers_update:
   - switch.prise_horloge_ikea
-  - switch.hue_smart_eco_pc_bureau
+  - light.hue_smart_eco_pc_bureau
   - switch.prise_tete_de_lit_chambre
   - light.hue_smart_eco_salon
   - switch.prise_tv_salon_ikea
@@ -139,7 +139,7 @@ custom_fields:
       const hStat  = safeState('switch.prise_horloge_ikea');
       const sStat  = safeState('light.hue_smart_eco_salon');
       const tsStat = safeState('switch.prise_tv_salon_ikea');
-      const pStat  = safeState('switch.hue_smart_eco_pc_bureau');
+      const pStat  = safeState('light.hue_smart_eco_pc_bureau');
       const tcStat = safeState('light.hue_smart_eco_tv_chambre');
       const tlStat = safeState('switch.prise_tete_de_lit_chambre');
       return `
@@ -187,7 +187,7 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 | Horloge | `switch.prise_horloge_ikea` | switch | 1. ENTRÉE |
 | Salon | `light.hue_smart_eco_salon` | light | 4. SALON |
 | TV Salon | `switch.prise_tv_salon_ikea` | switch | 4. SALON |
-| PC Bureau | `switch.hue_smart_eco_pc_bureau` | switch | 7. BUREAU |
+| PC Bureau | `light.hue_smart_eco_pc_bureau` | light | 7. BUREAU |
 | TV Chambre | `light.hue_smart_eco_tv_chambre` | light | 9. CHAMBRE |
 | Tête de Lit | `switch.prise_tete_de_lit_chambre` | switch | 9. CHAMBRE |
 
@@ -202,7 +202,7 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 | `switch.prise_horloge_ikea` | IKEA Dirigera (natif) | ✅ |
 | `light.hue_smart_eco_salon` | Philips Hue (natif) | ✅ |
 | `switch.prise_tv_salon_ikea` | IKEA Dirigera (natif) | ✅ |
-| `switch.hue_smart_eco_pc_bureau` | Philips Hue (natif) | ✅ |
+| `light.hue_smart_eco_pc_bureau` | Philips Hue (natif) | ✅ |
 | `light.hue_smart_eco_tv_chambre` | Philips Hue (natif) | ✅ |
 | `switch.prise_tete_de_lit_chambre` | Intégration native | ✅ |
 | `custom:button-card` | HACS | ✅ |
@@ -221,3 +221,4 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_PRISES]]  [[COULEURS_PRISES_PAR_PIECE]]  [[L3C1_Vignette_ECLAIRAGE]]  [[L3C3_Vignette_STORES]]*
+<!-- annotations_log: [2026-11-28] L3C2 : lot 3 verif fiches: switch.hue_smart_eco_pc_bureau -> light.hue_smart_eco_pc_bureau (entite reelle, le YAML docs utilise light) -->

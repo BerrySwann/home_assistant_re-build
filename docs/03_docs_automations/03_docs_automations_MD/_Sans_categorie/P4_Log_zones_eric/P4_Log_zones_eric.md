@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -37,7 +37,8 @@ Garde-fous : les transitions depuis/vers `unavailable` ou `unknown` sont ignoré
 
 ## Fichier source
 
-`P4_presence/P4_log_zones_eric.yaml`
+`docs/03_docs_automations/03_docs_automations_YAML/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.yaml`
 
 ---
 *Doc créée le 2026-09-10 (audit huissier : automation active dans HA sans fiche MD).*
+<!-- annotations_log: [2026-11-28] P4_Log_zones_eric : lot 2 verif fiches: chemin YAML cite mis au reel (P4_Log_zones_eric.yaml) -->

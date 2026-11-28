@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -42,7 +42,7 @@ Couvre jusqu'à 7 jours de retard Enedis en une seule exécution.
 
 ## Fichier source
 
-`P0_energie/rattrapage_linky_ecart.yaml` (et `energie/rattrapage_linky_ecart.yaml` — synchro identique)
+`docs/03_docs_automations/03_docs_automations_YAML/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.yaml` (l'ancien dossier `energie/` n'existe plus en prod ni en local au 2026-11-28)
 
 ## Scripts associés
 
@@ -52,3 +52,5 @@ Couvre jusqu'à 7 jours de retard Enedis en une seule exécution.
 ---
 *Doc créée le 2026-09-01 — Corrections 2026-09-03 : trigger 23:59:30 -> 01:00:00, template data.append() -> ns.namespace (SecurityError fix), energie/ synchro avec P0_energie/*
 *Corrections 2026-10-23 : alias HA renomme avec une lettre d ordre d execution (A a D), aligne sur la prod.*
+<!-- annotations_log: [2026-11-28] Rattrapage_linky_ecart : lot 2 verif fiches: chemin YAML cite mis au reel (Rattrapage_linky_ecart.yaml) -->
+<!-- annotations_log: [2026-11-28] Rattrapage_linky_ecart : lot 2 verif fiches: suppression de la mention du dossier energie/ qui n'existe plus (ni prod ni local au 2026-11-28) -->

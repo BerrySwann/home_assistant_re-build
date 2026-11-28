@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -68,7 +68,7 @@ type: grid
 │     └── Prise Eco. TV Salon (switch.prise_tv_salon_ikea)
 ├── [7. BUREAU]
 │     ├── Heading "Bureau"   (icon: mdi:desktop-tower-monitor)
-│     └── Prise PC Bureau    (switch.hue_smart_eco_pc_bureau)
+│     └── Prise PC Bureau    (light.hue_smart_eco_pc_bureau)
 ├── [9. CHAMBRE - TV]
 │     ├── Heading "Chambre"  (icon: mdi:bed)
 │     └── Prise Eco. TV Chambre (light.hue_smart_eco_tv_chambre)
@@ -120,7 +120,7 @@ La vitesse d'animation de l'icône est inversement proportionnelle à la charge 
 | Entrée - Horloge | `switch.prise_horloge_ikea` | `sensor.prise_horloge_ikea_*` | 2500 | false | *(vert toujours)* |
 | Salon | `light.hue_smart_eco_salon` | `sensor.prise_salon_chargeur_nous_*` | 2500 | false | *(vert toujours)* |
 | TV Salon | `switch.prise_tv_salon_ikea` | ~~`sensor.light.hue_smart_tv_salon_*`~~ 🐛 | 250 | `ture` ✅ *(voulu - affiche mA)* | *(vert toujours)* |
-| Bureau | `switch.hue_smart_eco_pc_bureau` | `sensor.prise_bureau_pc_ikea_*` | 500 | false | **Gris si OFF** ✅ |
+| Bureau | `light.hue_smart_eco_pc_bureau` | `sensor.prise_bureau_pc_ikea_*` | 500 | false | **Gris si OFF** ✅ |
 | TV Chambre | `light.hue_smart_eco_tv_chambre` | `sensor.prise_tv_chambre_nous_*` | 500 | false | *(vert toujours)* |
 | Tête de Lit | `switch.prise_tete_de_lit_chambre` | `sensor.prise_tete_de_lit_chambre_*` | 50 | false | *(vert toujours)* |
 
@@ -169,7 +169,7 @@ L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent ver
 | `switch.prise_horloge_ikea` | IKEA Dirigera | 1. ENTRÉE |
 | `light.hue_smart_eco_salon` | Philips Hue | 4. SALON |
 | `switch.prise_tv_salon_ikea` | IKEA Dirigera | 4. SALON |
-| `switch.hue_smart_eco_pc_bureau` | Philips Hue | 7. BUREAU |
+| `light.hue_smart_eco_pc_bureau` | Philips Hue | 7. BUREAU |
 | `light.hue_smart_eco_tv_chambre` | Philips Hue | 9. CHAMBRE |
 | `switch.prise_tete_de_lit_chambre` | Intégration native | 9. CHAMBRE |
 
@@ -214,3 +214,4 @@ L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent ver
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L3C2_Vignette_PRISES]]*
+<!-- annotations_log: [2026-11-28] L3C2 : lot 3 verif fiches: switch.hue_smart_eco_pc_bureau -> light.hue_smart_eco_pc_bureau (entite reelle, le YAML docs utilise light) -->

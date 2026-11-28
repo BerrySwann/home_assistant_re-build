@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--21-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C1_MINI_PC/01_vignette/vignette_L4C1_mini_pc.yaml` |
+| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.yaml` |
 | 🔗 **Accès depuis** | L4C1 - Matrice dashboard principal (ligne 4, colonne 1) |
 | 🏗️ **Type** | `custom:button-card` - grille custom 3×2 |
 | 📅 **Modifié le** | 2026-06-21 |
@@ -91,10 +91,11 @@ Vignette de supervision compacte du Mini-PC Intel NUC (hôte Proxmox). Affiche l
 
 ## 🔗 FICHIERS LIÉS
 
-- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C1_MINI_PC/01_vignette/vignette_L4C1_mini_pc.yaml`
+- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.yaml`
 - `docs/L4C1_MINI_PC/PAGE_MINI_PC.md`
 - `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md`
 
 ---
 
 ← Retour : `L4C2_PROXMOX` | → Suivant : `PAGE_MINI_PC`
+<!-- annotations_log: [2026-11-28] L4C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L4C1_Vignette_MINI_PC.yaml) -->

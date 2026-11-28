@@ -26,7 +26,7 @@
 ## Groupes de presence (dit par Eric le 2026-11-09 19:19)
 
 - Source des groupes : `sensor.groupe` (etabli : valeur `groupe_4` depuis 19:03 le 2026-11-09).
-- Sens des valeurs (etabli : CLAUDE.md, referentiel P4 sensor.groupe) : `groupe_1` = Absent ; `groupe_2` = Mamour seule ; `groupe_3` = Eric seul ; `groupe_4` = tous les deux. Deduit : Mamour = Geraldine.
+- Sens des valeurs (etabli : IA_P4_PRESENCE, referentiel P4 sensor.groupe) : `groupe_1` = Absent ; `groupe_2` = Mamour seule ; `groupe_3` = Eric seul ; `groupe_4` = tous les deux. Deduit : Mamour = Geraldine.
 - Usage `groupe_2` (dit par Eric) : eclairage pour Geraldine.
 - Usage `groupe_3` et `groupe_4` (dit par Eric 19:22) : peuvent servir d'eclairage quand le PC ne tourne pas, ou a l'espace loisirs quand le PC tourne (ecrans).
 - Quand le PC ne tourne pas, les 3 Hue Play servent, avec les 2 lampes Hue du bureau, d'eclairage du bureau (dit par Eric). C'est la raison de leur presence dans les groupes 2, 3 et 4 pour `switch.ecran_p_c_3_play_hue`.
@@ -117,3 +117,4 @@
 - Capteur CPU de Studio Code Server : idem.
 
 *Fin de fiche*
+<!-- annotations_log: [2026-11-28] corrections_refonte : renvoi CLAUDE.md -> IA_P4_PRESENCE pour le referentiel sensor.groupe (section deplacee, demande d'Eric 2026-11-28) -->

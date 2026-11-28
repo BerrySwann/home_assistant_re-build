@@ -95,6 +95,22 @@ DESC = {
   "Eric, et Claude ou Hermes pour aligner les skills",
   "Inventaire des skills Hermes regroupees par sujet, avec les skills communes a Claude en face a face.",
   "Savoir quelle skill existe, aligner les skills de Claude et d'Hermes. Pas dans la table de lecture de CLAUDE.md, pas pousse en prod."),
+ "00_IA_SOUS_CONTEXT_IA/IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE/IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE.md": (
+  "Claude, des qu'il modifie, deplace ou supprime un fichier, ou pousse vers H:",
+  "Fichiers : source de verite, sauvegardes .bak, versioning, emplacements et routage (injection et extraction par type de fichier). Extrait de CLAUDE.md le 2026-11-28.",
+  "Modification d'un fichier (.bak, retour arriere), nom d'un fichier de travail, badges d'une fiche .md, suppression sur H:, TEMPO, corbeille, push vers H:, dossiers XX_ / 98_ / 99_, ou va quel fichier."),
+ "00_IA_SOUS_CONTEXT_IA/IA_PROTOCOLES_ET_ECHANGES/IA_PROTOCOLES_ET_ECHANGES.md": (
+  "Claude, en debut et en fin de session, pour les audits et les echanges avec Hermes",
+  "Protocoles de session, trigul, audit MD5, TODO.html et echanges Claude / Hermes. Extrait de CLAUDE.md le 2026-11-28.",
+  "Debut ou fin de session, audits MD5, /trigul, prod fonctionnelle, slash commands, controle GitHub vs local, todo, echange avec Hermes, controle typographique d'un fichier ecrit, portee de la regle 5."),
+ "00_IA_SOUS_CONTEXT_IA/IA_REGLES_YAML_ET_P3/IA_REGLES_YAML_ET_P3.md": (
+  "Claude, pour tout YAML de config et pour le nommage des fichiers de docs",
+  "Regles YAML, nommage des fichiers et P3 eclairage (slugs, chaine tpl). Extrait de CLAUDE.md le 2026-11-28.",
+  "Creation ou modification d'un YAML de config, nommage d'un fichier ou dossier de docs, bordures ASCII, headers, slug, name, unique_id, Zero Helper UI, pas de valeur en dur, tout YAML P3."),
+ "00_IA_SOUS_CONTEXT_IA/IA_EQUIPEMENTS_REFERENTIELS/IA_EQUIPEMENTS_REFERENTIELS.md": (
+  "Claude, pour tout travail sur l'infra, les equipements ou le logement",
+  "Systeme, equipements par pole, dashboard, referentiels et logement. Extrait de CLAUDE.md le 2026-11-28.",
+  "Infra (Proxmox, LXC, IP), equipements P0 a P2, matrice des 18 vignettes, valeurs de sensor.groupe, tendance T ext, logement et absence."),
 }
 
 # autres index globaux du projet : (libelle, chemin relatif a docs/00_IA, qui le tient, controle)
@@ -327,3 +343,6 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+# annotations_log:
+# [2026-11-28] gen_global_index_ia : DESC : 4 entrees ajoutees (IA_FICHIERS_SAUVEGARDES_ET_ROUTAGE, IA_PROTOCOLES_ET_ECHANGES, IA_REGLES_YAML_ET_P3, IA_EQUIPEMENTS_REFERENTIELS), descriptions reprises de leurs en-tetes et de la table de CLAUDE.md (demande d Eric 2026-11-28)

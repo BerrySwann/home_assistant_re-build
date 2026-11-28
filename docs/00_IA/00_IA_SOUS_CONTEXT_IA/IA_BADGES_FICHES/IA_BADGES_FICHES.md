@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -197,14 +197,14 @@ Fiches (1) :
 Rendu : [![Modifié](https://img.shields.io/badge/MàJ-2026--04--17-44739e?style=flat-square)](.)
 
 Fiches (1) :
-- 04_docs_scripts/04_docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md
+- 04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/Scripts_clim_on_off/Scripts_clim_on_off.md
 
 ### 2026-04-19 : 1
 
 Rendu : [![Modifié](https://img.shields.io/badge/MàJ-2026--04--19-44739e?style=flat-square)](.)
 
 Fiches (1) :
-- 04_docs_scripts/04_docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md
+- 04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md
 
 ## Type (53 badges)
 
@@ -308,14 +308,14 @@ Fiches (1) :
 Rendu : [![Type](https://img.shields.io/badge/Type-Scripts-4fc3f7?style=flat-square)](.)
 
 Fiches (1) :
-- 04_docs_scripts/04_docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md
+- 04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/Scripts_clim_on_off/Scripts_clim_on_off.md
 
 ### Script_Exécutant : 1
 
 Rendu : [![Type](https://img.shields.io/badge/Type-Script_Exécutant-4fc3f7?style=flat-square)](.)
 
 Fiches (1) :
-- 04_docs_scripts/04_docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md
+- 04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md
 
 ### Technique : 1
 
@@ -428,3 +428,4 @@ Rendu : [![Modifs](https://img.shields.io/badge/Modifs-Gelé-f44336?style=flat-s
 
 Fiches (1) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.md
+<!-- annotations_log: [2026-11-28] mise_a_jour : chemin de Scripts_clim_on_off.md corrige (dossier Climatisation, 2 lignes) ; chemin de Script_j2_0_secu_arret_clim remplace par 04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md (deduit : meme script renomme, a confirmer) ; badges MaJ et HA (demande d Eric 2026-11-28) -->

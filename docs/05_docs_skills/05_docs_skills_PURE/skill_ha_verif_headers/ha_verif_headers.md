@@ -1,13 +1,13 @@
 ---
 name: "ha-verif-headers"
-description: "HA ReBuild skill - read-only check of the headers of the config YAML files (ASCII boxes of variable width, 5 headers, tertiary slug, name and unique_id) according to the CLAUDE.md standards. Trigger on: /ha-verif-headers, verifie les headers, verifie les ascii slug name unique_id, controle de forme des YAML, le fichier est-il conforme, after creating or modifying a config YAML."
+description: "HA ReBuild skill - read-only check of the headers of the config YAML files (ASCII boxes of variable width, 5 headers, tertiary slug, name and unique_id) according to the IA_REGLES_YAML_ET_P3 standards. Trigger on: /ha-verif-headers, verifie les headers, verifie les ascii slug name unique_id, controle de forme des YAML, le fichier est-il conforme, after creating or modifying a config YAML."
 ---
 
 # HA Verif Headers - check of the config YAML headers
 
 > Files present in several locations (config, GLOBAL_INDEX_REPO, README): see `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` and the check `Verif_emplacements.py` (decided by Eric on 2026-10-18).
 
-Created on 2026-10-20 at Eric's request. Checks that a YAML file in `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` follows the standards of `Claude md SAVE\CLAUDE.md`: sections 4 (ASCII borders), 5 (5 mandatory headers), 7 (tertiary slug), 8 (name and unique_id). READ-ONLY: the skill corrects nothing without an order from Eric.
+Created on 2026-10-20 at Eric's request. Checks that a YAML file in `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` follows the standards of `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_REGLES_YAML_ET_P3\IA_REGLES_YAML_ET_P3.md`: sections 4 (ASCII borders), 5 (5 mandatory headers), 7 (tertiary slug), 8 (name and unique_id). READ-ONLY: the skill corrects nothing without an order from Eric.
 
 Complements `ha-new-yaml` (which generates a compliant skeleton) and `check_yaml_forme.py` (box alignment only).
 
@@ -43,7 +43,7 @@ An AVIS is not necessarily a fault: `NOM_ID_DIFFERENT` comes from a heuristic (n
 ## RULES
 
 1. Read-only by default: no file modified without an order from Eric.
-2. Standards = `Claude md SAVE\CLAUDE.md`; if in doubt about a standard, read CLAUDE.md, do not guess.
+2. Standards = `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_REGLES_YAML_ET_P3\IA_REGLES_YAML_ET_P3.md`; if in doubt about a standard, read that file, do not guess.
 3. Backups (`.bak_`), dated names and the folders `.scripts`, `scripts`, `notifs`, `themes`, `blueprints`, `ARCHIVE` are ignored by the script.
 4. Does not touch automations or dashboards (outside the `01_config_system_SH_PY_YAML` scope).
 5. Script sheet: `docs\04_docs_scripts\04_docs_scripts_SH_MD\Verif_headers_yaml\Verif_headers_yaml.md`.
@@ -51,3 +51,5 @@ An AVIS is not necessarily a fault: `NOM_ID_DIFFERENT` comes from a heuristic (n
 ## Maintenance note
 
 This is the usable English copy of the skill (written in English to save tokens). Paths, file names, entity ids, check codes and report labels stay in French. The French explanation sheet is `docs/05_docs_skills/05_docs_skills_MD/skill_ha_verif_headers/ha_verif_headers.md`: when this file changes, re-read that sheet and update it. The installed skill `.claude/skills/ha-verif-headers/SKILL.md` must stay identical to this copy.
+<!-- annotations_log: [2026-11-28] corrections_refonte : renvois vers CLAUDE.md corriges (section deplacee dans un sous-contexte), meme correction que le skill de .claude (demande d Eric 2026-11-28) -->
+<!-- annotations_log: [2026-11-28] corrections_refonte : description : renvoi CLAUDE.md remplace par IA_REGLES_YAML_ET_P3 (demande d Eric 2026-11-28) -->

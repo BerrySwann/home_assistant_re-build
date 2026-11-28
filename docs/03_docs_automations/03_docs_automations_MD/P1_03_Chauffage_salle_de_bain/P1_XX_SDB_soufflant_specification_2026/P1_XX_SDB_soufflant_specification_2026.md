@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -109,9 +109,9 @@ démarrage ou d'arrêt, puis infrarouge `remote.soufflant_sdb` et prise
 Déploiement : ajout dans `automations.yaml`, `scripts.yaml` et le fichier d'interrupteurs
 virtuels, puis rechargement des trois domaines. Aucun redémarrage de Home Assistant.
 
-Exports : `03_docs_automations_YAML/P1_03_Chauffage_Salle_de_Bain/b_soufflant_sdb_routage/b_soufflant_sdb_routage.yaml` et
-`A_soufflant_SDB_bouton_rodret.yaml`, `04_docs_scripts_YAML/sdb_soufflant_demarrer/sdb_soufflant_demarrer.yaml` et
-`sdb_soufflant_arreter.yaml`.
+Exports : `03_docs_automations/03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.yaml` et
+`A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml` (même dossier), `04_docs_scripts/04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml` et
+`SDB_soufflant_arreter/SDB_soufflant_arreter.yaml` (même dossier).
 
 Le piège de nommage reste en place : l'automation dont l'identifiant parle de soufflant salle
 de bain (`bouton_ikea_rodret_soufflant_sdb_gestion_on_off_json`) pilote toujours le salon.
@@ -202,3 +202,4 @@ Le compte d'une heure du script de demarrage est efface par un redemarrage de HA
 - Automation E : 30 s apres le demarrage de HA, leve le verrou et lance le 10 mn si le soufflant est en marche sans timer actif.
 - Les deux dernieres etapes du script de demarrage (arret force a 60 min) sont gardees en doublon.
 - Non teste en conditions reelles. Detail et test a faire : `TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md`. Risque du routage B au redemarrage : TODO SDB-ROUTAGE-REDEMARRAGE.
+<!-- annotations_log: [2026-11-28] P1_XX_SDB_soufflant_specification_2026 : lot 4 verif fiches: chemins des exports YAML (automations et scripts) mis aux chemins reels -->

@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--25-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L2C1_ENERGIE_GENERALE/vignette_L2C1_energie_2026-06-18.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.yaml` |
 | 🔗 **Accès depuis** | Vue principale Home → tap → `/dashboard-tablette/energie` |
 | 🏗️ **Type carte** | `custom:button-card` |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -324,3 +324,4 @@ La carte se met à jour sur changement de l'une des 6 entités ci-dessus (event-
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_ENERGIE]]  [[PAGE_ENERGIE_MENSUEL]]  [[PAGE_ENERGIE_TEMPS_REEL]]  [[COULEURS_PRISES_PAR_PIECE]]  [[L2C2_Vignette_ENERGIE_CLIM]]  [[L2C3_Vignette_ENERGIE_ECLAIRAGE]]*
+<!-- annotations_log: [2026-11-28] L2C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L2C1_Vignette_ENERGIE_GENERALE.yaml) -->

@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.0-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `02_dashboard_docs_YAML/L0C0_PAGE_Home/05_Impacte de Foudre/card_foudre_home.yaml` |
+| 📁 **Path** | `02_dashboard_docs_YAML/L0C0_PAGE_Home/05_Impacte de foudre/Card_foudre_home.yaml` |
 | 🔗 **Accès depuis** | Vue principale Home (`L0C0_PAGE_Home`) |
 | 🏗️ **Layout** | `custom:button-card (visibility numeric_state)` |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -66,3 +66,4 @@ Carte HACS utilisée : `custom:button-card`.
 
 - YAML : `card_foudre_home.yaml` (dossier `05_Impacte de Foudre` côté YAML)
 - Page : [PAGE_HOME.md](../02_page/PAGE_HOME.md), carte 4 (et section Dépannage)
+<!-- annotations_log: [2026-11-28] Card_foudre_home : lot 3 verif fiches: chemin du YAML corrige en casse -->

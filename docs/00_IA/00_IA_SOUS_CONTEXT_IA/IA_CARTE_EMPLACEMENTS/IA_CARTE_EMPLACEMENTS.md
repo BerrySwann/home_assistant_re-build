@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -19,7 +19,7 @@
 
 ## 1. Les 5 emplacements
 
-- **L** : local ReBuild (`C:\Users\Berry Swann\Documents\ReBuild\`). Source de verite : la prod ne doit jamais etre en avance sur le local (regle d'Eric du 2026-10-18).
+- **L** : local ReBuild (`C:\Users\Berry Swann\Documents\ReBuild\`). Source de verite : la prod ne doit jamais etre en avance sur le local (regle d'Eric du 2026-10-18). Si Claude constate que la prod est en avance (modification faite en prod sans le dire), il pose la question EN MAJUSCULES avant d'agir (regle d'Eric du 2026-11-28, voir ORDRE DE TRAVAIL de CLAUDE.md).
 - **PR** : prod racine `/config/` (= `H:\`). C'est ce que HA lit.
 - **PM** : prod miroir docs `/config/docs/...` (= `H:\docs\...`).
 - **GR** : GitHub, racine du depot `BerrySwann/home_assistant_re-build`.
@@ -71,7 +71,7 @@ Trois emplacements seulement : L, PM, GD. Controles par `/ha-trigul` (superposit
 
 ## 5. Sens d'ecriture
 
-- On modifie le local d'abord (sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` a cote).
+- On modifie le local d'abord (sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` a cote). Jamais de modification directe en prod ni de .bak en prod, meme si Eric le demande (regle du 2026-11-28, voir ORDRE DE TRAVAIL de CLAUDE.md).
 - Push d'un fichier des familles 2.1 et 2.2 : vers PR ET vers PM, MD5 verifie sur les deux. Jamais un seul des deux.
 - Push d'un script vers `/config/.scripts/` ou `/config/scripts/` : seulement sur ordre d'Eric.
 - GitHub suit au backup HA lance par Eric.
@@ -82,10 +82,11 @@ Script en lecture seule : `docs/04_docs_scripts/04_docs_scripts_SH/Verif_emplace
 
 Lancement : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`
 
-Rapport : `historique\MD5\03_verif_emplacements\verif_emplacements_AAAA-MM-JJ.txt`. Verdicts : SYNC, PROD DIFFERENTE DU LOCAL, GITHUB EN ATTENTE DU BACKUP, ABSENT (avec les emplacements manquants), et en section 2 les fichiers presents ailleurs qu'en local (PROD RACINE SEULE, PROD MIROIR SEUL, GITHUB RACINE SEUL, GITHUB DOCS SEUL). Dernieres lignes : `ANOMALIES` et `RESULTAT`.
+Rapport : `historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_AAAA-MM-JJ.txt`. Verdicts : SYNC, PROD DIFFERENTE DU LOCAL, GITHUB EN ATTENTE DU BACKUP, ABSENT (avec les emplacements manquants), et en section 2 les fichiers presents ailleurs qu'en local (PROD RACINE SEULE, PROD MIROIR SEUL, GITHUB RACINE SEUL, GITHUB DOCS SEUL). Dernieres lignes : `ANOMALIES` et `RESULTAT`.
 
 Premier passage (2026-10-18 17:41, commit GitHub f45a765c) : 97 fichiers suivis, 94 SYNC, 2 en attente du backup GitHub (GLOBAL_INDEX_REPO et README a leur nouvel emplacement), 1 prod differente du local (`check_yaml_forme.py`, poussee en local seulement), 1 fichier verrou d'editeur en prod (`.scripts/#MP_01_monitor_temp.sh.#`).
 
 ## 7. Skills et scripts concernes
 
-`histo`, `histo-final`, `ha-push-yaml`, `ha-push-docs`, `ha-trigul`, `sync-index`, `update-arbo`, `ha-resync-tree`, `ha-new-yaml`, `fix-file`. A mettre a jour pour citer cette carte et appeler le script (en cours le 2026-10-18).
+`histo`, `histo-final`, `ha-push-yaml`, `ha-push-docs`, `ha-trigul`, `sync-index`, `update-arbo`, `ha-resync-tree`, `ha-new-yaml`, `fix-file`. Verifie le 2026-11-28 : les 10 skills (SKILL.md de `.claude/skills`) citent cette carte.
+<!-- annotations_log: [2026-11-28] mise_a_jour : renvois alignes sur l ordre de travail du 2026-11-28 (prod en avance : question en majuscules, jamais de modif ni de .bak en prod), chemin du rapport verif_emplacements corrige (historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS), section 7 verifiee (10 skills sur 10 citent la carte), badges MaJ et HA (demande d Eric 2026-11-28) -->

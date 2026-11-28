@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,10 +13,10 @@
 
 </div>
 
-> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_01_CLIM_CHAUFFAGE/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml`
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml`
 > **ID HA :** `1767373801871` (en prod dans automations.yaml)
 > **Mode HA :** `queued` - max: 5 - `max_exceeded: silent`
-> **Dernière mise à jour :** 2026-10-11 (en-tête et chemin du doc script corrigés, contenu relu contre le YAML) ; 2026-09-20 (ajout `max_exceeded: silent` - fin des messages « Maximum number of runs exceeded » au démarrage)
+> **Dernière mise à jour :** 2026-11-28 (chemin du YAML corrigé en casse, contenu relu contre le YAML) ; 2026-10-11 (en-tête et chemin du doc script corrigés, contenu relu contre le YAML) ; 2026-09-20 (ajout `max_exceeded: silent` - fin des messages « Maximum number of runs exceeded » au démarrage)
 
 ---
 
@@ -98,3 +98,4 @@ Une seule action :
 
 <!-- annotations_log:
 [2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT. -->
+<!-- annotations_log: [2026-11-28] B_0_2026_01_11_automatisation_clim_nuit_ : lot 3 verif fiches: chemin du YAML corrige en casse, ligne Derniere mise a jour completee -->

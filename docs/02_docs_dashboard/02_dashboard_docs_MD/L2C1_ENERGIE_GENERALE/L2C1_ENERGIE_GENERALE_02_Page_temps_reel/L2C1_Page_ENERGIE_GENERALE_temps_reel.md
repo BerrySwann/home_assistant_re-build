@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--15-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_temps_reel_2026-06-18.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml` |
 | 🔗 **Accès depuis** | Badge "Réel" de `page_energie_home.yaml` → `/dashboard-tablette/energie-temps-reel` |
 | 🔗 **Retour vers** | Tap titre → `/dashboard-tablette/energie` |
 | 🏗️ **Layout** | `type: grid` - 4 colonnes `column_span: 1` |
@@ -121,7 +121,7 @@ type: grid  (4 colonnes - column_span: 1 chacune)
   heading_style: title
   badges:
     - type: entity
-      entity: sensor.ecojoko_consommation_temps_reel
+      entity: sensor.general_electric_appart_power
       name: Réel
       color: green
       show_state: true
@@ -133,7 +133,7 @@ type: grid  (4 colonnes - column_span: 1 chacune)
 
 > ⚠️ Typo dans le titre original : "Temps Réél" (double accent) - conservé tel quel pour cohérence avec le YAML en production.
 
-**Entité :** `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée totale (W)
+**Entité :** `sensor.general_electric_appart_power` [Ecojoko - UI] Puissance instantanée totale (W)
 
 ---
 
@@ -192,7 +192,7 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 
 #### Section 7 : Autres
 
-| Sensor déclencheur | `sensor.total_poste_autres_puissance` *(ou équivalent)* |
+| Sensor déclencheur | `sensor.total_poste_autre_puissance` *(ou équivalent)* |
 | Badge icône | `mdi:account` |
 | Appareils | Divers (Fer à repasser, etc.) |
 
@@ -446,12 +446,12 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 | `sensor.lave_linge_avg_watts_quotidien` | Lave-Linge |
 | `sensor.lave_vaisselle_avg_watts_quotidien` | Lave-Vaisselle |
 | `sensor.airfryer_avg_watts_quotidien` | Airfryer |
-| `sensor.four_plaque_avg_watts_quotidien` | Four & Plaque |
+| `sensor.plaques_cuisson_avg_watts_quotidien` | Four & Plaque |
 | `sensor.frigo_avg_watts_quotidien` | Frigo |
 | `sensor.congelateur_avg_watts_quotidien` | Congélateur |
 | `sensor.pc_bureau_avg_watts_quotidien` | PCe |
 | `sensor.fer_repasser_avg_watts_quotidien` | Fer à Repasser |
-| `sensor.tete_lit_avg_watts_quotidien` | Tête de lit |
+| `sensor.tetes_lit_avg_watts_quotidien` | Tête de lit |
 | `sensor.tv_chambre_avg_watts_quotidien` | TV Chambre |
 | `sensor.all_standby_avg_watts_quotidien` | Veilles |
 
@@ -508,7 +508,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 
 | Rôle | Chemin |
 |------|--------|
-| Dashboard principal | `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_temps_reel_2026-06-18.yaml` |
+| Dashboard principal | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml` |
 | UM quotidiens P2 | `utility_meter/P2_prise/P2_UM_AMHQ.yaml` |
 | Sensors AVG P2 | `sensors/P2_prise/P2_kWh.yaml` |
 | Page d'origine | `page_energie_home.yaml` |
@@ -523,3 +523,5 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L2C1_Vignette_ENERGIE_GENERALE]]  [[PAGE_ENERGIE]]  [[PAGE_ENERGIE_MENSUEL]]*
+<!-- annotations_log: [2026-11-28] L2C1 : lot 1 verif fiches: entites inexistantes: four_plaque, tete_lit, total_poste_autres, ecojoko_consommation_temps_reel -->
+<!-- annotations_log: [2026-11-28] L2C1 : lot 2 verif fiches: chemin YAML cite mis au reel (L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml) -->

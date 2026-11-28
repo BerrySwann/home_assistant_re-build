@@ -23,7 +23,7 @@
 
 ## A quoi ca sert
 
-Verifie en lecture seule qu'un YAML de `01_config_system_SH_PY_YAML` respecte les normes du CLAUDE.md : boites ASCII, 5 headers, slug tertiaire, `name` et `unique_id`. Complement de `ha-new-yaml`.
+Verifie en lecture seule qu'un YAML de `01_config_system_SH_PY_YAML` respecte les normes de IA_REGLES_YAML_ET_P3 : boites ASCII, 5 headers, slug tertiaire, `name` et `unique_id`. Complement de `ha-new-yaml`.
 
 ## Les etapes
 
@@ -46,3 +46,4 @@ Verifie en lecture seule qu'un YAML de `01_config_system_SH_PY_YAML` respecte le
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
+<!-- annotations_log: [2026-11-28] corrections_refonte : fiche : renvoi CLAUDE.md remplace par IA_REGLES_YAML_ET_P3 (demande d Eric 2026-11-28) -->

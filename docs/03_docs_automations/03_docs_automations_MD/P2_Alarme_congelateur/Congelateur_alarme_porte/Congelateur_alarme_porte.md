@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P2_Alarme_Congélateur/congelateur_alarme_porte/congelateur_alarme_porte.yaml`
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P2_Alarme_congelateur/Congelateur_alarme_porte/Congelateur_alarme_porte.yaml`
 > **ID HA :** `1788279647593` (en prod dans automations.yaml, active dans HA)
 > **Mode HA :** `single`
 > **MàJ :** 2026-10-11 (en-tête corrigé : chemin, ID HA ; contenu relu contre le YAML)
@@ -77,3 +77,4 @@ l'historique réel de `sensor.prise_congelateur_cuisine_nous_current`
   moment de la création — seuils à valider en conditions réelles.
 - Pré-requis : `binary_sensor.congelateur_compresseur_actif` doit être
   poussé en prod et HA rechargé avant de créer cette automation.
+<!-- annotations_log: [2026-11-28] Congelateur_alarme_porte : lot 2 verif fiches: chemin YAML cite mis au reel (Congelateur_alarme_porte.yaml) -->

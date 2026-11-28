@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--13-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/02_page/page_L4C2_proxmox.yaml` |
+| 📁 **Fichier YAML** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.yaml` |
 | 🔗 **Accès depuis** | Tap sur vignette L4C2 → `/dashboard-tablette/systeme-proxmox` |
 | 🏗️ **Layout** | `grid` → `stack-in-card` vertical - 5 sections |
 | 📅 **Modifié le** | 2026-06-10 |
@@ -224,10 +224,11 @@ Page de supervision de l'infrastructure Proxmox VE. 6 sections indépendantes : 
 
 ## 🔗 FICHIERS LIÉS
 
-- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/02_page/page_L4C2_proxmox.yaml`
+- `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.yaml`
 - `docs/L4C2_PROXMOX/L4C2_Vignette_PROXMOX.md`
 - `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md`
 
 ---
 
 ← Retour : `L4C2_Vignette_PROXMOX.md` | → Suivant : `docs/L4C1_MINI_PC/`
+<!-- annotations_log: [2026-11-28] L4C2 : lot 2 verif fiches: chemin YAML cite mis au reel (L4C2_Page_PROXMOX.yaml) -->

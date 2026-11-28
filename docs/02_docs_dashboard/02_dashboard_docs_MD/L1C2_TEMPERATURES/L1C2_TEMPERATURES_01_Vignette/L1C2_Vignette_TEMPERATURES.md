@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--11-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -104,6 +104,8 @@ entities:
   - sensor.th_salle_de_bain_humidity
   - sensor.th_chambre_temperature
   - sensor.th_chambre_humidity
+  - sensor.tongel_temperature
+  - sensor.tongel_humidity
 triggers_update:
   - sensor.th_balcon_nord_temperature
   - sensor.th_balcon_nord_humidity
@@ -119,6 +121,8 @@ triggers_update:
   - sensor.th_salle_de_bain_humidity
   - sensor.th_chambre_temperature
   - sensor.th_chambre_humidity
+  - sensor.tongel_temperature
+  - sensor.tongel_humidity
 styles:
   card:
     - aspect-ratio: 1/1
@@ -170,14 +174,15 @@ custom_fields:
              '<span style="display: block; text-align: left; line-height: 1.2;">Cuisine</span>' +
              '<span style="display: block; text-align: left; line-height: 1.2;">Bureau</span>' +
              '<span style="display: block; text-align: left; line-height: 1.2;">SdB</span>' +
-             '<span style="display: block; text-align: left; line-height: 1.2;">Chambre</span>';
+             '<span style="display: block; text-align: left; line-height: 1.2;">Chambre</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Congél.</span>';
     ]]]
   temp: |
     [[[
       function getTemperatureColor(temp) {
         if (temp === 'NaN') return '#aaaaaa';
         var t = parseFloat(temp);
-        if (t < 5)  return '#3674B5';
+        if (t < 5) return '#3674B5';
         if (t < 13) return '#578FCA';
         if (t < 19) return '#A1E3F9';
         if (t < 25) return 'lightgreen';
@@ -186,10 +191,18 @@ custom_fields:
         if (t < 40) return '#F44336';
         return 'lightgreen';
       }
-      function formatTemp(entityId) {
+
+      function getFreezerTemperatureColor(temp) {
+        if (temp === 'NaN') return '#aaaaaa';
+        var t = parseFloat(temp);
+        if (t >= -15) return '#F44336';
+        return '#3674B5';
+      }
+
+      function formatTemp(entityId, colorFn) {
         var s = states[entityId]?.state;
         var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
-        var color = getTemperatureColor(val);
+        var color = (colorFn || getTemperatureColor)(val);
         var text = val === 'NaN' ? 'N/A' : val + '°C';
         return `<span style="display: block; text-align: center; line-height: 1.2; color: ${color};">${text}</span>`;
       }
@@ -199,11 +212,12 @@ custom_fields:
              formatTemp('sensor.th_cuisine_temperature') +
              formatTemp('sensor.th_bureau_temperature') +
              formatTemp('sensor.th_salle_de_bain_temperature') +
-             formatTemp('sensor.th_chambre_temperature');
+             formatTemp('sensor.th_chambre_temperature') +
+             formatTemp('sensor.tongel_temperature', getFreezerTemperatureColor);
     ]]]
   espace: |
     [[[
-      return Array(7).fill('<span style="display: block; text-align: center; line-height: 1.2;">&nbsp;&nbsp;</span>').join('');
+      return Array(8).fill('<span style="display: block; text-align: center; line-height: 1.2;">&nbsp;&nbsp;</span>').join('');
     ]]]
   humidite: |
     [[[
@@ -214,6 +228,7 @@ custom_fields:
         if (val > 55) return '#FFA500';
         return 'white';
       }
+
       function formatHum(entityId) {
         var s = states[entityId]?.state;
         var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
@@ -227,7 +242,8 @@ custom_fields:
              formatHum('sensor.th_cuisine_humidity') +
              formatHum('sensor.th_bureau_humidity') +
              formatHum('sensor.th_salle_de_bain_humidity') +
-             formatHum('sensor.th_chambre_humidity');
+             formatHum('sensor.th_chambre_humidity') +
+             formatHum('sensor.tongel_humidity');
     ]]]
 ```
 
@@ -251,8 +267,10 @@ custom_fields:
 | `sensor.th_salle_de_bain_humidity` | Zigbee - UI (Sonoff SNZB-02) | Salle de Bain |
 | `sensor.th_chambre_temperature` | Zigbee - UI (Sonoff SNZB-02) | Chambre |
 | `sensor.th_chambre_humidity` | Zigbee - UI (Sonoff SNZB-02) | Chambre |
+| `sensor.tongel_temperature` | Zigbee2MQTT (MQTT) | Congélateur (déduit du libellé `Congél.` et de `getFreezerTemperatureColor`) |
+| `sensor.tongel_humidity` | Zigbee2MQTT (MQTT) | Congélateur (idem) |
 
-> Les 14 entités sont identiques dans `entities:` et `triggers_update:` - la vignette se recalcule instantanément à chaque changement de valeur.
+> Les 16 entités sont identiques dans `entities:` et `triggers_update:` - la vignette se recalcule instantanément à chaque changement de valeur.
 
 ---
 
@@ -344,3 +362,14 @@ Si le sensor est `unknown`, `unavailable` ou absent → affiche `N/A` en gris.
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_TEMPERATURES]]  [[L1C1_Vignette_METEO]]  [[L1C3_Vignette_CLIM]]*
+
+---
+
+## Modifications du 2026-11-28
+
+Le bloc de code source est resynchronisé avec le YAML docs. Différences par rapport à l'ancienne version de la fiche :
+
+- Deux capteurs ajoutés aux listes `entities:` et `triggers_update:` (14 devient 16) : `sensor.tongel_temperature` et `sensor.tongel_humidity` (Zigbee2MQTT).
+- Une huitième ligne `Congél.` en bas de la colonne des pièces, et le gabarit de colonne vide passe de 7 à 8 lignes.
+- Nouvelle fonction `getFreezerTemperatureColor` : gris `#aaaaaa` si la valeur est `NaN`, rouge `#F44336` à partir de -15, bleu `#3674B5` en dessous. `formatTemp` reçoit une fonction de couleur optionnelle (par défaut `getTemperatureColor`).
+<!-- annotations_log: [2026-11-28] L1C2 : lot 3 verif fiches: code resynchronise avec le YAML docs, capteurs tongel ajoutes (14 -> 16 entites) -->

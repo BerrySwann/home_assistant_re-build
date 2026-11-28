@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--09--20-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -444,9 +444,9 @@ Ce template affiche un résumé textuel des **températures cibles actives** sel
 
 ```
 Jour (7h30-21h) + groupe_1  → éco_hiver_corrige (heat) / éco_ete_corrige (cool) / Fan Only
-Jour (7h30-21h) + groupe_2  → Salon: corrige_mamour / Bureau: ECO (heat ou cool) / Chambre: corrige_chambre
-Jour (7h30-21h) + groupe_3  → Salon+Bureau: corrige_eric / Chambre: corrige_chambre
-Jour (7h30-21h) + groupe_4  → Salon: corrige_mamour / Bureau: corrige_eric / Chambre: corrige_chambre
+Jour (7h30-21h) + groupe_2  → Salon: corrige_salon / Bureau: ECO (heat ou cool) / Chambre: corrige_chambre
+Jour (7h30-21h) + groupe_3  → Salon+Bureau: corrige_bureau / Chambre: corrige_chambre
+Jour (7h30-21h) + groupe_4  → Salon: corrige_salon / Bureau: corrige_bureau / Chambre: corrige_chambre
 
 Nuit (21h-7h30) + groupe_1  → éco_hiver_corrige (heat) / éco_ete_corrige (cool) / Fan Only
 Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
@@ -455,7 +455,7 @@ Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
 > Ces entités proviennent de `P1_MASTER_CLIM_TEMPLATES` :
 > `sensor.groupe`, `sensor.mode_ete_hiver`,
 > `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`,
-> `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_eric`,
+> `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_bureau`,
 > `sensor.temperature_corrige_chambre`, `sensor.temperature_confort_nuit`.
 
 > ⚠️ **Correction 2026-06-21** : entités obsolètes corrigées (`temperature_confort_jour_jour` → `temperature_confort_jour`, `corrige_*_hivers` → `corrige_*`). Logique cool G1 : `temperature_cible` → `temperature_eco_ete_corrige`. Corrections par pièce selon groupe ajoutées (corrige_mamour/eric/chambre).
@@ -608,7 +608,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
 | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | `sensor.conso_clim_rad_total` (W), `sensor.conso_clim_rad_total_quotidien/mensuel` (kWh) |
 | `P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` | `sensor.clim_rad_total_avg_watts_quotidien` (W - moy. depuis minuit) |
-| `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_cible/confort/confort_nuit/eco_hiver_corrige` |
+| `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_confort/confort_nuit/eco_hiver_corrige` |
 
 ---
 
@@ -690,3 +690,4 @@ Deux capteurs affiches par cette page ont ete renommes pour sortir les prenoms d
 Le renommage a ete fait cote Home Assistant, pas seulement dans les cartes : les deux entites ont ete supprimees
 puis recreees sous leur nouveau nom, donc l'historique de ces courbes repart de la date du changement. Les anciennes
 valeurs restent en base sous les anciens noms et ne s'affichent plus.
+<!-- annotations_log: [2026-11-28] L1C2 : lot 3 verif fiches: noms corriges apres renommage du 2026-11-03 (corrige_mamour/eric -> salon/bureau), temperature_cible retire de la liste du YAML maitre -->

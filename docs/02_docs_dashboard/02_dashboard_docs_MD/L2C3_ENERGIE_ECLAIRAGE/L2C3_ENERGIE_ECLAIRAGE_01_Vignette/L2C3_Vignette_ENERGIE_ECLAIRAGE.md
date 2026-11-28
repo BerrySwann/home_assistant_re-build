@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![Modifié](https://img.shields.io/badge/MàJ-2026-04-29-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L2C3_ENERGIE_ECLAIRAGE/vignette_L2C3_energie_eclairage_2026-05-13.yaml` |
+| 📁 **Path** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_01_Vignette/L2C3_Vignette_ENERGIE_ECLAIRAGE.yaml` |
 | 🔗 **Accès depuis** | Vue Home |
 | 🔗 **tap →** | `/dashboard-tablette/energie-lampes` |
 | 🏗️ **Layout** | `custom:button-card` - grille 3 colonnes |
@@ -371,3 +371,4 @@ Comportement voulu - `isEcoSensitive = true` maintient la couleur blanche en mod
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_ENERGIE_ECLAIRAGE]]  [[COULEURS_ECLAIRAGE_PAR_PIECE]]  [[L2C1_Vignette_ENERGIE_GENERALE]]  [[L2C2_Vignette_ENERGIE_CLIM]]  [[L3C1_Vignette_ECLAIRAGE]]*
+<!-- annotations_log: [2026-11-28] L2C3 : lot 2 verif fiches: chemin YAML cite mis au reel (L2C3_Vignette_ENERGIE_ECLAIRAGE.yaml) -->
