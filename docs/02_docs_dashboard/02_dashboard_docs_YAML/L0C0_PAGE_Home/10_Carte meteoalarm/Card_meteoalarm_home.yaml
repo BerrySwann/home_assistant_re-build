@@ -4,7 +4,7 @@
 # Masquée tant qu'aucune alerte n'est active (hide_when_no_warning: true)
 # Entité : sensor.06_weather_alert (intégration native Météo-France)
 # La même carte sert aussi dans le pop-up #alert de la page Météo (L1C1)
-# Visibilite (2026-11-28) : carte cachee quand sensor.alerte_avalanches est unavailable (capteur inhibe)
+# Visibilite (2026-11-28) : carte cachee quand sensor.alerte_avalanches vaut Jaune (avalanche sans objet pour Eric ; capteur reactive le 2026-11-28)
 # scaling_mode: disabled ajoute par l'editeur de la carte
 
 type: custom:meteoalarm-card
@@ -16,5 +16,5 @@ visibility:
   - condition: state
     entity_id: sensor.alerte_avalanches
     state_not:
-      - unavailable
+      - Jaune
 scaling_mode: disabled

@@ -48,6 +48,28 @@ mkdir -p "$LOG_DIR"
 exec 1>/dev/null   # Bloquer tout stdout parasite — seuls >> "$LOG" comptent
 cd /config
 
+# Libelle du mode pour la notification mobile (weekly : pas de notification mobile)
+case "${1:-}" in
+  Manuel) LABEL="Push Manuel" ;;
+  weekly) LABEL="" ;;
+  *)      LABEL="Push Auto" ;;
+esac
+
+# Notification mobile courte, SANS emoji (la montre ne les affiche pas)
+# $1 = OK ou HS ; $2 = "manual" -> envoyee seulement pour Push Manuel
+notify_mobile() {
+  [[ -n "$LABEL" ]] || return 0
+  [[ "${2:-}" != "manual" || "$LABEL" == "Push Manuel" ]] || return 0
+  local TOKEN_FILE="/config/.secrets/ha_token"
+  [[ -f "$TOKEN_FILE" ]] || return 0
+  curl -s -X POST \
+    -H "Authorization: Bearer $(cat "$TOKEN_FILE")" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"Backup GitHub","message":"'"${LABEL} [$1]"'"}' \
+    http://localhost:8123/api/services/notify/mobile_app_eric \
+    -o /dev/null -w 'Notif mobile: HTTP %{http_code}\n' --max-time 10 >> "$LOG" || true
+}
+
 
 # "[L-checkout] force branche main — évite push en detached HEAD"
 # Nettoyage rebase-merge orphelin (laissé par un rebase échoué)
@@ -56,7 +78,7 @@ git checkout main 2>/dev/null || git switch main 2>/dev/null || true
 
 # Trap global : log toute erreur non gérée avec numéro de ligne
 # "[L-trap] catch erreurs inattendues"
-trap 'echo "❌ Erreur inattendue ligne $LINENO — script interrompu: $(date "+%Y-%m-%d %H:%M:%S %Z")" >> "$LOG"' ERR
+trap 'echo "❌ Erreur inattendue ligne $LINENO — script interrompu: $(date "+%Y-%m-%d %H:%M:%S %Z")" >> "$LOG"; notify_mobile "HS"' ERR
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ IDENTITÉ GIT & AUTHENTIFICATION                                          │
@@ -100,8 +122,9 @@ if [[ -z "$CHANGED" && "$AHEAD" -eq 0 ]]; then
         -H "Authorization: Bearer ${TOKEN}" \
         -H "Content-Type: application/json" \
         -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
-        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+        http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 >> "$LOG" || true
     fi
+    notify_mobile "OK" manual
     exit 0
   fi
 fi
@@ -137,8 +160,9 @@ elif [[ "${1:-}" != "weekly" ]]; then
         -H "Authorization: Bearer ${TOKEN}" \
         -H "Content-Type: application/json" \
         -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
-        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+        http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 >> "$LOG" || true
     fi
+    notify_mobile "OK" manual
     exit 0
   fi
 else
@@ -170,6 +194,7 @@ do_push() {
 }
 
 if ! do_push; then
+  notify_mobile "HS"
   exit 1
 fi
 
@@ -194,6 +219,7 @@ fi
 # │ LOG SUCCÈS & NOTIFICATION HA                                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 echo "✅ Backup GitHub OK: ${NB_FILES:+$NB_FILES fichier(s) — }$MSG" >> "$LOG"
+notify_mobile "OK"
 
 TOKEN_FILE="/config/.secrets/ha_token"
 if [[ -f "$TOKEN_FILE" ]]; then
@@ -202,7 +228,7 @@ if [[ -f "$TOKEN_FILE" ]]; then
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
     -d '{"title":"Backup GitHub","message":"'"$MSG"'"}' \
-    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
+    http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 >> "$LOG" || true
 fi
 
 # annotations_log:

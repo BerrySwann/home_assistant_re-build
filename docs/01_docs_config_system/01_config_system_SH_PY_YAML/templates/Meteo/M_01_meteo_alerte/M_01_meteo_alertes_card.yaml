@@ -146,19 +146,18 @@
       icon: mdi:weather-sunny
 
 # --- alerte_avalanches ---
-# [2026-11-28] INHIBE a la demande d'Eric (alerte jaune avalanche) - bloc commente, retirer les # pour reactiver
-#    - name: 'Alerte Avalanches'
-#      unique_id: alerte_avalanches                     # "[L174] modif"
-#      state: >-
-#        {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
-#        {% if wa is none %}
-#          H. saison
-#        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-#          {{ wa }}
-#        {% else %}
-#          Vert
-#        {% endif %}
-#      icon: mdi:terrain
+    - name: 'Alerte Avalanches'
+      unique_id: alerte_avalanches                     # "[L174] modif"
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
+        {% if wa is none %}
+          H. saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
+        {% else %}
+          Vert
+        {% endif %}
+      icon: mdi:terrain
 
 # --- alerte_vagues_submersion ---
     - name: 'Alerte Vagues-submersion'
@@ -202,4 +201,4 @@
 # - 2026-10-25 : annotations complétées (heure, lignes et MD5 du retrait du repli) ; aucun changement de code, MD5 du fichier modifié par ce seul ajout de commentaires
 # - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x) ; date inconnue, antérieure au retrait du repli du 2026-10-15 (numéros de ligne d'avant ce retrait)
 #   Règle CLAUDE.md : unique_id ne doit PAS contenir 'sensor.' (slug seul).
-# - 2026-11-28 : capteur alerte_avalanches INHIBE (bloc commente, non supprime) a la demande d'Eric ; l'attribut Avalanches de alerte_meteo et la ligne du dashboard referencent toujours sensor.alerte_avalanches (affichage inconnu/indisponible tant que le bloc est commente)
+# - 2026-11-28 : capteur alerte_avalanches inhibe (bloc commente) puis REACTIVE le meme jour a la demande d Eric (la tuile Avalanches du pop-up Meteo disparaissait) ; bloc de nouveau actif, templates recharges (capteur a Jaune a 13h34)

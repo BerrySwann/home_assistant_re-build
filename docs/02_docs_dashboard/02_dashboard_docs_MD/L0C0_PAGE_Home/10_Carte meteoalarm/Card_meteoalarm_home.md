@@ -39,7 +39,7 @@ Carte HACS utilisée : `custom:meteoalarm-card` (Meteoalarm Card, version 2.9.0 
 
 - `integration: meteofrance` est obligatoire : une carte ajoutée sans cette option affiche "Cette intégration n'est pas valide !" dans l'éditeur.
 - `hide_when_no_warning: true` : la carte n'affiche rien tant qu'aucune alerte n'est active (comportement déduit du nom de l'option, non vérifié à l'écran). Une carte invisible n'est donc pas un défaut quand les alertes sont vertes.
-- `visibility` (2026-11-28) : la carte est cachée tant que `sensor.alerte_avalanches` vaut `unavailable` (capteur inhibé en commentaire dans `M_01_meteo_alertes_card.yaml`) ; elle réapparaît quand le capteur revient. Tant que le capteur est inhibé, la carte est donc cachée pour tous les types d'alerte, pas seulement l'avalanche. Condition ajoutée sur la carte Home uniquement, pas sur la copie du pop-up `#alert`.
+- `visibility` (2026-11-28, valeur changee par Eric le meme jour) : la carte est cachee tant que `sensor.alerte_avalanches` vaut `Jaune` (`state_not: [Jaune]`). Le capteur est actif dans `M_01_meteo_alertes_card.yaml` (inhibe puis reactive le 2026-11-28, car la tuile Avalanches du pop-up disparaissait). Effet : tant que l avalanche est Jaune, la carte est cachee pour tous les types d alerte, y compris une Orange ou Rouge d un autre type ; elle reapparait pour tout autre etat. Choix d Eric (avalanche sans objet chez lui, Orange et Rouge rares selon lui, non verifie). Condition sur la carte Home uniquement, pas sur la copie du pop-up `#alert`.
 - `scaling_mode: disabled` : option ajoutée par l'éditeur de la carte, rôle non vérifié.
 - La même carte (même configuration) se trouve aussi dans le pop-up `#alert` de la page Météo (L1C1), en dernier élément, sous les cartes caméra et les pastilles des capteurs `sensor.alerte_*`.
 - À ne pas confondre avec la bannière "Vigilance Jaune / Orange / Rouge" de la carte météo animée (carte 1), qui lit `sensor.alerte_meteo`.
@@ -51,14 +51,14 @@ Carte HACS utilisée : `custom:meteoalarm-card` (Meteoalarm Card, version 2.9.0 
 | Entité | Rôle | Source |
 |:---------|:-----|:-------|
 | `sensor.06_weather_alert` | Alertes de vigilance Alpes-Maritimes | Intégration Météo-France (native) |
-| `sensor.alerte_avalanches` | Condition de visibilité (carte cachée si unavailable) | Template M_01, inhibé le 2026-11-28 |
+| `sensor.alerte_avalanches` | Condition de visibilite (carte cachee si Jaune) | Template M_01, actif (reactive le 2026-11-28) |
 
 ---
 
 ## 🐛 Points à vérifier
 
 - Rendu non vérifié visuellement avec une alerte active (Jaune, Orange ou Rouge).
-- Rendu non vérifié visuellement avec `sensor.alerte_avalanches` de retour (carte de nouveau visible).
+- Rendu non verifie visuellement avec `sensor.alerte_avalanches` a Jaune (carte attendue cachee sur Home).
 - Historique : les exports `Dashboard_COMPLET` du 2026-03-16 au 2026-10-14 ne contiennent cette carte que dans la vue Météo, jamais dans la vue Home. Elle a été ajoutée à Home le 2026-10-15 (collée depuis l'éditeur par Eric).
 
 ---

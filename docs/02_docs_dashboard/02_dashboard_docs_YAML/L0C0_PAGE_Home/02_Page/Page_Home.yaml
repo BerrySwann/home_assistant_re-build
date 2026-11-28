@@ -1399,7 +1399,7 @@ cards:
       - condition: state
         entity_id: sensor.alerte_avalanches
         state_not:
-          - unavailable
+          - Jaune
     scaling_mode: disabled
   - type: vertical-stack
     cards:
