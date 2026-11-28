@@ -100,7 +100,7 @@ if [[ -z "$CHANGED" && "$AHEAD" -eq 0 ]]; then
         -H "Authorization: Bearer ${TOKEN}" \
         -H "Content-Type: application/json" \
         -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
-        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+        http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 || true
     fi
     exit 0
   fi
@@ -137,7 +137,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
         -H "Authorization: Bearer ${TOKEN}" \
         -H "Content-Type: application/json" \
         -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
-        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+        http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 || true
     fi
     exit 0
   fi
@@ -202,7 +202,7 @@ if [[ -f "$TOKEN_FILE" ]]; then
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
     -d '{"title":"Backup GitHub","message":"'"$MSG"'"}' \
-    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
+    http://localhost:8123/api/services/persistent_notification/create -o /dev/null -w 'Notif HA: HTTP %{http_code}\n' --max-time 10 || true
 fi
 
 # annotations_log:
