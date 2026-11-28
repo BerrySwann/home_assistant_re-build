@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--15-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.1-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.11.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
@@ -15,11 +15,11 @@
 |:------|:-------|
 | 📁 **Path** | `02_dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml` |
 | 🔗 **Accès depuis** | Vue principale Home (`L0C0_PAGE_Home`) |
-| 🏗️ **Layout** | `custom:meteoalarm-card (integration: meteofrance, hide_when_no_warning)` |
+| 🏗️ **Layout** | `custom:meteoalarm-card (integration: meteofrance, hide_when_no_warning, visibility sur sensor.alerte_avalanches)` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-10-15 |
-| 🏠 **Version HA** | 2026.10.1 |
+| 📅 **Modifié le** | 2026-11-28 |
+| 🏠 **Version HA** | 2026.11.3 |
 
 ---
 
@@ -39,6 +39,8 @@ Carte HACS utilisée : `custom:meteoalarm-card` (Meteoalarm Card, version 2.9.0 
 
 - `integration: meteofrance` est obligatoire : une carte ajoutée sans cette option affiche "Cette intégration n'est pas valide !" dans l'éditeur.
 - `hide_when_no_warning: true` : la carte n'affiche rien tant qu'aucune alerte n'est active (comportement déduit du nom de l'option, non vérifié à l'écran). Une carte invisible n'est donc pas un défaut quand les alertes sont vertes.
+- `visibility` (2026-11-28) : la carte est cachée tant que `sensor.alerte_avalanches` vaut `unavailable` (capteur inhibé en commentaire dans `M_01_meteo_alertes_card.yaml`) ; elle réapparaît quand le capteur revient. Tant que le capteur est inhibé, la carte est donc cachée pour tous les types d'alerte, pas seulement l'avalanche. Condition ajoutée sur la carte Home uniquement, pas sur la copie du pop-up `#alert`.
+- `scaling_mode: disabled` : option ajoutée par l'éditeur de la carte, rôle non vérifié.
 - La même carte (même configuration) se trouve aussi dans le pop-up `#alert` de la page Météo (L1C1), en dernier élément, sous les cartes caméra et les pastilles des capteurs `sensor.alerte_*`.
 - À ne pas confondre avec la bannière "Vigilance Jaune / Orange / Rouge" de la carte météo animée (carte 1), qui lit `sensor.alerte_meteo`.
 
@@ -49,12 +51,14 @@ Carte HACS utilisée : `custom:meteoalarm-card` (Meteoalarm Card, version 2.9.0 
 | Entité | Rôle | Source |
 |:---------|:-----|:-------|
 | `sensor.06_weather_alert` | Alertes de vigilance Alpes-Maritimes | Intégration Météo-France (native) |
+| `sensor.alerte_avalanches` | Condition de visibilité (carte cachée si unavailable) | Template M_01, inhibé le 2026-11-28 |
 
 ---
 
 ## 🐛 Points à vérifier
 
 - Rendu non vérifié visuellement avec une alerte active (Jaune, Orange ou Rouge).
+- Rendu non vérifié visuellement avec `sensor.alerte_avalanches` de retour (carte de nouveau visible).
 - Historique : les exports `Dashboard_COMPLET` du 2026-03-16 au 2026-10-14 ne contiennent cette carte que dans la vue Météo, jamais dans la vue Home. Elle a été ajoutée à Home le 2026-10-15 (collée depuis l'éditeur par Eric).
 
 ---

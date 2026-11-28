@@ -1395,6 +1395,12 @@ cards:
       - entity: sensor.06_weather_alert
     integration: meteofrance
     hide_when_no_warning: true
+    visibility:
+      - condition: state
+        entity_id: sensor.alerte_avalanches
+        state_not:
+          - unavailable
+    scaling_mode: disabled
   - type: vertical-stack
     cards:
       - type: custom:bubble-card

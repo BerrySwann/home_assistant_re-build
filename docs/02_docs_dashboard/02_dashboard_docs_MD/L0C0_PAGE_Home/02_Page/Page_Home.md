@@ -270,6 +270,7 @@ Alerte visuelle pleine largeur (12 colonnes). Aucune action tap/hold/double_tap.
 
 **Type :** `custom:meteoalarm-card` (HACS - Meteoalarm Card)
 **Visible si :** au moins une alerte de vigilance est active (`hide_when_no_warning: true`, comportement déduit du nom de l'option, non vérifié à l'écran)
+**Masquée si :** `sensor.alerte_avalanches` vaut `unavailable` (condition `visibility` ajoutée le 2026-11-28 ; capteur inhibé dans M_01)
 **Fichier YAML :** `02_dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml`
 
 Carte d'alertes Météo-France alimentée par `sensor.06_weather_alert` (`integration: meteofrance`). Fiche dédiée : [`CARD_METEOALARM_HOME.md`](../10_Carte%20Meteoalarm/CARD_METEOALARM_HOME.md). La même carte est utilisée dans le pop-up `#alert` de la page Météo (L1C1).
